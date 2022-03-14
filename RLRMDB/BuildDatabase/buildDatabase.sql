@@ -3,7 +3,7 @@
 
 CREATE TABLE vendor
 (
-    vendorId INT PRIMARY KEY,
+    vendorId INT PRIMARY KEY IDENTITY(1,1),
     vendorName VARCHAR(25) NOT NULL,
 )
 
@@ -22,15 +22,6 @@ CREATE TABLE productNumberSequence
     sequenceIdEnd INT NULL
 )
 
-CREATE TABLE materialId
-(
-    materialId INT PRIMARY KEY,
-    materialNumber INT NOT NULL,
-    vendorId INT,
-    sequenceId INT,
-    currentSequenceId INT
-)
-
 CREATE TABLE qualityControl
 (
     sampleSubmitNumber CHAR(8) PRIMARY KEY,
@@ -44,7 +35,7 @@ CREATE TABLE qualityControl
 
 CREATE TABLE materialName
 (
-    materialNameId INT PRIMARY KEY,
+    materialNameId INT PRIMARY KEY IDENTITY(1,1),
     materialName VARCHAR(50),
     materialNameAbreviation VARCHAR(10),
     permitNumber VARCHAR(25),
@@ -64,6 +55,14 @@ CREATE TABLE materialNumber
     requiresProcessOrder BIT,
     unitOfIssue CHAR(2),
     isRawMaterial BIT
+)
+CREATE TABLE materialId
+(
+    materialId INT PRIMARY KEY IDENTITY(1,1),
+    materialNumber INT FOREIGN KEY REFERENCES materialNumber,
+    vendorId INT,
+    sequenceId INT,
+    currentSequenceId INT
 )
 
 CREATE TABLE rawMaterial
