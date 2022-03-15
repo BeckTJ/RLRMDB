@@ -16,7 +16,8 @@ CREATE OR ALTER PROCEDURE materialInsert
     @vendorName AS VARCHAR(25),
     @sequenceNumber AS INT)
 AS
-
+BEGIN TRAN materialInsert
+BEGIN TRY 
 INSERT INTO materialName
     (materialName, materialNameAbreviation, permitNumber, rawMaterialCode, productCode, carbonDrumRequired, carbonDrumDaysAllowed,carbonDrumWeightAllowed)
 VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
@@ -35,7 +36,6 @@ IF EXISTS(SELECT vendorId
 FROM vendor
 WHERE vendorName = @vendorName)
 BEGIN
-
     SET @vendorId =(SELECT vendorId
     FROM vendor
     WHERE vendorName = @vendorName);
@@ -53,14 +53,21 @@ END
 
 DECLARE @sequenceId AS INT
 SET @sequenceId =(SELECT sequenceId
-FROM sequenceNumber
+FROM productNumberSequence
 WHERE sequenceIdStart = @sequenceNumber);
 
 DECLARE @currentSequenceId AS INT
 SET @currentSequenceId =(SELECT sequenceIdStart
-FROM sequenceNumber
-WHERE sequenceId = @sequenceId)
+FROM productNumberSequence
+WHERE sequenceId = @sequenceId);
 
 INSERT INTO materialId
     (materialNumber, vendorId,sequenceId, currentSequenceId)
 VALUES(@materialNumber, @vendorId, @sequenceId, @currentSequenceId);
+COMMIT;
+
+END TRY
+BEGIN CATCH
+    THROW;
+    ROLLBACK;
+END CATCH
