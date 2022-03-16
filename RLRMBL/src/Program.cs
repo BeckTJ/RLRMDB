@@ -18,11 +18,12 @@ namespace RLRMBL
             //    Console.WriteLine(i.number.ToString() + "\t" + i.name + i.nameAbreviation);
             //}
 
-            material m = j.getSingleMaterial(45234);
+            material m = j.getSingleMaterialFromDatabase(45235, 7);
 
 
 
-            Console.WriteLine(m.number.ToString() + "\t" + m.nameAbreviation + "\t" + m.name + m.permitNumber);
+            Console.WriteLine(m.number.ToString() + "\t" + m.nameAbreviation + "\t" + m.name + "\t" + m.permitNumber);
+            Console.WriteLine(m.nameAbreviation + "\t" + m.sequenceIdStart + "\t" + m.vendor);
 
         }
     }

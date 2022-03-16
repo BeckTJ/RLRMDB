@@ -44,5 +44,13 @@ namespace RLRMBL
             object data = set.Tables[0];
             return data;
         }
+        public void executeStoredProcedure(string query)
+        {
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.ExecuteNonQuery();
+
+        }
     }
 }

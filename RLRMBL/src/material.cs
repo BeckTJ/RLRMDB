@@ -10,6 +10,7 @@ public class material
 {
     List<material> M = new List<material>();
     Connection con = new Connection();
+
     public int number { get; set; }
     public string name { get; set; }
     public string nameAbreviation { get; set; }
@@ -19,6 +20,9 @@ public class material
     public bool carbonDrumRequired { get; set; }
     public bool batchManaged { get; set; }
     public bool isRawMaterial { get; set; }
+    public int sequenceIdEnd { get; set; }
+    public int sequenceIdStart { get; set; }
+    public string vendor { get; set; }
 
     public material()
     {
@@ -31,14 +35,18 @@ public class material
         carbonDrumRequired = false;
         batchManaged = false;
         isRawMaterial = false;
+        vendor = "";
     }
 
-    public void getMaterialFromDatabase()
+    public void materialFromDatabase()
     {
         int index;
         string query = @"Select * 
                             FROM materialNumber 
-                            JOIN materialName ON materialNumber.materialNameId = MaterialName.MaterialNameId";
+                            JOIN materialName ON materialNumber.materialNameId = MaterialName.MaterialNameId
+                            JOIN materialId ON materialNumber.materialNumber = materialId.materialNumber
+                            JOIN productNumberSequence ON materialId.sequenceId = productNumberSequence.sequenceId
+                            JOIN vendor ON vendor.vendorId = materialId.vendorId";
         con.OpenConnection();
         SqlDataReader reader = con.DataReader(query);
 
@@ -61,9 +69,9 @@ public class material
                     mat.grade = reader.GetString(reader.GetOrdinal("materialGrade"));
                 }
                 mat.unitOfIssue = reader.GetString(reader.GetOrdinal("unitOfIssue"));
-                mat.carbonDrumRequired = Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("carbonDrumRequired")));
-                mat.batchManaged = Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("batchManaged")));
-                mat.isRawMaterial = Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("isRawMaterial")));
+                mat.carbonDrumRequired = reader.GetBoolean(reader.GetOrdinal("carbonDrumRequired"));
+                mat.batchManaged = reader.GetBoolean(reader.GetOrdinal("batchManaged"));
+                mat.isRawMaterial = reader.GetBoolean(reader.GetOrdinal("isRawMaterial"));
                 M.Add(mat);
             }
 
@@ -72,18 +80,21 @@ public class material
     }
     public List<material> getMaterial()
     {
-        getMaterialFromDatabase();
+        materialFromDatabase();
         return M;
     }
-    public material getSingleMaterial(int input)
+    public material getSingleMaterialFromDatabase(int number, int id)
     {
         material soloMaterial = new material();
 
         int index;
         string query = @"Select *
                             FROM materialNumber 
-                            JOIN materialName ON materialNumber.materialNameId = MaterialName.MaterialNameId
-                            WHERE materialNumber = " + input;
+                            JOIN materialName ON materialNumber.materialNameId = materialName.materialNameId
+                            JOIN materialId ON materialNumber.materialNumber = materialId.materialNumber
+                            JOIN productNumberSequence ON materialId.sequenceId = productNumberSequence.sequenceId
+                            JOIN vendor ON vendor.vendorId = materialId.vendorId
+                            WHERE materialNumber.materialNumber = " + number + "AND vendor.vendorId =" + id;
         con.OpenConnection();
         SqlDataReader reader = con.DataReader(query);
         if (reader.HasRows)
@@ -104,33 +115,24 @@ public class material
                     soloMaterial.grade = reader.GetString(reader.GetOrdinal("materialGrade"));
                 }
                 soloMaterial.unitOfIssue = reader.GetString(reader.GetOrdinal("unitOfIssue"));
-                soloMaterial.carbonDrumRequired = (Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("carbonDrumRequired"))));
-                soloMaterial.batchManaged = Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("batchManaged")));
-                soloMaterial.isRawMaterial = Convert.ToBoolean(reader.GetInt32(reader.GetOrdinal("isRawMaterial")));
+                soloMaterial.carbonDrumRequired = (reader.GetBoolean(reader.GetOrdinal("carbonDrumRequired")));
+                soloMaterial.batchManaged = reader.GetBoolean(reader.GetOrdinal("batchManaged"));
+                soloMaterial.isRawMaterial = reader.GetBoolean(reader.GetOrdinal("isRawMaterial"));
+                soloMaterial.sequenceIdEnd = reader.GetInt32(reader.GetOrdinal("sequenceIdEnd"));
+                soloMaterial.sequenceIdStart = reader.GetInt32(reader.GetOrdinal("sequenceIdStart"));
+                soloMaterial.vendor = reader.GetString(reader.GetOrdinal("vendorName"));
             }
         }
         con.CloseConnection();
-        Console.WriteLine(soloMaterial.name);
         return soloMaterial;
     }
 
-    public void setMaterialName(int materialNameId, string name, string nameAbreviation, string permitNumber, string rawMaterialCode, string productCode, bool CarbonDrumRequired, int carbonDrumDaysAllowed, int carbonDrumWeightAllowed)
+    public void addMaterialToDatabase(int number, string name, string abreviation, string permit, string rmCode, string pCode, bool requireCarbonDrum, int cdDaysAllowed, int cdWeightAllowed, string grade, bool batch, bool processOrder, string UI, bool isRM, string vendorName, int sequenceNumber)
     {
         con.OpenConnection();
-        string query = @"INSERT INTO materialName(materialNameId, materialName, materialNameAbreviation, permitNumber, rawMaterialCode, productCode, CarbonDrumRequired, carbonDrumDaysAllowed, carbonDrumWeightAllowed),
-                        VALUES(" + materialNameId + "," + name + "," + nameAbreviation + "," + permitNumber + "," + rawMaterialCode + "," + productCode + "," + Convert.ToInt32(CarbonDrumRequired) + "," + carbonDrumDaysAllowed + "," + carbonDrumWeightAllowed + ")";
-
-        con.executeQuery(query);
-        con.CloseConnection();
-
-    }
-    public void setMaterialNumber(int number, int materialNameId, string grade, int unitOfIssue, bool batchManaged, bool processOrderRequired, bool isRawMaterial)
-    {
-        con.OpenConnection();
-        string query = @"INSERT INTO materialNumber(materialNumber, materialNameId, materialGrade, batchManaged, requiresProcessOrder, unitOfIssue, isRawMaterial),
-                       VALUES(" + number + "," + materialNameId + "," + grade + "," + Convert.ToInt32(batchManaged) + "," + Convert.ToInt32(processOrderRequired) + "," + unitOfIssue + "," + Convert.ToInt32(isRawMaterial) + ")";
-        con.executeQuery(query);
+        con.executeStoredProcedure(@"materialInsert " + number + ", '" + name + "','" + abreviation + "','" + permit + "','" + rmCode + "','" + pCode + "'," + requireCarbonDrum + "," + cdDaysAllowed + "," + cdWeightAllowed + "," + grade + "," + batch + "," + processOrder + ",'" + UI + "'," + isRM + ",'" + vendorName + "'," + sequenceNumber);
         con.CloseConnection();
     }
 
 }
+
