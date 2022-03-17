@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TBeck\\workdb\\RLRMBL\\src\\RLRMBL.csproj": {}
+    "C:\\Users\\TBeck\\WorkDB\\RLRMBL\\src\\RLRMBL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TBeck\\workdb\\RLRMBL\\src\\RLRMBL.csproj": {
+    "C:\\Users\\TBeck\\WorkDB\\RLRMBL\\src\\RLRMBL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\workdb\\RLRMBL\\src\\RLRMBL.csproj",
+        "projectUniqueName": "C:\\Users\\TBeck\\WorkDB\\RLRMBL\\src\\RLRMBL.csproj",
         "projectName": "RLRMBL",
-        "projectPath": "C:\\Users\\TBeck\\workdb\\RLRMBL\\src\\RLRMBL.csproj",
+        "projectPath": "C:\\Users\\TBeck\\WorkDB\\RLRMBL\\src\\RLRMBL.csproj",
         "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\workdb\\RLRMBL\\src\\obj\\",
+        "outputPath": "C:\\Users\\TBeck\\WorkDB\\RLRMBL\\src\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -49,6 +49,16 @@
             "Microsoft.Data.SqlClient": {
               "target": "Package",
               "version": "[4.1.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.3, )"
             },
             "NUnit": {
               "target": "Package",

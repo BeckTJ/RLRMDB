@@ -9,7 +9,7 @@ namespace RLRMBL
         {
 
 
-            material j = new material();
+            // material j = new material();
             //List<material> m = j.getMaterial();
 
 
@@ -18,12 +18,12 @@ namespace RLRMBL
             //    Console.WriteLine(i.number.ToString() + "\t" + i.name + i.nameAbreviation);
             //}
 
-            material m = j.getSingleMaterialFromDatabase(45235, 7);
+            // material m = j.getSingleMaterialFromDatabase(45235, 7);
 
 
 
-            Console.WriteLine(m.number.ToString() + "\t" + m.nameAbreviation + "\t" + m.name + "\t" + m.permitNumber);
-            Console.WriteLine(m.nameAbreviation + "\t" + m.sequenceIdStart + "\t" + m.vendor);
+            //Console.WriteLine(m.number.ToString() + "\t" + m.nameAbreviation + "\t" + m.name + "\t" + m.permitNumber);
+            //Console.WriteLine(m.nameAbreviation + "\t" + m.sequenceIdStart + "\t" + m.vendor);
 
         }
     }
