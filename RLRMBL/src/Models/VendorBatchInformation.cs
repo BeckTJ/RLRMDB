@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RLRMBL
+namespace RLRMBL.Models
 {
     public partial class VendorBatchInformation
     {

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using RLRMBL.Models;
 
-namespace RLRMBL
+namespace RLRMBL.Context
 {
     public partial class RLRMDBContext : DbContext
     {
@@ -21,9 +22,8 @@ namespace RLRMBL
         public virtual DbSet<Employee> Employees { get; set; } = null!;
         public virtual DbSet<Material> Materials { get; set; } = null!;
         public virtual DbSet<MaterialId> MaterialIds { get; set; } = null!;
-        public virtual DbSet<MaterialName> MaterialNames { get; set; } = null!;
         public virtual DbSet<MaterialNumber> MaterialNumbers { get; set; } = null!;
-        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Production> Production { get; set; } = null!;
         public virtual DbSet<ProductNumberSequence> ProductNumberSequences { get; set; } = null!;
         public virtual DbSet<QualityControl> QualityControls { get; set; } = null!;
         public virtual DbSet<RawMaterial> RawMaterials { get; set; } = null!;
@@ -45,7 +45,7 @@ namespace RLRMBL
             modelBuilder.Entity<AlphabeticDate>(entity =>
             {
                 entity.HasKey(e => e.MonthNumber)
-                    .HasName("PK__alphabet__82D522917EEC0FFA");
+                    .HasName("PK__alphabet__82D52291379915E9");
 
                 entity.ToTable("alphabeticDate");
 
@@ -63,7 +63,7 @@ namespace RLRMBL
             modelBuilder.Entity<Distilation>(entity =>
             {
                 entity.HasKey(e => e.ProductId)
-                    .HasName("PK__distilat__2D10D16AD85109C0");
+                    .HasName("PK__distilat__2D10D16A8BDBBBCE");
 
                 entity.ToTable("distilation");
 
@@ -81,7 +81,8 @@ namespace RLRMBL
 
                 entity.Property(e => e.Heels).HasColumnName("heels");
 
-                entity.Property(e => e.HeelsPumped).HasColumnName("heelsPumped");
+                entity.Property(e => e.HeelsPumped).HasColumnName("heelsPumped")
+                    .IsRequired();
 
                 entity.Property(e => e.Prefraction).HasColumnName("prefraction");
 
@@ -133,69 +134,52 @@ namespace RLRMBL
 
             modelBuilder.Entity<Material>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.MaterialNameId)
+                    .HasName("PK__material__6A6E3BCD2C8F556A");
 
-                entity.ToView("material");
+                entity.ToTable("material");
 
-                entity.Property(e => e.BatchManaged).HasColumnName("Batch Managed");
+                entity.Property(e => e.MaterialNameId).HasColumnName("materialNameId");
 
-                entity.Property(e => e.CarbonDrum).HasColumnName("Carbon Drum");
+                entity.Property(e => e.CarbonDrumDaysAllowed).HasColumnName("carbonDrumDaysAllowed");
 
-                entity.Property(e => e.DaysAllowed).HasColumnName("Days Allowed");
+                entity.Property(e => e.CarbonDrumRequired).HasColumnName("carbonDrumRequired")
+                    .IsRequired();
 
-                entity.Property(e => e.Description)
+                entity.Property(e => e.CarbonDrumWeightAllowed).HasColumnName("carbonDrumWeightAllowed");
+
+                entity.Property(e => e.MaterialName)
                     .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Grade)
-                    .HasMaxLength(10)
                     .IsUnicode(false)
-                    .IsFixedLength();
+                    .HasColumnName("materialName")
+                    .IsRequired();
 
-                entity.Property(e => e.Material1)
-                    .HasMaxLength(10)
+                entity.Property(e => e.MaterialNameAbreviation)
+                    .HasMaxLength(25)
                     .IsUnicode(false)
-                    .HasColumnName("Material");
-
-                entity.Property(e => e.MaterialNumber).HasColumnName("Material Number");
+                    .HasColumnName("materialNameAbreviation")
+                    .IsRequired();
 
                 entity.Property(e => e.PermitNumber)
                     .HasMaxLength(25)
                     .IsUnicode(false)
-                    .HasColumnName("Permit Number");
-
-                entity.Property(e => e.PoRequired).HasColumnName("PO Required");
+                    .HasColumnName("permitNumber");
 
                 entity.Property(e => e.ProductCode)
                     .HasMaxLength(3)
                     .IsUnicode(false)
-                    .HasColumnName("Product Code");
-
-                entity.Property(e => e.RawMaterial).HasColumnName("Raw Material");
+                    .HasColumnName("productCode");
 
                 entity.Property(e => e.RawMaterialCode)
                     .HasMaxLength(3)
                     .IsUnicode(false)
-                    .HasColumnName("Raw Material Code");
-
-                entity.Property(e => e.Ui)
-                    .HasMaxLength(2)
-                    .IsUnicode(false)
-                    .HasColumnName("UI")
-                    .IsFixedLength();
-
-                entity.Property(e => e.VendorName)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("Vendor Name");
-
-                entity.Property(e => e.WeightAllowed).HasColumnName("Weight Allowed");
+                    .HasColumnName("rawMaterialCode");
             });
 
             modelBuilder.Entity<MaterialId>(entity =>
             {
                 entity.HasKey(e => e.MaterialId1)
-                    .HasName("PK__material__99B653FD66B1B8FF");
+                    .HasName("PK__material__99B653FDF99C4B8E");
 
                 entity.ToTable("materialId");
 
@@ -215,48 +199,10 @@ namespace RLRMBL
                     .HasConstraintName("FK__materialI__mater__32E0915F");
             });
 
-            modelBuilder.Entity<MaterialName>(entity =>
-            {
-                entity.ToTable("materialName");
-
-                entity.Property(e => e.MaterialNameId).HasColumnName("materialNameId");
-
-                entity.Property(e => e.CarbonDrumDaysAllowed).HasColumnName("carbonDrumDaysAllowed");
-
-                entity.Property(e => e.CarbonDrumRequired).HasColumnName("carbonDrumRequired");
-
-                entity.Property(e => e.CarbonDrumWeightAllowed).HasColumnName("carbonDrumWeightAllowed");
-
-                entity.Property(e => e.MaterialName1)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("materialName");
-
-                entity.Property(e => e.MaterialNameAbreviation)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("materialNameAbreviation");
-
-                entity.Property(e => e.PermitNumber)
-                    .HasMaxLength(25)
-                    .IsUnicode(false)
-                    .HasColumnName("permitNumber");
-
-                entity.Property(e => e.ProductCode)
-                    .HasMaxLength(3)
-                    .IsUnicode(false)
-                    .HasColumnName("productCode");
-
-                entity.Property(e => e.RawMaterialCode)
-                    .HasMaxLength(3)
-                    .IsUnicode(false)
-                    .HasColumnName("rawMaterialCode");
-            });
-
             modelBuilder.Entity<MaterialNumber>(entity =>
             {
                 entity.HasKey(e => e.MaterialNumber1)
-                    .HasName("PK__material__EE13FB89DF9A8166");
+                    .HasName("PK__material__EE13FB891D767955");
 
                 entity.ToTable("materialNumber");
 
@@ -264,19 +210,17 @@ namespace RLRMBL
                     .ValueGeneratedNever()
                     .HasColumnName("materialNumber");
 
-                entity.Property(e => e.BatchManaged).HasColumnName("batchManaged");
+                entity.Property(e => e.BatchManaged).HasColumnName("batchManaged")
+                    .IsRequired();
 
-                entity.Property(e => e.IsRawMaterial).HasColumnName("isRawMaterial");
+                entity.Property(e => e.IsRawMaterial).HasColumnName("isRawMaterial")
+                    .IsRequired();
 
-                entity.Property(e => e.MaterialGrade)
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .HasColumnName("materialGrade")
-                    .IsFixedLength();
+                entity.Property(e => e.MaterialNameId).HasColumnName("materialNameId")
+                    .IsRequired();
 
-                entity.Property(e => e.MaterialNameId).HasColumnName("materialNameId");
-
-                entity.Property(e => e.RequiresProcessOrder).HasColumnName("requiresProcessOrder");
+                entity.Property(e => e.RequiresProcessOrder).HasColumnName("requiresProcessOrder")
+                    .IsRequired();
 
                 entity.Property(e => e.UnitOfIssue)
                     .HasMaxLength(2)
@@ -290,10 +234,10 @@ namespace RLRMBL
                     .HasConstraintName("FK__materialN__mater__300424B4");
             });
 
-            modelBuilder.Entity<Product>(entity =>
+            modelBuilder.Entity<Production>(entity =>
             {
                 entity.HasKey(e => e.ProductLotNumber)
-                    .HasName("PK__product__794840452AF69058");
+                    .HasName("PK__product__794840451FC26F46");
 
                 entity.ToTable("product");
 
@@ -335,7 +279,7 @@ namespace RLRMBL
             modelBuilder.Entity<ProductNumberSequence>(entity =>
             {
                 entity.HasKey(e => e.SequenceId)
-                    .HasName("PK__productN__53F40863D46F5A9C");
+                    .HasName("PK__productN__53F4086332C9F781");
 
                 entity.ToTable("productNumberSequence");
 
@@ -351,7 +295,7 @@ namespace RLRMBL
             modelBuilder.Entity<QualityControl>(entity =>
             {
                 entity.HasKey(e => e.SampleSubmitNumber)
-                    .HasName("PK__qualityC__45525A7EE2AB8BD2");
+                    .HasName("PK__qualityC__45525A7E70D8374B");
 
                 entity.ToTable("qualityControl");
 
@@ -373,7 +317,8 @@ namespace RLRMBL
                     .HasColumnType("numeric(18, 0)")
                     .HasColumnName("inspectionLotNumber");
 
-                entity.Property(e => e.Rejected).HasColumnName("rejected");
+                entity.Property(e => e.Rejected).HasColumnName("rejected")
+                    .IsRequired();
 
                 entity.Property(e => e.RejectedDate)
                     .HasColumnType("date")
@@ -390,7 +335,7 @@ namespace RLRMBL
             modelBuilder.Entity<RawMaterial>(entity =>
             {
                 entity.HasKey(e => e.DrumLotNumber)
-                    .HasName("PK__rawMater__944152904CFC88A4");
+                    .HasName("PK__rawMater__944152908680F7FA");
 
                 entity.ToTable("rawMaterial");
 
@@ -481,7 +426,7 @@ namespace RLRMBL
             modelBuilder.Entity<VendorBatchInformation>(entity =>
             {
                 entity.HasKey(e => e.BatchId)
-                    .HasName("PK__vendorBa__78CCD773A39889B2");
+                    .HasName("PK__vendorBa__78CCD773230650CE");
 
                 entity.ToTable("vendorBatchInformation");
 

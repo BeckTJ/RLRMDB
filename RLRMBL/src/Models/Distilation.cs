@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RLRMBL
+namespace RLRMBL.Models
 {
     public partial class Distilation
     {
@@ -17,6 +17,6 @@ namespace RLRMBL
         public DateTime? EndDate { get; set; }
 
         public virtual RawMaterial? DrumLotNumberNavigation { get; set; }
-        public virtual Product? ProductLotNumberNavigation { get; set; }
+        public virtual Production? ProductLotNumberNavigation { get; set; }
     }
 }

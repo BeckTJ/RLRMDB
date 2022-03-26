@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RLRMBL
+namespace RLRMBL.Models
 {
     public partial class QualityControl
     {
         public QualityControl()
         {
-            Products = new HashSet<Product>();
+            Products = new HashSet<Production>();
             RawMaterials = new HashSet<RawMaterial>();
         }
 
@@ -20,7 +20,7 @@ namespace RLRMBL
         public DateTime? ExperiationDate { get; set; }
 
         public virtual VendorBatchInformation? VendorBatch { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Production> Products { get; set; }
         public virtual ICollection<RawMaterial> RawMaterials { get; set; }
     }
 }
