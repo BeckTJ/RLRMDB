@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RLRMDBModelStoreContainer" CdmEntityContainer="RLRMDBEntities">
+    <EntitySetMapping Name="C__EFMigrationsHistory">
+      <EntityTypeMapping TypeName="RLRMDBModel.C__EFMigrationsHistory">
+        <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="alphabeticDates">
+      <EntityTypeMapping TypeName="RLRMDBModel.alphabeticDate">
+        <MappingFragment StoreEntitySet="alphabeticDate">
+          <ScalarProperty Name="monthNumber" ColumnName="monthNumber" />
+          <ScalarProperty Name="alphabeticCode" ColumnName="alphabeticCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="distilations">
+      <EntityTypeMapping TypeName="RLRMDBModel.distilation">
+        <MappingFragment StoreEntitySet="distilation">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productLotNumber" ColumnName="productLotNumber" />
+          <ScalarProperty Name="drumLotNumber" ColumnName="drumLotNumber" />
+          <ScalarProperty Name="rawMaterialLoaded" ColumnName="rawMaterialLoaded" />
+          <ScalarProperty Name="prefraction" ColumnName="prefraction" />
+          <ScalarProperty Name="heels" ColumnName="heels" />
+          <ScalarProperty Name="heelsPumped" ColumnName="heelsPumped" />
+          <ScalarProperty Name="runNumber" ColumnName="runNumber" />
+          <ScalarProperty Name="startDate" ColumnName="startDate" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="employees">
+      <EntityTypeMapping TypeName="RLRMDBModel.employee">
+        <MappingFragment StoreEntitySet="employee">
+          <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materials">
+      <EntityTypeMapping TypeName="RLRMDBModel.material">
+        <MappingFragment StoreEntitySet="material">
+          <ScalarProperty Name="materialNameId" ColumnName="materialNameId" />
+          <ScalarProperty Name="materialName" ColumnName="materialName" />
+          <ScalarProperty Name="materialNameAbreviation" ColumnName="materialNameAbreviation" />
+          <ScalarProperty Name="permitNumber" ColumnName="permitNumber" />
+          <ScalarProperty Name="rawMaterialCode" ColumnName="rawMaterialCode" />
+          <ScalarProperty Name="productCode" ColumnName="productCode" />
+          <ScalarProperty Name="carbonDrumRequired" ColumnName="carbonDrumRequired" />
+          <ScalarProperty Name="carbonDrumDaysAllowed" ColumnName="carbonDrumDaysAllowed" />
+          <ScalarProperty Name="carbonDrumWeightAllowed" ColumnName="carbonDrumWeightAllowed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materialIds">
+      <EntityTypeMapping TypeName="RLRMDBModel.materialId">
+        <MappingFragment StoreEntitySet="materialId">
+          <ScalarProperty Name="materialId1" ColumnName="materialId" />
+          <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="sequenceId" ColumnName="sequenceId" />
+          <ScalarProperty Name="currentSequenceId" ColumnName="currentSequenceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="materialNumbers">
+      <EntityTypeMapping TypeName="RLRMDBModel.materialNumber">
+        <MappingFragment StoreEntitySet="materialNumber">
+          <ScalarProperty Name="materialNumber1" ColumnName="materialNumber" />
+          <ScalarProperty Name="materialNameId" ColumnName="materialNameId" />
+          <ScalarProperty Name="batchManaged" ColumnName="batchManaged" />
+          <ScalarProperty Name="requiresProcessOrder" ColumnName="requiresProcessOrder" />
+          <ScalarProperty Name="unitOfIssue" ColumnName="unitOfIssue" />
+          <ScalarProperty Name="isRawMaterial" ColumnName="isRawMaterial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="RLRMDBModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="productLotNumber" ColumnName="productLotNumber" />
+          <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+          <ScalarProperty Name="productionBatchNumber" ColumnName="productionBatchNumber" />
+          <ScalarProperty Name="processOrder" ColumnName="processOrder" />
+          <ScalarProperty Name="receiverId" ColumnName="receiverId" />
+          <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productNumberSequences">
+      <EntityTypeMapping TypeName="RLRMDBModel.productNumberSequence">
+        <MappingFragment StoreEntitySet="productNumberSequence">
+          <ScalarProperty Name="sequenceId" ColumnName="sequenceId" />
+          <ScalarProperty Name="sequenceIdStart" ColumnName="sequenceIdStart" />
+          <ScalarProperty Name="sequenceIdEnd" ColumnName="sequenceIdEnd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="qualityControls">
+      <EntityTypeMapping TypeName="RLRMDBModel.qualityControl">
+        <MappingFragment StoreEntitySet="qualityControl">
+          <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+          <ScalarProperty Name="inspectionLotNumber" ColumnName="inspectionLotNumber" />
+          <ScalarProperty Name="vendorBatchId" ColumnName="vendorBatchId" />
+          <ScalarProperty Name="rejected" ColumnName="rejected" />
+          <ScalarProperty Name="rejectedDate" ColumnName="rejectedDate" />
+          <ScalarProperty Name="approvalDate" ColumnName="approvalDate" />
+          <ScalarProperty Name="experiationDate" ColumnName="experiationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rawMaterials">
+      <EntityTypeMapping TypeName="RLRMDBModel.rawMaterial">
+        <MappingFragment StoreEntitySet="rawMaterial">
+          <ScalarProperty Name="drumLotNumber" ColumnName="drumLotNumber" />
+          <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+          <ScalarProperty Name="drumWeight" ColumnName="drumWeight" />
+          <ScalarProperty Name="sapBatchNumber" ColumnName="sapBatchNumber" />
+          <ScalarProperty Name="containerNumber" ColumnName="containerNumber" />
+          <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+          <ScalarProperty Name="processOrder" ColumnName="processOrder" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorBatchId" ColumnName="vendorBatchId" />
+          <ScalarProperty Name="dateUsed" ColumnName="dateUsed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="receivers">
+      <EntityTypeMapping TypeName="RLRMDBModel.receiver">
+        <MappingFragment StoreEntitySet="receiver">
+          <ScalarProperty Name="receiverId" ColumnName="receiverId" />
+          <ScalarProperty Name="receiverName" ColumnName="receiverName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendors">
+      <EntityTypeMapping TypeName="RLRMDBModel.vendor">
+        <MappingFragment StoreEntitySet="vendor">
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vendorBatchInformations">
+      <EntityTypeMapping TypeName="RLRMDBModel.vendorBatchInformation">
+        <MappingFragment StoreEntitySet="vendorBatchInformation">
+          <ScalarProperty Name="batchId" ColumnName="batchId" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="vendorBatchNumber" ColumnName="vendorBatchNumber" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

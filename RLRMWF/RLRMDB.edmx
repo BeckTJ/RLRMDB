@@ -1,0 +1,962 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RLRMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="alphabeticDate">
+          <Key>
+            <PropertyRef Name="monthNumber" />
+          </Key>
+          <Property Name="monthNumber" Type="int" Nullable="false" />
+          <Property Name="alphabeticCode" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="distilation">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productLotNumber" Type="char" MaxLength="10" />
+          <Property Name="drumLotNumber" Type="char" MaxLength="10" />
+          <Property Name="rawMaterialLoaded" Type="int" />
+          <Property Name="prefraction" Type="int" />
+          <Property Name="heels" Type="int" />
+          <Property Name="heelsPumped" Type="bit" Nullable="false" />
+          <Property Name="runNumber" Type="int" />
+          <Property Name="startDate" Type="datetime" />
+          <Property Name="endDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="char" MaxLength="25" />
+          <Property Name="lastName" Type="char" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="materialNameId" />
+          </Key>
+          <Property Name="materialNameId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="materialNameAbreviation" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="permitNumber" Type="varchar" MaxLength="25" />
+          <Property Name="rawMaterialCode" Type="varchar" MaxLength="3" />
+          <Property Name="productCode" Type="varchar" MaxLength="3" />
+          <Property Name="carbonDrumRequired" Type="bit" Nullable="false" />
+          <Property Name="carbonDrumDaysAllowed" Type="int" />
+          <Property Name="carbonDrumWeightAllowed" Type="int" />
+        </EntityType>
+        <EntityType Name="materialId">
+          <Key>
+            <PropertyRef Name="materialId" />
+          </Key>
+          <Property Name="materialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="materialNumber" Type="int" />
+          <Property Name="vendorId" Type="int" />
+          <Property Name="sequenceId" Type="int" />
+          <Property Name="currentSequenceId" Type="int" />
+        </EntityType>
+        <EntityType Name="materialNumber">
+          <Key>
+            <PropertyRef Name="materialNumber" />
+          </Key>
+          <Property Name="materialNumber" Type="int" Nullable="false" />
+          <Property Name="materialNameId" Type="int" Nullable="false" />
+          <Property Name="batchManaged" Type="bit" Nullable="false" />
+          <Property Name="requiresProcessOrder" Type="bit" Nullable="false" />
+          <Property Name="unitOfIssue" Type="char" MaxLength="2" />
+          <Property Name="isRawMaterial" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productLotNumber" />
+          </Key>
+          <Property Name="productLotNumber" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="materialNumber" Type="int" />
+          <Property Name="productionBatchNumber" Type="int" />
+          <Property Name="processOrder" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="receiverId" Type="int" />
+          <Property Name="sampleSubmitNumber" Type="char" MaxLength="8" />
+          <Property Name="quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="productNumberSequence">
+          <Key>
+            <PropertyRef Name="sequenceId" />
+          </Key>
+          <Property Name="sequenceId" Type="int" Nullable="false" />
+          <Property Name="sequenceIdStart" Type="int" Nullable="false" />
+          <Property Name="sequenceIdEnd" Type="int" />
+        </EntityType>
+        <EntityType Name="qualityControl">
+          <Key>
+            <PropertyRef Name="sampleSubmitNumber" />
+          </Key>
+          <Property Name="sampleSubmitNumber" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="inspectionLotNumber" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="vendorBatchId" Type="int" />
+          <Property Name="rejected" Type="bit" Nullable="false" />
+          <Property Name="rejectedDate" Type="date" />
+          <Property Name="approvalDate" Type="date" />
+          <Property Name="experiationDate" Type="date" />
+        </EntityType>
+        <EntityType Name="rawMaterial">
+          <Key>
+            <PropertyRef Name="drumLotNumber" />
+          </Key>
+          <Property Name="drumLotNumber" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="materialNumber" Type="int" />
+          <Property Name="drumWeight" Type="int" />
+          <Property Name="sapBatchNumber" Type="int" />
+          <Property Name="containerNumber" Type="char" MaxLength="7" />
+          <Property Name="sampleSubmitNumber" Type="char" MaxLength="8" />
+          <Property Name="processOrder" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="vendorId" Type="int" />
+          <Property Name="vendorBatchId" Type="int" />
+          <Property Name="dateUsed" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="receiver">
+          <Key>
+            <PropertyRef Name="receiverId" />
+          </Key>
+          <Property Name="receiverId" Type="int" Nullable="false" />
+          <Property Name="receiverName" Type="char" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="vendor">
+          <Key>
+            <PropertyRef Name="vendorId" />
+          </Key>
+          <Property Name="vendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vendorName" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vendorBatchInformation">
+          <Key>
+            <PropertyRef Name="batchId" />
+          </Key>
+          <Property Name="batchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vendorId" Type="int" />
+          <Property Name="vendorBatchNumber" Type="varchar" MaxLength="25" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="materialNumber" Type="int" />
+        </EntityType>
+        <Association Name="FK__distilati__drumL__403A8C7D">
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="0..1" />
+          <End Role="distilation" Type="Self.distilation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rawMaterial">
+              <PropertyRef Name="drumLotNumber" />
+            </Principal>
+            <Dependent Role="distilation">
+              <PropertyRef Name="drumLotNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__distilati__produ__3F466844">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="distilation" Type="Self.distilation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productLotNumber" />
+            </Principal>
+            <Dependent Role="distilation">
+              <PropertyRef Name="productLotNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materialI__mater__32E0915F">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="materialId" Type="Self.materialId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber" />
+            </Principal>
+            <Dependent Role="materialId">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materialN__mater__300424B4">
+          <End Role="material" Type="Self.material" Multiplicity="1" />
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="materialNameId" />
+            </Principal>
+            <Dependent Role="materialNumber">
+              <PropertyRef Name="materialNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__materia__3B75D760">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__sampleS__3C69FB99">
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qualityControl">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qualityCo__vendo__2B3F6F97">
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="0..1" />
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendorBatchInformation">
+              <PropertyRef Name="batchId" />
+            </Principal>
+            <Dependent Role="qualityControl">
+              <PropertyRef Name="vendorBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__mater__35BCFE0A">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__sampl__36B12243">
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qualityControl">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__vendo__37A5467C">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorId" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__vendo__38996AB5">
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendorBatchInformation">
+              <PropertyRef Name="batchId" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="vendorBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vendorBat__mater__6E01572D">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber" />
+            </Principal>
+            <Dependent Role="vendorBatchInformation">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vendorBat__vendo__267ABA7A">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="0..1" />
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorId" />
+            </Principal>
+            <Dependent Role="vendorBatchInformation">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="setDrumId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char">
+          <Parameter Name="materialNumber" Type="int" Mode="In" />
+          <Parameter Name="vendorName" Type="char" Mode="In" />
+        </Function>
+        <EntityContainer Name="RLRMDBModelStoreContainer">
+          <EntitySet Name="__EFMigrationsHistory" EntityType="Self.__EFMigrationsHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="alphabeticDate" EntityType="Self.alphabeticDate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="distilation" EntityType="Self.distilation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materialId" EntityType="Self.materialId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="materialNumber" EntityType="Self.materialNumber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productNumberSequence" EntityType="Self.productNumberSequence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="qualityControl" EntityType="Self.qualityControl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rawMaterial" EntityType="Self.rawMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="receiver" EntityType="Self.receiver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vendor" EntityType="Self.vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vendorBatchInformation" EntityType="Self.vendorBatchInformation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__distilati__drumL__403A8C7D" Association="Self.FK__distilati__drumL__403A8C7D">
+            <End Role="rawMaterial" EntitySet="rawMaterial" />
+            <End Role="distilation" EntitySet="distilation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__distilati__produ__3F466844" Association="Self.FK__distilati__produ__3F466844">
+            <End Role="product" EntitySet="product" />
+            <End Role="distilation" EntitySet="distilation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materialI__mater__32E0915F" Association="Self.FK__materialI__mater__32E0915F">
+            <End Role="materialNumber" EntitySet="materialNumber" />
+            <End Role="materialId" EntitySet="materialId" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materialN__mater__300424B4" Association="Self.FK__materialN__mater__300424B4">
+            <End Role="material" EntitySet="material" />
+            <End Role="materialNumber" EntitySet="materialNumber" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__materia__3B75D760" Association="Self.FK__product__materia__3B75D760">
+            <End Role="materialNumber" EntitySet="materialNumber" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__sampleS__3C69FB99" Association="Self.FK__product__sampleS__3C69FB99">
+            <End Role="qualityControl" EntitySet="qualityControl" />
+            <End Role="product" EntitySet="product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qualityCo__vendo__2B3F6F97" Association="Self.FK__qualityCo__vendo__2B3F6F97">
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformation" />
+            <End Role="qualityControl" EntitySet="qualityControl" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__mater__35BCFE0A" Association="Self.FK__rawMateri__mater__35BCFE0A">
+            <End Role="materialNumber" EntitySet="materialNumber" />
+            <End Role="rawMaterial" EntitySet="rawMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__sampl__36B12243" Association="Self.FK__rawMateri__sampl__36B12243">
+            <End Role="qualityControl" EntitySet="qualityControl" />
+            <End Role="rawMaterial" EntitySet="rawMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__vendo__37A5467C" Association="Self.FK__rawMateri__vendo__37A5467C">
+            <End Role="vendor" EntitySet="vendor" />
+            <End Role="rawMaterial" EntitySet="rawMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__vendo__38996AB5" Association="Self.FK__rawMateri__vendo__38996AB5">
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformation" />
+            <End Role="rawMaterial" EntitySet="rawMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vendorBat__mater__6E01572D" Association="Self.FK__vendorBat__mater__6E01572D">
+            <End Role="materialNumber" EntitySet="materialNumber" />
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vendorBat__vendo__267ABA7A" Association="Self.FK__vendorBat__vendo__267ABA7A">
+            <End Role="vendor" EntitySet="vendor" />
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RLRMDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__EFMigrationsHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="alphabeticDate">
+          <Key>
+            <PropertyRef Name="monthNumber" />
+          </Key>
+          <Property Name="monthNumber" Type="Int32" Nullable="false" />
+          <Property Name="alphabeticCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="distilation">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productLotNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="drumLotNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="rawMaterialLoaded" Type="Int32" />
+          <Property Name="prefraction" Type="Int32" />
+          <Property Name="heels" Type="Int32" />
+          <Property Name="heelsPumped" Type="Boolean" Nullable="false" />
+          <Property Name="runNumber" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="3" />
+          <Property Name="endDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="rawMaterial" Relationship="Self.FK__distilati__drumL__403A8C7D" FromRole="distilation" ToRole="rawMaterial" />
+          <NavigationProperty Name="product" Relationship="Self.FK__distilati__produ__3F466844" FromRole="distilation" ToRole="product" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="employeeId" />
+          </Key>
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="materialNameId" />
+          </Key>
+          <Property Name="materialNameId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="materialNameAbreviation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permitNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="rawMaterialCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="productCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="carbonDrumRequired" Type="Boolean" Nullable="false" />
+          <Property Name="carbonDrumDaysAllowed" Type="Int32" />
+          <Property Name="carbonDrumWeightAllowed" Type="Int32" />
+          <NavigationProperty Name="materialNumbers" Relationship="Self.FK__materialN__mater__300424B4" FromRole="material" ToRole="materialNumber" />
+        </EntityType>
+        <EntityType Name="materialId">
+          <Key>
+            <PropertyRef Name="materialId1" />
+          </Key>
+          <Property Name="materialId1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="materialNumber" Type="Int32" />
+          <Property Name="vendorId" Type="Int32" />
+          <Property Name="sequenceId" Type="Int32" />
+          <Property Name="currentSequenceId" Type="Int32" />
+          <NavigationProperty Name="materialNumber1" Relationship="Self.FK__materialI__mater__32E0915F" FromRole="materialId" ToRole="materialNumber" />
+        </EntityType>
+        <EntityType Name="materialNumber">
+          <Key>
+            <PropertyRef Name="materialNumber1" />
+          </Key>
+          <Property Name="materialNumber1" Type="Int32" Nullable="false" />
+          <Property Name="materialNameId" Type="Int32" Nullable="false" />
+          <Property Name="batchManaged" Type="Boolean" Nullable="false" />
+          <Property Name="requiresProcessOrder" Type="Boolean" Nullable="false" />
+          <Property Name="unitOfIssue" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="isRawMaterial" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="material" Relationship="Self.FK__materialN__mater__300424B4" FromRole="materialNumber" ToRole="material" />
+          <NavigationProperty Name="materialIds" Relationship="Self.FK__materialI__mater__32E0915F" FromRole="materialNumber" ToRole="materialId" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__materia__3B75D760" FromRole="materialNumber" ToRole="product" />
+          <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__mater__35BCFE0A" FromRole="materialNumber" ToRole="rawMaterial" />
+          <NavigationProperty Name="vendorBatchInformations" Relationship="RLRMDBModel.FK__vendorBat__mater__6E01572D" FromRole="materialNumber" ToRole="vendorBatchInformation" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productLotNumber" />
+          </Key>
+          <Property Name="productLotNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="materialNumber" Type="Int32" />
+          <Property Name="productionBatchNumber" Type="Int32" />
+          <Property Name="processOrder" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="receiverId" Type="Int32" />
+          <Property Name="sampleSubmitNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="distilations" Relationship="Self.FK__distilati__produ__3F466844" FromRole="product" ToRole="distilation" />
+          <NavigationProperty Name="materialNumber1" Relationship="Self.FK__product__materia__3B75D760" FromRole="product" ToRole="materialNumber" />
+          <NavigationProperty Name="qualityControl" Relationship="Self.FK__product__sampleS__3C69FB99" FromRole="product" ToRole="qualityControl" />
+        </EntityType>
+        <EntityType Name="productNumberSequence">
+          <Key>
+            <PropertyRef Name="sequenceId" />
+          </Key>
+          <Property Name="sequenceId" Type="Int32" Nullable="false" />
+          <Property Name="sequenceIdStart" Type="Int32" Nullable="false" />
+          <Property Name="sequenceIdEnd" Type="Int32" />
+        </EntityType>
+        <EntityType Name="qualityControl">
+          <Key>
+            <PropertyRef Name="sampleSubmitNumber" />
+          </Key>
+          <Property Name="sampleSubmitNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="inspectionLotNumber" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="vendorBatchId" Type="Int32" />
+          <Property Name="rejected" Type="Boolean" Nullable="false" />
+          <Property Name="rejectedDate" Type="DateTime" Precision="0" />
+          <Property Name="approvalDate" Type="DateTime" Precision="0" />
+          <Property Name="experiationDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="products" Relationship="Self.FK__product__sampleS__3C69FB99" FromRole="qualityControl" ToRole="product" />
+          <NavigationProperty Name="vendorBatchInformation" Relationship="Self.FK__qualityCo__vendo__2B3F6F97" FromRole="qualityControl" ToRole="vendorBatchInformation" />
+          <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__sampl__36B12243" FromRole="qualityControl" ToRole="rawMaterial" />
+        </EntityType>
+        <EntityType Name="rawMaterial">
+          <Key>
+            <PropertyRef Name="drumLotNumber" />
+          </Key>
+          <Property Name="drumLotNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="materialNumber" Type="Int32" />
+          <Property Name="drumWeight" Type="Int32" />
+          <Property Name="sapBatchNumber" Type="Int32" />
+          <Property Name="containerNumber" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="sampleSubmitNumber" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="processOrder" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="vendorId" Type="Int32" />
+          <Property Name="vendorBatchId" Type="Int32" />
+          <Property Name="dateUsed" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="distilations" Relationship="Self.FK__distilati__drumL__403A8C7D" FromRole="rawMaterial" ToRole="distilation" />
+          <NavigationProperty Name="materialNumber1" Relationship="Self.FK__rawMateri__mater__35BCFE0A" FromRole="rawMaterial" ToRole="materialNumber" />
+          <NavigationProperty Name="qualityControl" Relationship="Self.FK__rawMateri__sampl__36B12243" FromRole="rawMaterial" ToRole="qualityControl" />
+          <NavigationProperty Name="vendor" Relationship="Self.FK__rawMateri__vendo__37A5467C" FromRole="rawMaterial" ToRole="vendor" />
+          <NavigationProperty Name="vendorBatchInformation" Relationship="Self.FK__rawMateri__vendo__38996AB5" FromRole="rawMaterial" ToRole="vendorBatchInformation" />
+        </EntityType>
+        <EntityType Name="receiver">
+          <Key>
+            <PropertyRef Name="receiverId" />
+          </Key>
+          <Property Name="receiverId" Type="Int32" Nullable="false" />
+          <Property Name="receiverName" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vendor">
+          <Key>
+            <PropertyRef Name="vendorId" />
+          </Key>
+          <Property Name="vendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vendorName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__vendo__37A5467C" FromRole="vendor" ToRole="rawMaterial" />
+          <NavigationProperty Name="vendorBatchInformations" Relationship="Self.FK__vendorBat__vendo__267ABA7A" FromRole="vendor" ToRole="vendorBatchInformation" />
+        </EntityType>
+        <EntityType Name="vendorBatchInformation">
+          <Key>
+            <PropertyRef Name="batchId" />
+          </Key>
+          <Property Name="batchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vendorId" Type="Int32" />
+          <Property Name="vendorBatchNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="qualityControls" Relationship="Self.FK__qualityCo__vendo__2B3F6F97" FromRole="vendorBatchInformation" ToRole="qualityControl" />
+          <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__vendo__38996AB5" FromRole="vendorBatchInformation" ToRole="rawMaterial" />
+          <NavigationProperty Name="vendor" Relationship="Self.FK__vendorBat__vendo__267ABA7A" FromRole="vendorBatchInformation" ToRole="vendor" />
+          <Property Name="materialNumber" Type="Int32" />
+          <NavigationProperty Name="materialNumber1" Relationship="RLRMDBModel.FK__vendorBat__mater__6E01572D" FromRole="vendorBatchInformation" ToRole="materialNumber" />
+        </EntityType>
+        <Association Name="FK__distilati__drumL__403A8C7D">
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="0..1" />
+          <End Role="distilation" Type="Self.distilation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rawMaterial">
+              <PropertyRef Name="drumLotNumber" />
+            </Principal>
+            <Dependent Role="distilation">
+              <PropertyRef Name="drumLotNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__distilati__produ__3F466844">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="distilation" Type="Self.distilation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productLotNumber" />
+            </Principal>
+            <Dependent Role="distilation">
+              <PropertyRef Name="productLotNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materialN__mater__300424B4">
+          <End Role="material" Type="Self.material" Multiplicity="1" />
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="material">
+              <PropertyRef Name="materialNameId" />
+            </Principal>
+            <Dependent Role="materialNumber">
+              <PropertyRef Name="materialNameId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__materialI__mater__32E0915F">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="materialId" Type="Self.materialId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber1" />
+            </Principal>
+            <Dependent Role="materialId">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__materia__3B75D760">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber1" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__mater__35BCFE0A">
+          <End Role="materialNumber" Type="Self.materialNumber" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber1" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__product__sampleS__3C69FB99">
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="0..1" />
+          <End Role="product" Type="Self.product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qualityControl">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__qualityCo__vendo__2B3F6F97">
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="0..1" />
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendorBatchInformation">
+              <PropertyRef Name="batchId" />
+            </Principal>
+            <Dependent Role="qualityControl">
+              <PropertyRef Name="vendorBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__sampl__36B12243">
+          <End Role="qualityControl" Type="Self.qualityControl" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="qualityControl">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="sampleSubmitNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__vendo__37A5467C">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorId" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rawMateri__vendo__38996AB5">
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="0..1" />
+          <End Role="rawMaterial" Type="Self.rawMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendorBatchInformation">
+              <PropertyRef Name="batchId" />
+            </Principal>
+            <Dependent Role="rawMaterial">
+              <PropertyRef Name="vendorBatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vendorBat__vendo__267ABA7A">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="0..1" />
+          <End Role="vendorBatchInformation" Type="Self.vendorBatchInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorId" />
+            </Principal>
+            <Dependent Role="vendorBatchInformation">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RLRMDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__EFMigrationsHistory" EntityType="Self.C__EFMigrationsHistory" />
+          <EntitySet Name="alphabeticDates" EntityType="Self.alphabeticDate" />
+          <EntitySet Name="distilations" EntityType="Self.distilation" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="materials" EntityType="Self.material" />
+          <EntitySet Name="materialIds" EntityType="Self.materialId" />
+          <EntitySet Name="materialNumbers" EntityType="Self.materialNumber" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <EntitySet Name="productNumberSequences" EntityType="Self.productNumberSequence" />
+          <EntitySet Name="qualityControls" EntityType="Self.qualityControl" />
+          <EntitySet Name="rawMaterials" EntityType="Self.rawMaterial" />
+          <EntitySet Name="receivers" EntityType="Self.receiver" />
+          <EntitySet Name="vendors" EntityType="Self.vendor" />
+          <EntitySet Name="vendorBatchInformations" EntityType="Self.vendorBatchInformation" />
+          <AssociationSet Name="FK__distilati__drumL__403A8C7D" Association="Self.FK__distilati__drumL__403A8C7D">
+            <End Role="rawMaterial" EntitySet="rawMaterials" />
+            <End Role="distilation" EntitySet="distilations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__distilati__produ__3F466844" Association="Self.FK__distilati__produ__3F466844">
+            <End Role="product" EntitySet="products" />
+            <End Role="distilation" EntitySet="distilations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materialN__mater__300424B4" Association="Self.FK__materialN__mater__300424B4">
+            <End Role="material" EntitySet="materials" />
+            <End Role="materialNumber" EntitySet="materialNumbers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__materialI__mater__32E0915F" Association="Self.FK__materialI__mater__32E0915F">
+            <End Role="materialNumber" EntitySet="materialNumbers" />
+            <End Role="materialId" EntitySet="materialIds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__materia__3B75D760" Association="Self.FK__product__materia__3B75D760">
+            <End Role="materialNumber" EntitySet="materialNumbers" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__mater__35BCFE0A" Association="Self.FK__rawMateri__mater__35BCFE0A">
+            <End Role="materialNumber" EntitySet="materialNumbers" />
+            <End Role="rawMaterial" EntitySet="rawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__product__sampleS__3C69FB99" Association="Self.FK__product__sampleS__3C69FB99">
+            <End Role="qualityControl" EntitySet="qualityControls" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__qualityCo__vendo__2B3F6F97" Association="Self.FK__qualityCo__vendo__2B3F6F97">
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
+            <End Role="qualityControl" EntitySet="qualityControls" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__sampl__36B12243" Association="Self.FK__rawMateri__sampl__36B12243">
+            <End Role="qualityControl" EntitySet="qualityControls" />
+            <End Role="rawMaterial" EntitySet="rawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__vendo__37A5467C" Association="Self.FK__rawMateri__vendo__37A5467C">
+            <End Role="vendor" EntitySet="vendors" />
+            <End Role="rawMaterial" EntitySet="rawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rawMateri__vendo__38996AB5" Association="Self.FK__rawMateri__vendo__38996AB5">
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
+            <End Role="rawMaterial" EntitySet="rawMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vendorBat__vendo__267ABA7A" Association="Self.FK__vendorBat__vendo__267ABA7A">
+            <End Role="vendor" EntitySet="vendors" />
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vendorBat__mater__6E01572D" Association="RLRMDBModel.FK__vendorBat__mater__6E01572D">
+            <End Role="materialNumber" EntitySet="materialNumbers" />
+            <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK__vendorBat__mater__6E01572D">
+          <End Type="RLRMDBModel.materialNumber" Role="materialNumber" Multiplicity="0..1" />
+          <End Type="RLRMDBModel.vendorBatchInformation" Role="vendorBatchInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="materialNumber">
+              <PropertyRef Name="materialNumber1" />
+            </Principal>
+            <Dependent Role="vendorBatchInformation">
+              <PropertyRef Name="materialNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RLRMDBModelStoreContainer" CdmEntityContainer="RLRMDBEntities">
+          <EntitySetMapping Name="C__EFMigrationsHistory">
+            <EntityTypeMapping TypeName="RLRMDBModel.C__EFMigrationsHistory">
+              <MappingFragment StoreEntitySet="__EFMigrationsHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="alphabeticDates">
+            <EntityTypeMapping TypeName="RLRMDBModel.alphabeticDate">
+              <MappingFragment StoreEntitySet="alphabeticDate">
+                <ScalarProperty Name="monthNumber" ColumnName="monthNumber" />
+                <ScalarProperty Name="alphabeticCode" ColumnName="alphabeticCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="distilations">
+            <EntityTypeMapping TypeName="RLRMDBModel.distilation">
+              <MappingFragment StoreEntitySet="distilation">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="productLotNumber" ColumnName="productLotNumber" />
+                <ScalarProperty Name="drumLotNumber" ColumnName="drumLotNumber" />
+                <ScalarProperty Name="rawMaterialLoaded" ColumnName="rawMaterialLoaded" />
+                <ScalarProperty Name="prefraction" ColumnName="prefraction" />
+                <ScalarProperty Name="heels" ColumnName="heels" />
+                <ScalarProperty Name="heelsPumped" ColumnName="heelsPumped" />
+                <ScalarProperty Name="runNumber" ColumnName="runNumber" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="RLRMDBModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materials">
+            <EntityTypeMapping TypeName="RLRMDBModel.material">
+              <MappingFragment StoreEntitySet="material">
+                <ScalarProperty Name="materialNameId" ColumnName="materialNameId" />
+                <ScalarProperty Name="materialName" ColumnName="materialName" />
+                <ScalarProperty Name="materialNameAbreviation" ColumnName="materialNameAbreviation" />
+                <ScalarProperty Name="permitNumber" ColumnName="permitNumber" />
+                <ScalarProperty Name="rawMaterialCode" ColumnName="rawMaterialCode" />
+                <ScalarProperty Name="productCode" ColumnName="productCode" />
+                <ScalarProperty Name="carbonDrumRequired" ColumnName="carbonDrumRequired" />
+                <ScalarProperty Name="carbonDrumDaysAllowed" ColumnName="carbonDrumDaysAllowed" />
+                <ScalarProperty Name="carbonDrumWeightAllowed" ColumnName="carbonDrumWeightAllowed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materialIds">
+            <EntityTypeMapping TypeName="RLRMDBModel.materialId">
+              <MappingFragment StoreEntitySet="materialId">
+                <ScalarProperty Name="materialId1" ColumnName="materialId" />
+                <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="sequenceId" ColumnName="sequenceId" />
+                <ScalarProperty Name="currentSequenceId" ColumnName="currentSequenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materialNumbers">
+            <EntityTypeMapping TypeName="RLRMDBModel.materialNumber">
+              <MappingFragment StoreEntitySet="materialNumber">
+                <ScalarProperty Name="materialNumber1" ColumnName="materialNumber" />
+                <ScalarProperty Name="materialNameId" ColumnName="materialNameId" />
+                <ScalarProperty Name="batchManaged" ColumnName="batchManaged" />
+                <ScalarProperty Name="requiresProcessOrder" ColumnName="requiresProcessOrder" />
+                <ScalarProperty Name="unitOfIssue" ColumnName="unitOfIssue" />
+                <ScalarProperty Name="isRawMaterial" ColumnName="isRawMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="RLRMDBModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="productLotNumber" ColumnName="productLotNumber" />
+                <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+                <ScalarProperty Name="productionBatchNumber" ColumnName="productionBatchNumber" />
+                <ScalarProperty Name="processOrder" ColumnName="processOrder" />
+                <ScalarProperty Name="receiverId" ColumnName="receiverId" />
+                <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="productNumberSequences">
+            <EntityTypeMapping TypeName="RLRMDBModel.productNumberSequence">
+              <MappingFragment StoreEntitySet="productNumberSequence">
+                <ScalarProperty Name="sequenceId" ColumnName="sequenceId" />
+                <ScalarProperty Name="sequenceIdStart" ColumnName="sequenceIdStart" />
+                <ScalarProperty Name="sequenceIdEnd" ColumnName="sequenceIdEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="qualityControls">
+            <EntityTypeMapping TypeName="RLRMDBModel.qualityControl">
+              <MappingFragment StoreEntitySet="qualityControl">
+                <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+                <ScalarProperty Name="inspectionLotNumber" ColumnName="inspectionLotNumber" />
+                <ScalarProperty Name="vendorBatchId" ColumnName="vendorBatchId" />
+                <ScalarProperty Name="rejected" ColumnName="rejected" />
+                <ScalarProperty Name="rejectedDate" ColumnName="rejectedDate" />
+                <ScalarProperty Name="approvalDate" ColumnName="approvalDate" />
+                <ScalarProperty Name="experiationDate" ColumnName="experiationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rawMaterials">
+            <EntityTypeMapping TypeName="RLRMDBModel.rawMaterial">
+              <MappingFragment StoreEntitySet="rawMaterial">
+                <ScalarProperty Name="drumLotNumber" ColumnName="drumLotNumber" />
+                <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+                <ScalarProperty Name="drumWeight" ColumnName="drumWeight" />
+                <ScalarProperty Name="sapBatchNumber" ColumnName="sapBatchNumber" />
+                <ScalarProperty Name="containerNumber" ColumnName="containerNumber" />
+                <ScalarProperty Name="sampleSubmitNumber" ColumnName="sampleSubmitNumber" />
+                <ScalarProperty Name="processOrder" ColumnName="processOrder" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="vendorBatchId" ColumnName="vendorBatchId" />
+                <ScalarProperty Name="dateUsed" ColumnName="dateUsed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="receivers">
+            <EntityTypeMapping TypeName="RLRMDBModel.receiver">
+              <MappingFragment StoreEntitySet="receiver">
+                <ScalarProperty Name="receiverId" ColumnName="receiverId" />
+                <ScalarProperty Name="receiverName" ColumnName="receiverName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendors">
+            <EntityTypeMapping TypeName="RLRMDBModel.vendor">
+              <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendorBatchInformations">
+            <EntityTypeMapping TypeName="RLRMDBModel.vendorBatchInformation">
+              <MappingFragment StoreEntitySet="vendorBatchInformation">
+                <ScalarProperty Name="materialNumber" ColumnName="materialNumber" />
+                <ScalarProperty Name="batchId" ColumnName="batchId" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="vendorBatchNumber" ColumnName="vendorBatchNumber" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
