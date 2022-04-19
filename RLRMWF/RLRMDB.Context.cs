@@ -12,6 +12,8 @@ namespace RLRMWF
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RLRMDBEntities : DbContext
     {
@@ -39,5 +41,55 @@ namespace RLRMWF
         public virtual DbSet<receiver> receivers { get; set; }
         public virtual DbSet<vendor> vendors { get; set; }
         public virtual DbSet<vendorBatchInformation> vendorBatchInformations { get; set; }
+    
+        public virtual int rawMaterialUpdate(Nullable<int> materialNumber, string vendorName, string vendorBatchNumber, Nullable<int> drumWeight, Nullable<int> sapBatchNumber, string containerNumber, Nullable<decimal> processOrder, Nullable<int> quantity)
+        {
+            var materialNumberParameter = materialNumber.HasValue ?
+                new ObjectParameter("materialNumber", materialNumber) :
+                new ObjectParameter("materialNumber", typeof(int));
+    
+            var vendorNameParameter = vendorName != null ?
+                new ObjectParameter("vendorName", vendorName) :
+                new ObjectParameter("vendorName", typeof(string));
+    
+            var vendorBatchNumberParameter = vendorBatchNumber != null ?
+                new ObjectParameter("vendorBatchNumber", vendorBatchNumber) :
+                new ObjectParameter("vendorBatchNumber", typeof(string));
+    
+            var drumWeightParameter = drumWeight.HasValue ?
+                new ObjectParameter("drumWeight", drumWeight) :
+                new ObjectParameter("drumWeight", typeof(int));
+    
+            var sapBatchNumberParameter = sapBatchNumber.HasValue ?
+                new ObjectParameter("sapBatchNumber", sapBatchNumber) :
+                new ObjectParameter("sapBatchNumber", typeof(int));
+    
+            var containerNumberParameter = containerNumber != null ?
+                new ObjectParameter("containerNumber", containerNumber) :
+                new ObjectParameter("containerNumber", typeof(string));
+    
+            var processOrderParameter = processOrder.HasValue ?
+                new ObjectParameter("processOrder", processOrder) :
+                new ObjectParameter("processOrder", typeof(decimal));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("quantity", quantity) :
+                new ObjectParameter("quantity", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("rawMaterialUpdate", materialNumberParameter, vendorNameParameter, vendorBatchNumberParameter, drumWeightParameter, sapBatchNumberParameter, containerNumberParameter, processOrderParameter, quantityParameter);
+        }
+    
+        public virtual int sampleSubmit(string sampleNumber, Nullable<decimal> lotNumber)
+        {
+            var sampleNumberParameter = sampleNumber != null ?
+                new ObjectParameter("sampleNumber", sampleNumber) :
+                new ObjectParameter("sampleNumber", typeof(string));
+    
+            var lotNumberParameter = lotNumber.HasValue ?
+                new ObjectParameter("lotNumber", lotNumber) :
+                new ObjectParameter("lotNumber", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sampleSubmit", sampleNumberParameter, lotNumberParameter);
+        }
     }
 }

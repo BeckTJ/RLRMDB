@@ -11,13 +11,23 @@ namespace RLRMWF.Tests
     [TestClass()]
     public class MaterialsTests
     {
+        Materials material = new Materials();
+
         [TestMethod()]
         public void getMaterialTest()
         {
-            Materials material = new Materials();
             var materialNumber = 45235;
             var result = material.getMaterial(materialNumber);
 
+            Assert.AreEqual(materialNumber, result.number);
+        }
+        [TestMethod()]
+        public void materialNameId()
+        {
+            var materialNumber = 45234;
+            var result = material.getMaterialNameId(materialNumber);
+
+            Assert.AreEqual(9, result);
         }
     }
 }

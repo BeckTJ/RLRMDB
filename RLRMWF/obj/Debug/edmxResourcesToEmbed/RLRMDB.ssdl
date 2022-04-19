@@ -132,6 +132,7 @@
     </Key>
     <Property Name="vendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="vendorName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="isMPPS" Type="bit" />
   </EntityType>
   <EntityType Name="vendorBatchInformation">
     <Key>
@@ -299,6 +300,24 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="obtainVendorBatchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+    <Parameter Name="vendorId" Type="int" Mode="In" />
+    <Parameter Name="vendorBatchNumber" Type="char" Mode="In" />
+  </Function>
+  <Function Name="rawMaterialUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="materialNumber" Type="int" Mode="In" />
+    <Parameter Name="vendorName" Type="varchar" Mode="In" />
+    <Parameter Name="vendorBatchNumber" Type="varchar" Mode="In" />
+    <Parameter Name="drumWeight" Type="int" Mode="In" />
+    <Parameter Name="sapBatchNumber" Type="int" Mode="In" />
+    <Parameter Name="containerNumber" Type="char" Mode="In" />
+    <Parameter Name="processOrder" Type="numeric" Mode="In" />
+    <Parameter Name="quantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sampleSubmit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="sampleNumber" Type="char" Mode="In" />
+    <Parameter Name="lotNumber" Type="numeric" Mode="In" />
+  </Function>
   <Function Name="setDrumId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char">
     <Parameter Name="materialNumber" Type="int" Mode="In" />
     <Parameter Name="vendorName" Type="char" Mode="In" />

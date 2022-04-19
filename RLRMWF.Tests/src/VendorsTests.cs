@@ -16,7 +16,16 @@ namespace RLRMWF.Tests
         {
             Vendors vendor = new Vendors();
             var result = vendor.getVendorIdFromDatabase("Silabond");
-            Assert.AreEqual(5,result);
+            Assert.AreEqual(5, result);
+        }
+
+        [TestMethod()]
+        public void getVendorFromDatabaseTest1()
+        {
+            string output = "Silabond";
+            Vendors vendor = new Vendors();
+            var result = vendor.getVendorFromDatabase(45235);
+            StringAssert.Contains(output, result[0]);
         }
     }
 }

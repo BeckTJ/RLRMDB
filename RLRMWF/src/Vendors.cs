@@ -24,9 +24,13 @@ namespace RLRMWF
         {
             return (from vendor in context.vendors
                     join materialId in context.materialIds on vendor.vendorId equals materialId.vendorId
-                    join materialNumber in context.materialNumbers on materialId.materialNumber equals materialNumber.materialNumber1
-                    where materialNumber.materialNumber1 == matNum
+                    where materialId.materialNumber == matNum
                     select vendor.vendorName).ToList();
+        }
+
+        internal object getVendorFromDatabaseByMaterialNameId(int nameId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

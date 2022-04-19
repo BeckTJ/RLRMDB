@@ -142,6 +142,7 @@
     <EntitySetMapping Name="vendors">
       <EntityTypeMapping TypeName="RLRMDBModel.vendor">
         <MappingFragment StoreEntitySet="vendor">
+          <ScalarProperty Name="isMPPS" ColumnName="isMPPS" />
           <ScalarProperty Name="vendorId" ColumnName="vendorId" />
           <ScalarProperty Name="vendorName" ColumnName="vendorName" />
         </MappingFragment>
@@ -158,5 +159,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="rawMaterialUpdate" FunctionName="RLRMDBModel.Store.rawMaterialUpdate" />
+    <FunctionImportMapping FunctionImportName="sampleSubmit" FunctionName="RLRMDBModel.Store.sampleSubmit" />
   </EntityContainerMapping>
 </Mapping>

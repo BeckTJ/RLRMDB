@@ -16,7 +16,7 @@ namespace RLRMWF
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            new MainFrom().Show();
+            new MainForm().Show();
             Application.Run();
         }
     }

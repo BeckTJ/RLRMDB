@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace RLRMWF
 {
-    public partial class MaterialForm : MainFrom
+    public partial class MaterialForm : MainForm
     {
         Materials material = new Materials();
         VendorBatch batch = new VendorBatch();
@@ -140,7 +140,6 @@ namespace RLRMWF
             {
                 vendorLabel[i].Text = output.vendor;
                 vendorLabel[i].Visible = true;
-
                 batchlist[i].View = View.Details;
                 batchlist[i].Columns.Add("Batch Number", -2);
                 batchlist[i].Columns.Add("Quantity", -2);
@@ -149,7 +148,7 @@ namespace RLRMWF
                 foreach (var result in batches)
                 {
                     
-                        ListViewItem qty = new ListViewItem();
+                    ListViewItem qty = new ListViewItem();
                     qty.Text = result.vendorBatchNumber;
                     qty.SubItems.Add(result.quantity.ToString());
                     batchlist[i].Items.Add(qty);
@@ -165,10 +164,10 @@ namespace RLRMWF
 
         private void exit_Click(object sender, EventArgs e)
         {
-            MainFrom main = new MainFrom();
-            searchOptions search = new searchOptions();
+            
+            searchOptions search = new searchOptions("material");
             this.Close();
-            main.Show();
+            MainForm.ActiveForm.Show();
             search.Show();
         }
     }

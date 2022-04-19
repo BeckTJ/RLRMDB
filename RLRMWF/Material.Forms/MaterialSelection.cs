@@ -13,20 +13,42 @@ namespace RLRMWF
     public partial class searchOptions : Form
     {
         MaterialForm materialForm = new MaterialForm();
+        RawMaterialForm rawMaterialForm = new RawMaterialForm();
+        string formChoice;
 
-        public searchOptions()
+        public searchOptions(string formToOpen)
         {
             InitializeComponent();
+            formChoice = formToOpen;
+        }
+        public void getMaterialForm(int input)
+        {
+            materialForm.GetMaterial(input);
+            this.Close();
+            materialForm.Show();
+        }
+        public void getRawMaterialForm(int input)
+        {
+            rawMaterialForm.RawMaterialDrum(input);
+            this.Close();
+            rawMaterialForm.Show();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            var input = Convert.ToInt32(Input.Text);
-            materialForm.GetMaterial(input);
 
-            this.Close();
-            MainFrom.ActiveForm.Close();
-            materialForm.Show();
+            var result = Convert.ToInt32(Input.Text);
+
+            switch (formChoice)
+            {
+                case "material":
+                    getMaterialForm(result);
+                    break;
+                case "sample":
+                    getRawMaterialForm(result);
+                    break;
+                default:throw new Exception();
+            }
         }
 
         private void exitButton_Click(object sender, EventArgs e)

@@ -23,6 +23,7 @@ namespace RLRMWF
     
         public int vendorId { get; set; }
         public string vendorName { get; set; }
+        public Nullable<bool> isMPPS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rawMaterial> rawMaterials { get; set; }

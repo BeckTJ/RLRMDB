@@ -78,6 +78,7 @@
             <summary>
             Gets the script used when constructing the post string.
             </summary>
+            <exception cref="T:System.ArgumentNullException">If the 'value' is null.</exception>
         </member>
         <member name="P:Microsoft.IdentityModel.Protocols.AuthenticationProtocolMessage.ScriptButtonText">
             <summary>
@@ -300,6 +301,42 @@
             <summary>
             For the this type, this is a no-op
             </summary>
+        </member>
+        <member name="T:Microsoft.IdentityModel.Protocols.HttpRequestData">
+            <summary>
+            Structure that represents an incoming or an outgoing http request.
+            </summary>
+        </member>
+        <member name="P:Microsoft.IdentityModel.Protocols.HttpRequestData.Uri">
+            <summary>
+            Gets or sets the http request URI. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.IdentityModel.Protocols.HttpRequestData.Method">
+            <summary>
+            Gets or sets the http request method.
+            </summary>
+        </member>
+        <member name="P:Microsoft.IdentityModel.Protocols.HttpRequestData.Body">
+            <summary>
+            Gets or sets the http request body.
+            </summary>
+        </member>
+        <member name="P:Microsoft.IdentityModel.Protocols.HttpRequestData.Headers">
+            <summary>
+            Gets or sets the collection of http request headers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.IdentityModel.Protocols.HttpRequestData.PropertyBag">
+            <summary>
+            Gets or sets an <see cref="T:System.Collections.Generic.IDictionary`2"/> that enables custom extensibility scenarios.
+            </summary>
+        </member>
+        <member name="M:Microsoft.IdentityModel.Protocols.HttpRequestData.AppendHeaders(System.Net.Http.Headers.HttpHeaders)">
+            <summary>
+            A utility method that appends <paramref name="headers"/> to the <see cref="P:Microsoft.IdentityModel.Protocols.HttpRequestData.Headers"/>.
+            </summary>
+            <param name="headers">A collection of http request headers.</param>
         </member>
         <member name="T:Microsoft.IdentityModel.Protocols.LogMessages">
             <summary>

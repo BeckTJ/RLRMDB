@@ -137,6 +137,7 @@
           </Key>
           <Property Name="vendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="vendorName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="isMPPS" Type="bit" />
         </EntityType>
         <EntityType Name="vendorBatchInformation">
           <Key>
@@ -304,6 +305,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="obtainVendorBatchId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="vendorId" Type="int" Mode="In" />
+          <Parameter Name="vendorBatchNumber" Type="char" Mode="In" />
+        </Function>
+        <Function Name="rawMaterialUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="materialNumber" Type="int" Mode="In" />
+          <Parameter Name="vendorName" Type="varchar" Mode="In" />
+          <Parameter Name="vendorBatchNumber" Type="varchar" Mode="In" />
+          <Parameter Name="drumWeight" Type="int" Mode="In" />
+          <Parameter Name="sapBatchNumber" Type="int" Mode="In" />
+          <Parameter Name="containerNumber" Type="char" Mode="In" />
+          <Parameter Name="processOrder" Type="numeric" Mode="In" />
+          <Parameter Name="quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sampleSubmit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sampleNumber" Type="char" Mode="In" />
+          <Parameter Name="lotNumber" Type="numeric" Mode="In" />
+        </Function>
         <Function Name="setDrumId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="char">
           <Parameter Name="materialNumber" Type="int" Mode="In" />
           <Parameter Name="vendorName" Type="char" Mode="In" />
@@ -534,6 +553,7 @@
           <Property Name="vendorName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__vendo__37A5467C" FromRole="vendor" ToRole="rawMaterial" />
           <NavigationProperty Name="vendorBatchInformations" Relationship="Self.FK__vendorBat__vendo__267ABA7A" FromRole="vendor" ToRole="vendorBatchInformation" />
+          <Property Name="isMPPS" Type="Boolean" />
         </EntityType>
         <EntityType Name="vendorBatchInformation">
           <Key>
@@ -760,6 +780,20 @@
             <End Role="materialNumber" EntitySet="materialNumbers" />
             <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
           </AssociationSet>
+          <FunctionImport Name="rawMaterialUpdate">
+            <Parameter Name="materialNumber" Mode="In" Type="Int32" />
+            <Parameter Name="vendorName" Mode="In" Type="String" />
+            <Parameter Name="vendorBatchNumber" Mode="In" Type="String" />
+            <Parameter Name="drumWeight" Mode="In" Type="Int32" />
+            <Parameter Name="sapBatchNumber" Mode="In" Type="Int32" />
+            <Parameter Name="containerNumber" Mode="In" Type="String" />
+            <Parameter Name="processOrder" Mode="In" Type="Decimal" />
+            <Parameter Name="quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sampleSubmit">
+            <Parameter Name="sampleNumber" Mode="In" Type="String" />
+            <Parameter Name="lotNumber" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <Association Name="FK__vendorBat__mater__6E01572D">
           <End Type="RLRMDBModel.materialNumber" Role="materialNumber" Multiplicity="0..1" />
@@ -920,6 +954,7 @@
           <EntitySetMapping Name="vendors">
             <EntityTypeMapping TypeName="RLRMDBModel.vendor">
               <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="isMPPS" ColumnName="isMPPS" />
                 <ScalarProperty Name="vendorId" ColumnName="vendorId" />
                 <ScalarProperty Name="vendorName" ColumnName="vendorName" />
               </MappingFragment>
@@ -936,6 +971,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="rawMaterialUpdate" FunctionName="RLRMDBModel.Store.rawMaterialUpdate" />
+          <FunctionImportMapping FunctionImportName="sampleSubmit" FunctionName="RLRMDBModel.Store.sampleSubmit" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

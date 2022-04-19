@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace RLRMWF
 {
-    public partial class MainFrom : Form
+    public partial class MainForm : Form
     {
         
-        public MainFrom()
+        public MainForm()
         {
             InitializeComponent();
             mainMenuStrip();
@@ -28,20 +28,29 @@ namespace RLRMWF
             vendorUpdateToolStripMenuItem1.Click += new EventHandler(menuStrip1_ItemClicked);
             newToolStripMenuItem1.Click += new EventHandler(menuStrip1_ItemClicked);
             exitToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
+            sampleSubmitToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
         }
 
         private void menuStrip1_ItemClicked(object sender, EventArgs e)
         {
             MaterialForm newMaterial = new MaterialForm();
-            searchOptions search = new searchOptions();
             var menuItem = sender as ToolStripMenuItem;
             if (menuItem == searchToolStripMenuItem || menuItem == updateToolStripMenuItem || menuItem == newMaterialToolStripMenuItem)
             {
+                var formToOpen = "material";
+                searchOptions search = new searchOptions(formToOpen);
                 search.Show();
-            }    
+            }
+            else if(menuItem == sampleSubmitToolStripMenuItem)
+            {
+                var formToOpen = "sample";
+                searchOptions search = new searchOptions(formToOpen);
+                search.Show();
+            }
             else if(menuItem == exitToolStripMenuItem)
             {
                 Application.Exit();
+                ActiveForm.Show();
             }
         }
     }

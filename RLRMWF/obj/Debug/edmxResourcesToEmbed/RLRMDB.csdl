@@ -154,6 +154,7 @@
     <Property Name="vendorName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="rawMaterials" Relationship="Self.FK__rawMateri__vendo__37A5467C" FromRole="vendor" ToRole="rawMaterial" />
     <NavigationProperty Name="vendorBatchInformations" Relationship="Self.FK__vendorBat__vendo__267ABA7A" FromRole="vendor" ToRole="vendorBatchInformation" />
+    <Property Name="isMPPS" Type="Boolean" />
   </EntityType>
   <EntityType Name="vendorBatchInformation">
     <Key>
@@ -380,6 +381,20 @@
       <End Role="materialNumber" EntitySet="materialNumbers" />
       <End Role="vendorBatchInformation" EntitySet="vendorBatchInformations" />
     </AssociationSet>
+    <FunctionImport Name="rawMaterialUpdate">
+      <Parameter Name="materialNumber" Mode="In" Type="Int32" />
+      <Parameter Name="vendorName" Mode="In" Type="String" />
+      <Parameter Name="vendorBatchNumber" Mode="In" Type="String" />
+      <Parameter Name="drumWeight" Mode="In" Type="Int32" />
+      <Parameter Name="sapBatchNumber" Mode="In" Type="Int32" />
+      <Parameter Name="containerNumber" Mode="In" Type="String" />
+      <Parameter Name="processOrder" Mode="In" Type="Decimal" />
+      <Parameter Name="quantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sampleSubmit">
+      <Parameter Name="sampleNumber" Mode="In" Type="String" />
+      <Parameter Name="lotNumber" Mode="In" Type="Decimal" />
+    </FunctionImport>
   </EntityContainer>
   <Association Name="FK__vendorBat__mater__6E01572D">
     <End Type="RLRMDBModel.materialNumber" Role="materialNumber" Multiplicity="0..1" />

@@ -78,6 +78,12 @@ namespace RLRMWF
 
                     }).ToList();
         }
+        public int getMaterialNameId(int materialNumber)
+        {
+            return context.materialNumbers
+                .Where(mn => mn.materialNumber1 == materialNumber)
+                .Select(mn => mn.materialNameId).FirstOrDefault();
+        }
 
     }
 }
