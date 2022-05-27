@@ -12,32 +12,32 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class materialNumber
+    public partial class MaterialNumber
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public materialNumber()
+        public MaterialNumber()
         {
-            this.materialIds = new HashSet<materialId>();
-            this.products = new HashSet<product>();
-            this.rawMaterials = new HashSet<rawMaterial>();
-            this.vendorBatchInformations = new HashSet<vendorBatchInformation>();
+            this.Products = new HashSet<Product>();
+            this.MaterialIds = new HashSet<MaterialId>();
+            this.RawMaterialLogs = new HashSet<RawMaterialLog>();
+            this.VendorBatches = new HashSet<VendorBatch>();
         }
     
-        public int materialNumber1 { get; set; }
-        public int materialNameId { get; set; }
-        public bool batchManaged { get; set; }
-        public bool requiresProcessOrder { get; set; }
-        public string unitOfIssue { get; set; }
-        public bool isRawMaterial { get; set; }
+        public int MaterialNumber1 { get; set; }
+        public Nullable<int> NameId { get; set; }
+        public Nullable<bool> BatchManaged { get; set; }
+        public Nullable<bool> RequiresProcessOrder { get; set; }
+        public string UnitOfIssue { get; set; }
+        public Nullable<bool> IsRawMaterial { get; set; }
     
-        public virtual material material { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<materialId> materialIds { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual Material Material { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<product> products { get; set; }
+        public virtual ICollection<MaterialId> MaterialIds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rawMaterial> rawMaterials { get; set; }
+        public virtual ICollection<RawMaterialLog> RawMaterialLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<vendorBatchInformation> vendorBatchInformations { get; set; }
+        public virtual ICollection<VendorBatch> VendorBatches { get; set; }
     }
 }

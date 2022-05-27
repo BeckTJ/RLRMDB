@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RLRMWF
 {
-    public class VendorBatch
+    public class vendorBatch
     {
         RLRMDBEntities context = new RLRMDBEntities();
 
@@ -14,34 +14,25 @@ namespace RLRMWF
         public string vendorBatchNumber { get; private set; }
         public int? quantity { get; private set; }
 
-        public List<VendorBatch> getVendorBatch(int materialNumber, string vendorName)
+        public List<vendorBatch> getVendorBatch(int materialNumber, string vendorName)
         {
-           return(from vendorBatchInformation in context.vendorBatchInformations
-                    join vendor in context.vendors on vendorBatchInformation.vendorId equals vendor.vendorId
-                    where vendorBatchInformation.materialNumber == materialNumber && vendor.vendorName == vendorName
-                    select new VendorBatch
+            return (from VendorBatch in context.VendorBatches
+                    join Vendor in context.Vendors on VendorBatch.VendorId equals Vendor.VendorId
+                    where VendorBatch.MaterialNumber == materialNumber && Vendor.VendorName == vendorName
+                    select new vendorBatch
                     {
-                        vendorBatchNumber = vendorBatchInformation.vendorBatchNumber,
-                        quantity = vendorBatchInformation.quantity
+                        vendorBatchNumber = VendorBatch.VendorBatchNumber,
+                        quantity = VendorBatch.Quantity
                     }).ToList();
-           
-
-
         }
-        public List<VendorBatch> getVendorBatchFromDatabase(int materialNumber)
+        public List<string> getVendorBatchList(int number, string vendorName)
         {
-
-            return (from vendorBatchInformation in context.vendorBatchInformations
-                    join vendor in context.vendors on vendorBatchInformation.vendorId equals vendor.vendorId
-                    where vendorBatchInformation.materialNumber == materialNumber && vendorBatchInformation.quantity > 0
-                    group vendor by vendor.vendorName into Vendors
-                    orderby Vendors
-                    select new VendorBatch
-                   {
-                   }).ToList();
-                    
-
-            
+            Vendors vendors = new Vendors();
+            var vendorId = vendors.getVendorIdFromDatabase(vendorName);
+            return context.VendorBatches
+                .Where(vb => vb.VendorId == vendorId)
+                .Where(vb => vb.MaterialNumber == number)
+                .Select(vb => vb.VendorBatchNumber).ToList();
         }
     }
 }

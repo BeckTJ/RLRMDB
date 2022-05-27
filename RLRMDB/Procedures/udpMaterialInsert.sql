@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE materialInsert
+CREATE OR ALTER PROCEDURE Materials.MaterialInsert
     (@materialNumber AS INT,
     @materialName AS VARCHAR(50),
     @nameAbreviation AS VARCHAR(10),
@@ -8,7 +8,6 @@ CREATE OR ALTER PROCEDURE materialInsert
     @carbonDrumRequired AS BIT,
     @carbonDrumDaysAllowed AS INT,
     @carbonDrumWeightAllowed AS INT,
-    @materialGrade AS CHAR(10),
     @batchManaged AS BIT,
     @requiresProcessOrder AS BIT,
     @unitOfIssue AS CHAR(2),
@@ -16,34 +15,34 @@ CREATE OR ALTER PROCEDURE materialInsert
     @vendorName AS VARCHAR(25),
     @sequenceNumber AS INT)
 AS
-BEGIN TRAN materialInsert
+BEGIN TRAN MaterialInsert
 BEGIN TRY 
-INSERT INTO materialName
-    (materialName, materialNameAbreviation, permitNumber, rawMaterialCode, productCode, carbonDrumRequired, carbonDrumDaysAllowed,carbonDrumWeightAllowed)
+INSERT INTO Material
+    (MaterialName, MaterialNameAbreviation, PermitNumber, RawMaterialCode, ProductCode, CarbonDrumRequired, CarbonDrumDaysAllowed, CarbonDrumWeightAllowed)
 VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
 
 DECLARE @nameId AS INT
-SET @nameId = (SELECT materialNameId
-FROM materialName
-WHERE materialName = @materialName);
+SET @nameId = (SELECT NameId
+FROM MaterialName
+WHERE MaterialName = @materialName);
 
-INSERT INTO materialNumber
-    (materialNumber, materialNameId, materialGrade, batchManaged, requiresProcessOrder, unitOfIssue, isRawMaterial)
-VALUES(@materialNumber, @nameId, @materialGrade, @batchManaged, @requiresProcessOrder, @unitOfIssue, @isRawMaterial);
+INSERT INTO MaterialNumber
+    (MaterialNumber, NameId,  BatchManaged, RequiresProcessOrder, UnitOfIssue, IsRawMaterial)
+VALUES(@materialNumber, @nameId,  @batchManaged, @requiresProcessOrder, @unitOfIssue, @isRawMaterial);
 
 DECLARE @vendorId AS INT
-IF EXISTS(SELECT vendorId
-FROM vendor
-WHERE vendorName = @vendorName)
+IF EXISTS(SELECT VendorId
+FROM Vendor
+WHERE VendorName = @vendorName)
 BEGIN
-    SET @vendorId =(SELECT vendorId
-    FROM vendor
-    WHERE vendorName = @vendorName);
+    SET @vendorId =(SELECT VendorId
+    FROM Vendor
+    WHERE VendorName = @vendorName);
 END
 ELSE
 BEGIN
-    INSERT INTO vendor
-        (vendorName)
+    INSERT INTO Vendor
+        (VendorName)
     VALUES(@vendorName);
 
     SET @vendorId =(SELECT vendorId

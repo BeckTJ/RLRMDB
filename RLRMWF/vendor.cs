@@ -12,22 +12,22 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class vendor
+    public partial class Vendor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public vendor()
+        public Vendor()
         {
-            this.rawMaterials = new HashSet<rawMaterial>();
-            this.vendorBatchInformations = new HashSet<vendorBatchInformation>();
+            this.RawMaterialLogs = new HashSet<RawMaterialLog>();
+            this.VendorBatches = new HashSet<VendorBatch>();
         }
     
-        public int vendorId { get; set; }
-        public string vendorName { get; set; }
-        public Nullable<bool> isMPPS { get; set; }
+        public int VendorId { get; set; }
+        public string VendorName { get; set; }
+        public bool IsMPPS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<rawMaterial> rawMaterials { get; set; }
+        public virtual ICollection<RawMaterialLog> RawMaterialLogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<vendorBatchInformation> vendorBatchInformations { get; set; }
+        public virtual ICollection<VendorBatch> VendorBatches { get; set; }
     }
 }

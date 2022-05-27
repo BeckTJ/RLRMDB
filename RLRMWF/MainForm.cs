@@ -25,10 +25,11 @@ namespace RLRMWF
             updateToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
             newMaterialToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
             vendorBatchToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
-            vendorUpdateToolStripMenuItem1.Click += new EventHandler(menuStrip1_ItemClicked);
-            newToolStripMenuItem1.Click += new EventHandler(menuStrip1_ItemClicked);
+            vendorUpdateToolStripMenuItem3 .Click += new EventHandler(menuStrip1_ItemClicked);
+            newToolStripMenuItem2.Click += new EventHandler(menuStrip1_ItemClicked);
             exitToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
-            sampleSubmitToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
+            RMAddToolStripMenuItem.Click += new EventHandler(menuStrip1_ItemClicked);
+            RMUpdateToolStripMenuItem1.Click += new EventHandler(menuStrip1_ItemClicked);
         }
 
         private void menuStrip1_ItemClicked(object sender, EventArgs e)
@@ -41,7 +42,7 @@ namespace RLRMWF
                 searchOptions search = new searchOptions(formToOpen);
                 search.Show();
             }
-            else if(menuItem == sampleSubmitToolStripMenuItem)
+            else if(menuItem == RMAddToolStripMenuItem)
             {
                 var formToOpen = "sample";
                 searchOptions search = new searchOptions(formToOpen);

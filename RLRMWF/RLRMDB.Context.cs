@@ -27,22 +27,42 @@ namespace RLRMWF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__EFMigrationsHistory> C__EFMigrationsHistory { get; set; }
-        public virtual DbSet<alphabeticDate> alphabeticDates { get; set; }
-        public virtual DbSet<distilation> distilations { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
-        public virtual DbSet<material> materials { get; set; }
-        public virtual DbSet<materialId> materialIds { get; set; }
-        public virtual DbSet<materialNumber> materialNumbers { get; set; }
-        public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<productNumberSequence> productNumberSequences { get; set; }
-        public virtual DbSet<qualityControl> qualityControls { get; set; }
-        public virtual DbSet<rawMaterial> rawMaterials { get; set; }
-        public virtual DbSet<receiver> receivers { get; set; }
-        public virtual DbSet<vendor> vendors { get; set; }
-        public virtual DbSet<vendorBatchInformation> vendorBatchInformations { get; set; }
+        public virtual DbSet<AlphabeticDate> AlphabeticDates { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductNumberSequence> ProductNumberSequences { get; set; }
+        public virtual DbSet<Receiver> Receivers { get; set; }
+        public virtual DbSet<UsageLog> UsageLogs { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Material> Materials { get; set; }
+        public virtual DbSet<MaterialId> MaterialIds { get; set; }
+        public virtual DbSet<MaterialNumber> MaterialNumbers { get; set; }
+        public virtual DbSet<RawMaterialLog> RawMaterialLogs { get; set; }
+        public virtual DbSet<SampleSubmit> SampleSubmits { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<VendorBatch> VendorBatches { get; set; }
     
-        public virtual int rawMaterialUpdate(Nullable<int> materialNumber, string vendorName, string vendorBatchNumber, Nullable<int> drumWeight, Nullable<int> sapBatchNumber, string containerNumber, Nullable<decimal> processOrder, Nullable<int> quantity)
+        public virtual int AddVendorBatch(Nullable<int> materailNumber, string name, string batchNumber, Nullable<int> qty)
+        {
+            var materailNumberParameter = materailNumber.HasValue ?
+                new ObjectParameter("materailNumber", materailNumber) :
+                new ObjectParameter("materailNumber", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var batchNumberParameter = batchNumber != null ?
+                new ObjectParameter("batchNumber", batchNumber) :
+                new ObjectParameter("batchNumber", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("qty", qty) :
+                new ObjectParameter("qty", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddVendorBatch", materailNumberParameter, nameParameter, batchNumberParameter, qtyParameter);
+        }
+    
+        public virtual int RawMaterialUpdate(Nullable<int> materialNumber, string vendorName, string vendorBatchNumber, Nullable<int> drumWeight, Nullable<int> sapBatchNumber, string containerNumber, Nullable<int> quantity)
         {
             var materialNumberParameter = materialNumber.HasValue ?
                 new ObjectParameter("materialNumber", materialNumber) :
@@ -68,28 +88,76 @@ namespace RLRMWF
                 new ObjectParameter("containerNumber", containerNumber) :
                 new ObjectParameter("containerNumber", typeof(string));
     
-            var processOrderParameter = processOrder.HasValue ?
-                new ObjectParameter("processOrder", processOrder) :
-                new ObjectParameter("processOrder", typeof(decimal));
-    
             var quantityParameter = quantity.HasValue ?
                 new ObjectParameter("quantity", quantity) :
                 new ObjectParameter("quantity", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("rawMaterialUpdate", materialNumberParameter, vendorNameParameter, vendorBatchNumberParameter, drumWeightParameter, sapBatchNumberParameter, containerNumberParameter, processOrderParameter, quantityParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RawMaterialUpdate", materialNumberParameter, vendorNameParameter, vendorBatchNumberParameter, drumWeightParameter, sapBatchNumberParameter, containerNumberParameter, quantityParameter);
         }
     
-        public virtual int sampleSubmit(string sampleNumber, Nullable<decimal> lotNumber)
+        public virtual int MaterialInsert(Nullable<int> materialNumber, string materialName, string nameAbreviation, string permitNumber, string rawMaterialCode, string productCode, Nullable<bool> carbonDrumRequired, Nullable<int> carbonDrumDaysAllowed, Nullable<int> carbonDrumWeightAllowed, Nullable<bool> batchManaged, Nullable<bool> requiresProcessOrder, string unitOfIssue, Nullable<bool> isRawMaterial, string vendorName, Nullable<int> sequenceNumber)
         {
-            var sampleNumberParameter = sampleNumber != null ?
-                new ObjectParameter("sampleNumber", sampleNumber) :
-                new ObjectParameter("sampleNumber", typeof(string));
+            var materialNumberParameter = materialNumber.HasValue ?
+                new ObjectParameter("materialNumber", materialNumber) :
+                new ObjectParameter("materialNumber", typeof(int));
     
-            var lotNumberParameter = lotNumber.HasValue ?
-                new ObjectParameter("lotNumber", lotNumber) :
-                new ObjectParameter("lotNumber", typeof(decimal));
+            var materialNameParameter = materialName != null ?
+                new ObjectParameter("materialName", materialName) :
+                new ObjectParameter("materialName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sampleSubmit", sampleNumberParameter, lotNumberParameter);
+            var nameAbreviationParameter = nameAbreviation != null ?
+                new ObjectParameter("nameAbreviation", nameAbreviation) :
+                new ObjectParameter("nameAbreviation", typeof(string));
+    
+            var permitNumberParameter = permitNumber != null ?
+                new ObjectParameter("permitNumber", permitNumber) :
+                new ObjectParameter("permitNumber", typeof(string));
+    
+            var rawMaterialCodeParameter = rawMaterialCode != null ?
+                new ObjectParameter("rawMaterialCode", rawMaterialCode) :
+                new ObjectParameter("rawMaterialCode", typeof(string));
+    
+            var productCodeParameter = productCode != null ?
+                new ObjectParameter("productCode", productCode) :
+                new ObjectParameter("productCode", typeof(string));
+    
+            var carbonDrumRequiredParameter = carbonDrumRequired.HasValue ?
+                new ObjectParameter("carbonDrumRequired", carbonDrumRequired) :
+                new ObjectParameter("carbonDrumRequired", typeof(bool));
+    
+            var carbonDrumDaysAllowedParameter = carbonDrumDaysAllowed.HasValue ?
+                new ObjectParameter("carbonDrumDaysAllowed", carbonDrumDaysAllowed) :
+                new ObjectParameter("carbonDrumDaysAllowed", typeof(int));
+    
+            var carbonDrumWeightAllowedParameter = carbonDrumWeightAllowed.HasValue ?
+                new ObjectParameter("carbonDrumWeightAllowed", carbonDrumWeightAllowed) :
+                new ObjectParameter("carbonDrumWeightAllowed", typeof(int));
+    
+            var batchManagedParameter = batchManaged.HasValue ?
+                new ObjectParameter("batchManaged", batchManaged) :
+                new ObjectParameter("batchManaged", typeof(bool));
+    
+            var requiresProcessOrderParameter = requiresProcessOrder.HasValue ?
+                new ObjectParameter("requiresProcessOrder", requiresProcessOrder) :
+                new ObjectParameter("requiresProcessOrder", typeof(bool));
+    
+            var unitOfIssueParameter = unitOfIssue != null ?
+                new ObjectParameter("unitOfIssue", unitOfIssue) :
+                new ObjectParameter("unitOfIssue", typeof(string));
+    
+            var isRawMaterialParameter = isRawMaterial.HasValue ?
+                new ObjectParameter("isRawMaterial", isRawMaterial) :
+                new ObjectParameter("isRawMaterial", typeof(bool));
+    
+            var vendorNameParameter = vendorName != null ?
+                new ObjectParameter("vendorName", vendorName) :
+                new ObjectParameter("vendorName", typeof(string));
+    
+            var sequenceNumberParameter = sequenceNumber.HasValue ?
+                new ObjectParameter("sequenceNumber", sequenceNumber) :
+                new ObjectParameter("sequenceNumber", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MaterialInsert", materialNumberParameter, materialNameParameter, nameAbreviationParameter, permitNumberParameter, rawMaterialCodeParameter, productCodeParameter, carbonDrumRequiredParameter, carbonDrumDaysAllowedParameter, carbonDrumWeightAllowedParameter, batchManagedParameter, requiresProcessOrderParameter, unitOfIssueParameter, isRawMaterialParameter, vendorNameParameter, sequenceNumberParameter);
         }
     }
 }

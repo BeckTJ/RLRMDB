@@ -45,6 +45,9 @@
     <Reference Include="Azure.Identity, Version=1.5.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.5.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="Docker.DotNet, Version=3.125.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Docker.DotNet.3.125.5\lib\netstandard2.0\Docker.DotNet.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -129,8 +132,8 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.IdentityModel.Tokens.6.8.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
@@ -249,16 +252,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="alphabeticDate.cs">
+    <Compile Include="AlphabeticDate.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="C__EFMigrationsHistory.cs">
+    <Compile Include="Employee.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="distilation.cs">
-      <DependentUpon>RLRMDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="employee.cs">
+    <Compile Include="Material.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Material.Forms\RawMaterialForm.cs">
@@ -273,49 +273,28 @@
     <Compile Include="MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="material.cs">
-      <DependentUpon>RLRMDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Material.Forms\MaterialForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Material.Forms\MaterialForm.designer.cs">
       <DependentUpon>MaterialForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="materialId.cs">
+    <Compile Include="MaterialId.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="materialNumber.cs">
+    <Compile Include="MaterialNumber.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="RLRMDBDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RLRMDBDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="src\Materials.cs" />
-    <Compile Include="Material.Forms\MaterialSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Material.Forms\MaterialSelection.designer.cs">
-      <DependentUpon>MaterialSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="product.cs">
+    <Compile Include="Product.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="productNumberSequence.cs">
+    <Compile Include="ProductNumberSequence.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="qualityControl.cs">
+    <Compile Include="RawMaterialLog.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="rawMaterial.cs">
-      <DependentUpon>RLRMDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="src\RawMaterialLog.cs" />
-    <Compile Include="receiver.cs">
+    <Compile Include="Receiver.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
     <Compile Include="RLRMDB.Context.cs">
@@ -333,12 +312,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RLRMDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="src\Vendors.cs" />
-    <Compile Include="vendor.cs">
+    <Compile Include="RLRMDBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RLRMDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SampleSubmit.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="src\Materials.cs" />
+    <Compile Include="Material.Forms\MaterialSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Material.Forms\MaterialSelection.designer.cs">
+      <DependentUpon>MaterialSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\QualityControl.cs" />
+    <Compile Include="src\RawMaterial.cs" />
+    <Compile Include="src\Selection.cs" />
+    <Compile Include="src\RMLog.cs" />
+    <Compile Include="src\Vendors.cs" />
     <Compile Include="src\VendorBatch.cs" />
-    <Compile Include="vendorBatchInformation.cs">
+    <Compile Include="UsageLog.cs">
+      <DependentUpon>RLRMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vendor.cs">
+      <DependentUpon>RLRMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VendorBatch.cs">
       <DependentUpon>RLRMDB.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="MainForm.resx">
@@ -396,19 +399,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="RLRMDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RLRMDB.Context.cs</LastGenOutput>
       <DependentUpon>RLRMDB.edmx</DependentUpon>
+      <LastGenOutput>RLRMDB.Context.cs</LastGenOutput>
     </Content>
     <Content Include="RLRMDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RLRMDB.edmx</DependentUpon>
       <LastGenOutput>RLRMDB.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,3 +1,5 @@
-update qualityControl
-set approvalDate = GETDATE()
-WHERE sampleSubmitNumber = 'RAW12346'
+SELECT *
+FROM Vendors.VendorBatch
+
+select *
+from QualityControl.SampleSubmit

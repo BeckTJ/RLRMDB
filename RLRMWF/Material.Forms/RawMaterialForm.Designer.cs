@@ -62,6 +62,7 @@ namespace RLRMWF
             this.vendorBox = new System.Windows.Forms.ComboBox();
             this.vendorBatchBox = new System.Windows.Forms.ComboBox();
             this.lotNumberBox = new System.Windows.Forms.TextBox();
+            this.materialNumberBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -169,6 +170,7 @@ namespace RLRMWF
             // 
             this.SAPBatchBox2.Location = new System.Drawing.Point(275, 189);
             this.SAPBatchBox2.Name = "SAPBatchBox2";
+            this.SAPBatchBox2.ReadOnly = true;
             this.SAPBatchBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SAPBatchBox2.Size = new System.Drawing.Size(147, 27);
             this.SAPBatchBox2.TabIndex = 15;
@@ -185,6 +187,7 @@ namespace RLRMWF
             // 
             this.containerNumberBox.Location = new System.Drawing.Point(475, 189);
             this.containerNumberBox.Name = "containerNumberBox";
+            this.containerNumberBox.ReadOnly = true;
             this.containerNumberBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.containerNumberBox.Size = new System.Drawing.Size(127, 27);
             this.containerNumberBox.TabIndex = 18;
@@ -193,6 +196,7 @@ namespace RLRMWF
             // 
             this.netWeightBox.Location = new System.Drawing.Point(657, 189);
             this.netWeightBox.Name = "netWeightBox";
+            this.netWeightBox.ReadOnly = true;
             this.netWeightBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.netWeightBox.Size = new System.Drawing.Size(64, 27);
             this.netWeightBox.TabIndex = 19;
@@ -354,6 +358,7 @@ namespace RLRMWF
             this.vendorBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.vendorBox.Size = new System.Drawing.Size(159, 28);
             this.vendorBox.TabIndex = 32;
+            this.vendorBox.SelectedIndexChanged += new System.EventHandler(this.VendorBox_selectedIndexChange);
             // 
             // vendorBatchBox
             // 
@@ -363,19 +368,30 @@ namespace RLRMWF
             this.vendorBatchBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.vendorBatchBox.Size = new System.Drawing.Size(189, 28);
             this.vendorBatchBox.TabIndex = 33;
+            this.vendorBatchBox.SelectedIndexChanged += new System.EventHandler(this.batchBox_selectedIndexChange);
             // 
             // lotNumberBox
             // 
             this.lotNumberBox.Location = new System.Drawing.Point(28, 190);
             this.lotNumberBox.Name = "lotNumberBox";
+            this.lotNumberBox.ReadOnly = true;
             this.lotNumberBox.Size = new System.Drawing.Size(210, 27);
             this.lotNumberBox.TabIndex = 34;
             // 
-            // RawMaterialFrom
+            // materialNumberBox
+            // 
+            this.materialNumberBox.Location = new System.Drawing.Point(254, 131);
+            this.materialNumberBox.Name = "materialNumberBox";
+            this.materialNumberBox.ReadOnly = true;
+            this.materialNumberBox.Size = new System.Drawing.Size(159, 27);
+            this.materialNumberBox.TabIndex = 35;
+            // 
+            // RawMaterialForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.materialNumberBox);
             this.Controls.Add(this.lotNumberBox);
             this.Controls.Add(this.vendorBatchBox);
             this.Controls.Add(this.vendorBox);
@@ -398,7 +414,7 @@ namespace RLRMWF
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DrumId);
-            this.Name = "RawMaterialFrom";
+            this.Name = "RawMaterialForm";
             this.Text = "Raw Material";
             this.Controls.SetChildIndex(this.DrumId, 0);
             this.Controls.SetChildIndex(this.label1, 0);
@@ -422,6 +438,7 @@ namespace RLRMWF
             this.Controls.SetChildIndex(this.vendorBox, 0);
             this.Controls.SetChildIndex(this.vendorBatchBox, 0);
             this.Controls.SetChildIndex(this.lotNumberBox, 0);
+            this.Controls.SetChildIndex(this.materialNumberBox, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -466,6 +483,7 @@ namespace RLRMWF
         private System.Windows.Forms.ComboBox vendorBox;
         private System.Windows.Forms.ComboBox vendorBatchBox;
         private System.Windows.Forms.TextBox lotNumberBox;
+        private System.Windows.Forms.TextBox materialNumberBox;
     }
 }
 

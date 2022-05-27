@@ -12,84 +12,107 @@ namespace RLRMWF
 {
     public partial class RawMaterialForm : MainForm
     {
-        private int materialNumber;
-        private string drumId;
-        private string vendor1;
-        private string vendorBatch;
-        private string distilOperator;
-        private long inspectionLotNumber;
-        private int sapBatch;
-        private string containerNumber;
-        private int netWeight;
-        private string sampleNumber;
+        RMLog rawMaterialLog;
+        List<int> rmNumber = new List<int>();
 
-        public RawMaterialForm()
+        public RawMaterialForm(int number)
         {
             InitializeComponent();
+            rawMaterialLog = new RMLog(number);
         }
-        public void RawMaterialDrum(int number)
+        internal void InputRawMaterialInformation()
         {
-            RawMaterialLog rm = new RawMaterialLog();
-            Materials materials = new Materials();
-            Vendors vendorName = new Vendors();
-            VendorBatch batch = new VendorBatch();
-            ListViewItem vendors = new ListViewItem();
-           
-            dateBox.Text = DateTime.Today.ToString("d");
-            operatorBox.Text = "DT"; // Set from user (not created yet)
-            distilOperator = "DT";
+            var vendorNames = rawMaterialLog.getVendorList();
+            vendorBatchBox.Items.Clear();
 
-            
-
-                vendors.Text = item;
-                vendorBox.Items.Add(vendors);
-            
-            vendor1 = vendorBox.SelectedText;
-
-
-
-            vendorBatchBox.Items.Add(batch.getVendorBatch(number,vendor1));
-            containerNumber = containerNumberBox.Text;
-            sampleNumber = sampleNumberBox.Text;
-
-            if (lotNumberBox.Text == "")
-                lotNumberBox.Text = "";
-            else
-                inspectionLotNumber = long.Parse(lotNumberBox.Text);
-            if (SAPBatchBox2.Text == "")
-                SAPBatchBox2.Text = "";
-            else
-                sapBatch = int.Parse(SAPBatchBox2.Text);
-            if (netWeightBox.Text == "")
-                netWeightBox.Text = "";
-            else
-                netWeight = int.Parse(netWeightBox.Text);
-            
-            rm.getDrumId(number, vendor1);
-            var result = rm.drumId;
-            DrumId.Text = result;
-
-
+            foreach (var vendorName in vendorNames)
+            {
+                vendorBox.Items.Add(vendorName.vendorName);
+                rmNumber.Add((int)vendorName.materialNumber);
+            }
         }
-        public void setRawMaterialDrum()
+        private void VendorBox_selectedIndexChange(object sender, EventArgs e)
         {
-            RawMaterialLog material = new RawMaterialLog();
-            material.setRawMaterialDrum(materialNumber, vendor1, vendorBatch, distilOperator, inspectionLotNumber, sapBatch,
-                containerNumber, netWeight, sampleNumber);
-            material.addDrumToDatabase();
+            if (vendorBox.SelectedItem != null)
+            {
+                var selectedVendor = vendorBox.SelectedItem.ToString();
+                var selectedIndex = vendorBox.SelectedIndex;
+
+                rawMaterialLog.vendor = selectedVendor;
 
 
+                if (rawMaterialLog.getIsMpps() == true)
+                {
+                    lotNumberBox.ReadOnly = false;
+                    SAPBatchBox2.ReadOnly = false;
+                    containerNumberBox.ReadOnly = false;
+                    netWeightBox.ReadOnly = false;
+                    vendorBatchBox.ResetText();
+                    vendorBatchBox.Enabled = false;
+                }
+                else
+                {
+                    lotNumberBox.ReadOnly = true;
+                    SAPBatchBox2.ReadOnly = true;
+                    containerNumberBox.ReadOnly = true;
+                    netWeightBox.ReadOnly = true;
+                    vendorBatchBox.Enabled = true;
+                }
+
+                materialNumberBox.Text = rmNumber[selectedIndex].ToString();
+
+                var vendorBatchList = rawMaterialLog.getVendorBatchList(rmNumber[selectedIndex],selectedVendor);
+
+                foreach (var batch in vendorBatchList)
+                {
+                    vendorBatchBox.Items.Add(batch);
+                }
+            }
+        }
+        private void batchBox_selectedIndexChange(object sendor, EventArgs e)
+        {
+            
+            if (vendorBatchBox.SelectedItem != null)
+            {
+                var vendorBatch = vendorBatchBox.SelectedItem.ToString();
+                rawMaterialLog.vendorBatch = vendorBatch;
+            }
         }
         private void Submit_Click(object sender, EventArgs e)
         {
-            setRawMaterialDrum();
+            rawMaterialLog.checkSampleSubmit(sampleNumberBox.Text);
+
+            if (rawMaterialLog.getIsMpps() == false)
+            {
+                DrumId.Text =  rawMaterialLog.SubmitRawMaterial();
+                approvalBox.Text = rawMaterialLog.approvalDate.ToShortDateString();
+                experationBox.Text = rawMaterialLog.experationDate.ToShortDateString();
+                qcSignOffBox.Text = rawMaterialLog.qcOperator;
+
+            }
+            else
+            {
+                rawMaterialLog.inspectionLot = long.Parse(lotNumberBox.Text);
+                rawMaterialLog.sapBatch = int.Parse(SAPBatchBox2.Text);
+                rawMaterialLog.ctn = containerNumberBox.Text;
+                rawMaterialLog.netWeight = int.Parse(netWeightBox.Text);
+                approvalBox.Text = rawMaterialLog.approvalDate.ToShortDateString();
+                experationBox.Text = rawMaterialLog.experationDate.ToShortDateString();
+                qcSignOffBox.Text = rawMaterialLog.qcOperator;
+
+                rawMaterialLog.SubmitMPPSMaterial();
+            }
+            ;
+            operatorBox.Text = rawMaterialLog.getUser();
+            dateBox.Text = DateTime.Today.ToShortDateString();
+            Submit.Enabled = false;   
         }
 
         private void Exit_Click(object sender, EventArgs e)
         {
-         
+            MainForm mainForm = new MainForm();
             this.Close();
-            MainForm.ActiveForm.Show();
+            mainForm.Show();
         }
 
         

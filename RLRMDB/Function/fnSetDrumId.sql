@@ -1,4 +1,4 @@
-CREATE or ALTER FUNCTION setDrumId
+CREATE or ALTER FUNCTION Distillation.SetDrumId
     (@materialNumber AS INT,
     @vendorName AS CHAR(20))
     RETURNS CHAR(10) 
@@ -6,19 +6,19 @@ CREATE or ALTER FUNCTION setDrumId
 BEGIN
 
     DECLARE @alphabeticDate AS CHAR(1)
-    SET @alphabeticDate = (SELECT alphabeticCode
-    FROM alphabeticDate
-    WHERE monthNumber = MONTH(GETDATE()));
+    SET @alphabeticDate = (SELECT AlphabeticCode
+    FROM AlphabeticDate
+    WHERE MonthNumber = MONTH(GETDATE()));
 
     DECLARE @drumId AS CHAR(10)
     SET @drumId =(
-    SELECT CONCAT(FORMAT(materialId.currentSequenceId,'000'), materialName.rawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
-    FROM materialNumber
-        JOIN materialId ON materialNumber.materialNumber = materialId.materialNumber
-        JOIN materialName ON materialName.materialNameId = materialNumber.materialNameId
-        JOIN vendor ON vendor.vendorId = materialId.vendorId
-    WHERE materialNumber.materialNumber = @materialNumber
-        AND vendor.vendorName = @vendorName)
+    SELECT CONCAT(FORMAT(MaterialId.CurrentSequenceId,'000'), Material.RawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
+    FROM MaterialNumber
+        JOIN MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
+        JOIN Material ON Material.MaterialNameId = MaterialNumber.MaterialNameId
+        JOIN Vendor ON Vendor.VendorId = MaterialId.VendorId
+    WHERE MaterialNumber.MaterialNumber = @materialNumber
+        AND Vendor.vendorName = @vendorName)
 
     RETURN @drumId
 END

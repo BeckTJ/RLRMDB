@@ -12,25 +12,26 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class product
+    public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public product()
+        public Product()
         {
-            this.distilations = new HashSet<distilation>();
+            this.UsageLogs = new HashSet<UsageLog>();
         }
     
-        public string productLotNumber { get; set; }
-        public Nullable<int> materialNumber { get; set; }
-        public Nullable<int> productionBatchNumber { get; set; }
-        public Nullable<decimal> processOrder { get; set; }
-        public Nullable<int> receiverId { get; set; }
-        public string sampleSubmitNumber { get; set; }
-        public Nullable<int> quantity { get; set; }
+        public string ProductLotNumber { get; set; }
+        public Nullable<int> MaterialNumber { get; set; }
+        public Nullable<int> ProductionBatchNumber { get; set; }
+        public Nullable<decimal> ProcessOrder { get; set; }
+        public Nullable<int> ReceiverId { get; set; }
+        public string SampleSubmitNumber { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
+        public virtual MaterialNumber MaterialNumber1 { get; set; }
+        public virtual Receiver Receiver { get; set; }
+        public virtual SampleSubmit SampleSubmit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<distilation> distilations { get; set; }
-        public virtual materialNumber materialNumber1 { get; set; }
-        public virtual qualityControl qualityControl { get; set; }
+        public virtual ICollection<UsageLog> UsageLogs { get; set; }
     }
 }

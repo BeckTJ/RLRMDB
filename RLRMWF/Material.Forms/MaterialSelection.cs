@@ -12,33 +12,48 @@ namespace RLRMWF
 {
     public partial class searchOptions : Form
     {
-        MaterialForm materialForm = new MaterialForm();
-        RawMaterialForm rawMaterialForm = new RawMaterialForm();
+        MaterialForm materialForm;
+        RawMaterialForm rawMaterialForm;
+        List<Materials> sel;
         string formChoice;
+        int result;
 
         public searchOptions(string formToOpen)
         {
             InitializeComponent();
             formChoice = formToOpen;
+
+            Selection selection = new Selection();
+            sel = new List<Materials>();
+            sel = selection.getMaterialName();
+            foreach (var s in sel)
+            {
+                materialSelectionBox.Items.Add(s.name);
+            } 
+        }
+        private void materialSelectionBox_selectedIndexChange(object sendor, EventArgs e)
+        {
+            if (materialSelectionBox != null)
+            {
+                result = Convert.ToInt32(sel[materialSelectionBox.SelectedIndex].number);
+            }
         }
         public void getMaterialForm(int input)
         {
+            materialForm = new MaterialForm();
             materialForm.GetMaterial(input);
             this.Close();
             materialForm.Show();
         }
         public void getRawMaterialForm(int input)
         {
-            rawMaterialForm.RawMaterialDrum(input);
+            rawMaterialForm = new RawMaterialForm(input);
             this.Close();
             rawMaterialForm.Show();
+            rawMaterialForm.InputRawMaterialInformation();
         }
-
         private void SearchButton_Click(object sender, EventArgs e)
         {
-
-            var result = Convert.ToInt32(Input.Text);
-
             switch (formChoice)
             {
                 case "material":
@@ -49,6 +64,7 @@ namespace RLRMWF
                     break;
                 default:throw new Exception();
             }
+            //MainForm.ActiveForm.Close();
         }
 
         private void exitButton_Click(object sender, EventArgs e)

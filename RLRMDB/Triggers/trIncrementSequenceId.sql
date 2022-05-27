@@ -1,28 +1,38 @@
-CREATE OR ALTER TRIGGER incrementSequenceId
-ON rawMaterial
+CREATE OR ALTER TRIGGER Materials.IncrementSequenceId
+ON Materials.RawMaterialLog
 AFTER INSERT,UPDATE
 
 AS
 
 DECLARE @vendorId AS INT
 SET @vendorId = (select top(1)
-    inserted.vendorId
+    inserted.VendorId
 FROM inserted);
 
 DECLARE @materialNumber AS INT
+
 SET @materialNumber = (select top(1)
-    inserted.materialNumber
+    inserted.MaterialNumber
 FROM inserted);
 
 DECLARE @currentId AS INT
-SET @currentId = (SELECT currentSequenceId
-FROM materialId
-WHERE vendorId = @vendorId AND materialNumber = @materialNumber);
+SET @currentId = (SELECT CurrentSequenceId
+FROM MaterialId
+WHERE VendorId = @vendorId AND MaterialNumber = @materialNumber);
 
-DECLARE @increaseId AS INT
-SET @increaseId = (@currentId +1);
+IF @currentId = (SELECT SequenceIdEnd
+                FROM Distillation.ProductNumberSequence
+                    JOIN MaterialId on ProductNumberSequence.SequenceId = MaterialId.SequenceId
+                WHERE VendorId = @vendorId AND MaterialNumber = @materialNumber)
+SET @currentId = (SELECT sequenceIdStart FROM Distillation.ProductNumberSequence
+                    JOIN MaterialId on ProductNumberSequence.SequenceId = MaterialId.SequenceId
+                WHERE VendorId = @vendorId AND MaterialNumber = @materialNumber)
 
-UPDATE materialId 
-SET currentsequenceId = (@increaseId)
-WHERE vendorId = @vendorId AND materialNumber = @materialNumber;
+ELSE
+SET @currentId = (@currentId + 1)
+
+
+UPDATE MaterialId 
+SET CurrentsequenceId = (@currentId)
+WHERE VendorId = @vendorId AND MaterialNumber = @materialNumber;
 

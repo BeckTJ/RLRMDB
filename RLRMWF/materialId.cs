@@ -12,14 +12,14 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class materialId
+    public partial class MaterialId
     {
-        public int materialId1 { get; set; }
-        public Nullable<int> materialNumber { get; set; }
-        public Nullable<int> vendorId { get; set; }
-        public Nullable<int> sequenceId { get; set; }
-        public Nullable<int> currentSequenceId { get; set; }
+        public int MaterialId1 { get; set; }
+        public Nullable<int> MaterialNumber { get; set; }
+        public Nullable<int> VendorId { get; set; }
+        public Nullable<int> SequenceId { get; set; }
+        public Nullable<int> CurrentSequenceId { get; set; }
     
-        public virtual materialNumber materialNumber1 { get; set; }
+        public virtual MaterialNumber MaterialNumber1 { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace RLRMWF.Tests
             string output = "Silabond";
             Vendors vendor = new Vendors();
             var result = vendor.getVendorFromDatabase(45235);
-            StringAssert.Contains(output, result[0]);
+            StringAssert.Contains(output, result[0].vendorName);
         }
     }
 }

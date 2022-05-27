@@ -12,10 +12,10 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class employee
+    public partial class Employee
     {
-        public int employeeId { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
+        public int EmployeeId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

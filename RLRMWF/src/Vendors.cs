@@ -11,26 +11,35 @@ namespace RLRMWF
     {
         RLRMDBEntities context = new RLRMDBEntities();
 
+        public int? materialNumber { get; private set; }
+        public string vendorName { get; private set; }
+        public bool? isMPPS { get; private set; }
 
-        
         public int getVendorIdFromDatabase(string vendorName)
         {
-            return context.vendors
-                .Where(v => v.vendorName == vendorName)
-                .Select(v => v.vendorId).FirstOrDefault();
+            return context.Vendors
+                .Where(v => v.VendorName == vendorName)
+                .Select(v => v.VendorId).FirstOrDefault();
         }
 
-        public List<string> getVendorFromDatabase(int matNum)
+        public List<Vendors> getVendorFromDatabase(int matNum)
         {
-            return (from vendor in context.vendors
-                    join materialId in context.materialIds on vendor.vendorId equals materialId.vendorId
-                    where materialId.materialNumber == matNum
-                    select vendor.vendorName).ToList();
+            return (from vendor in context.Vendors
+                    join materialId in context.MaterialIds on vendor.VendorId equals materialId.VendorId
+                    where materialId.MaterialNumber == matNum
+                    select new Vendors
+                    {
+                        vendorName = vendor.VendorName,
+                        materialNumber = materialId.MaterialNumber,
+                        isMPPS = vendor.IsMPPS
+                    }).ToList();
         }
 
-        internal object getVendorFromDatabaseByMaterialNameId(int nameId)
+        public bool getIsMpps(string vendor)
         {
-            throw new NotImplementedException();
+            return (bool)context.Vendors
+                .Where(v => v.VendorName == vendor)
+                .Select(v => v.IsMPPS).FirstOrDefault();
         }
     }
 }

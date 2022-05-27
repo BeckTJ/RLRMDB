@@ -129,12 +129,12 @@ namespace RLRMWF
 
         }
 
-        public void GetVendorBatchTab(List<Materials> input)
+        public void GetVendorBatchTab(List<Materials> input) // rework vendor tab. dif output should desplay for dif material depending on number of vendors
         {
-            VendorBatch batch = new VendorBatch();
+            vendorBatch batch = new vendorBatch();
             Label[] vendorLabel = { VendorLabel1, VendorLabel2, VendorLabel3 };
             ListView[] batchlist = { BatchList1, BatchList2, BatchList3 };
-            List<VendorBatch> batches = new List<VendorBatch>();
+            List<vendorBatch> batches = new List<vendorBatch>();
             int i = 0;
             foreach (var output in input)
             {
@@ -147,7 +147,6 @@ namespace RLRMWF
                 batches = batch.getVendorBatch(output.number, output.vendor);
                 foreach (var result in batches)
                 {
-                    
                     ListViewItem qty = new ListViewItem();
                     qty.Text = result.vendorBatchNumber;
                     qty.SubItems.Add(result.quantity.ToString());

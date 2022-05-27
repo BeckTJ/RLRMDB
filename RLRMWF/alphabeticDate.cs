@@ -12,9 +12,9 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class alphabeticDate
+    public partial class AlphabeticDate
     {
-        public int monthNumber { get; set; }
-        public string alphabeticCode { get; set; }
+        public int MonthNumber { get; set; }
+        public string AlphabeticCode { get; set; }
     }
 }

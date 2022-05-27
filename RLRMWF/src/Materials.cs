@@ -18,12 +18,12 @@ namespace RLRMWF
         public string rawMaterialCode { get; private set; }
         public string permitNumber { get; private set; }
         public string unitOfIssue { get; private set; }
-        public bool carbonDrumRequired { get; private set; }
+        public bool? carbonDrumRequired { get; private set; }
         public int? carbonDrumDaysAllowed { get; private set; }
         public int? carbonDrumWeightAllowed { get; private set; }
-        public bool batchManaged { get; private set; }
-        public bool isRawMaterial { get; private set; }
-        public bool processOrderRequired { get; private set; }
+        public bool? batchManaged { get; private set; }
+        public bool? isRawMaterial { get; private set; }
+        public bool? processOrderRequired { get; private set; }
         public int sequenceIdStart { get; private set; }
         public int? sequenceIdEnd { get; private set; }
         public string vendor { get; private set; }
@@ -32,58 +32,79 @@ namespace RLRMWF
         public Materials getMaterial(int input)
         {
 
-            return (from materialNumber in context.materialNumbers
-                    join material in context.materials on materialNumber.materialNameId equals material.materialNameId
-                    join materialId in context.materialIds on materialNumber.materialNumber1 equals materialId.materialNumber
-                    join productNumberSequence in context.productNumberSequences on materialId.sequenceId equals productNumberSequence.sequenceId
-                    where materialNumber.materialNumber1 == input
+            return (from MaterialNumber in context.MaterialNumbers
+                    join Material in context.Materials on MaterialNumber.NameId equals Material.NameId
+                    join MaterialId in context.MaterialIds on MaterialNumber.MaterialNumber1 equals MaterialId.MaterialNumber
+                    join productNumberSequence in context.ProductNumberSequences on MaterialId.SequenceId equals productNumberSequence.SequenceId
+                    where MaterialNumber.MaterialNumber1 == input
                     select new Materials
                     {
-                        number = materialNumber.materialNumber1,
-                        nameId = material.materialNameId,
-                        name = material.materialName,
-                        nameAbreviation = material.materialNameAbreviation,
-                        productCode = material.productCode,
-                        rawMaterialCode = material.rawMaterialCode,
-                        permitNumber = material.permitNumber,
-                        unitOfIssue = materialNumber.unitOfIssue,
-                        carbonDrumRequired = material.carbonDrumRequired,
-                        carbonDrumDaysAllowed = material.carbonDrumDaysAllowed,
-                        carbonDrumWeightAllowed = material.carbonDrumWeightAllowed,
-                        batchManaged = materialNumber.batchManaged,
-                        isRawMaterial = materialNumber.isRawMaterial,
-                        processOrderRequired = materialNumber.requiresProcessOrder,
-                        currentId = materialId.currentSequenceId,
-                        sequenceIdStart = productNumberSequence.sequenceIdStart,
-                        sequenceIdEnd = productNumberSequence.sequenceIdEnd,
+                        number = MaterialNumber.MaterialNumber1,
+                        nameId = Material.NameId,
+                        name = Material.MaterialName,
+                        nameAbreviation = Material.MaterialNameAbreviation,
+                        productCode = Material.ProductCode,
+                        rawMaterialCode = Material.RawMaterialCode,
+                        permitNumber = Material.PermitNumber,
+                        unitOfIssue = MaterialNumber.UnitOfIssue,
+                        carbonDrumRequired = Material.CarbonDrumRequired,
+                        carbonDrumDaysAllowed = Material.CarbonDrumDaysAllowed,
+                        carbonDrumWeightAllowed = Material.CarbonDrumWeightAllowed,
+                        batchManaged = MaterialNumber.BatchManaged,
+                        isRawMaterial = MaterialNumber.IsRawMaterial,
+                        processOrderRequired = MaterialNumber.RequiresProcessOrder,
+                        currentId = MaterialId.CurrentSequenceId,
+                        sequenceIdStart = productNumberSequence.SequenceIdStart,
+                        sequenceIdEnd = productNumberSequence.SequenceIdEnd,
                     }).First();
         }
 
         internal List<Materials> getRawMaterialFromDatabase(int nameId)
         {
-            return (from materialNumber in context.materialNumbers
-                    join material in context.materials on materialNumber.materialNameId equals material.materialNameId
-                    join materialId in context.materialIds on materialNumber.materialNumber1 equals materialId.materialNumber
-                    join vendor in context.vendors on materialId.vendorId equals vendor.vendorId
-                    join productNumberSequence in context.productNumberSequences on materialId.sequenceId equals productNumberSequence.sequenceId
-                    where materialNumber.materialNameId == nameId && materialNumber.isRawMaterial == true
+            return (from MaterialNumber in context.MaterialNumbers
+                    join Material in context.Materials on MaterialNumber.NameId equals Material.NameId
+                    join MaterialId in context.MaterialIds on MaterialNumber.MaterialNumber1 equals MaterialId.MaterialNumber
+                    join Vendor in context.Vendors on MaterialId.VendorId equals Vendor.VendorId
+                    join ProductNumberSequence in context.ProductNumberSequences on MaterialId.SequenceId equals ProductNumberSequence.SequenceId
+                    where MaterialNumber.NameId == nameId && MaterialNumber.IsRawMaterial == true
                     select new Materials
                     {
-                        number = materialNumber.materialNumber1,
-                        vendor = vendor.vendorName,
-                        sequenceIdStart = productNumberSequence.sequenceIdStart,
-                        sequenceIdEnd = productNumberSequence.sequenceIdEnd,
-                        currentId = materialId.currentSequenceId,
-                        rawMaterialCode = material.rawMaterialCode
+                        number = MaterialNumber.MaterialNumber1,
+                        vendor = Vendor.VendorName,
+                        sequenceIdStart = ProductNumberSequence.SequenceIdStart,
+                        sequenceIdEnd = ProductNumberSequence.SequenceIdEnd,
+                        currentId = MaterialId.CurrentSequenceId,
+                        rawMaterialCode = Material.RawMaterialCode
 
                     }).ToList();
         }
-        public int getMaterialNameId(int materialNumber)
+        public List<int> getRawMaterialNumber(int number)
         {
-            return context.materialNumbers
-                .Where(mn => mn.materialNumber1 == materialNumber)
-                .Select(mn => mn.materialNameId).FirstOrDefault();
+            var nameId = getMaterialNameId(number);
+
+            return (from MaterialNumber in context.MaterialNumbers
+                    where MaterialNumber.NameId == nameId && MaterialNumber.IsRawMaterial == true
+                    select MaterialNumber.MaterialNumber1).ToList();
         }
+        public int getMaterialNameId(int MaterialNumber)
+        {
+            return (int)context.MaterialNumbers
+                .Where(mn => mn.MaterialNumber1 == MaterialNumber)
+                .Select(mn => mn.NameId).FirstOrDefault();
+        }
+        public List<Materials> getMaterialNameList()
+        {
+            return (from Material in context.Materials
+                    join MaterialNumber in context.MaterialNumbers on Material.NameId equals MaterialNumber.NameId
+                    where MaterialNumber.IsRawMaterial != true
+                    orderby Material.MaterialName
+                    select new Materials
+                    {
+                        number = MaterialNumber.MaterialNumber1,
+                        name = Material.MaterialNameAbreviation
+                    }).ToList();
+        }
+
 
     }
 }

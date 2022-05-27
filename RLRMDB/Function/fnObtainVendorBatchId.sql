@@ -1,12 +1,23 @@
-CREATE OR ALTER FUNCTION obtainVendorBatchId(@vendorId AS INT, @vendorBatchNumber AS CHAR(25))
+CREATE OR ALTER FUNCTION Vendors.ObtainVendorBatchId(@name AS VARCHAR(25), @vendorBatchNumber AS CHAR(25))
 RETURNS INT
 AS
 BEGIN
-
-    DECLARE @vendorBatchId AS INT
+DECLARE @vendorBatchId AS INT
+IF EXISTS(SELECT BatchId
+            FROM Vendors.VendorBatch
+            WHERE VendorBatchNumber = @vendorBatchNumber)
+BEGIN
     SET @vendorBatchId = (SELECT BatchId
-    FROM vendorBatchInformation
-    WHERE VendorBatchNumber = @vendorBatchNumber);
-
+                            FROM Vendors.VendorBatch
+                            WHERE VendorBatchNumber = @vendorBatchNumber);
+END
+ELSE
+    
+    EXEC AddVendorBatch @name, @vendorBatchNumber;
+    
+    SET @vendorBatchId = (SELECT BatchId
+                            FROM Vendors.VendorBatch
+                            WHERE VendorBatchNumber = @vendorBatchNumber)
+    
     RETURN @vendorBatchId;
 END

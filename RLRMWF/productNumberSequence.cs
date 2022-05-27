@@ -12,10 +12,10 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class productNumberSequence
+    public partial class ProductNumberSequence
     {
-        public int sequenceId { get; set; }
-        public int sequenceIdStart { get; set; }
-        public Nullable<int> sequenceIdEnd { get; set; }
+        public int SequenceId { get; set; }
+        public int SequenceIdStart { get; set; }
+        public Nullable<int> SequenceIdEnd { get; set; }
     }
 }

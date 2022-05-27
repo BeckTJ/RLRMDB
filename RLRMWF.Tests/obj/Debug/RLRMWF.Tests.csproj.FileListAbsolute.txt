@@ -124,3 +124,5 @@ C:\Users\TBeck\WorkDB\RLRMWF.Tests\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\TBeck\WorkDB\RLRMWF.Tests\bin\Debug\System.Text.Json.xml
 C:\Users\TBeck\WorkDB\RLRMWF.Tests\bin\Debug\System.ValueTuple.xml
 C:\Users\TBeck\WorkDB\RLRMWF.Tests\obj\Debug\RLRMWF.Tests.csproj.SuggestedBindingRedirects.cache
+C:\Users\TBeck\WorkDB\RLRMWF.Tests\bin\Debug\Docker.DotNet.dll
+C:\Users\TBeck\WorkDB\RLRMWF.Tests\bin\Debug\Docker.DotNet.pdb

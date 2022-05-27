@@ -30,9 +30,9 @@ namespace RLRMWF
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.Input = new System.Windows.Forms.TextBox();
             this.SearchButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.materialSelectionBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -44,13 +44,6 @@ namespace RLRMWF
             this.label1.Size = new System.Drawing.Size(133, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Material Number";
-            // 
-            // Input
-            // 
-            this.Input.Location = new System.Drawing.Point(153, 63);
-            this.Input.Name = "Input";
-            this.Input.Size = new System.Drawing.Size(223, 27);
-            this.Input.TabIndex = 1;
             // 
             // SearchButton
             // 
@@ -72,14 +65,23 @@ namespace RLRMWF
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // materialSelectionBox
+            // 
+            this.materialSelectionBox.FormattingEnabled = true;
+            this.materialSelectionBox.Location = new System.Drawing.Point(154, 66);
+            this.materialSelectionBox.Name = "materialSelectionBox";
+            this.materialSelectionBox.Size = new System.Drawing.Size(171, 28);
+            this.materialSelectionBox.TabIndex = 4;
+            this.materialSelectionBox.SelectedIndexChanged += new System.EventHandler(this.materialSelectionBox_selectedIndexChange);
+            // 
             // searchOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 236);
+            this.Controls.Add(this.materialSelectionBox);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.SearchButton);
-            this.Controls.Add(this.Input);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -93,8 +95,8 @@ namespace RLRMWF
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox Input;
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.ComboBox materialSelectionBox;
     }
 }

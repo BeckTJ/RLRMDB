@@ -12,9 +12,18 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class receiver
+    public partial class Receiver
     {
-        public int receiverId { get; set; }
-        public string receiverName { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Receiver()
+        {
+            this.Products = new HashSet<Product>();
+        }
+    
+        public int ReceiverId { get; set; }
+        public string ReceiverName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

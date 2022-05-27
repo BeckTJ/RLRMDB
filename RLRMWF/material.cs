@@ -12,25 +12,25 @@ namespace RLRMWF
     using System;
     using System.Collections.Generic;
     
-    public partial class material
+    public partial class Material
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public material()
+        public Material()
         {
-            this.materialNumbers = new HashSet<materialNumber>();
+            this.MaterialNumbers = new HashSet<MaterialNumber>();
         }
     
-        public int materialNameId { get; set; }
-        public string materialName { get; set; }
-        public string materialNameAbreviation { get; set; }
-        public string permitNumber { get; set; }
-        public string rawMaterialCode { get; set; }
-        public string productCode { get; set; }
-        public bool carbonDrumRequired { get; set; }
-        public Nullable<int> carbonDrumDaysAllowed { get; set; }
-        public Nullable<int> carbonDrumWeightAllowed { get; set; }
+        public int NameId { get; set; }
+        public string MaterialName { get; set; }
+        public string MaterialNameAbreviation { get; set; }
+        public string PermitNumber { get; set; }
+        public string RawMaterialCode { get; set; }
+        public string ProductCode { get; set; }
+        public Nullable<bool> CarbonDrumRequired { get; set; }
+        public Nullable<int> CarbonDrumDaysAllowed { get; set; }
+        public Nullable<int> CarbonDrumWeightAllowed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<materialNumber> materialNumbers { get; set; }
+        public virtual ICollection<MaterialNumber> MaterialNumbers { get; set; }
     }
 }

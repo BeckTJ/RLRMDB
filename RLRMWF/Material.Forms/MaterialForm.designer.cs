@@ -32,6 +32,8 @@ namespace RLRMWF
             this.update = new System.Windows.Forms.Button();
             this.exit = new System.Windows.Forms.Button();
             this.VendorTab = new System.Windows.Forms.TabPage();
+            this.BatchList3 = new System.Windows.Forms.ListView();
+            this.BatchList2 = new System.Windows.Forms.ListView();
             this.BatchList1 = new System.Windows.Forms.ListView();
             this.VendorLabel3 = new System.Windows.Forms.Label();
             this.VendorLabel2 = new System.Windows.Forms.Label();
@@ -112,8 +114,6 @@ namespace RLRMWF
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.BatchList2 = new System.Windows.Forms.ListView();
-            this.BatchList3 = new System.Windows.Forms.ListView();
             this.VendorTab.SuspendLayout();
             this.RawMaterialTab.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -162,6 +162,26 @@ namespace RLRMWF
             this.VendorTab.Text = "Vendor";
             this.VendorTab.UseVisualStyleBackColor = true;
             // 
+            // BatchList3
+            // 
+            this.BatchList3.HideSelection = false;
+            this.BatchList3.Location = new System.Drawing.Point(654, 62);
+            this.BatchList3.Name = "BatchList3";
+            this.BatchList3.Size = new System.Drawing.Size(245, 284);
+            this.BatchList3.TabIndex = 8;
+            this.BatchList3.UseCompatibleStateImageBehavior = false;
+            this.BatchList3.Visible = false;
+            // 
+            // BatchList2
+            // 
+            this.BatchList2.HideSelection = false;
+            this.BatchList2.Location = new System.Drawing.Point(362, 62);
+            this.BatchList2.Name = "BatchList2";
+            this.BatchList2.Size = new System.Drawing.Size(245, 284);
+            this.BatchList2.TabIndex = 7;
+            this.BatchList2.UseCompatibleStateImageBehavior = false;
+            this.BatchList2.Visible = false;
+            // 
             // BatchList1
             // 
             this.BatchList1.HideSelection = false;
@@ -175,7 +195,7 @@ namespace RLRMWF
             // VendorLabel3
             // 
             this.VendorLabel3.AutoSize = true;
-            this.VendorLabel3.Location = new System.Drawing.Point(721, 38);
+            this.VendorLabel3.Location = new System.Drawing.Point(714, 39);
             this.VendorLabel3.Name = "VendorLabel3";
             this.VendorLabel3.Size = new System.Drawing.Size(111, 20);
             this.VendorLabel3.TabIndex = 2;
@@ -185,7 +205,7 @@ namespace RLRMWF
             // VendorLabel2
             // 
             this.VendorLabel2.AutoSize = true;
-            this.VendorLabel2.Location = new System.Drawing.Point(431, 38);
+            this.VendorLabel2.Location = new System.Drawing.Point(431, 39);
             this.VendorLabel2.Name = "VendorLabel2";
             this.VendorLabel2.Size = new System.Drawing.Size(111, 20);
             this.VendorLabel2.TabIndex = 1;
@@ -195,7 +215,7 @@ namespace RLRMWF
             // VendorLabel1
             // 
             this.VendorLabel1.AutoSize = true;
-            this.VendorLabel1.Location = new System.Drawing.Point(117, 38);
+            this.VendorLabel1.Location = new System.Drawing.Point(117, 39);
             this.VendorLabel1.Name = "VendorLabel1";
             this.VendorLabel1.Size = new System.Drawing.Size(111, 20);
             this.VendorLabel1.TabIndex = 0;
@@ -1052,26 +1072,6 @@ namespace RLRMWF
             this.label8.Size = new System.Drawing.Size(45, 20);
             this.label8.TabIndex = 8;
             // 
-            // BatchList2
-            // 
-            this.BatchList2.HideSelection = false;
-            this.BatchList2.Location = new System.Drawing.Point(362, 62);
-            this.BatchList2.Name = "BatchList2";
-            this.BatchList2.Size = new System.Drawing.Size(245, 284);
-            this.BatchList2.TabIndex = 7;
-            this.BatchList2.UseCompatibleStateImageBehavior = false;
-            this.BatchList2.Visible = false;
-            // 
-            // BatchList3
-            // 
-            this.BatchList3.HideSelection = false;
-            this.BatchList3.Location = new System.Drawing.Point(654, 62);
-            this.BatchList3.Name = "BatchList3";
-            this.BatchList3.Size = new System.Drawing.Size(245, 284);
-            this.BatchList3.TabIndex = 8;
-            this.BatchList3.UseCompatibleStateImageBehavior = false;
-            this.BatchList3.Visible = false;
-            // 
             // MaterialForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -1165,7 +1165,6 @@ namespace RLRMWF
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label15;
@@ -1189,6 +1188,7 @@ namespace RLRMWF
         private System.Windows.Forms.ListView BatchList1;
         private System.Windows.Forms.ListView BatchList3;
         private System.Windows.Forms.ListView BatchList2;
+        private System.Windows.Forms.Label label22;
     }
 }
 

@@ -122,3 +122,5 @@ C:\Users\TBeck\WorkDB\RLRMWF\bin\Debug\System.Text.Json.xml
 C:\Users\TBeck\WorkDB\RLRMWF\bin\Debug\System.ValueTuple.xml
 C:\Users\TBeck\WorkDB\RLRMWF\obj\Debug\RLRMWF.csproj.SuggestedBindingRedirects.cache
 C:\Users\TBeck\WorkDB\RLRMWF\obj\Debug\RLRMWF.RawMaterialForm.resources
+C:\Users\TBeck\WorkDB\RLRMWF\bin\Debug\Docker.DotNet.dll
+C:\Users\TBeck\WorkDB\RLRMWF\bin\Debug\Docker.DotNet.pdb
