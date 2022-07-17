@@ -1,0 +1,16 @@
+-- Create A View(create table to hold reciever qty and what lot is in it)
+--CREATE TABLE Distillation.UsageLog
+--(
+--    ProductId INT PRIMARY KEY IDENTITY(1,1),
+--    ProductLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.Product,
+--    ReveiverId INT FOREIGN KEY REFERENCES Distillation.Receiver,
+--    RunNumber VARCHAR(7),
+--    DrumLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Materials.RawMaterial,
+--    RawMaterialQuantity INT,
+--    ProductCollected INT,       --Are they needed or can they 
+--    PrefractionCollected INT,   -- be calc as required.
+--    HeelsVolume INT,            --
+--    HeelsPumped BIT,
+--    StartDate DATETIME,
+--    EndDate DATETIME - use sample date 
+--)

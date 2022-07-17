@@ -2,11 +2,11 @@
 CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     (@materialNumber AS INT,
     @vendorName AS VARCHAR(25),
-    @vendorBatchNumber AS VARCHAR(25),
-    @drumWeight INT,
-    @sapBatchNumber INT,
-    @containerNumber CHAR(7),
-    @quantity AS INT
+    @vendorBatchNumber AS VARCHAR(25) = NULL,
+    @drumWeight INT = NULL,
+    @sapBatchNumber INT = NULL,
+    @containerNumber CHAR(7) = NULL,
+    @quantity AS INT = 1
 )
 AS
 BEGIN TRAN EnterRawMaterial
@@ -18,7 +18,7 @@ SET @drumId = (Distillation.setDrumId(@materialNumber, @vendorName));
 DECLARE @batchId AS INT
 SET @batchId = (SELECT BatchId FROM Vendors.VendorBatch WHERE VendorBatchNumber = @vendorBatchNumber);
 
-INSERT INTO Materials.RawMaterialLog
+INSERT INTO Materials.RawMaterial
     (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchId, DateUsed)
 VALUES
     (@drumId, @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @batchId, GETDATE());

@@ -136,28 +136,30 @@ namespace RLRMWF
             ListView[] batchlist = { BatchList1, BatchList2, BatchList3 };
             List<vendorBatch> batches = new List<vendorBatch>();
             int i = 0;
-            foreach (var output in input)
-            {
-                vendorLabel[i].Text = output.vendor;
-                vendorLabel[i].Visible = true;
-                batchlist[i].View = View.Details;
-                batchlist[i].Columns.Add("Batch Number", -2);
-                batchlist[i].Columns.Add("Quantity", -2);
-
-                batches = batch.getVendorBatch(output.number, output.vendor);
-                foreach (var result in batches)
+            if(input != null) {
+                foreach (var output in input)
                 {
-                    ListViewItem qty = new ListViewItem();
-                    qty.Text = result.vendorBatchNumber;
-                    qty.SubItems.Add(result.quantity.ToString());
-                    batchlist[i].Items.Add(qty);
-                    batchlist[i].Visible = true;
-                    if (batchlist.Count() < 0)
+                    vendorLabel[i].Text = output.vendor;
+                    vendorLabel[i].Visible = true;
+                    batchlist[i].View = View.Details;
+                    batchlist[i].Columns.Add("Batch Number", -2);
+                    batchlist[i].Columns.Add("Quantity", -2);
+
+                    batches = batch.getVendorBatch(output.number, output.vendor);
+                    foreach (var result in batches)
                     {
+                        ListViewItem qty = new ListViewItem();
+                        qty.Text = result.vendorBatchNumber;
+                        qty.SubItems.Add(result.quantity.ToString());
+                        batchlist[i].Items.Add(qty);
                         batchlist[i].Visible = true;
+                        if (batchlist.Count() < 0)
+                        {
+                            batchlist[i].Visible = true;
+                        }
                     }
+                    i++;
                 }
-                i++;
             }
         }
 

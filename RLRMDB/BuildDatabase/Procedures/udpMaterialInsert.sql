@@ -6,8 +6,8 @@ CREATE OR ALTER PROCEDURE Materials.MaterialInsert
     @rawMaterialCode AS VARCHAR(3),
     @productCode AS VARCHAR(3),
     @carbonDrumRequired AS BIT,
-    @carbonDrumDaysAllowed AS INT,
-    @carbonDrumWeightAllowed AS INT,
+    @carbonDrumDaysAllowed AS INT = NULL,
+    @carbonDrumWeightAllowed AS INT = NULL,
     @batchManaged AS BIT,
     @requiresProcessOrder AS BIT,
     @unitOfIssue AS CHAR(2),
@@ -17,50 +17,50 @@ CREATE OR ALTER PROCEDURE Materials.MaterialInsert
 AS
 BEGIN TRAN MaterialInsert
 BEGIN TRY 
-INSERT INTO Material
+INSERT INTO Materials.Material
     (MaterialName, MaterialNameAbreviation, PermitNumber, RawMaterialCode, ProductCode, CarbonDrumRequired, CarbonDrumDaysAllowed, CarbonDrumWeightAllowed)
 VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
 
 DECLARE @nameId AS INT
 SET @nameId = (SELECT NameId
-FROM MaterialName
+FROM Materials.Material
 WHERE MaterialName = @materialName);
 
-INSERT INTO MaterialNumber
+INSERT INTO Materials.MaterialNumber
     (MaterialNumber, NameId,  BatchManaged, RequiresProcessOrder, UnitOfIssue, IsRawMaterial)
 VALUES(@materialNumber, @nameId,  @batchManaged, @requiresProcessOrder, @unitOfIssue, @isRawMaterial);
 
 DECLARE @vendorId AS INT
 IF EXISTS(SELECT VendorId
-FROM Vendor
+FROM Vendors.Vendor
 WHERE VendorName = @vendorName)
 BEGIN
     SET @vendorId =(SELECT VendorId
-    FROM Vendor
+    FROM Vendors.Vendor
     WHERE VendorName = @vendorName);
 END
 ELSE
 BEGIN
-    INSERT INTO Vendor
+    INSERT INTO Vendors.Vendor
         (VendorName)
     VALUES(@vendorName);
 
     SET @vendorId =(SELECT vendorId
-    FROM vendor
+    FROM Vendors.Vendor
     WHERE vendorName = @vendorName);
 END
 
 DECLARE @sequenceId AS INT
 SET @sequenceId =(SELECT sequenceId
-FROM productNumberSequence
+FROM Distillation.ProductNumberSequence
 WHERE sequenceIdStart = @sequenceNumber);
 
 DECLARE @currentSequenceId AS INT
 SET @currentSequenceId =(SELECT sequenceIdStart
-FROM productNumberSequence
+FROM Distillation.ProductNumberSequence
 WHERE sequenceId = @sequenceId);
 
-INSERT INTO materialId
+INSERT INTO Materials.MaterialId
     (materialNumber, vendorId,sequenceId, currentSequenceId)
 VALUES(@materialNumber, @vendorId, @sequenceId, @currentSequenceId);
 COMMIT;

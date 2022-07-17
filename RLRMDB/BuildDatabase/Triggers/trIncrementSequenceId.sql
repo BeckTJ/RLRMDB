@@ -1,14 +1,15 @@
 CREATE OR ALTER TRIGGER Materials.IncrementSequenceId
-ON Materials.RawMaterialLog
+ON Materials.RawMaterial
 AFTER INSERT,UPDATE
 
 AS
 
 DECLARE @vendorId AS INT
-SET @vendorId = (select top(1)
-    inserted.VendorId
-FROM inserted);
-
+SET @vendorId = (select VendorId
+                    From Vendors.VendorBatch
+                    WHERE BatchId = (SELECT inserted.VendorBatchId
+                                    FROM inserted));
+                                                
 DECLARE @materialNumber AS INT
 
 SET @materialNumber = (select top(1)

@@ -9,10 +9,10 @@ VALUES
     (3, 'F'),
     (4, 'G'),
     (5, 'H'),
-    (6, 'I'),
-    (7, 'J'),
-    (8, 'K'),
-    (9, 'L')
+    (6, 'J'),
+    (7, 'K'),
+    (8, 'L'),
+    (9, 'M')
 
 select *
 from Distillation.AlphabeticDate

@@ -9,10 +9,13 @@ SET @rejected = (SELECT inserted.Rejected
 
 IF(@rejected = 0)
     UPDATE QualityControl.SampleSubmit
-    SET ApprovalDate = GETDATE();
+    SET ApprovalDate = GETDATE(),
+        ExperiationDate = DATEADD(YEAR,1,GETDATE())
+    WHERE Rejected = @rejected;    
 
 ELSE IF(@rejected = 1)
 
     UPDATE QualityControl.SampleSubmit
-    SET RejectedDate = GETDATE();
+    SET RejectedDate = GETDATE()
+    WHERE Rejected = @rejected;
 

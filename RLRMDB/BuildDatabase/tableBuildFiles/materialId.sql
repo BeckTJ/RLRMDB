@@ -48,7 +48,12 @@ VALUES
 	(45267, (SELECT VendorId FROM Vendors.Vendor WHERE VendorName = 'Sivance'), 400),
 	(45269, 0, 600),
 	(45270, (SELECT VendorId FROM Vendors.Vendor WHERE VendorName = 'Axiall'), 1000),
-	(2306209, (SELECT VendorId FROM Vendors.Vendor WHERE VendorName = 'Reclaim'), 500)
+	(2306209, (SELECT VendorId FROM Vendors.Vendor WHERE VendorName = 'Reclaim'), 500);
+
+	UPDATE Materials.MaterialId
+	SET SequenceId = (SELECT SequenceId 
+						FROM Distillation.ProductNumberSequence
+						WHERE SequenceIdStart = CurrentSequenceId);
 
 SELECT *
 FROM Materials.MaterialId
