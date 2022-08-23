@@ -36,7 +36,6 @@ ELSE
 
 DECLARE @LotId AS VARCHAR(7)
 SET @LotId = (SELECT CONCAT(@id,@code));
-                
 
 RETURN @LotId
 END

@@ -1,0 +1,22 @@
+CREATE TABLE Distillation.PreStartChecks(
+    CheckID INT IDENTITY(1,1) PRIMARY KEY,
+    VacuumTrapInstallDate DATE,
+    ReboilerSkinTempBelowValue BIT,
+    KnockOutPotDrained BIT,
+    HeelsPumped BIT,
+    HeliumCylinderPSI INT,
+    HeliumFlowPSI INT,
+    CoolantLevel BIT,
+    CoolantPurgeSet BIT,
+    NitrogenFlowRate INT,
+    NitrogenPurge INT,
+    HeatingMantlePurgeSet INT,
+    NitrogenFlow INT,
+    AftercoolerPressure INT,
+    ChillerSetting INT,
+    NitrogenToCondenserPurge INT,
+    SecondaryPurgeSet BIT,
+    InspectLines BIT,
+    ControllerInitialSetBelowValue BIT,
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber
+)

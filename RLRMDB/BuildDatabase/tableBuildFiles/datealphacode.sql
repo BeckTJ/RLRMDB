@@ -1,18 +1,18 @@
 INSERT INTO Distillation.AlphabeticDate
     (MonthNumber, AlphabeticCode)
 VALUES
-    (10, 'A'),
-    (11, 'B'),
-    (12, 'C'),
-    (1, 'D'),
-    (2, 'E'),
-    (3, 'F'),
-    (4, 'G'),
-    (5, 'H'),
-    (6, 'J'),
-    (7, 'K'),
-    (8, 'L'),
-    (9, 'M')
+    (1, 'A'),
+    (2, 'B'),
+    (3, 'C'),
+    (4, 'D'),
+    (5, 'E'),
+    (6, 'F'),
+    (7, 'G'),
+    (8, 'H'),
+    (9, 'J'),
+    (10, 'K'),
+    (11, 'L'),
+    (12, 'M')
 
 select *
 from Distillation.AlphabeticDate

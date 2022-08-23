@@ -1,0 +1,25 @@
+﻿MaterialName,MaterialNameAbreviation,MaterialNumber,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumWeight,CarbonDrumDays,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial,Vendor,SequenceId
+Milk,MLK,58971,123-ABC-1234,AA,AB,0,0,0,0.89,2:25,3:25,3,1,1,kg,0,Finished Product,1000
+Fruit Juice,FRJU,58423,234-ABC-1235,BA,BB,1,10,0,0.54,1:45,2:28,5,1,1,kg,0,Finished Product,300
+Lemonade,LMND,58913,345-ABC-1236,CA,CB,0,0,0,1.2,2:75,2:37,2,1,1,g,0,Finished Product,500
+Beer,BEER,58245,456-ABC-1237,DA,DB,0,0,0,0.88,4:20,4:45,3,1,1,kg,0,Finished Product,200
+Wine,WIN,58143,567-ABC-1238,EA,EB,0,0,0,0.94,2:20,3:80,1,1,1,kg,0,Finished Product,800
+Liquor,LQR,58765,678-ABC-1239,FA,FB,1,0,5,1.45,5:35,2:15,3,1,1,kg,0,Finished Product,700
+Milk,MLK,31777,,,,,,,,,,,0,0,kg,1,Costco,3000
+Fruit Juice,FRJU,36178,,,,,,,,,,,0,0,kg,1,Walmart,100
+Lemonade,LMND,32144,,,,,,,,,,,0,0,kg,1,Winco,200
+Beer,BEER,32716,,,,,,,,,,,0,0,kg,1,Liquor Store,800
+Wine,WIN,32409,,,,,,,,,,,1,1,kg,1,Wine Palace,900
+Liquor,LQR,30173,,,,,,,,,,,1,1,kg,1,Bevmo,100
+Milk,MLK,3282571,,,,,,,,,,,1,1,kg,1,Stop N Shop,800
+Fruit Juice,FRJU,3322187,,,,,,,,,,,0,0,kg,1,Ralphs,600
+Lemonade,LMND,3665760,,,,,,,,,,,0,0,kg,1,7 Eleven,2000
+Beer,BEER,3081971,,,,,,,,,,,0,0,kg,1,Faith's,900
+Wine,WIN,3589067,,,,,,,,,,,1,1,kg,1,Ranch,200
+Liquor,LQR,3579790,,,,,,,,,,,0,0,kg,1,Russia,1000
+Milk,MLK,3372033,,,,,,,,,,,1,1,kg,1,Reclaim,400
+Fruit Juice,FRJU,3195356,,,,,,,,,,,0,0,kg,1,Reclaim,1000
+Lemonade,LMND,3531374,,,,,,,,,,,0,0,kg,1,Reclaim,200
+Beer,BEER,3948173,,,,,,,,,,,1,1,kg,1,Reclaim,800
+Wine,WIN,3473903,,,,,,,,,,,0,0,kg,1,Reclaim,1
+Liquor,LQR,3789434,,,,,,,,,,,1,1,kg,1,Reclaim,2000

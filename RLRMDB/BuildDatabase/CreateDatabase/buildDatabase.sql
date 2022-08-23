@@ -25,85 +25,85 @@ CREATE SCHEMA HumanResources
 GO
 
 --Create tabels 
-CREATE TABLE Distillation.SystemTemperatureAtRunTime(
-    TemperatureId INT PRIMARY KEY,
-    ReboilerZone1 INT,
-    ReboilerZone2 INT,
-    ReboilerZone3 INT,
-    ReboilerZone4 INT,
-    ReboilerZone5 INT,
-    ReboilerZone6 INT,
-    ColumnAverage INT,
-    InternalFluidTemp INT,
-    ColumnBottom INT,
-    ColumnMiddle INT,
-    ColumnTop INT,
-    RefluxSplitter INT,
-    CondenserTop INT,
-    CondenserCoolantOutlet INT,
-    AftercoolerCoolantOutlet INT,
-    CondeserSkin INT,
-    CondenserInlet INT,
-    AftercoolerInlet INT,
-    LN2 INT,
-)
+--CREATE TABLE Distillation.SystemTemperatureAtRunTime(
+--    TemperatureId INT PRIMARY KEY,
+--    ReboilerZone1 INT,
+--    ReboilerZone2 INT,
+--    ReboilerZone3 INT,
+--    ReboilerZone4 INT,
+--    ReboilerZone5 INT,
+--    ReboilerZone6 INT,
+--    ColumnAverage INT,
+--    InternalFluidTemp INT,
+--    ColumnBottom INT,
+--    ColumnMiddle INT,
+--    ColumnTop INT,
+--    RefluxSplitter INT,
+--    CondenserTop INT,
+--    CondenserCoolantOutlet INT,
+--    AftercoolerCoolantOutlet INT,
+--    CondeserSkin INT,
+--    CondenserInlet INT,
+--    AftercoolerInlet INT,
+--    LN2 INT,
+--)
 
-Create TABLE Distillation.SystemPressureSetPoint(
-    SystemId INT PRIMARY KEY,
-    SystemPressure INT,
-    SystemDifferentialPressure INT,
-    ReboilerPressure INT,
-    PrefractionFlaskPressure INT,
-    ReceiverPressure INT,
-    ChillerRecircPressure INT,
-    NitrogenBleedRate INT ,
-    CondenserCoolantFlowRate INT,
-    AftercoolerCoolantFlowRate INT,
-    CondenserCoolantPressure INT,
-    AftercoolerCoolantPressure INT,
-    HighPurityVentPurge INT,
-    ColumnDPLevelSensePurge INT,
-    ReboilerLevelSensePurge INT,
-    RecieverPurge INT,
-    ContainmentPurge INT,
-    ReboilerPurge INT ,
-    PrefractionLevelSencePurge INT ,
-    SystemPurge INT,
-    N2ToCondenserCoolantTank INT,
-    HeatedTankPurge INT,
-    CondenserPurge INT,
-    ReboilerContainmentPressure INT,
-    FeedDrumVentPurge INT,
-    WasteDrumVentPurge INT,
-    VentHeaderPurge INT,
-    ReliefHeaderVentPurge INT,
-    ParticleCounterContainmentPressure INT,
-    VacuumBreakLinePurge INT,
-    VacuumPumpCasePurge INT
-)
+--Create TABLE Distillation.SystemPressureSetPoint(
+--    SystemId INT PRIMARY KEY,
+--    SystemPressure INT,
+--    SystemDifferentialPressure INT,
+--    ReboilerPressure INT,
+--    PrefractionFlaskPressure INT,
+--    ReceiverPressure INT,
+--    ChillerRecircPressure INT,
+--    NitrogenBleedRate INT ,
+--    CondenserCoolantFlowRate INT,
+--    AftercoolerCoolantFlowRate INT,
+--    CondenserCoolantPressure INT,
+--    AftercoolerCoolantPressure INT,
+--    HighPurityVentPurge INT,
+--    ColumnDPLevelSensePurge INT,
+--    ReboilerLevelSensePurge INT,
+--    RecieverPurge INT,
+--    ContainmentPurge INT,
+--    ReboilerPurge INT ,
+--    PrefractionLevelSencePurge INT ,
+--    SystemPurge INT,
+--    N2ToCondenserCoolantTank INT,
+--    HeatedTankPurge INT,
+--    CondenserPurge INT,
+--    ReboilerContainmentPressure INT,
+--    FeedDrumVentPurge INT,
+--    WasteDrumVentPurge INT,
+--    VentHeaderPurge INT,
+--    ReliefHeaderVentPurge INT,
+--    ParticleCounterContainmentPressure INT,
+--    VacuumBreakLinePurge INT,
+--    VacuumPumpCasePurge INT
+--)
 
-CREATE TABLE Distillation.SystemTemperatureSetPoint(
-    TemperatureSetPointId INT,
-    ReboilerZone1 INT,
-    ReboilerZone2 INT,
-    ReboilerZone3 INT,
-    ReboilerZone4 INT,
-    ReboilerZone5 INT,
-    ReboilerZone6 INT,
-    ColumnAverage INT,
-    InternalFluidTemp INT,
-    ColumnBottom INT,
-    ColumnMiddle INT,
-    ColumnTop INT,
-    RefluxSplitter INT,
-    CondenserTop INT,
-    CondenserCoolantOutlet INT,
-    AftercoolerCoolantOutlet INT,
-    CondeserSkin INT,
-    CondenserInlet INT,
-    AftercoolerInlet INT,
-    LN2 INT,
-)
+--CREATE TABLE Distillation.SystemTemperatureSetPoint(
+--    TemperatureSetPointId INT,
+--    ReboilerZone1 INT,
+--    ReboilerZone2 INT,
+--    ReboilerZone3 INT,
+--    ReboilerZone4 INT,
+--    ReboilerZone5 INT,
+--    ReboilerZone6 INT,
+--    ColumnAverage INT,
+--    InternalFluidTemp INT,
+--    ColumnBottom INT,
+--    ColumnMiddle INT,
+--    ColumnTop INT,
+--    RefluxSplitter INT,
+--    CondenserTop INT,
+--    CondenserCoolantOutlet INT,
+--    AftercoolerCoolantOutlet INT,
+--    CondeserSkin INT,
+--    CondenserInlet INT,
+--    AftercoolerInlet INT,
+--    LN2 INT,
+--)
 
 CREATE TABLE Distillation.AlphabeticDate
 (
@@ -156,7 +156,10 @@ CREATE TABLE Materials.Material
     CarbonDrumWeightAllowed INT,
     CarbonDrumInstallDate DATE,
     SpecificGravity DECIMAL(3,2),
-    SystemId INT FOREIGN KEY REFERENCES SystemPressureSetPoint
+    PrefractionRefluxRatio VARCHAR(5),
+    CollectRefluxRatio VARCHAR(5),
+    NumberOfRuns INT,
+    --SystemId INT FOREIGN KEY REFERENCES SystemPressureSetPoint
 )
 GO
 
@@ -215,7 +218,7 @@ CREATE TABLE Materials.MaterialId
     CurrentSequenceId INT
 )
 
-CREATE TABLE Materials.RawMaterial
+CREATE TABLE Distillation.RawMaterial
 (
     DrumLotNumber VARCHAR(10) PRIMARY KEY,
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
@@ -229,41 +232,73 @@ CREATE TABLE Materials.RawMaterial
 
 )
 
-CREATE TABLE Distillation.ProductRunLog
+CREATE TABLE Distillation.PreStartChecks(
+    CheckID INT IDENTITY(1,1) PRIMARY KEY,
+    VacuumTrapInstallDate DATE,
+    ReboilerSkinTempBelowValue BIT,
+    KnockOutPotDrained BIT,
+    HeelsPumped BIT,
+    HeliumCylinderPSI INT,
+    HeliumFlowPSI INT,
+    CoolantLevel BIT,
+    CoolantPurgeSet BIT,
+    NitrogenFlowRate INT,
+    NitrogenPurge INT,
+    HeatingMantlePurgeSet INT,
+    NitrogenFlow INT,
+    AftercoolerPressure INT,
+    ChillerSetting INT,
+    NitrogenToCondenserPurge INT,
+    SecondaryPurgeSet BIT,
+    InspectLines BIT,
+    ControllerInitialSetBelowValue BIT,
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber
+)
+
+CREATE TABLE Distillation.Production
 (
-    ProductLotNumber VARCHAR(10) PRIMARY KEY,
+    ProductId INT IDENTITY(1,1) PRIMARY KEY,
+    ProductLotNumber VARCHAR(10),
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
-    ProductionBatchNumber INT,
+    ProductBatchNumber INT,
     ProcessOrder NUMERIC,
     ReceiverId INT FOREIGN KEY REFERENCES Distillation.Receiver,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
-    DrumLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Materials.RawMaterial,
+    StartDate DATE,
+)
+CREATE NONCLUSTERED INDEX IX_Production_ProductLotNumber
+ON Distillation.Production(ProductLotNumber ASC)
+
+CREATE NONCLUSTERED INDEX IX_Production_ProductionBatchNumber
+ON Distillation.Production(ProductBatchNumber ASC)
+
+CREATE NONCLUSTERED INDEX IX_Production_ProcessOrder
+ON Distillation.Production(ProcessOrder ASC)
+
+CREATE TABLE Distillation.ProductRun
+(
+    RunId INT IDENTITY(1,1) PRIMARY KEY,
+    RunNumber INT,
+    DrumLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.RawMaterial,
     RawMaterialStartWeight INT,
     RawMaterialEndWeight INT,
     TotalRawMaterialLoaded INT,
     KOPotDrained BIT,
-    RunNumber INT,
-    StartDate DATE,
-    SystemStatus VARCHAR(10),
     ReadingTime TIME,
+    SystemStatus VARCHAR(10),
     VisualVerification BIT,
     CollectRate INT,
     RecieverLevel INT,
     HeelsLevel INT,
-    HeelsPumped INT,
+    HeelsPumped BIT,
     PrefractionLevel INT,
     ReboilerLevel INT,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee,
-    PressureId INT FOREIGN KEY REFERENCES Distillation.SystemPressureAtRunTime,
-    TemperatureId INT FOREIGN KEY REFERENCES Distillation.SystemTemperatureAtRunTime
+    --PressureId INT FOREIGN KEY REFERENCES Distillation.SystemPressureAtRunTime,
+    --TemperatureId INT FOREIGN KEY REFERENCES Distillation.SystemTemperatureAtRunTime,
+    --ProductId INT FOREIGN KEY REFERENCES Distillation.Production,
+    --CheckID INT FOREIGN KEY REFERENCES Distillation.PreStartChecks
 )
-
-CREATE NONCLUSTERED INDEX IX_ProductRunLog_ProductionBatchNumber
-ON Distillation.Production(ProductionBatchNumber ASC)
-
-CREATE NONCLUSTERED INDEX IX_ProductRunLog_ProcessOrder
-ON Distillation.Production(ProcessOrder ASC)
-
 GO
 
 --PROCEDURES
@@ -392,7 +427,7 @@ SET @drumId = (Distillation.setDrumId(@materialNumber, @vendorName));
 DECLARE @batchId AS INT
 SET @batchId = (SELECT BatchId FROM Vendors.VendorBatch WHERE VendorBatchNumber = @vendorBatchNumber);
 
-INSERT INTO Materials.RawMaterialLog
+INSERT INTO Distillation.RawMaterialLog
     (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchId, DateUsed)
 VALUES
     (@drumId, @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @batchId, GETDATE());
@@ -406,8 +441,8 @@ GO
 
 --TRIGGERS
 
-CREATE OR ALTER TRIGGER Materials.IncrementSequenceId
-ON Materials.RawMaterial
+CREATE OR ALTER TRIGGER Distillation.IncrementSequenceId
+ON Distillation.RawMaterial
 AFTER INSERT,UPDATE
 
 AS
@@ -580,7 +615,7 @@ GO
 
 --Veiw
 
-CREATE OR ALTER VIEW Materials.RawMaterialLog
+CREATE OR ALTER VIEW Distillation.RawMaterialLog
 AS
 
 SELECT DateUsed AS 'Date',
@@ -598,7 +633,7 @@ SELECT DateUsed AS 'Date',
     ExperiationDate AS 'Experation Date',
     RejectedDate AS 'Rejected Date'
 
-FROM Materials.RawMaterial
+FROM Distillation.RawMaterial
 JOIN Materials.MaterialNumber ON RawMaterial.MaterialNumber = MaterialNumber.MaterialNumber
 JOIN Materials.Material ON MaterialNumber.NameId = Material.NameId
 JOIN Vendors.VendorBatch ON RawMaterial.VendorBatchId = VendorBatch.BatchId
