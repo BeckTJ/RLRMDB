@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build mcr.microsoft.com/mssql/server2019
+      run: docker build mcr.microsoft.com/mssql/server:2019-latest
