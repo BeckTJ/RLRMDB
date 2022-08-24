@@ -1,0 +1,12 @@
+name: BuildDB
+on: [push]
+jobs:
+  job1:
+    name: buildDB
+    runs-on: windows-latest
+    steps:
+      name: Create Container
+      uses: docker://mcr.microsoft.com/mssql/server2019
+      with:
+        RLRMDB_ACCESS_ID: ${{secrets.RLRMDB_ACCESS_ID}}
+        RLRMDB_ACCESS_KEY: ${{secrets.RLRMDB_ACCESS_KEY}}
