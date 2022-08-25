@@ -1,4 +1,4 @@
-name: RLRMDB Container
+name: Docker Image CI
 
 on:
   push:
@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build mcr.microsoft.com/mssql/server:2019-latest
+      run: docker build . --file Dockerfile --tag mcr.microsoft.com/mssql/server:2019-latest
