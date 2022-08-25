@@ -5,6 +5,6 @@ ENV SA_PASSWORD = FR*@ger12
 
 WORKDIR /src
 
-COPY WorkDB\RLRMDB\DataFiles\MaterialData.csv /usr/local/bin/MaterialData.csv
+COPY WorkDB\RLRMDB\DataFiles\MaterialData.csv /src/MaterialData.csv
 
-RUN ()
+RUN /opt/mssql/bin/sqlservr
