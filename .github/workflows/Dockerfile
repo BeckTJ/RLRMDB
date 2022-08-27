@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/mssql/server:2019-latest
-
-ENV ACCEPT_EULA=Y
-ENV SA_PASSWORD = FR*@ger12
+FROM tjbeck/mssql_server
 
 WORKDIR /src
 
-COPY WorkDB\RLRMDB\DataFiles\MaterialData.csv /src/MaterialData.csv
+COPY ../BuildDatabase/CreateDatabase/buildDatabase.sql buildDatabase.sql
+COPY ../BuildDatabase/Procedures/udpInsertMaterialsFromCSV.sql udpInsertMaterialsFromCSV.sql
 
-RUN /opt/mssql/bin/sqlservr
+ENV sa_password=FR*@ger12
+ENV ACCEPT_EULA=Y
+
