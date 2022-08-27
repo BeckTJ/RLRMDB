@@ -9,8 +9,8 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      uses: docker
-      name: Build the Docker image
-      image: DockerFile
+      - uses: docker
+      - name: Build the Docker image
+      - image: DockerFile
 
-      run: docker build . --file ./Dockerfile
+          run: docker build . --file ./Dockerfile
