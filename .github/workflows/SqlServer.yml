@@ -3,14 +3,14 @@ name: SqlServer2019
 on:
   push:
     branches: ["master"]
-  pull_request:
-    branches: ["master"]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file ./Dockerfile
+      uses: docker
+      name: Build the Docker image
+      image: DockerFile
+
+      run: docker build . --file ./Dockerfile
