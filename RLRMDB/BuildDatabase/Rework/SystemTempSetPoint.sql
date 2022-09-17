@@ -1,4 +1,4 @@
-CREATE TABLE Distillation.TemperatureAtRunTime(
+CREATE TABLE Engineering.SystemTemperatureSetPoint(
     TemperatureSetPointId INT PRIMARY KEY,
     AftercoolerInlet INT,
     AftercoolerOutlet INT,

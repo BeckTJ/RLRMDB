@@ -1,140 +1,74 @@
-﻿MaterialName,Nomenclature,Indicator,SetPointLow,SetPointHigh,Variance
-Beer,Aftercooler Coolant Pressure,PI-108,17,,3
-Beer,Aftercooler Flow Rate,FIC-106,0.16,,0.2
-Beer,Zone 1,TI-119,220,,20
-Beer,Zone 1 Controller,TIC-109,242,,10
-Beer,Chiller Recirc Pressure,PI-103,20,,3
-Beer,Condenser Coolant Pressure,PI-107,15,,3
-Beer,Condenser Flow Rate,FRI-105,0.25,,0.2
-Beer,Condenser Inlet,TI-112,40,,20
-Beer,Condenser Outlet,TI-120,43,,20
-Beer,Condenser Skin,TI-113,27,,20
-Beer,Heating Top,TI-116,170,,20
-Beer,Heating Top Skin,TIC-111,190,,10
-Beer,Liquid,TI-115,175,,3
-Beer,LN2 Traps,TI-117,-190,,3
-Beer,Nitrogen Bleed Rate,FIC-104,1,,0.5
-Beer,Prefraction Flask Pressure,VI-102,125,,5
-Beer,Prefraction Level,,,,
-Beer,Reboiler Level,,,,
-Beer,Receiver Pressure,PI-*,-20,,1
-Beer,Reciever Level,,,,
-Beer,Reflux Splitter ,TI-114,160,,3
-Beer,System Differential Pressure,PDL-101,15,,4
-Beer,System Pressure,PIC-100,125,,2
-Beer,Zone 2,TI-118,210,,20
-Beer,Zone 2 Controller,TIC-110,232,,10
-Fruit Juice,Aftercooler Flow Rate,FI-108,3,,1
-Fruit Juice,Aftercooler Pressure,PI-106,25,,5
-Fruit Juice,Column dP,FIC-115,1,,0.5
-Fruit Juice,Condenser Coolant Pressure,PI-105,25,,5
-Fruit Juice,Condenser Flow Rate,FRI-107,2,,1
-Fruit Juice,Condenser Purge,FIC-103,3,,1
-Fruit Juice,Heated Tank (Rec. B) Purge,FIC-101,2,,1
-Fruit Juice,Heated Tank (Rec. B) Purge,FIC-114,1,,0.5
-Fruit Juice,House N2 Pressure,PI-117,80,90,
-Fruit Juice,Liquid in Splitter Overflow Container,,,,
-Fruit Juice,N2 to Condenser Coolant Tank,FIC-110,3,,1
-Fruit Juice,Prefraction Purge,FIC-112,1,,0.5
-Fruit Juice,Reboiler Containment Box Pressure,PI-104,0.15,0.35,
-Fruit Juice,Reboiler Purge,FIC-111,1,,0.5
-Fruit Juice,Receiver A Purge,FIC-113,1,,0.5
-Fruit Juice,Receiver A Purge,FIC-100,2,,1
-Fruit Juice,Receivers Sparge,FIC-109,2,,1
-Fruit Juice,System Purge,FIC-102,10,,2
-Fruit Juice,Vent Pressure,PI-116,<1,,
-Lemonade,Aftercooler Coolant Outlet,TE-900,25,,20
-Lemonade,Aftercooler Flow Rate,FI-901,2,,0.2
-Lemonade,Column Average,Avg TE-901-903,60,,10
-Lemonade,Column Bottom,TE-901,62,,10
-Lemonade,Column dP,DPIT-900A,0.15,,0.5
-Lemonade,Column dP,DPIT-900,30,,3
-Lemonade,Column Middle ,TE-902,61,,10
-Lemonade,Column Top,TE-903,55,,10
-Lemonade,Condenser Coolant Outlet ,TE-904,30,,20
-Lemonade,Condenser Flow Rate,FRI-900,8,,1
-Lemonade,Condeser Top,TE-905,45,,20
-Lemonade,Internal Fluid Temp,TE-906,55,,10
-Lemonade,Prefraction Level,LIT-901A,0.15,,0.5
-Lemonade,Prefraction Level,LIT-901,12,,
-Lemonade,Reboiler ,LIT-900A,0.15,,0.5
-Lemonade,Zone 1,TE-907,145,,10
-Lemonade,Reboiler Level,,,,
-Lemonade,Reboiler Mantle Purge,FIC-900,25,,1
-Lemonade,Zone 2,TE-908,130,,10
-Lemonade,Zone 3,TE-909,130,,10
-Lemonade,Zone 4,TE-910,140,,10
-Lemonade,Zone 5,TE-911,120,,10
-Lemonade,Zone 6,TE-912,120,,10
-Lemonade,Receiver A Purge,FIC-901,5,,1
-Lemonade,Receiver B Purge,FIC-902,5,,1
-Lemonade,Reflux Splitter ,TE-913,50,,2
-Lemonade,Reboiler Level,LIT-900,80,,
-Lemonade,Secondary Container Purge,FIC-903,25,,1
-Lemonade,System Purge,FIC-904,13,,1
-Lemonade,Vent Pressure,PI-900,<1,,
-Liquor,Bottom Column,TE-612,45,65,
-Liquor,Cold Coolant (HX-620) Return,TE-604,2,5,
-Liquor,Cold Coolant (HX-620) Supply,TE-605,4,10,
-Liquor,Heels,LT-619,,,
-Liquor,Hot Coolant (HX-601) Return,TE-613,10,20,
-Liquor,Hot Coolant (HX-601) Supply,TE-614,10,20,
-Liquor,Mid Column,TE-610,25,45,
-Liquor,Mid Column Set Point,TIC-611,35,55,
-Liquor,Motor Speed,SI-608,200,245,
-Liquor,Prefraction Level,LT-618,,,
-Liquor,Receiver A,LT-615,,,
-Liquor,Receiver B,LT-616,,,
-Liquor,Receiver C,LT-617,,,
-Liquor,Rework,LT-620,,,
-Liquor,RM Flow PV Process Value,FIC-601,0.5,3,
-Liquor,RM Flow SG Specific Gravity,FIC-603,0.25,1,
-Liquor,RM Flow SV Set Point,FIC-602,0.5,3,
-Liquor,Still Vacuum,PT-607,<1000,,
-Liquor,Top Column,TE-609,20,40,
-Liquor,Vacuum Pump ,PI-606,4,10,
-Milk,Aftercooler Coolant Pressure,PI-419,15,,4
-Milk,Aftercooler Flow Rate,FI-401,1.2,,0.5
-Milk,Cold Tank Level (T-600),Sight Glass,,,visible
-Milk,Condenser Coolant Pressure,PI-418,9,,4
-Milk,Condenser Flow Rate,FRI-400,1.2,,0.5
-Milk,Condenser Purge,FIC-403,20,,2
-Milk,Heated Coolant Tank Purge,FIC-417,6,,1
-Milk,Hot Tank Level (T-500),Sight Glass,,,Visible
-Milk,Misc: Feed/Recovery Drum Purge,FIC-411,6,,1
-Milk,Nitrogen to Solenoids,PCV-601A,75,,
-Milk,Prior Sampling: Receiver Sparge,FIC-407,12,,
-Milk,Purge: DPIT-300,FIC-416,0.25,,0.5
-Milk,Purge: LIT-300,FIC-412,0.25,,0.5
-Milk,Purge: LIT-401,FIC-413,0.25,,0.5
-Milk,Purge: LIT-402,FIC-414,0.25,,0.5
-Milk,Purge: LIT-403,FIC-415,0.25,,0.5
-Milk,Receiver Flange Purge A,FIC-408,6,,1
-Milk,Receiver Flange Purge B,FIC-409,6,,1
-Milk,Receiver Flange Purge C,FIC-410,6,,1
-Milk,Receiver Purge A,FIC-404,2,,1
-Milk,Receiver Purge B,FIC-405,2,,1
-Milk,Receiver Purge C,FIC-406,2,,1
-Milk,Secondary Container Z Purge,PI-421,,,safe band
-Milk,System Purge,FIC-402,15,20,
-Milk,Vent Pressure,PI-420,<1,,
-Wine,Bottom Column,TI-7,105,,10
-Wine,Zone 1 Controller,TIC-5,210,,10
-Wine,Column dP,DP-3,10,,3
-Wine,Condenser Inlet,TI-8,30,,10
-Wine,Condenser Outlet,TI-9,30,,10
-Wine,Condenser Skin,TI-10,25,,10
-Wine,Condeser Flow,FI-1,0.5,,0.5
-Wine,High Purity Vent Purge,FIC-4,25,,2
-Wine,Liquid,TI-11,10,,10
-Wine,Prefraction Level,,,,
-Wine,Reboiler Level,,,,
-Wine,Reboiler Pressure,PI-2,<1,,
-Wine,Reciever Level,,,,
-Wine,Reflux Splitter ,TI-12,120,,2
-Wine,Top Column,TI-13,105,,10
-Wine,Zone 2 Controller,TIC-6,205,,10
-Wine,Zone 1,TI-14,200,,10
-Wine,Zone 2,TI-15,195,,10
-Wine,Zone 3,TI-16,197,,10
-Wine,Zone 3 Controller,TIC7,187,,10
+﻿MaterialName,Nomenclature,Indicator,SetPointChar,SetPointLow,SetPointHigh,Variance
+Beer,Aftercooler Coolant Pressure,PI-108,,17,,3
+Milk,Aftercooler Coolant Pressure,PI-419,,15,,4
+Fruit Juice,Aftercooler Coolant Pressure,PI-106,,25,,5
+Beer,Aftercooler Flow Rate,FIC-106,,0.16,,0.2
+Fruit Juice,Aftercooler Flow Rate,FI-108,,3,,1
+Lemonade,Aftercooler Flow Rate,FI-901,,2,,0.2
+Milk,Aftercooler Flow Rate,FI-401,,1.2,,0.5
+Beer,Chiller Recirc Pressure,PI-103,,20,,3
+Beer,Condenser Coolant Pressure,PI-107,,15,,3
+Fruit Juice,Condenser Coolant Pressure,PI-105,,25,,5
+Milk,Condenser Coolant Pressure,PI-418,,9,,4
+Beer,Condenser Flow Rate,FRI-105,,0.25,,0.2
+Fruit Juice,Condenser Flow Rate,FRI-107,,2,,1
+Lemonade,Condenser Flow Rate,FRI-900,,8,,1
+Milk,Condenser Flow Rate,FRI-400,,1.2,,0.5
+Fruit Juice,Condenser Purge,FIC-103,,3,,1
+Milk,Condenser Purge,FIC-403,,20,,2
+Wine,Condeser Flow Rate,FI-1,,0.5,,0.5
+Milk,Feed/Recovery Drum Purge,FIC-411,,6,,1
+Milk,Heated Coolant Tank Purge,FIC-417,,6,,1
+Fruit Juice,Heated Tank (Rec. B) Purge,FIC-101,,2,,1
+Wine,High Purity Vent Purge,FIC-4,,25,,2
+Fruit Juice,House N2 Pressure,PI-117,,80,90,
+Fruit Juice,Liquid in Splitter Overflow Container,,,,,
+Fruit Juice,LIT Heated Tank (Rec. B) Purge,FIC-114,,1,,0.5
+Liquor,Motor Speed,SI-608,,200,245,
+Fruit Juice,N2 to Condenser Coolant Tank,FIC-110,,3,,1
+Beer,Nitrogen Bleed Rate,FIC-104,,1,,0.5
+Milk,Nitrogen to Solenoids,PCV-601A,,75,,
+Beer,Prefraction Flask Pressure,VI-102,,125,,5
+Fruit Juice,Prefraction Purge,FIC-112,,1,,0.5
+Lemonade,Prefraction Purge,LIT-901A,,0.15,,0.5
+Milk,Purge: DPIT-300,FIC-416,,0.25,,0.5
+Milk,Purge: LIT-300,FIC-412,,0.25,,0.5
+Milk,Purge: LIT-401,FIC-413,,0.25,,0.5
+Milk,Purge: LIT-402,FIC-414,,0.25,,0.5
+Milk,Purge: LIT-403,FIC-415,,0.25,,0.5
+Fruit Juice,Reboiler Containment Pressure,PI-104,,0.15,0.35,
+Lemonade,Reboiler Mantle Purge,FIC-900,,25,,1
+Wine,Reboiler Pressure,PI-2,<1,,,
+Fruit Juice,Reboiler Purge,FIC-111,,1,,0.5
+Lemonade,Reboiler Purge,LIT-900A,,0.15,,0.5
+Fruit Juice,Receiver A Purge,FIC-100,,2,,1
+Lemonade,Receiver A Purge,FIC-901,,5,,1
+Milk,Receiver A Purge,FIC-404,,2,,1
+Lemonade,Receiver B Purge,FIC-902,,5,,1
+Milk,Receiver B Purge,FIC-405,,2,,1
+Milk,Receiver C Purge,FIC-406,,2,,1
+Milk,Receiver Flange Purge A,FIC-408,,6,,1
+Milk,Receiver Flange Purge B,FIC-409,,6,,1
+Milk,Receiver Flange Purge C,FIC-410,,6,,1
+Beer,Receiver Pressure,PI-*,,-20,,1
+Fruit Juice,Receiver Purge,FIC-113,,1,,0.5
+Milk,Receiver Sparge,FIC-407,,12,,
+Fruit Juice,Receiver Sparge,FIC-109,,2,,1
+Liquor,RM Flow PV Process Value,FIC-601,,0.5,3,
+Liquor,RM Flow SG Specific Gravity,FIC-603,,0.25,1,
+Liquor,RM Flow SV Set Point,FIC-602,,0.5,3,
+Lemonade,Secondary Container Purge,FIC-903,,25,,1
+Milk,Secondary Container Purge,PI-421,,,,
+Liquor,Still Vacuum,PT-607,<1000,,,
+Fruit Juice,System Differential Pressure,FIC-115,,1,,0.5
+Lemonade,System Differential Pressure,DPIT-900,,30,,3
+Wine,System Differential Pressure,DP-3,,10,,3
+Beer,System Differential Pressure,PDL-101,,15,,4
+Lemonade,System Differential Pressure Purge,DPIT-900A,,0.15,,0.5
+Beer,System Pressure,PIC-100,,125,,2
+Fruit Juice,System Purge,FIC-102,,10,,2
+Lemonade,System Purge,FIC-904,,13,,1
+Milk,System Purge,FIC-402,,15,20,
+Fruit Juice,Vent Pressure,PI-116,<1,,,
+Lemonade,Vent Pressure,PI-900,<1,,,
+Milk,Vent Pressure,PI-420,<1,,,

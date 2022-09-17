@@ -1,5 +1,5 @@
-Create TABLE Distillation.SystemPressureSetPoint(
-    SystemId INT PRIMARY KEY,
+Create TABLE Engineering.SystemPressureSetPoint(
+    PressureId INT PRIMARY KEY,
     SystemPressure INT,
     SystemDifferentialPressure INT,
     ReboilerPressure INT,

@@ -6,3 +6,5 @@ create schema QualityControl
 go
 create schema Vendors
 go
+create schema Engineering
+go

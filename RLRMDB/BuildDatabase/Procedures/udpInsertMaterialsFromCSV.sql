@@ -1,4 +1,4 @@
-CREATE OR ALTER PROCEDURE udpMaterialInsertDB
+CREATE OR ALTER PROCEDURE MaterialInsertDB
 AS
 BEGIN
 CREATE TABLE #tempTbl(
@@ -24,7 +24,7 @@ CREATE TABLE #tempTbl(
 
 BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
     WITH(
-        FORMAT = 'CSV',
+        FORMAT = 'csv',
         FIRSTROW = 2,
         FIELDTERMINATOR = ',',
         ROWTERMINATOR = '\n',
@@ -33,13 +33,13 @@ BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
     BEGIN TRAN 
         BEGIN TRY
             
-            INSERT INTO Materials.Material(MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
-            SELECT TOP(6) MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
+            INSERT INTO Materials.Material(ParentMaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
+            SELECT TOP(6) MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName)
             
-            INSERT INTO Materials.MaterialNumber(MaterialNumber,NameId,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial)
-            SELECT MaterialNumber,(Select NameId FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
+            INSERT INTO Materials.MaterialNumber(MaterialNumber,ParentMaterialNumber,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial)
+            SELECT MaterialNumber,(Select ParentMaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.MaterialNumber WHERE MaterialNumber.MaterialNumber = #tempTbl.MaterialNumber)
 
@@ -49,8 +49,8 @@ BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
             FROM #tempTbl
             WHERE NOT EXISTS(Select * FROM Vendors.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
 
-            INSERT INTO Materials.MaterialId(MaterialNumber, VendorId, CurrentSequenceId, SequenceId)
-            SELECT MaterialNumber,(SELECT VendorId FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),SequenceId,(SELECT SequenceId FROM Distillation.ProductNumberSequence WHERE SequenceIdStart = #tempTbl.SequenceId)
+            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, CurrentSequenceId, SequenceId)
+            SELECT MaterialNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),SequenceId,(SELECT SequenceId FROM Distillation.ProductNumberSequence WHERE SequenceIdStart = #tempTbl.SequenceId)
             FROM #tempTbl
 
 

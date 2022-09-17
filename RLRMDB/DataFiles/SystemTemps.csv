@@ -1,0 +1,50 @@
+﻿MaterialName,Nomenclature,Indicator,SetPointLow,SetPointHigh,Variance
+Beer,Condenser Inlet,TI-112,40,,20
+Beer,Condenser Outlet,TI-120,43,,20
+Beer,Condenser Skin,TI-113,27,,20
+Beer,Heating Top,TI-116,170,,20
+Beer,Heating Top Skin,TIC-111,190,,10
+Beer,Liquid,TI-115,175,,3
+Beer,LN2 Traps,TI-117,-190,,3
+Beer,Reboiler Zone 1,TI-119,220,,20
+Beer,Reboiler Zone 2,TI-118,210,,20
+Beer,Reflux Splitter ,TI-114,160,,3
+Beer,Zone 1 Controller,TIC-109,242,,10
+Beer,Zone 2 Controller,TIC-110,232,,10
+Lemonade,Aftercooler Outlet,TE-900,25,,20
+Lemonade,Column Average,Avg TE-901-903,60,,10
+Lemonade,Column Bottom,TE-901,62,,10
+Lemonade,Column Middle ,TE-902,61,,10
+Lemonade,Column Top,TE-903,55,,10
+Lemonade,Condenser Outlet ,TE-904,30,,20
+Lemonade,Condeser Top,TE-905,45,,20
+Lemonade,Liquid,TE-906,55,,10
+Lemonade,Reboiler Zone 1,TE-907,145,,10
+Lemonade,Reboiler Zone 2,TE-908,130,,10
+Lemonade,Reboiler Zone 3,TE-909,130,,10
+Lemonade,Reboiler Zone 4,TE-910,140,,10
+Lemonade,Reboiler Zone 5,TE-911,120,,10
+Lemonade,Reboiler Zone 6,TE-912,120,,10
+Lemonade,Reflux Splitter ,TE-913,50,,2
+Liquor,Aftercooler Inlet,TE-613,10,20,
+Liquor,Aftercooler Outlet,TE-614,10,20,
+Liquor,Column Bottom,TE-612,45,65,
+Liquor,Column Middle ,TE-610,25,45,
+Liquor,Column Middle Set Point,TIC-611,35,55,
+Liquor,Condenser Inlet,TE-604,2,5,
+Liquor,Condenser Outlet,TE-605,4,10,
+Liquor,Top Column,TE-609,20,40,
+Liquor,Vacuum Pump ,PI-606,4,10,
+Wine,Column Bottom,TI-7,105,,10
+Wine,Condenser Inlet,TI-8,30,,10
+Wine,Condenser Outlet,TI-9,30,,10
+Wine,Condenser Skin,TI-10,25,,10
+Wine,Liquid,TI-11,10,,10
+Wine,Reboiler Zone 1,TI-14,200,,10
+Wine,Reboiler Zone 2,TI-15,195,,10
+Wine,Reboiler Zone 3,TI-16,197,,10
+Wine,Reflux Splitter ,TI-12,120,,2
+Wine,Top Column,TI-13,105,,10
+Wine,Zone 1 Controller,TIC-5,210,,10
+Wine,Zone 2 Controller,TIC-6,205,,10
+Wine,Zone 3 Controller,TIC7,187,,10

@@ -21,33 +21,23 @@ INSERT INTO Materials.Material
     (MaterialName, MaterialNameAbreviation, PermitNumber, RawMaterialCode, ProductCode, CarbonDrumRequired, CarbonDrumDaysAllowed, CarbonDrumWeightAllowed)
 VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
 
-DECLARE @nameId AS INT
-SET @nameId = (SELECT NameId
+DECLARE @parentMaterialNumber AS INT
+SET @parentMaterialNumber = (SELECT ParentMaterialNumber
 FROM Materials.Material
 WHERE MaterialName = @materialName);
 
 INSERT INTO Materials.MaterialNumber
-    (MaterialNumber, NameId,  BatchManaged, RequiresProcessOrder, UnitOfIssue, IsRawMaterial)
-VALUES(@materialNumber, @nameId,  @batchManaged, @requiresProcessOrder, @unitOfIssue, @isRawMaterial);
+    (MaterialNumber, ParentMaterialNumber,  BatchManaged, RequiresProcessOrder, UnitOfIssue, IsRawMaterial)
+VALUES(@materialNumber, @parentMaterialNumber,  @batchManaged, @requiresProcessOrder, @unitOfIssue, @isRawMaterial);
 
-DECLARE @vendorId AS INT
-IF EXISTS(SELECT VendorId
+IF NOT EXISTS(SELECT VendorName
 FROM Vendors.Vendor
 WHERE VendorName = @vendorName)
-BEGIN
-    SET @vendorId =(SELECT VendorId
-    FROM Vendors.Vendor
-    WHERE VendorName = @vendorName);
-END
-ELSE
+
 BEGIN
     INSERT INTO Vendors.Vendor
         (VendorName)
     VALUES(@vendorName);
-
-    SET @vendorId =(SELECT vendorId
-    FROM Vendors.Vendor
-    WHERE vendorName = @vendorName);
 END
 
 DECLARE @sequenceId AS INT
@@ -61,8 +51,8 @@ FROM Distillation.ProductNumberSequence
 WHERE sequenceId = @sequenceId);
 
 INSERT INTO Materials.MaterialId
-    (materialNumber, vendorId,sequenceId, currentSequenceId)
-VALUES(@materialNumber, @vendorId, @sequenceId, @currentSequenceId);
+    (MaterialNumber, VendorName, SequenceId, CurrentSequenceId)
+VALUES(@materialNumber, @vendorName, @sequenceId, @currentSequenceId);
 COMMIT;
 
 END TRY
