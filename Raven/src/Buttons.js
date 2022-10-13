@@ -3,15 +3,23 @@ import {Pressable, StyleSheet, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const Buttons = props => {
+  const routeName = props.name;
+  let path;
+
+  if (routeName !== 'Reports') {
+    path = 'MaterialChoice';
+  } else {
+    path = routeName;
+  }
   const navigation = useNavigation();
   return (
     <Pressable
-      onPress={() => navigation.navigate(props)}
+      onPress={() => navigation.navigate(path, {otherParam: routeName})}
       style={({pressed}) => [
         {backgroundColor: pressed ? '#4294b8' : '#3c545e'},
         styles.button,
       ]}>
-      <Text style={styles.text}>{props.name}</Text>
+      <Text style={styles.text}>{routeName}</Text>
     </Pressable>
   );
 };

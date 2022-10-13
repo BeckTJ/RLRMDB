@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using RavenAPI.Services;
+using RavenAPI.Data;
 using RavenAPI.Models;
+using RavenAPI.DTO;
 
 namespace RavenAPI.Controllers;
 
@@ -8,18 +10,19 @@ namespace RavenAPI.Controllers;
 [Route("[controller]")]
 public class MaterialController : ControllerBase
 {
+
     public MaterialController()
     {
 
     }
     // GET all action
     [HttpGet]
-    public ActionResult<List<Material>> GetAll() =>
-        MaterialServices.GetAll();
+    public ActionResult<List<MaterialDTO>> GetAll() => MaterialServices.GetAll();
+
 
     // GET by Id action
     [HttpGet("(id)")]
-    public ActionResult<Material> Get(int id)
+    public ActionResult<MaterialDTO> Get(int id)
     {
         var material = MaterialServices.Get(id);
 

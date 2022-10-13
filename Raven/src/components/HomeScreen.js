@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
-import Buttons from './Buttons';
+import Buttons from '../Buttons';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen({navigation, route}) {
   const titles = ['Raw Material', 'Run Log', 'Sample', 'Reports'];
   const listtitle = titles.map((title, index) => (
     <Buttons key={index} name={title} />

@@ -1,10 +1,13 @@
 FROM tjbeck/mssql_server
 
-WORKDIR /src
+RUN mkdir -p /usr/raven
+WORKDIR /usr/raven
 
-COPY ../RLRMDB/BuildDatabase/CreateDatabase/buildDatabase.sql buildDatabase.sql
-COPY ../RLRMDB/BuildDatabase/Procedures/udpInsertMaterialsFromCSV.sql udpInsertMaterialsFromCSV.sql
+COPY ../../RavenDB/BuildDatabase/CreateDatabase /usr/raven/
+COPY ../../RavenDB/DataFiles/BuildFiles /usr/raven/
 
-ENV sa_password=FR*@ger12
-ENV ACCEPT_EULA=Y
+RUN chmod +x /usr/work/import-data.sh
 
+EXPOSE 1433
+
+CMD /bin/bash ./entrypoint.sh

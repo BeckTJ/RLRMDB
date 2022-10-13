@@ -1,22 +1,28 @@
 using RavenAPI.Models;
 using RavenAPI.Data;
-using System.Linq;
+using RavenAPI.DTO;
 
 namespace RavenAPI.Services;
 public class MaterialServices
 {
     static RavenDBContext context = new RavenDBContext();
-    static List<Material> Materials { get; } = (from Material in context.Materials
-                                                select Material).ToList();
-    public static List<Material> GetAll() => Materials;
 
-    public static Material Get(int id) => Materials.FirstOrDefault(m => m.ParentMaterialNumber == id);
+    static List<MaterialDTO> Materials { get; } = context.Materials
+     .Select(m => new MaterialDTO
+     {
+         materialNumber = m.ParentMaterialNumber,
+         materialName = m.MaterialNameAbreviation
+     })
+        .ToList();
+    static public List<MaterialDTO> GetAll() => Materials;
 
-    public static void Add(Material material)
+    static public MaterialDTO Get(int id) => Materials.FirstOrDefault(m => m.materialNumber == id);
+
+    static public void Add(Material material)
     {
 
     }
-    public static void Delete(int id)
+    static public void Delete(int id)
     {
 
     }
