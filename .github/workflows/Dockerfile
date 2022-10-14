@@ -5,8 +5,8 @@ WORKDIR /usr/raven
 
 COPY ../../RavenDB/BuildDatabase/CreateDatabase /usr/raven/
 COPY ../../RavenDB/DataFiles/BuildFiles /usr/raven/
-
-RUN chmod +x /usr/work/import-data.sh
+COPY --chmod=765 ../../entrypoint.sh /usr/raven/
+COPY --chmod=765 ../../import-data.sh /usr/raven/
 
 EXPOSE 1433
 
