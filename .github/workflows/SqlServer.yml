@@ -13,4 +13,4 @@ jobs:
       - name: Build the Docker image
       - image: DockerFile
 
-          run: docker build . 
+          run: docker build -t mssql:dev --file ./Dockerfile 
