@@ -30,9 +30,10 @@ CREATE TABLE Engineering.SystemNomenclature(
     Nomenclature VARCHAR(50) PRIMARY KEY
 )
 
-CREATE TABLE Engineering.Indicator(
-    IndicatorAbreviation VARCHAR(3),
-    IndicatorType VARCHAR(25)
+CREATE TABLE Engineering.SystemIndicator(
+    --IndicatorAbreviation VARCHAR(3),
+    --IndicatorNomenclature VARCHAR(25),
+    IndicatorType VARCHAR(50)
 )
 
 CREATE TABLE Distillation.AlphabeticDate
@@ -69,7 +70,7 @@ CREATE TABLE Distillation.ProductNumberSequence
 
 CREATE TABLE Materials.Material
 (
-    ParentMaterialNumber INT PRIMARY KEY,
+    MaterialNumber INT PRIMARY KEY,
     MaterialName VARCHAR(50) NOT NULL,
     MaterialNameAbreviation VARCHAR(15),
     PermitNumber VARCHAR(25),
@@ -91,14 +92,15 @@ CREATE NONCLUSTERED INDEX IX_Material_NameAbreviation
 ON Materials.Material(MaterialNameAbreviation ASC)
 GO
 
-CREATE TABLE Engineering.IndicatorSetPoints(
-    SystemId INT PRIMARY KEY IDENTITY,
-    ParentMaterialNumber INT FOREIGN KEY REFERENCES Materials.Material,
-    Nomenclature VARCHAR(50) FOREIGN KEY REFERENCES Engineering.SystemNomenclature,
+CREATE TABLE Engineering.IndicatorSetPoint(
+    SystemId INT PRIMARY KEY IDENTITY(1,1),
+    IndicatorType VARCHAR(50),
+    IsRequired BIT,
+    MaterialNumber INT NOT NULL FOREIGN KEY REFERENCES Materials.Material,
+    Nomenclature VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Engineering.SystemNomenclature,
     Indicator VARCHAR(10),
-    SetPointLow DECIMAL(6,3),
-    SetPointHigh DECIMAL(6,3),
-    Variance DECIMAL(6,3),
+    SetPoint DECIMAL(6,2),
+    Variance DECIMAL(6,2),
 )
 
 CREATE TABLE QualityControl.SampleSubmit
@@ -227,9 +229,5 @@ CREATE TABLE Distillation.ProductRun
     PrefractionLevel INT,
     ReboilerLevel INT,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee,
-    --PressureId INT FOREIGN KEY REFERENCES Distillation.PressureAtRunTime,
-    --TemperatureId INT FOREIGN KEY REFERENCES Distillation.TemperatureAtRunTime,
-    --ProductId INT FOREIGN KEY REFERENCES Distillation.Production,
-    --CheckID INT FOREIGN KEY REFERENCES Distillation.PreStartChecks
 )
 GO

@@ -6,13 +6,11 @@ Create Table #tempSystemTbl(
     MaterialName VARCHAR(25),
     Nomenclature VARCHAR(50),
     Indicator VARCHAR(10),
-    SetPointChar VARCHAR(10),
-    SetPointLow DECIMAL(6,2),
-    SetPointHigh DECIMAL(6,2),
+    SetPoint DECIMAL(6,2),
     Variance DECIMAL(6,2)
 );
 
-BULK INSERT #tempSystemTbl FROM '../../tmp/SystemData.csv'
+BULK INSERT #tempSystemTbl FROM '..\..\tmp\SystemData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -26,11 +24,10 @@ BEGIN TRAN
         INSERT INTO Engineering.SystemNomenclature(Nomenclature)
         SELECT DISTINCT Nomenclature FROM #tempSystemTbl
 
-        INSERT INTO Engineering.IndicatorSetPoints(MaterialNumber,Nomenclature,Indicator,SetPointChar,SetPointLow,SetPointHigh,Variance)
+        INSERT INTO Engineering.IndicatorSetPoints(ParentMaterialNumber,Nomenclature,Indicator,SetPointLow,SetPointHigh,Variance)
         SELECT (SELECT ParentMaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempSystemTbl.MaterialName),
             (SELECT Nomenclature FROM Engineering.SystemNomenclature WHERE Nomenclature = #tempSystemTbl.Nomenclature),
             Indicator,
-            SetPointChar,
             SetPointLow,
             SetPointHigh,
             Variance
@@ -39,6 +36,7 @@ BEGIN TRAN
         COMMIT TRAN;
     END TRY
     BEGIN CATCH
+        THROW;
         ROLLBACK;
     END CATCH
 END

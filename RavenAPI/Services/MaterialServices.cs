@@ -10,19 +10,20 @@ public class MaterialServices
     static List<MaterialDTO> Materials { get; } = context.Materials
      .Select(m => new MaterialDTO
      {
-         materialNumber = m.ParentMaterialNumber,
-         materialName = m.MaterialNameAbreviation
+         materialNumber = m.MaterialNumber,
+         materialName = m.MaterialNameAbreviation,
+         material = m.MaterialName,
      })
         .ToList();
-    static public List<MaterialDTO> GetAll() => Materials;
+    public static List<MaterialDTO> GetAll() => Materials;
 
-    static public MaterialDTO Get(int id) => Materials.FirstOrDefault(m => m.materialNumber == id);
+    public static MaterialDTO Get(int id) => Materials.FirstOrDefault(m => m.materialNumber == id);
 
-    static public void Add(Material material)
+    static void Add(Material material)
     {
 
     }
-    static public void Delete(int id)
+    static void Delete(int id)
     {
 
     }

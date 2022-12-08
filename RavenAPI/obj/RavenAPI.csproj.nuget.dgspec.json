@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TBeck\\workdb\\ravenapi\\RavenAPI.csproj": {}
+    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TBeck\\workdb\\ravenapi\\RavenAPI.csproj": {
+    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\workdb\\ravenapi\\RavenAPI.csproj",
+        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI.csproj",
         "projectName": "RavenAPI",
-        "projectPath": "C:\\Users\\TBeck\\workdb\\ravenapi\\RavenAPI.csproj",
+        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI.csproj",
         "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\workdb\\ravenapi\\obj\\",
+        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -49,6 +49,10 @@
             "Microsoft.Entityframeworkcore.SqlServer": {
               "target": "Package",
               "version": "[6.0.9, )"
+            },
+            "Microsoft.Extensions.Configuration.UserSecrets": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

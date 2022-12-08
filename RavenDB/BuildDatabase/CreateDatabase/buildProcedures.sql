@@ -46,11 +46,11 @@ AS
 BEGIN TRAN MaterialInsert
 BEGIN TRY 
 INSERT INTO Materials.Material
-    (MaterialName, MaterialNameAbreviation, PermitNumber, RawMaterialCode, ProductCode, CarbonDrumRequired, CarbonDrumDaysAllowed, CarbonDrumWeightAllowed)
-VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
+    (MaterialNumber,MaterialName, MaterialNameAbreviation, PermitNumber, RawMaterialCode, ProductCode, CarbonDrumRequired, CarbonDrumDaysAllowed, CarbonDrumWeightAllowed)
+VALUES(@materialNumber,@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
 
 DECLARE @parentMaterialNumber AS INT
-SET @parentMaterialNumber = (SELECT ParentMaterialNumber
+SET @parentMaterialNumber = (SELECT MaterialNumber
 FROM Materials.Material
 WHERE MaterialName = @materialName);
 
@@ -201,7 +201,7 @@ BEGIN
     SELECT CONCAT(FORMAT(MaterialId.CurrentSequenceId,'000'), Material.RawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
     FROM Materials.MaterialNumber
         JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
-        JOIN Materials.Material ON Material.ParentMaterialNumber = MaterialNumber.ParentMaterialNumber
+        JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
         JOIN Vendors.Vendor ON Vendor.VendorName = MaterialId.VendorName
     WHERE MaterialNumber.MaterialNumber = @materialNumber
         AND Vendor.VendorName = @vendorName)
@@ -254,16 +254,16 @@ AS
 BEGIN
 
 Create Table #tempSystemTbl(
+    IndicatorType VARCHAR(50),
+    IsRequired BIT,
     MaterialName VARCHAR(25),
     Nomenclature VARCHAR(50),
     Indicator VARCHAR(10),
-    SetPointChar VARCHAR(10),
-    SetPointLow DECIMAL(6,2),
-    SetPointHigh DECIMAL(6,2),
+    SetPoint DECIMAL(6,2),
     Variance DECIMAL(6,2)
 );
 
-BULK INSERT #tempSystemTbl FROM '../../tmp/SystemData.csv'
+BULK INSERT #tempSystemTbl FROM '..\..\usr\dbfiles\BuildFiles\SystemData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -273,17 +273,20 @@ BULK INSERT #tempSystemTbl FROM '../../tmp/SystemData.csv'
     );
 BEGIN TRAN
     BEGIN TRY
+
+        INSERT INTO Engineering.SystemIndicator(IndicatorType)
+        SELECT DISTINCT IndicatorType FROM #tempSystemTbl
     
         INSERT INTO Engineering.SystemNomenclature(Nomenclature)
         SELECT DISTINCT Nomenclature FROM #tempSystemTbl
 
-        INSERT INTO Engineering.IndicatorSetPoints(MaterialNumber,Nomenclature,Indicator,SetPointChar,SetPointLow,SetPointHigh,Variance)
-        SELECT (SELECT ParentMaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempSystemTbl.MaterialName),
+        INSERT INTO Engineering.IndicatorSetPoint(IndicatorType,IsRequired,MaterialNumber,Nomenclature,Indicator,SetPoint,Variance)
+        SELECT (SELECT IndicatorType FROM Engineering.SystemIndicator WHERE IndicatorType = #tempSystemTbl.IndicatorType),
+            IsRequired, 
+            (SELECT MaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempSystemTbl.MaterialName),
             (SELECT Nomenclature FROM Engineering.SystemNomenclature WHERE Nomenclature = #tempSystemTbl.Nomenclature),
             Indicator,
-            SetPointChar,
-            SetPointLow,
-            SetPointHigh,
+            SetPoint,
             Variance
          FROM #tempSystemTbl
 
@@ -319,7 +322,7 @@ CREATE TABLE #tempTbl(
     Vendor VARCHAR(25),
     SequenceId INT);
 
-BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
+BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -330,13 +333,13 @@ BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
     BEGIN TRAN 
         BEGIN TRY
             
-            INSERT INTO Materials.Material(ParentMaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
+            INSERT INTO Materials.Material(MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
             SELECT TOP(6) MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName)
             
             INSERT INTO Materials.MaterialNumber(MaterialNumber,ParentMaterialNumber,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial)
-            SELECT MaterialNumber,(Select ParentMaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
+            SELECT MaterialNumber,(Select MaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.MaterialNumber WHERE MaterialNumber.MaterialNumber = #tempTbl.MaterialNumber)
 

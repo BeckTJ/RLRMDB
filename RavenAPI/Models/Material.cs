@@ -11,7 +11,7 @@ namespace RavenAPI.Models
             MaterialNumbers = new HashSet<MaterialNumber>();
         }
 
-        public int ParentMaterialNumber { get; set; }
+        public int MaterialNumber { get; set; }
         public string MaterialName { get; set; } = null!;
         public string? MaterialNameAbreviation { get; set; }
         public string? PermitNumber { get; set; }
