@@ -1,4 +1,4 @@
-CREATE OR ALTER FUNCTION Distillation.UpdateProductId(@id VARCHAR(6))
+CREATE OR ALTER FUNCTION Distillation.UpdateProductId(@id VARCHAR(10))
 RETURNS VARCHAR(10)
 AS
 BEGIN

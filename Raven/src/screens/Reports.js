@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import LargeButton from './components/LargeButton';
+import LargeButton from '../components/LargeButton';
 
 export default Reports = (props, {navigation, route}) => {
   return (

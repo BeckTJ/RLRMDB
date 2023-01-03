@@ -1,26 +1,34 @@
 import {NavigationHelpersContext} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import ajax from './components/ajax';
+import ajax from '../ajax';
 
 export default MaterialSelection = (props, {navigation, route}) => {
   const [material, setMaterial] = useState([]);
+  const [option, setOption] = useState();
   const distillationOption = props.route.params.data;
-  const option = props.route.params.option;
 
   useEffect(() => {
     async function getMaterial() {
       const materialList = await ajax.fetchMaterial();
       return setMaterial(await materialList);
     }
+    setOption(distillationOption);
     getMaterial();
   }, []);
+
+  handlePress = selection => {
+    props.navigation.push('Product Information', {
+      choice: option,
+      data: selection,
+    });
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.title}>
         <Text style={styles.text}>Distillation</Text>
-        <Text style={styles.text}>{distillationOption.name}</Text>
+        <Text style={styles.text}>{distillationOption}</Text>
       </View>
       <FlatList
         numColumns={2}
@@ -28,12 +36,11 @@ export default MaterialSelection = (props, {navigation, route}) => {
         ItemSeparatorComponent={<View style={{margin: '5%'}} />}
         style={styles.buttons}
         data={material}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <LargeButton
+            onPress={() => handlePress(item)}
             key={item.materialNumber}
             name={item.materialName}
-            currentOption={'Material Selection'}
-            currentRoute={distillationOption}
           />
         )}
       />

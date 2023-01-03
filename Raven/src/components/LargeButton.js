@@ -3,34 +3,9 @@ import React, {useEffect, useState} from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
 
 export default LargeButton = props => {
-  const [path, setPath] = useState();
-  const navigation = useNavigation();
-  const option = props.currentOption;
-  const currentPath = props.currentRoute;
-
-  useEffect(() => {
-    setPath(props);
-  });
-
-  handleHomeScreenPress = (selection, path) => {
-    if (selection === 'Reports') {
-      navigation.navigate(selection);
-    } else {
-      navigation.navigate('Material Selection', {data: path});
-    }
-  };
-
-  handlePress = (selection, path) => {
-    navigation.navigate(selection, {data: path});
-  };
-
   return (
     <Pressable
-      onPress={() =>
-        option !== 'Material Selection'
-          ? handleHomeScreenPress(props, path)
-          : handlePress(currentPath, path)
-      }
+      onPress={props.onPress}
       style={({pressed}) => [
         {backgroundColor: pressed ? '#4294b8' : '#3c545e'},
         styles.button,

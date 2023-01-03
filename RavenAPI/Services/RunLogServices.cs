@@ -1,6 +1,6 @@
-using RavenAPI.Models;
 using RavenAPI.Data;
 using RavenAPI.DTO;
+using RavenAPI.src;
 
 namespace RavenAPI.Services;
 
@@ -8,17 +8,13 @@ public class RunLogServices
 {
     static RavenDBContext context = new RavenDBContext();
 
-    static List<RunLogDTO> RunLog { get; } = context.IndicatorSetPoints
-    .Select(i => new RunLogDTO
-    {
-        materialNumber = i.MaterialNumber,
-        nomenclature = i.Nomenclature,
-        indicator = i.Indicator,
-        setPoint = i.SetPoint,
-        variance = i.Variance,
-    }).ToList();
+    static List<RunLogDTO> RunLog { get; } = MaterialRunLog.GetMaterialRunLog();
 
     public static List<RunLogDTO> GetAll() => RunLog;
 
-    public static List<RunLogDTO> Get(int materialNumber) => RunLog.Where(i => i.materialNumber == materialNumber).ToList();
+    public static List<string> GetHourlyRead(int materialNumber) => MaterialRunLog.GetHourlyReads(materialNumber);
+
+    public static List<string> GetPreStart(int materialNumber) => MaterialRunLog.GetPreStartCheck(materialNumber);
+
+    public static List<List<String>> GetRunLog(int materialNumber) => MaterialRunLog.GetRunLog(materialNumber);
 }

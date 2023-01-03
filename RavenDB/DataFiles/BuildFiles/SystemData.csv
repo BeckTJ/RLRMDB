@@ -21,6 +21,9 @@ Temperature,1,Beer,Condenser Skin,TI-113,27,20
 Temperature,1,Beer,Heating Top,TI-116,170,20
 Temperature,1,Beer,Reboiler Zone 1,TI-119,220,20
 Temperature,1,Beer,Reboiler Zone 2,TI-118,210,20
+Levels,1,Beer,Prefraction Level,,,
+Levels,1,Beer,Reboiler Level,,,
+Levels,1,Beer,Reciever Level,,,
 Pressure,0,Fruit Juice,Vent Pressure,PI-116,1,-1
 Pressure,0,Fruit Juice,Aftercooler Coolant Pressure,PI-106,25,5
 Pressure,0,Fruit Juice,Aftercooler Flow Rate,FI-108,3,1
@@ -40,6 +43,12 @@ Pressure,0,Fruit Juice,Receiver Purge,FIC-113,1,0.5
 Pressure,0,Fruit Juice,Receiver Sparge,FIC-109,2,1
 Pressure,0,Fruit Juice,System Differential Pressure,FIC-115,1,0.5
 Pressure,0,Fruit Juice,System Purge,FIC-102,10,2
+Levels,1,Fruit Juice,Reboiler Level,LIT-350,,
+Levels,0,Fruit Juice,Prefraction Level,LIT-450,,
+Levels,1,Fruit Juice,Reciever A,LIT-451,,
+Levels,1,Fruit Juice,Reciever C,LIT-452,,
+Levels,1,Fruit Juice,Reciever D,LIT-453,,
+Levels,0,Fruit Juice,Heated Tank ,LIT-751,,
 Pressure,1,Lemonade,Vent Pressure,PI-900,1,-1
 Pressure,1,Lemonade,Aftercooler Flow Rate,FI-901,2,0.2
 Pressure,1,Lemonade,Condenser Flow Rate,FRI-900,8,1
@@ -52,7 +61,10 @@ Pressure,1,Lemonade,Secondary Container Purge,FIC-903,25,1
 Pressure,1,Lemonade,System Differential Pressure,DPIT-900,30,3
 Pressure,1,Lemonade,System Differential Pressure Purge,DPIT-900A,0.15,0.5
 Pressure,1,Lemonade,System Purge,FIC-904,13,1
-Temperature,1,Lemonade,Reflux Splitter ,TE-913,50,2
+Level Sense Purge,1,Lemonade,Reboiler,LIT-300A,0.5,0.5
+Level Sense Purge,1,Lemonade,Prefraction,LIT-400A,0.5,0.5
+Level Sense Purge,1,Lemonade,Column dp,DPIT-300A,0.5,0.5
+Temperature,1,Lemonade,Reflux Splitter ,DPIT-300A,50,2
 Temperature,1,Lemonade,Column Average,Avg TE-901-903,60,10
 Temperature,1,Lemonade,Column Bottom,TE-901,62,10
 Temperature,1,Lemonade,Column Middle ,TE-902,61,10
@@ -67,6 +79,9 @@ Temperature,1,Lemonade,Reboiler Zone 6,TE-912,120,10
 Temperature,1,Lemonade,Aftercooler Outlet,TE-900,25,20
 Temperature,1,Lemonade,Condenser Outlet ,TE-904,30,20
 Temperature,1,Lemonade,Condeser Top,TE-905,45,20
+Levels,1,Lemonade,Prefraction Level,LIT-901,,
+Levels,1,Lemonade,Reboiler Level,,,
+Levels,1,Lemonade,Reboiler Level,LIT-900,,
 Pressure,1,Liquor,Still Vacuum,PT-607,1000,-1
 Pressure,1,Liquor,Motor Speed,SI-608,222.5,22.5
 Pressure,1,Liquor,RM Flow PV Process Value,FIC-601,1.75,1.25
@@ -81,12 +96,18 @@ Temperature,1,Liquor,Condenser Inlet,TE-604,3.5,1.5
 Temperature,1,Liquor,Condenser Outlet,TE-605,7,3
 Temperature,1,Liquor,Top Column,TE-609,30,10
 Temperature,1,Liquor,Vacuum Pump ,PI-606,7,3
+Levels,1,Liquor,Prefraction Level,LT-618,,
+Levels,1,Liquor,Receiver A,LT-615,,
+Levels,1,Liquor,Receiver B,LT-616,,
+Levels,1,Liquor,Receiver C,LT-617,,
+Levels,1,Liquor,Rework,LT-620,,
+Levels,1,Liquor,Heels,LT-619,,
 Pressure,0,Milk,Vent Pressure,PI-420,1,-1
 Pressure,0,Milk,Aftercooler Coolant Pressure,PI-419,15,4
 Pressure,0,Milk,Aftercooler Flow Rate,FI-401,1.2,0.5
 Pressure,0,Milk,Condenser Coolant Pressure,PI-418,9,4
 Pressure,0,Milk,Condenser Flow Rate,FRI-400,1.2,0.5
-Pressure,0,Milk,Condenser Purge,FIC-403,20,2
+Pre-Start,1,Milk,Condenser Purge,FIC-403,20,2
 Pressure,0,Milk,Feed/Recovery Drum Purge,FIC-411,6,1
 Pressure,0,Milk,Heated Coolant Tank Purge,FIC-417,6,1
 Pressure,0,Milk,Nitrogen to Solenoids,PCV-601A,75,
@@ -104,6 +125,9 @@ Pressure,0,Milk,Receiver Flange Purge C,FIC-410,6,1
 Pressure,0,Milk,Receiver Sparge,FIC-407,12,
 Pressure,0,Milk,Secondary Container Purge,PI-421,,
 Pressure,0,Milk,System Purge,FIC-402,17.5,2.5
+Levels,0,Milk,Cold Tank Level (T-600),,,
+Levels,0,Milk,Hot Tank Level (T-500),,,
+Levels,1,Milk,Receiver Level,,,
 Pressure,1,Wine,Reboiler Pressure,PI-2,1,-1
 Pressure,1,Wine,Condeser Flow Rate,FI-1,0.5,0.5
 Pressure,1,Wine,High Purity Vent Purge,FIC-4,25,2
@@ -121,27 +145,27 @@ Temperature,1,Wine,Top Column,TI-13,105,10
 Temperature Controller,1,Wine,Zone 1 Controller,TIC-5,210,10
 Temperature Controller,1,Wine,Zone 2 Controller,TIC-6,205,10
 Temperature Controller,1,Wine,Zone 3 Controller,TIC7,187,10
-Levels,1,Beer,Prefraction Level,,,
-Levels,1,Beer,Reboiler Level,,,
-Levels,1,Beer,Reciever Level,,,
-Levels,1,Lemonade,Prefraction Level,LIT-901,,
-Levels,1,Lemonade,Reboiler Level,,,
-Levels,1,Lemonade,Reboiler Level,LIT-900,,
-Levels,1,Liquor,Prefraction Level,LT-618,,
-Levels,0,Milk,Cold Tank Level (T-600),,,
-Levels,0,Milk,Hot Tank Level (T-500),,,
 Levels,1,Wine,Prefraction Level,,,
 Levels,1,Wine,Reboiler Level,,,
 Levels,1,Wine,Reciever Level,,,
-Levels,1,Liquor,Receiver A,LT-615,,
-Levels,1,Liquor,Receiver B,LT-616,,
-Levels,1,Liquor,Receiver C,LT-617,,
-Levels,1,Liquor,Rework,LT-620,,
-Levels,1,Liquor,Heels,LT-619,,
-Levels,1,Fruit Juice,Reboiler Level,LIT-350,,
-Levels,0,Fruit Juice,Prefraction Level,LIT-450,,
-Levels,1,Fruit Juice,Reciever A,LIT-451,,
-Levels,1,Fruit Juice,Reciever C,LIT-452,,
-Levels,1,Fruit Juice,Reciever D,LIT-453,,
-Levels,0,Fruit Juice,Heated Tank ,LIT-751,,
-Levels,1,Milk,Receiver Level,,,
+Pre Start,1,Beer,Reboiler skin temp,,75,-1
+Pre Start,1,Wine,Reboiler skin temp,,75,-1
+Pre Start,1,Fruit Juice,Reboiler skin temp,,75,-1
+Pre Start,1,Lemonade,Reboiler skin temp,,90,-1
+Pre Start,1,Milk,Reboiler skin temp,,90,-1
+Pre Start,1,Beer,Knock Out Pot Empty,,,
+Pre Start,1,Wine,Knock Out Pot Empty,,,
+Pre Start,1,Fruit Juice,Knock Out Pot Empty,,,
+Pre Start,1,Lemonade,Knock Out Pot Empty,,,
+Pre Start,1,Milk,Knock Out Pot Empty,,,
+Pre Start,1,Beer,Vacuum Pump Oil Level,,,
+Pre Start,1,Beer,Reboiler Purge Box Empty,,,
+Pre Start,1,Beer,Helium Cylinder Pressure,,,
+Pre Start,1,Beer,Helium Cylinder Flow Pressure,,,
+Pre Start,1,Beer,Chiller Isolation Valve Open,,,
+Pre Start,1,Milk,Containment Inspected,,,
+Pre Start,1,Wine,Aftercooler Coolant Pressure,PI-706,5,3
+Pre Start,1,Wine,Chiller Setting,,15,2
+Pre Start,1,Wine,Nitrogen to Condenser Purge,FIC-802,3,2
+Pre Start,1,Wine,Coolant Pressure,PI-705,17,2
+Pre Start,1,Wine,Nitrogen Flow,FIC-805,20,2

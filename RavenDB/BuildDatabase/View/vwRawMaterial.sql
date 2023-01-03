@@ -1,25 +1,22 @@
-CREATE OR ALTER VIEW Materials.RawMaterialLog
+CREATE OR ALTER VIEW Distillation.RawMaterialLog
 AS
 
-SELECT DateUsed AS 'Date',
+SELECT SampleSubmit.SampleDate AS 'Date',
     Vendor.VendorName AS 'Vendor', 
-    HumanResources.EmployeeInitials(Employee.EmployeeId)AS 'Operator',
     DrumLotNumber AS 'Drum ID',
     SapBatchNumber AS 'SAP Batch Number', 
-    VendorBatch.VendorBatchNumber AS 'Vendor Batch Number', 
+    -- VendorBatch.VendorBatchNumber AS 'Vendor Batch Number', 
     SampleSubmit.SampleSubmitNumber AS 'Sample Number',
     InspectionLotNumber AS 'Lot Number', 
     ContainerNumber AS 'Container Number', 
     CONCAT(DrumWeight,' ',UnitOfIssue) AS 'Weight', 
-    HumanResources.EmployeeInitials(SampleSubmit.EmployeeId) AS 'QC Operator',
     ApprovalDate AS 'Approval Date',
     ExperiationDate AS 'Experation Date',
     RejectedDate AS 'Rejected Date'
 
-FROM Materials.RawMaterial
-JOIN Materials.MaterialNumber ON RawMaterial.MaterialNumber = MaterialNumber.MaterialNumber
-JOIN Materials.Material ON MaterialNumber.NameId = Material.NameId
-JOIN Vendors.VendorBatch ON RawMaterial.VendorBatchId = VendorBatch.BatchId
-JOIN Vendors.Vendor ON VendorBatch.VendorId = Vendor.VendorId
+FROM Distillation.RawMaterial
+JOIN Materials.MaterialId ON RawMaterial.MaterialNumber = MaterialId.MaterialNumber
+JOIN Materials.MaterialNumber ON MaterialId.MaterialNumber = MaterialNumber.MaterialNumber
+JOIN Vendors.VendorBatch ON RawMaterial.VendorBatchNumber = VendorBatch.VendorBatchNumber
+JOIN Vendors.Vendor ON MaterialId.VendorName = Vendor.VendorName
 JOIN QualityControl.SampleSubmit ON RawMaterial.SampleSubmitNumber = SampleSubmit.SampleSubmitNumber
-JOIN HumanResources.Employee ON RawMaterial.EmployeeId = Employee.EmployeeId

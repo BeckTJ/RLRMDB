@@ -1,17 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import LargeButton from './components/LargeButton';
+import LargeButton from '../components/LargeButton';
 import MaterialSelection from './MaterialSelection';
 
 export default Distillation = ({navigation, route}) => {
-  const [path, setPath] = useState();
-
   const distillationOptions = [
     'Raw Material',
     'Run Log',
     'Sample Submit',
     'Reports',
   ];
+  handleHomeScreenPress = selection => {
+    if (selection === 'Reports') {
+      navigation.push(selection, {data: selection});
+    } else {
+      navigation.push('Material Selection', {data: selection});
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -25,7 +30,13 @@ export default Distillation = ({navigation, route}) => {
         columnWrapperStyle={{justifyContent: 'space-evenly'}}
         style={styles.buttons}
         data={distillationOptions}
-        renderItem={({item}) => <LargeButton key={item.index} name={item} />}
+        renderItem={({item}) => (
+          <LargeButton
+            onPress={() => handleHomeScreenPress(item)}
+            key={item.index}
+            name={item}
+          />
+        )}
       />
     </View>
   );

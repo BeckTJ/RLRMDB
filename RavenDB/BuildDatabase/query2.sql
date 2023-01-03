@@ -1,0 +1,3 @@
+select ProductId,ReceiverId,ProductLotNumber,MaterialNumber,ProductBatchNumber,ProcessOrder,Production.InspectionLotNumber,SampleSubmit.SampleSubmitNumber,SampleDate from Distillation.Production
+join QualityControl.SampleSubmit ON Production.SampleSubmitNumber = SampleSubmit.SampleSubmitNumber
+

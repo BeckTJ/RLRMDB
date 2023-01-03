@@ -80,10 +80,14 @@ CREATE TABLE Materials.Material
     CarbonDrumDaysAllowed INT,
     CarbonDrumWeightAllowed INT,
     CarbonDrumInstallDate DATE,
+    VacuumTrapRequired BIT DEFAULT(0) NOT NULL,
+    VacuumTrapInstallDate DATE,
+    VacuumTrapDaysAllowed INT,
     SpecificGravity DECIMAL(3,2),
     PrefractionRefluxRatio VARCHAR(5),
     CollectRefluxRatio VARCHAR(5),
     NumberOfRuns INT,
+    HeelPumpFrequency INT,
     --SystemId INT FOREIGN KEY REFERENCES SystemPressureSetPoint
 )
 GO
@@ -95,7 +99,7 @@ GO
 CREATE TABLE Engineering.IndicatorSetPoint(
     SystemId INT PRIMARY KEY IDENTITY(1,1),
     IndicatorType VARCHAR(50),
-    IsRequired BIT,
+    IsRequired BIT NOT NULL DEFAULT(0),
     MaterialNumber INT NOT NULL FOREIGN KEY REFERENCES Materials.Material,
     Nomenclature VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Engineering.SystemNomenclature,
     Indicator VARCHAR(10),
@@ -107,6 +111,7 @@ CREATE TABLE QualityControl.SampleSubmit
 (
     SampleSubmitNumber CHAR(8) PRIMARY KEY,
     InspectionLotNumber BIGINT,
+    SampleDate DATE,
     Rejected BIT,
     RejectedDate DATE,
     ApprovalDate DATE,
@@ -162,32 +167,8 @@ CREATE TABLE Distillation.RawMaterial
     ContainerNumber CHAR(7),
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
     VendorBatchNumber VARCHAR(25) FOREIGN KEY REFERENCES Vendors.VendorBatch,
-    DateUsed DATE NOT NULL,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
 
-)
-
-CREATE TABLE Distillation.PreStartChecks(
-    CheckID INT IDENTITY(1,1) PRIMARY KEY,
-    VacuumTrapInstallDate DATE,
-    ReboilerSkinTempBelowValue BIT,
-    KnockOutPotDrained BIT,
-    HeelsPumped BIT,
-    HeliumCylinderPSI INT,
-    HeliumFlowPSI INT,
-    CoolantLevel BIT,
-    CoolantPurgeSet BIT,
-    NitrogenFlowRate INT,
-    NitrogenPurge INT,
-    HeatingMantlePurgeSet INT,
-    NitrogenFlow INT,
-    AftercoolerPressure INT,
-    ChillerSetting INT,
-    NitrogenToCondenserPurge INT,
-    SecondaryPurgeSet BIT,
-    InspectLines BIT,
-    ControllerInitialSetBelowValue BIT,
-    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber
 )
 
 CREATE TABLE Distillation.Production
@@ -197,9 +178,9 @@ CREATE TABLE Distillation.Production
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
     ProductBatchNumber INT,
     ProcessOrder NUMERIC,
+    InspectionLotNumber BIGINT,
     ReceiverId INT FOREIGN KEY REFERENCES Distillation.Receiver,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
-    StartDate DATE,
 )
 CREATE NONCLUSTERED INDEX IX_Production_ProductLotNumber
 ON Distillation.Production(ProductLotNumber ASC)
@@ -217,17 +198,33 @@ CREATE TABLE Distillation.ProductRun
     DrumLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.RawMaterial,
     RawMaterialStartWeight INT,
     RawMaterialEndWeight INT,
-    TotalRawMaterialLoaded INT,
-    KOPotDrained BIT,
-    ReadingTime TIME,
-    SystemStatus VARCHAR(10),
-    VisualVerification BIT,
-    CollectRate INT,
-    RecieverLevel INT,
-    HeelsLevel INT,
-    HeelsPumped BIT,
-    PrefractionLevel INT,
-    ReboilerLevel INT,
+    RunStartDate DATE,
+    ProductID INT FOREIGN KEY REFERENCES Distillation.Production,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee,
 )
+
+CREATE TABLE Distillation.PreStartChecks(
+    CheckID INT IDENTITY(1,1) PRIMARY KEY,
+    ReboilerSkinTempBelowValue BIT,
+    KnockOutPotDrained BIT,
+    HeelsPumped BIT,
+    HeliumCylinderPSI INT,
+    HeliumFlowPSI INT,
+    CoolantLevel BIT,
+    CoolantPurgeSet BIT,
+    NitrogenFlowRate INT,
+    NitrogenPurge INT,
+    HeatingMantlePurgeSet INT,
+    NitrogenFlow INT,
+    AftercoolerPressure INT,
+    ChillerSetting INT,
+    NitrogenToCondenserPurge INT,
+    SecondaryPurgeSet BIT,
+    InspectLines BIT,
+    ControllerInitialSetBelowValue BIT,
+    RunId INT FOREIGN KEY REFERENCES Distillation.ProductRun,
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.Material
+)
+
+
 GO

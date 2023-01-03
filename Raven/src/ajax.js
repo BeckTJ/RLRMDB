@@ -14,7 +14,19 @@ export default {
   async fetchRunLog(materialNumber) {
     try {
       const response = await fetch(
-        apiHost + '/RunLog/(id)?materialNumber=' + materialNumber,
+        apiHost + '/RunLog/(HourlyRead)?materialNumber=' + materialNumber,
+      );
+      const responseJson = await response.json();
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  async fetchPreStart(materialNumber) {
+    try {
+      const response = await fetch(
+        apiHost + '/RunLog/(PreStart)?materialNumber=' + materialNumber,
       );
       const responseJson = await response.json();
       return responseJson;

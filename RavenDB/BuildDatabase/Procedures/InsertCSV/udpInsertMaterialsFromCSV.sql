@@ -11,6 +11,8 @@ CREATE TABLE #tempTbl(
     CarbonDrumRequired BIT,
     CarbonDrumWeight INT, 
     CarbonDrumDays INT,
+    VacuumTrapRequired BIT,
+    VacuumTrapDaysAllowed INT,
     SpecificGravity DECIMAL(3,2),
     PrefractionRefluxRatio VARCHAR(5),
     CollectRefluxRatio VARCHAR(5),
@@ -20,6 +22,7 @@ CREATE TABLE #tempTbl(
     UnitOfIssue VARCHAR(2),
     IsRawMaterial BIT,
     Vendor VARCHAR(25),
+    IsMPPS BIT,
     SequenceId INT);
 
 BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
@@ -33,19 +36,19 @@ BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
     BEGIN TRAN 
         BEGIN TRY
             
-            INSERT INTO Materials.Material(ParentMaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
+            INSERT INTO Materials.Material(MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
             SELECT TOP(6) MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,RawMaterialCode,ProductCode,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName)
             
             INSERT INTO Materials.MaterialNumber(MaterialNumber,ParentMaterialNumber,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial)
-            SELECT MaterialNumber,(Select ParentMaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
+            SELECT MaterialNumber,(Select MaterialNumber FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName),BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.MaterialNumber WHERE MaterialNumber.MaterialNumber = #tempTbl.MaterialNumber)
 
         
-            INSERT INTO Vendors.Vendor(VendorName)
-            SELECT DISTINCT Vendor
+            INSERT INTO Vendors.Vendor(VendorName,IsMPPS)
+            SELECT DISTINCT Vendor,IsMPPS
             FROM #tempTbl
             WHERE NOT EXISTS(Select * FROM Vendors.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
 

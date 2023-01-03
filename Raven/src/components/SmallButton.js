@@ -4,7 +4,7 @@ import {Text, StyleSheet, Pressable} from 'react-native';
 export default SmallButton = props => {
   return (
     <Pressable
-      onPress={handlePress}
+      onPress={props.onPress}
       style={({pressed}) => [
         {backgroundColor: pressed ? '#4294b8' : '#3c545e'},
         styles.button,
@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 50,
-    minHeight: 75,
+    minWidth: 150,
+    minHeight: 125,
     borderWidth: 2,
     borderRadius: 10,
     borderColor: 'blue',
