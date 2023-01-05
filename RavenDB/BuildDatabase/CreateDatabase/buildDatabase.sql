@@ -88,7 +88,6 @@ CREATE TABLE Materials.Material
     CollectRefluxRatio VARCHAR(5),
     NumberOfRuns INT,
     HeelPumpFrequency INT,
-    --SystemId INT FOREIGN KEY REFERENCES SystemPressureSetPoint
 )
 GO
 
@@ -154,7 +153,6 @@ CREATE TABLE Materials.MaterialId
     MaterialNumber INT,
     VendorName VARCHAR(25),
     SequenceId INT,
-    CurrentSequenceId INT
     PRIMARY KEY (MaterialNumber,VendorName)
 )
 
@@ -163,8 +161,9 @@ CREATE TABLE Distillation.RawMaterial
     DrumLotNumber VARCHAR(10) PRIMARY KEY,
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
     DrumWeight INT,
-    SapBatchNumber INT,
+    SapBatchNumber INT ,
     ContainerNumber CHAR(7),
+    InspectionLotNumber NUMERIC,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
     VendorBatchNumber VARCHAR(25) FOREIGN KEY REFERENCES Vendors.VendorBatch,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee

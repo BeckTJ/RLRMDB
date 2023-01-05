@@ -4,11 +4,11 @@ AFTER UPDATE
 AS
 
 IF(UPDATE(SampleSubmitNumber))
-BEGIN
-DECLARE @product VARCHAR(10)
-SET @product = (SELECT inserted.ProductLotNumber FROM inserted)
+    BEGIN
+    DECLARE @product VARCHAR(10)
+    SET @product = (SELECT inserted.ProductLotNumber FROM inserted)
 
-UPDATE Distillation.Production
-SET ProductLotNumber = Distillation.UpdateProductId(@product)
-WHERE ProductLotNumber = @product
-END
+    UPDATE Distillation.Production
+    SET ProductLotNumber = Distillation.UpdateProductId(@product)
+    WHERE ProductLotNumber = @product
+    END

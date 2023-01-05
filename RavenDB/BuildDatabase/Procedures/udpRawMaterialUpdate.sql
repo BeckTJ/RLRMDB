@@ -1,30 +1,34 @@
 
 CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     (@materialNumber AS INT,
-    @vendorName AS VARCHAR(25),
     @vendorBatchNumber AS VARCHAR(25) = NULL,
-    @drumWeight INT = NULL,
+    @inspectionLotNumber NUMERIC = NULL,
     @sapBatchNumber INT = NULL,
+    @sampleSubmitNumber CHAR(8) = NULL,
     @containerNumber CHAR(7) = NULL,
-    @quantity AS INT = 1
-)
-AS
-BEGIN TRAN EnterRawMaterial
-BEGIN TRY
+    @quantity AS INT = 1,
+    @drumWeight AS DECIMAL(6,2) = NULL
+    )
+    AS
+    BEGIN TRAN EnterRawMaterial
+    BEGIN TRY
 
-DECLARE @drumId AS CHAR(10)
-SET @drumId = (Distillation.setDrumId(@materialNumber, @vendorName));
+    DECLARE @vendor VARCHAR(50)
+    SET @vendor = (SELECT VendorName FROM Vendors.VendorBatch
+                    WHERE VendorBatchNumber = @vendorBatchNumber)
+                    
+    WHILE(@quantity > 0)
+        BEGIN
+        INSERT INTO Distillation.RawMaterial
+            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchNumber)
+        VALUES
+            (Distillation.SetDrumId(@materialNumber,@vendor), @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber)
 
-DECLARE @batchId AS INT
-SET @batchId = (SELECT BatchId FROM Vendors.VendorBatch WHERE VendorBatchNumber = @vendorBatchNumber);
-
-INSERT INTO Materials.RawMaterial
-    (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchId, DateUsed)
-VALUES
-    (@drumId, @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @batchId, GETDATE());
-
-COMMIT TRAN;
-END TRY
-BEGIN CATCH
-    ROLLBACK TRAN;
-END CATCH
+          SET @quantity=@quantity-1
+        END
+        
+    COMMIT TRAN;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRAN;
+    END CATCH

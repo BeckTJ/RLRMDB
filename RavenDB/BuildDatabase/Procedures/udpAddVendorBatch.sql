@@ -1,14 +1,11 @@
-CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(50))
+CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(50),@materialNumber INT, @qty INT = 1)
 AS
 BEGIN TRAN VendorBatch
 BEGIN TRY
-DECLARE @vendorId AS INT
-SET @vendorId = (SELECT vendorId 
-                    FROM Vendors.Vendor
-                    WHERE vendorName = @vendorName)
 
-INSERT INTO Vendors.VendorBatch(vendorId,VendorBatchNumber)
-VALUES(@vendorId,@batchNumber);
+    INSERT INTO Vendors.VendorBatch(VendorBatchNumber,VendorName,Quantity,MaterialNumber)
+    VALUES(@batchNumber,@vendorName, @qty, @materialNumber)
+
 COMMIT TRAN
 END TRY
 BEGIN CATCH

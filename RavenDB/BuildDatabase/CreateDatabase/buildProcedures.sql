@@ -12,20 +12,6 @@ VALUES (@vendorName, @isMpps);
 END
 GO
 
-CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(50))
-AS
-BEGIN TRAN VendorBatch
-BEGIN TRY
-
-INSERT INTO Vendors.VendorBatch(VendorName,VendorBatchNumber)
-VALUES(@vendorName,@batchNumber);
-COMMIT TRAN
-END TRY
-BEGIN CATCH
-    ROLLBACK TRAN
-END CATCH
-GO
-
 CREATE OR ALTER PROCEDURE Materials.MaterialInsert
     (@materialNumber AS INT,
     @materialName AS VARCHAR(50),
@@ -90,33 +76,56 @@ BEGIN CATCH
 END CATCH
 GO
 
+CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@materialNumber INT,
+@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(50), @qty INT = 1)
+AS
+BEGIN TRAN VendorBatch
+BEGIN TRY
+
+INSERT INTO Vendors.VendorBatch(VendorName,VendorBatchNumber,Quantity,MaterialNumber)
+VALUES(@vendorName,@batchNumber,@qty,@materialNumber);
+
+COMMIT TRAN
+END TRY
+BEGIN CATCH
+    ROLLBACK TRAN
+END CATCH 
+GO
+
 
 CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     (@materialNumber AS INT,
-    @vendorName AS VARCHAR(25),
-    @vendorBatchNumber AS VARCHAR(25),
-    @drumWeight INT = NULL,
+    @vendorBatchNumber AS VARCHAR(25) = NULL,
+    @inspectionLotNumber NUMERIC = NULL,
     @sapBatchNumber INT = NULL,
-    @containerNumber CHAR(7)=NULL,
-    @quantity AS INT = 1
-)
-AS
-BEGIN TRAN EnterRawMaterial
-BEGIN TRY
+    @sampleSubmitNumber CHAR(8) = NULL,
+    @containerNumber CHAR(7) = NULL,
+    @quantity AS INT = 1,
+    @drumWeight AS DECIMAL(6,2) = NULL
+    )
+    AS
+    BEGIN TRAN EnterRawMaterial
+    BEGIN TRY
 
-DECLARE @drumId AS CHAR(10)
-SET @drumId = (Distillation.setDrumId(@materialNumber, @vendorName));
+    DECLARE @vendor VARCHAR(50)
+    SET @vendor = (SELECT VendorName FROM Vendors.VendorBatch
+                    WHERE VendorBatchNumber = @vendorBatchNumber)
+                    
+    WHILE(@quantity > 0)
+        BEGIN
+        INSERT INTO Distillation.RawMaterial
+            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchNumber)
+        VALUES
+            (Distillation.SetDrumId(@materialNumber,@vendor), @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber)
 
-INSERT INTO Distillation.RawMaterial
-    (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchNumber)
-VALUES
-    (@drumId, @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber);
-
-COMMIT TRAN;
-END TRY
-BEGIN CATCH
-    ROLLBACK TRAN;
-END CATCH
+          SET @quantity=@quantity-1
+        END
+        
+    COMMIT TRAN;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRAN;
+    END CATCH
 GO
 
 --TRIGGERS
@@ -139,68 +148,63 @@ WHERE ProductLotNumber = @product
 END
 GO
 
-
 --FUNCTIONS
+
+--Sets Lot Number with date code.
 CREATE or ALTER FUNCTION Distillation.SetDrumId
-    (@materialNumber AS INT,
-    @vendorName AS CHAR(20))
+    (@materialNumber AS INT, @vendorName VARCHAR(50) = NULL)
     RETURNS CHAR(10) 
     AS 
 BEGIN
 
+    DECLARE @newDrumId INT
+    DECLARE @drumLotNumber AS VARCHAR(10)
     DECLARE @alphabeticDate AS CHAR(1)
+    DECLARE @drumId VARCHAR(10)
+    DECLARE @sequenceId INT
+
     SET @alphabeticDate = (SELECT AlphabeticCode
     FROM AlphabeticDate
     WHERE MonthNumber = MONTH(GETDATE()));
 
-    DECLARE @drumId AS CHAR(10)
-    SET @drumId =(
-    SELECT CONCAT(FORMAT(MaterialId.CurrentSequenceId,'000'), Material.RawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
-    FROM Materials.MaterialNumber
-        JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
-        JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
-        JOIN Vendors.Vendor ON Vendor.VendorName = MaterialId.VendorName
-    WHERE MaterialNumber.MaterialNumber = @materialNumber
-        AND Vendor.VendorName = @vendorName)
+    SET @drumId = (SELECT TOP(1) DrumLotNumber from Distillation.RawMaterial
+    WHERE materialnumber = @materialNumber
+    ORDER BY DrumLotNumber DESC)
 
-    RETURN @drumId
+    IF(@drumId != NULL)
+        BEGIN
+        IF (LEN(@drumId)=10 OR LEN(@drumId)=6)
+            BEGIN
+            SET @newDrumId = CAST(LEFT(@drumId,4)AS INT)+1
+            END
+        ELSE
+            BEGIN
+            SET @newDrumId = CAST(LEFT(@drumId,3)AS INT)+1
+            END
+
+        SET @drumLotNumber = (SELECT CONCAT(@newdrumId, Material.RawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
+                                FROM Materials.MaterialNumber
+                                    JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
+                                    JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
+                                WHERE MaterialNumber.MaterialNumber = @materialNumber)
+        END
+    ELSE
+        BEGIN
+        SET @sequenceId = (SELECT SequenceIdStart FROM Distillation.ProductNumberSequence 
+                            JOIN Materials.MaterialId ON ProductNumberSequence.SequenceId = MaterialId.SequenceId
+                            WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendorName)
+
+        SET @drumLotNumber = (SELECT CONCAT(@sequenceId, Material.RawMaterialCode,RIGHT(YEAR(GETDATE()),1),@alphabeticDate,FORMAT(GETDATE(),'dd')) AS 'Drum ID'
+        FROM Materials.MaterialNumber
+            JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
+            JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
+        WHERE MaterialNumber.MaterialNumber = @materialNumber)
+        END
+
+    RETURN @drumLotNumber
 END
-GO
-
-CREATE OR ALTER FUNCTION HumanResources.EmployeeInitials(@employeeId AS CHAR(7) = 'NA')
-RETURNS CHAR(2)
-AS
-BEGIN
-DECLARE @employeeInit AS CHAR(2)
-SET @employeeInit = (CONCAT(Left(1,(SELECT FirstName FROM HumanResources.Employee WHERE EmployeeId = @employeeId)),Left(1,(SELECT LastName FROM HumanResources.Employee WHERE EmployeeId = @employeeId))))
-
-RETURN @employeeInit;
-END
-GO
-
-CREATE OR ALTER FUNCTION Distillation.UpdateProductId(@id VARCHAR(10))
-RETURNS VARCHAR(10)
-AS
-BEGIN
-
-DECLARE @sampleDate DATE
-SET @sampleDate = (SELECT SampleDate FROM QualityControl.SampleSubmit
-                    JOIN Distillation.Production ON SampleSubmit.SampleSubmitNumber = Production.SampleSubmitNumber
-                    WHERE SampleSubmit.SampleSubmitNumber = (SELECT SampleSubmitNumber FROM Distillation.Production
-                    WHERE ProductLotNumber = @id))
-
-DECLARE @alphabeticDate AS CHAR(1)
-    SET @alphabeticDate = (SELECT AlphabeticCode
-    FROM AlphabeticDate
-    WHERE MonthNumber = MONTH(@SampleDate));
 
 
-DECLARE @productId AS VARCHAR(10)
-SET @productId = CONCAT(@id,RIGHT(YEAR(@sampleDate),1),@alphabeticDate, FORMAT(@sampleDate,'dd'))
-
-
-RETURN @productId
-END
 GO
 
 CREATE OR ALTER FUNCTION Materials.SpecificGravity(@materialName AS CHAR(20), @WeightLiters AS DECIMAL(5,2))
@@ -361,7 +365,7 @@ BULK INSERT #product FROM '..\..\usr\dbfiles\BuildFiles\ProductData.csv'
         BEGIN TRY
 
             INSERT INTO Distillation.Production(ProductLotNumber,MaterialNumber,ProductBatchNumber,ProcessOrder,ReceiverId,InspectionLotNumber)
-            SELECT Distillation.UpdateProductID(ProductLotNumber),MaterialNumber,ProductionBatchNumber,ProcessOrder,ReceiverId,InspectionLotNumber
+            SELECT ProductLotNumber,MaterialNumber,ProductionBatchNumber,ProcessOrder,ReceiverId,InspectionLotNumber
             FROM #product
 
             INSERT INTo QualityControl.SampleSubmit(SampleSubmitNumber,InspectionLotNumber,SampleDate)
