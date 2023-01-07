@@ -25,7 +25,7 @@ CREATE TABLE #tempTbl(
     IsMPPS BIT,
     SequenceId INT);
 
-BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
+BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -52,8 +52,8 @@ BULK INSERT #tempTbl FROM '..\..\tmp\MaterialData.csv'
             FROM #tempTbl
             WHERE NOT EXISTS(Select * FROM Vendors.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
 
-            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, CurrentSequenceId, SequenceId)
-            SELECT MaterialNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),SequenceId,(SELECT SequenceId FROM Distillation.ProductNumberSequence WHERE SequenceIdStart = #tempTbl.SequenceId)
+            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, SequenceId)
+            SELECT MaterialNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),SequenceId
             FROM #tempTbl
 
 

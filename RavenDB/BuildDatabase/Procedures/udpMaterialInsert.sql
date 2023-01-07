@@ -22,7 +22,7 @@ INSERT INTO Materials.Material
 VALUES(@materialName, @nameAbreviation, @permitNumber, @rawMaterialCode, @productCode, @carbonDrumRequired, @carbonDrumDaysAllowed, @carbonDrumWeightAllowed);
 
 DECLARE @parentMaterialNumber AS INT
-SET @parentMaterialNumber = (SELECT ParentMaterialNumber
+SET @parentMaterialNumber = (SELECT MaterialNumber
 FROM Materials.Material
 WHERE MaterialName = @materialName);
 
@@ -45,14 +45,9 @@ SET @sequenceId =(SELECT sequenceId
 FROM Distillation.ProductNumberSequence
 WHERE sequenceIdStart = @sequenceNumber);
 
-DECLARE @currentSequenceId AS INT
-SET @currentSequenceId =(SELECT sequenceIdStart
-FROM Distillation.ProductNumberSequence
-WHERE sequenceId = @sequenceId);
-
 INSERT INTO Materials.MaterialId
-    (MaterialNumber, VendorName, SequenceId, CurrentSequenceId)
-VALUES(@materialNumber, @vendorName, @sequenceId, @currentSequenceId);
+    (MaterialNumber, VendorName, SequenceId)
+VALUES(@materialNumber, @vendorName, @sequenceId);
 COMMIT;
 
 END TRY

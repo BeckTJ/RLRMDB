@@ -1,13 +1,15 @@
-CREATE or ALTER FUNCTION Distillation.SetDrumId (@materialNumber AS INT, @vendorName VARCHAR(50) = NULL, @sampleDate DATE = NULL)
-    RETURNS CHAR(10) 
-    AS 
-BEGIN
-
+    DECLARE @materialNumber int
+    declare @vendorName varchar(25)
+    declare @sampleDate DATE
     DECLARE @newDrumId INT
     DECLARE @drumLotNumber AS VARCHAR(10)
     DECLARE @alphabeticDate AS CHAR(1)
     DECLARE @drumId VARCHAR(10)
     DECLARE @sequenceId INT
+
+    set @materialNumber = 32716
+    set @vendorName = 'Liquor Store'
+    set @sampleDate = '2021-10-02'
 
     SET @alphabeticDate = (SELECT AlphabeticCode
     FROM Distillation.AlphabeticDate
@@ -55,5 +57,4 @@ BEGIN
                                 WHERE MaterialNumber.MaterialNumber = @materialNumber)
         END
 
-    RETURN @drumLotNumber
-END
+        select @drumLotNumber

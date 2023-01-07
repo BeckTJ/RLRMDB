@@ -12,7 +12,7 @@ CREATE TABLE #product(
     SampleDate DATE
 );
 
-BULK INSERT #product FROM '..\..\usr\dbfiles\BuildFiles\ProductData.csv'
+BULK INSERT #product FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,

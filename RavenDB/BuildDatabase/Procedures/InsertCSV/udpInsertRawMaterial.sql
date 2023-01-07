@@ -3,16 +3,17 @@ AS
 BEGIN
 
     CREATE TABLE #rawMaterial(
-        DrumLotNumber VARCHAR(10),
+        Id INT IDENTITY(1,1),
+        SampleDate DATE,
         MaterialNumber INT,
+        VendorBatchNumber VARCHAR(25),
         SapBatchNumber INT,
+        InspectionLotNumber NUMERIC,
         ContainerNumber CHAR(7),
         SampleSubmitNumber CHAR(8),
-        VendorBatchNumber VARCHAR(25),
-        SampleDate DATE,
-        ApprovalDate DATE,
-        RejectedDate DATE,
-        EmployeeId CHAR(7)
+        Quantity INT,
+        DrumWeight DECIMAL(6,2),
+
     )
 
     BULK INSERT #rawMaterial FROM '..\..\usr\dbfiles\BuildFiles\RawMaterialData.csv'
@@ -23,46 +24,37 @@ BEGIN
         ROWTERMINATOR = '\n',
         KEEPNULLS
     )
-    BEGIN TRAN
-        BEGIN TRY
 
-            DECLARE @rejected BIT
-            IF(SELECT RejectedDate FROM #rawMaterial)!= NULL
-                BEGIN
-                SET @rejected = 1
-                END
+            DECLARE @materialNumber INT
+            DECLARE @vendorBatchNumber VARCHAR(25)
+            DECLARE @inspectionLotNumber NUMERIC
+            DECLARE @sapBatchNumber INT
+            DECLARE @sampleSubmitNumber CHAR(8)
+            DECLARE @containerNumber CHAR(7)
+            DECLARE @numberOfDrums INT
+            DECLARE @drumWeight DECIMAL(6,2)
+            DECLARE @sampleDate DATE
+            DECLARE @rows INT
+            DECLARE @index INT
             
-            DECLARE @total INT
-            SET @total = (SELECT count(*) FROM #rawMaterial WHERE vendorbatchNumber = #rawMaterial.vendorBatchNumber)
+            SET @rows = (SELECT COUNT(*) FROM #rawMaterial)
+            SET @index = 1
 
-            INSERT INTO QualityControl.SampleSubmit(SampleSubmitNumber,SampleDate,Rejected,RejectedDate,ApprovalDate)
-            SELECT DISTINCT SampleSubmitNumber,SampleDate,@rejected,RejectedDate,ApprovalDate
-            FROM #rawMaterial
-            WHERE NOT EXISTS(SELECT * FROM QualityControl.SampleSubmit WHERE SampleSubmit.SampleSubmitNumber = #rawMaterial.SampleSubmitNumber)
-
-            IF(SELECT VendorBatchNumber FROM #rawMaterial WHERE VendorBatchNumber = #rawMaterial.VendorBatchNumber) != NULL
+            WHILE(@index <= @rows)
                 BEGIN
-                    INSERT INTO Vendors.VendorBatch(VendorBatchNumber,VendorName,Quantity,MaterialNumber)
-                    SELECT DISTINCT VendorBatchNumber,
-                        (SELECT Vendor.VendorName FROM Vendors.Vendor 
-                        JOIN Materials.MaterialId ON Vendor.VendorName = MaterialId.VendorName
-                        WHERE MaterialId.MaterialNumber = #rawMaterial.MaterialNumber),
-                        @total,
-                        MaterialNumber
-                    FROM #rawMaterial
-                    WHERE NOT EXISTS(SELECT * FROM Vendors.VendorBatch WHERE VendorBatch.VendorBatchNumber = #rawMaterial.VendorBatchNumber)
+                SET @materialNumber = (select materialnumber from #rawMaterial where id = @index)
+                SET @vendorBatchNumber = (select VendorBatchNumber from #rawMaterial where id = @index)
+                SET @inspectionLotNumber = (select InspectionLotNumber from #rawMaterial where id = @index)
+                SET @sapBatchNumber = (select SapBatchNumber from #rawMaterial where id = @index)
+                SET @sampleSubmitNumber = (select SampleSubmitNumber from #rawMaterial where id = @index)
+                SET @containerNumber = (select ContainerNumber from #rawMaterial where id = @index)
+                SET @numberOfDrums = (select Quantity from #rawMaterial where id = @index)
+                SET @drumWeight = (select drumWeight from #rawMaterial where id = @index)
+                SET @sampleDate = (select SampleDate from #rawMaterial where id = @index)
+
+                EXEC Distillation.SetRawMaterial @materialNumber, @vendorBatchNumber, @inspectionLotNumber, @sapBatchNumber, @sampleSubmitNumber, @containerNumber, @numberOfDrums, @drumWeight, @sampleDate
+                
+                SET @index += 1
                 END
-
-            INSERT INTO Distillation.RawMaterial(DrumLotNumber,MaterialNumber,SapBatchNumber,ContainerNumber,SampleSubmitNumber,VendorBatchNumber)
-            SELECT DrumLotNumber,MaterialNumber,SapBatchNumber, ContainerNumber,
-            (SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit WHERE SampleSubmit.SampleSubmitNumber = #rawMaterial.SampleSubmitNumber),
-            (SELECT VendorBatchNumber FROM Vendors.VendorBatch WHERE VendorBatch.VendorBatchNumber = #rawMaterial.VendorBatchNumber)
-            FROM #rawMaterial
-
-            COMMIT TRAN;
-        END TRY
-    BEGIN CATCH
-        THROW;
-        ROLLBACK;
-    END CATCH
+                
 END
