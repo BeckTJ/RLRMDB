@@ -101,7 +101,7 @@ CREATE TABLE Engineering.IndicatorSetPoint(
     IsRequired BIT NOT NULL DEFAULT(0),
     MaterialNumber INT NOT NULL FOREIGN KEY REFERENCES Materials.Material,
     Nomenclature VARCHAR(50) NOT NULL FOREIGN KEY REFERENCES Engineering.SystemNomenclature,
-    Indicator VARCHAR(10),
+    Indicator VARCHAR(25),
     SetPoint DECIMAL(6,2),
     Variance DECIMAL(6,2),
 )

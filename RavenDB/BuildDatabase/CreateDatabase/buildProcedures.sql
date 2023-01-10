@@ -15,18 +15,24 @@ GO
 CREATE OR ALTER PROCEDURE QualityControl.SubmitSample
     (@sampleNumber AS CHAR(8), @lotNumber AS NUMERIC, @sampleDate DATE)
 AS
-BEGIN TRAN SubmitSample
-BEGIN TRY
+
+DECLARE @id VARCHAR(10)
+DECLARE @productId VARCHAR(10)
+
+SET @id = (SELECT ProductLotNumber FROM Distillation.Production
+            WHERE InspectionLotNumber = @lotNumber)
+
+set @productId = Distillation.UpdateProductId(@id,@sampleDate)
 
 INSERT INTO QualityControl.SampleSubmit(SampleSubmitNumber, InspectionLotNumber, SampleDate)
 VALUES
     (@sampleNumber, @lotNumber, @sampleDate);
-    
-    COMMIT TRAN SubmitSample
-END TRY
-BEGIN CATCH
-    ROLLBACK TRAN
-END CATCH 
+
+UPDATE Distillation.Production
+SET SampleSubmitNumber = (SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit
+                            WHERE SampleSubmitNumber = @sampleNumber),
+    ProductLotNumber = @productId
+WHERE InspectionLotNumber = @lotNumber
 GO
 
 CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(25),@materialNumber INT, @qty INT = 1)
@@ -43,8 +49,6 @@ BEGIN CATCH
     ROLLBACK TRAN
 END CATCH
 GO
-
-
 
 CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     (@materialNumber AS INT,
@@ -103,29 +107,32 @@ AS
     EXEC Distillation.RawMaterialUpdate @materialNumber, @vendorBatchNumber,@inspectionLotNumber,@sapBatchNumber,@sampleSubmitNumber,@sampleDate,@containerNumber,@numberOfDrums,@drumWeight
 GO
 
---TRIGGERS
-CREATE OR ALTER TRIGGER Distillation.UpdateProductLotNumber
-ON Distillation.Production
-AFTER INSERT,UPDATE
-AS
-
-IF(UPDATE(SampleSubmitNumber))
-BEGIN
-DECLARE @product VARCHAR(10)
-SET @product = (SELECT top(1) inserted.ProductLotNumber FROM inserted)
-
-DECLARE @id INT
-SET @id = (SELECT ProductId From Distillation.Production WHERE ProductLotNumber = @product)
-
-UPDATE Distillation.Production
-SET ProductLotNumber = Distillation.UpdateProductId(@product)
-WHERE ProductLotNumber = @product
-END
-GO
-
 --FUNCTIONS
 
 --Sets Lot Number with date code.
+CREATE OR ALTER FUNCTION Distillation.UpdateProductId(@id VARCHAR(10),@sampleDate DATE = NULL)
+RETURNS VARCHAR(10)
+AS
+BEGIN
+
+IF @sampleDate = NULL
+    BEGIN
+    SET @sampleDate = GETDATE()
+    END
+
+DECLARE @alphabeticDate AS CHAR(1)
+    SET @alphabeticDate = (SELECT AlphabeticCode
+    FROM AlphabeticDate
+    WHERE MonthNumber = MONTH(@sampleDate));
+    
+DECLARE @productId AS VARCHAR(10)
+SET @productId = CONCAT(@id,RIGHT(YEAR(@sampleDate),1),@alphabeticDate, FORMAT(@sampleDate,'dd'))
+
+
+RETURN @productId
+END
+GO
+
 CREATE or ALTER FUNCTION Distillation.SetDrumId (@materialNumber AS INT, @vendorName VARCHAR(50) = NULL, @sampleDate DATE = NULL)
     RETURNS CHAR(10) 
     AS 
@@ -210,7 +217,7 @@ Create Table #tempSystemTbl(
     IsRequired BIT,
     MaterialName VARCHAR(25),
     Nomenclature VARCHAR(50),
-    Indicator VARCHAR(10),
+    Indicator VARCHAR(25),
     SetPoint DECIMAL(6,2),
     Variance DECIMAL(6,2)
 );
