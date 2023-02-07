@@ -74,8 +74,6 @@ CREATE TABLE Materials.Material
     MaterialName VARCHAR(50) NOT NULL,
     MaterialNameAbreviation VARCHAR(15),
     PermitNumber VARCHAR(25),
-    RawMaterialCode VARCHAR(3),
-    ProductCode VARCHAR(3),
     CarbonDrumRequired BIT DEFAULT(0) NOT NULL,
     CarbonDrumDaysAllowed INT,
     CarbonDrumWeightAllowed INT,
@@ -152,6 +150,7 @@ CREATE TABLE Materials.MaterialId
 (
     MaterialNumber INT,
     VendorName VARCHAR(25),
+    MaterialCode VARCHAR(3),
     SequenceId INT,
     PRIMARY KEY (MaterialNumber,VendorName)
 )
@@ -172,12 +171,12 @@ CREATE TABLE Distillation.RawMaterial
 
 CREATE TABLE Distillation.Production
 (
-    ProductId INT IDENTITY(1,1) PRIMARY KEY,
-    ProductLotNumber VARCHAR(10),
+    ProductLotNumber VARCHAR(10) PRIMARY KEY,
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
     ProductBatchNumber INT,
     ProcessOrder NUMERIC,
     InspectionLotNumber BIGINT,
+    StartDate DATE,
     ReceiverId INT FOREIGN KEY REFERENCES Distillation.Receiver,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
 )
@@ -198,7 +197,7 @@ CREATE TABLE Distillation.ProductRun
     RawMaterialStartWeight INT,
     RawMaterialEndWeight INT,
     RunStartDate DATE,
-    ProductID INT FOREIGN KEY REFERENCES Distillation.Production,
+    ProductLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.Production,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee,
 )
 
