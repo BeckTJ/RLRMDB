@@ -1,41 +1,67 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, TextInput} from 'react-native';
+import ajax from '../ProductionAjax';
 import Dropdown from '../components/DropDown';
 import SmallButton from '../components/SmallButton';
 
 export default ProductInfo = (props, {navigation, route}) => {
   const material = props.route.params.data;
   const distillationOption = props.route.params.choice;
-  const vender = ['lost', 'time'];
-  let po, batch, lotNumber, receiver;
+  const [productLot, setProductLot] = useState([]);
+  const [order, setOrder] = useState();
+  const [batch, setBatch] = useState();
+
+  let LotInfo = {};
+
+  useEffect(() => {
+    async function getLotNumber() {
+      return setProductLot(await ajax.fetchProduct(material.materialNumber));
+    }
+    getLotNumber();
+  }, []);
+
+  const updateLotInfo = async () => {
+    LotInfo.lotNumber = productLot.productLotNumber;
+    LotInfo.materialNumber = productLot.materialNumber;
+    LotInfo.processOrder = order;
+    LotInfo.batchNumber = batch;
+    LotInfo.reciever = 'A-123';
+    LotInfo.sampleNumber = null;
+    await ajax.postProduct(LotInfo);
+  };
 
   handleSubmit = () => {
-    navigation.push(distillationOption, {data: material});
+    updateLotInfo();
+    props.navigation.push(distillationOption, {
+      Data: material,
+      Lot: LotInfo,
+    });
   };
-  handleExit = () => {};
+  handleExit = () => {
+    props.navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.header}>
-          {distillationOption}: {material.materialName}
+          {distillationOption}: {productLot.materialNumber}
         </Text>
       </View>
       <View style={styles.display}>
         <View style={styles.rm}>
           <Text style={styles.text}>Product Lot Number: </Text>
-          <TextInput
-            style={styles.productInput}
-            keyboardType={'default'}
-            value={lotNumber}
-          />
+          <Text style={styles.productLotNumber}>
+            {productLot.productLotNumber}
+          </Text>
         </View>
         <View style={styles.rm}>
           <Text style={styles.text}>Process Order: </Text>
           <TextInput
             style={styles.productInput}
             keyboardType={'numeric'}
-            value={po}
+            onChangeText={setOrder}
+            value={order}
           />
         </View>
         <View style={styles.rm}>
@@ -43,8 +69,13 @@ export default ProductInfo = (props, {navigation, route}) => {
           <TextInput
             style={styles.productInput}
             keyboardType={'numeric'}
+            onChangeText={setBatch}
             value={batch}
           />
+        </View>
+        <View style={styles.dropdown}>
+          <Text style={styles.text}>Reciever: </Text>
+          <Dropdown label={'Select Item'} />
         </View>
         <View style={styles.dropdown}>
           <Text style={styles.text}>Raw Material: </Text>
@@ -92,10 +123,18 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: 'baseline',
+    textAlign: 'center',
     paddingBottom: 25,
   },
   text: {
     fontSize: 36,
+  },
+  productLotNumber: {
+    borderBottomWidth: 1.5,
+    borderColor: 'black',
+    fontSize: 32,
+    textAlign: 'center',
+    width: 350,
   },
   dropdown: {
     flexWrap: 'wrap',

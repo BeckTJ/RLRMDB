@@ -9,20 +9,20 @@ import {
 } from 'react-native';
 import InputValue from '../components/InputValue';
 import PreStart from '../components/PreStart';
-import ajax from '../ajax';
+import ajax from '../ProductionAjax';
 import SmallButton from '../components/SmallButton';
 
 export default RunLog = (props, {navigation, route}) => {
   const [read, setRead] = useState([]);
   const [preStart, setPreStart] = useState([]);
-  let po, batch, lotNumber, receiver;
 
-  const data = props.route.params.data;
+  const material = props.route.params.Data;
+  const productLot = props.route.params.Lot;
 
   useEffect(() => {
     async function setDistillation() {
-      setPreStart(await ajax.fetchPreStart(data.materialNumber));
-      setRead(await ajax.fetchRunLog(data.materialNumber));
+      setPreStart(await ajax.fetchPreStart(material.materialNumber));
+      setRead(await ajax.fetchRunLog(material.materialNumber));
     }
     setDistillation();
   }, []);
@@ -31,35 +31,25 @@ export default RunLog = (props, {navigation, route}) => {
     <View style={styles.container}>
       <View>
         <View style={styles.runLog}>
-          <Text style={styles.text}>Run Log: {data.materialName}</Text>
+          <Text style={styles.text}>Run Log: {material.materialName}</Text>
           <View style={styles.header}>
             <Text style={styles.setPoint}>Lot Number:</Text>
-            <TextInput
-              style={styles.preStartInput}
-              keyboardType={'default'}
-              value={lotNumber}
-            />
+            <Text style={styles.product}>{productLot.lotNumber}</Text>
           </View>
         </View>
         <View style={styles.header}>
-          <Text style={styles.setPoint}>Receiver:</Text>
-          <TextInput
-            style={styles.preStartInput}
-            keyboardType={'default'}
-            value={receiver}
-          />
-          <Text style={styles.setPoint}>Process Order:</Text>
-          <TextInput
-            style={styles.preStartInput}
-            keyboardType={'numeric'}
-            value={po}
-          />
-          <Text style={styles.setPoint}>Batch #:</Text>
-          <TextInput
-            style={styles.preStartInput}
-            keyboardType={'numeric'}
-            value={batch}
-          />
+          <View style={styles.productView}>
+            <Text style={styles.setPoint}>Receiver:</Text>
+            <Text style={styles.product}>{productLot.reciever}</Text>
+          </View>
+          <View style={styles.productView}>
+            <Text style={styles.setPoint}>Process Order:</Text>
+            <Text style={styles.product}>{productLot.processOrder}</Text>
+          </View>
+          <View style={styles.productView}>
+            <Text style={styles.setPoint}>Batch #:</Text>
+            <Text style={styles.product}>{productLot.batchNumber}</Text>
+          </View>
         </View>
         <PreStart style={styles.checks} material={preStart} />
       </View>
@@ -90,8 +80,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'baseline',
-    marginTop: -10,
     marginBottom: 5,
+  },
+  product: {
+    marginRight: 25,
+    borderBottomWidth: 1.5,
+    borderColor: 'black',
+    fontSize: 20,
+    textAlign: 'center',
+    width: 125,
+  },
+  productView: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'baseline',
   },
   preStartInput: {
     fontSize: 18,

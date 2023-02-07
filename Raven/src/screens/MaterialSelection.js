@@ -1,4 +1,3 @@
-import {NavigationHelpersContext} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import ajax from '../ajax';
@@ -19,7 +18,7 @@ export default MaterialSelection = (props, {navigation, route}) => {
 
   handlePress = selection => {
     props.navigation.push('Product Information', {
-      choice: option,
+      choice: distillationOption,
       data: selection,
     });
   };
