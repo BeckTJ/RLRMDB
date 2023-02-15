@@ -14,5 +14,5 @@ public class ProductServices
     public static ProductDTO getNextProductLotNumber(int materialNumber) => Product.getNextProductLotNumber(materialNumber);
 
     public static void InsertProductLot(ProductDTO product) => Product.setProductLot(product);
-    public static void GetVendors(int materialNumber) => RawMaterialSRC.getVendor(materialNumber);
+    public static List<String> GetVendors(int materialNumber) => RawMaterialSRC.getVendor(materialNumber);
 }

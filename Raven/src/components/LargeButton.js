@@ -1,8 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {Pressable, StyleSheet, Text} from 'react-native';
+import React from 'react';
+import {Pressable, Text, StyleSheet} from 'react-native';
 
-export default LargeButton = props => {
+const LargeButton = props => {
   return (
     <Pressable
       onPress={props.onPress}
@@ -31,3 +30,5 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+
+export default LargeButton;

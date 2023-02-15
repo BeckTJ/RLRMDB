@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import ajax from '../ajax';
+import LargeButton from '../components/LargeButton';
 
-export default MaterialSelection = (props, {navigation, route}) => {
+const MaterialSelection = (props, {navigation, route}) => {
   const [material, setMaterial] = useState([]);
   const [option, setOption] = useState();
   const distillationOption = props.route.params.data;
@@ -14,9 +15,9 @@ export default MaterialSelection = (props, {navigation, route}) => {
     }
     setOption(distillationOption);
     getMaterial();
-  }, []);
+  }, [distillationOption]);
 
-  handlePress = selection => {
+  const handlePress = selection => {
     props.navigation.push('Product Information', {
       choice: distillationOption,
       data: selection,
@@ -65,3 +66,4 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+export default MaterialSelection;

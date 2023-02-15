@@ -1,16 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React from 'react';
+import {View, FlatList, StyleSheet, Text, SafeAreaView} from 'react-native';
 import LargeButton from '../components/LargeButton';
-import MaterialSelection from './MaterialSelection';
 
-export default Distillation = ({navigation, route}) => {
+const DistillationHome = ({navigation}) => {
   const distillationOptions = [
     'Raw Material',
     'Run Log',
     'Sample Submit',
     'Reports',
   ];
-  handleHomeScreenPress = selection => {
+  const handleHomeScreenPress = selection => {
     if (selection === 'Reports') {
       navigation.push(selection, {data: selection});
     } else {
@@ -65,3 +64,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+
+export default DistillationHome;

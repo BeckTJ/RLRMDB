@@ -12,7 +12,7 @@ import PreStart from '../components/PreStart';
 import ajax from '../ProductionAjax';
 import SmallButton from '../components/SmallButton';
 
-export default RunLog = (props, {navigation, route}) => {
+const RunLog = (props, {navigation, route}) => {
   const [read, setRead] = useState([]);
   const [preStart, setPreStart] = useState([]);
 
@@ -25,7 +25,7 @@ export default RunLog = (props, {navigation, route}) => {
       setRead(await ajax.fetchRunLog(material.materialNumber));
     }
     setDistillation();
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
@@ -107,3 +107,4 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+export default RunLog;

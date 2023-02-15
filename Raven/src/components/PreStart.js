@@ -4,7 +4,7 @@ import CarbonDrum from './CarbonDrum';
 import FeedDrum from './FeedDrum';
 import InputValue from './InputValue';
 
-export default PreStart = data => {
+const PreStart = data => {
   const material = data.material;
 
   return (
@@ -68,3 +68,5 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 });
+
+export default PreStart;

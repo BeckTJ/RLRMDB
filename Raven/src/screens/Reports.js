@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import LargeButton from '../components/LargeButton';
 
-export default Reports = (props, {navigation, route}) => {
+const Reports = (props, {navigation, route}) => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -36,3 +36,4 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+export default Reports;

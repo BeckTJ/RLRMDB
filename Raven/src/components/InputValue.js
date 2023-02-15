@@ -7,9 +7,10 @@ import {
   TextInput,
   FlatList,
   SectionList,
+  Button,
 } from 'react-native';
 
-export default InputValue = props => {
+const InputValue = props => {
   const [number, onSubmitEditing] = useState(null);
   const [hourlyRead, setHourlyRead] = useState([InputValue]);
 
@@ -17,7 +18,7 @@ export default InputValue = props => {
     setHourlyRead([...hourlyRead, InputValue]);
   }
 
-  handlePress = () => {
+  const handlePress = () => {
     addHourlyRead();
   };
   return (
@@ -45,7 +46,7 @@ export default InputValue = props => {
         )}
       />
 
-      <SmallButton
+      <Button
         onPress={handlePress}
         style={({pressed}) => [
           {backgroundColor: pressed ? '#4294b8' : '#3c545e'},
@@ -101,3 +102,4 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
 });
+export default InputValue;

@@ -4,7 +4,7 @@ import ajax from '../ProductionAjax';
 import Dropdown from '../components/DropDown';
 import SmallButton from '../components/SmallButton';
 
-export default ProductInfo = (props, {navigation, route}) => {
+const ProductInfo = (props, {navigation, route}) => {
   const material = props.route.params.data;
   const distillationOption = props.route.params.choice;
   const [productLot, setProductLot] = useState([]);
@@ -18,7 +18,7 @@ export default ProductInfo = (props, {navigation, route}) => {
       return setProductLot(await ajax.fetchProduct(material.materialNumber));
     }
     getLotNumber();
-  }, []);
+  });
 
   const updateLotInfo = async () => {
     LotInfo.lotNumber = productLot.productLotNumber;
@@ -30,14 +30,14 @@ export default ProductInfo = (props, {navigation, route}) => {
     await ajax.postProduct(LotInfo);
   };
 
-  handleSubmit = () => {
+  const handleSubmit = () => {
     updateLotInfo();
     props.navigation.push(distillationOption, {
       Data: material,
       Lot: LotInfo,
     });
   };
-  handleExit = () => {
+  const handleExit = () => {
     props.navigation.goBack();
   };
 
@@ -156,3 +156,4 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
 });
+export default ProductInfo;

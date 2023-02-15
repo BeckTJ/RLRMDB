@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import Moment from 'moment';
 
-export default CarbonDrum = data => {
+const CarbonDrum = data => {
   const material = data.material;
   Moment.locale('en');
   let installDate,
@@ -71,3 +71,4 @@ const styles = StyleSheet.create({
     marginBottom: -20,
   },
 });
+export default CarbonDrum;

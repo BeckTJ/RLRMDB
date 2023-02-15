@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 
-export default FeedDrum = () => {
+const FeedDrum = () => {
   let feedDrum, batch, startWeight, endWeight;
 
   return (
@@ -67,3 +67,4 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 });
+export default FeedDrum;

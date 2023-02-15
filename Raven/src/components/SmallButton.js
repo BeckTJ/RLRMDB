@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Text, StyleSheet, Pressable} from 'react-native';
 
-export default SmallButton = props => {
+const SmallButton = props => {
   return (
     <Pressable
       onPress={props.onPress}
@@ -29,3 +29,4 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
+export default SmallButton;
