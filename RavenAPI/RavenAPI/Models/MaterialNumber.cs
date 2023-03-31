@@ -9,7 +9,6 @@ namespace RavenAPI.Models
         {
             Productions = new HashSet<Production>();
             RawMaterials = new HashSet<RawMaterial>();
-            SampleRequireds = new HashSet<SampleRequired>();
             VendorBatches = new HashSet<VendorBatch>();
         }
 
@@ -23,7 +22,6 @@ namespace RavenAPI.Models
         public virtual Material ParentMaterialNumberNavigation { get; set; } = null!;
         public virtual ICollection<Production> Productions { get; set; }
         public virtual ICollection<RawMaterial> RawMaterials { get; set; }
-        public virtual ICollection<SampleRequired> SampleRequireds { get; set; }
         public virtual ICollection<VendorBatch> VendorBatches { get; set; }
     }
 }

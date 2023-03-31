@@ -8,11 +8,12 @@ namespace RavenAPI.Models
         public Receiver()
         {
             Productions = new HashSet<Production>();
+            SystemReceivers = new HashSet<SystemReceiver>();
         }
 
-        public int ReceiverId { get; set; }
         public string ReceiverName { get; set; } = null!;
 
         public virtual ICollection<Production> Productions { get; set; }
+        public virtual ICollection<SystemReceiver> SystemReceivers { get; set; }
     }
 }

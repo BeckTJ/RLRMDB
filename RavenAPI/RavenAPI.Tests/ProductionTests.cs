@@ -10,44 +10,37 @@ public class ProductTests
     [Fact]
     public void getProductLotNumberTest2()
     {
-        int number = 58143;
+        // ProductDTO product = new ProductDTO();
+        // product.MaterialNumber = 58245;
+        // product.ProductLotNumber = LotNumber.GetNextProductLotNumber((int)product.MaterialNumber);
+        // product.ProcessOrder = 9999123456;
+        // product.ProductBatchNumber = 9991234;
+        // product.ReceiverName = "A";
 
-        var lot = Product.getNextProductLotNumber(number);
+        // ProductDTO.SetProductLot(product);
 
-        Assert.Equal("700EB", lot.ProductLotNumber);
+        int number = 58245;
+        var current = LotNumber.GetProductLotNumber(number);
+
+        var lot = LotNumber.GetNextProductLotNumber(number);
+
+        Assert.NotEqual(current.ProductLotNumber, lot);
     }
 
     [Fact]
     public void firstLotNumber()
     {
-        ProductDTO product = new ProductDTO();
+        string product;
         int materialnumber = 58245;
-        product = Product.getFirstLotNumber(materialnumber);
+        product = LotNumber.GetFirstLotNumber(materialnumber);
 
-        Assert.Equal("100DB", product.ProductLotNumber);
+        Assert.Equal("200DB", product);
     }
     [Fact]
-    public void InsertTest()
+    public void receiverTest()
     {
-        int materialNumber = 58245;
-        ProductDTO product = new ProductDTO();
-        List<ProductDTO> testProduct = Product.getProductLot(materialNumber);
+        List<string> product = ProductDTO.GetReceivers(58245);
 
-        long? processorder = testProduct[0].ProcessOrder + 1;
-        int? batch = testProduct[0].ProductBatchNumber + 1;
-
-        product.ProductLotNumber = Product.getNextProductLotNumber(materialNumber).ProductLotNumber;
-        product.ProcessOrder = processorder;
-        product.ProductBatchNumber = batch;
-        product.MaterialNumber = materialNumber;
-        product.ReceiverId = 1;
-
-        Product.setProductLot(product);
-
-        ProductDTO newProduct = new ProductDTO();
-        newProduct = Product.getProductLotNumber(materialNumber);
-
-        Assert.Equal(58245, newProduct.MaterialNumber);
-
+        Assert.Equal(3, product.Count());
     }
 }

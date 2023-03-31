@@ -15,33 +15,52 @@ VALUES
     (12, 'M')
 
 GO
-INSERT into Distillation.ProductNumberSequence
-    (SequenceIdStart, SequenceIdEnd)
-VALUES(001, 099),
-    (100, 199),
-    (200, 299),
-    (300, 399),
-    (400, 499),
-    (500, 599),
-    (600, 699),
-    (700, 799),
-    (800, 899),
-    (900, 999),
-    (1000, 1999),
-    (2000, 2999),
-    (3000, 3999),
-    (4000, 4999),
-    (5000, 5999),
-    (6000, 6999),
-    (7000, 7999),
-    (8000, 8999),
-    (9000, 9999)
+INSERT INTO Materials.UnitOfIssue(UnitOfIssue, Nomenclature)
+VALUES ('kg','Kilogram'),
+    ('g', 'Gram'),
+    ('L', 'Liter'),
+    ('mL', 'Milliliter')
+
+GO
+
+INSERT INTO Distillation.SystemStatus(StatusCode,StatusName)
+VALUES('H','Heatup'),
+    ('R','Reflux'),
+    ('P', 'Pre-Fraction'),
+    ('C', 'Collect'),
+    ('S', 'Shutdown'),
+    ('SP', 'System Pressurise')
+
+INSERT INTO Engineering.Receiver(ReceiverName)
+VALUES('A'),
+    ('B'),
+    ('C'),
+    ('D'),
+    ('A-101'),
+    ('A-102'),
+    ('A-103'),
+    ('A-104'),
+    ('A-901'),
+    ('A-902'),
+    ('A-903'),
+    ('A-904')
 GO
 
 INSERT into HumanResources.Employee (EmployeeId, FirstName, LastName)
     VALUES  ('LAS1234', 'John', 'Smith'),
             ('LAS2345', 'Jane', 'Smith'),
             ('LAS3456', 'Brian', 'Squire')
+GO
+
+BULK INSERT QualityControl.SampleRequired FROM '..\..\usr\dbfiles\BuildFiles\MaterialSampleRequired.csv'
+WITH
+(
+    FORMAT = 'csv',
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '\n',
+    KEEPNULLS
+)
 GO
 
 CREATE OR ALTER PROCEDURE SystemDataInsertDB
@@ -143,32 +162,33 @@ BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
 
             set @index = 1
 
-            while(@index <= (select count(*)FROM #tempTbl))
-
-            SET @materialNumber = (SELECT MaterialNumber FROM #tempTbl WHERE ID = @index)
-            SET @materialName = (SELECT MaterialNameAbreviation FROM #tempTbl WHERE ID = @index)
-            SET @parentMaterialNumber = (SELECT MaterialNumber FROM Materials.Material WHERE Material.MaterialNameAbreviation = @materialName)
-            SET @batchManaged  = (SELECT BatchManaged FROM #tempTbl WHERE ID = @index)
-            SET @requiresProcessOrder  = (SELECT RequiresProcessOrder FROM #tempTbl WHERE ID = @index)
-            SET @unitofIssue  = (SELECT UnitOfIssue FROM #tempTbl WHERE ID = @index)
-            SET @isRawMaterial  = (SELECT IsRawMaterial FROM #tempTbl WHERE ID = @index)
-            set @index += 1
-
             INSERT INTO Materials.Material(MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,VacuumTrapRequired,VacuumTrapDaysAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
             SELECT TOP(6) MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,VacuumTrapRequired,VacuumTrapDaysAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName)
-            
-            EXEC Materials.InsertMaterialNumber @materialNumber,@parentMaterialNumber,@batchManaged,@requiresProcessOrder,@unitOfIssue,@isRawMaterial
-        
-            INSERT INTO Vendors.Vendor(VendorName,IsMPPS)
-            SELECT DISTINCT Vendor,IsMPPS
-            FROM #tempTbl
-            WHERE NOT EXISTS(Select * FROM Vendors.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
 
-            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, MaterialCode, SequenceId)
-            SELECT MaterialNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),MaterialCode,
-            (SELECT SequenceId FROM Distillation.ProductNumberSequence WHERE SequenceId = #tempTbl.SequenceId)
+
+            while(@index <= (select count(*)FROM #tempTbl))
+            BEGIN
+                SET @materialNumber = (SELECT MaterialNumber FROM #tempTbl WHERE ID = @index)
+                SET @materialName = (SELECT MaterialNameAbreviation FROM #tempTbl WHERE ID = @index)
+                SET @parentMaterialNumber = (SELECT MaterialNumber FROM Materials.Material WHERE Material.MaterialNameAbreviation = @materialName)
+                SET @batchManaged  = (SELECT BatchManaged FROM #tempTbl WHERE ID = @index)
+                SET @requiresProcessOrder  = (SELECT RequiresProcessOrder FROM #tempTbl WHERE ID = @index)
+                SET @unitofIssue  = (SELECT UnitOfIssue FROM #tempTbl WHERE ID = @index)
+                SET @isRawMaterial  = (SELECT IsRawMaterial FROM #tempTbl WHERE ID = @index)
+                set @index += 1
+
+                EXEC Materials.InsertMaterialNumber @materialNumber,@parentMaterialNumber,@batchManaged,@requiresProcessOrder,@unitOfIssue,@isRawMaterial
+            END
+
+            INSERT INTO Materials.Vendor(VendorName)
+            SELECT DISTINCT Vendor
+            FROM #tempTbl
+            WHERE NOT EXISTS(Select * FROM Materials.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
+
+            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, MaterialCode, SequenceId, TotalRecords)
+            SELECT MaterialNumber,(SELECT VendorName FROM Materials.Vendor WHERE VendorName = #tempTbl.Vendor),MaterialCode, SequenceId, 100
             FROM #tempTbl
 
             COMMIT TRAN;
@@ -187,6 +207,7 @@ BEGIN
         Id INT IDENTITY(1,1),
         SampleDate DATE,
         MaterialNumber INT,
+        Vendor VARCHAR(25),
         VendorBatchNumber VARCHAR(25),
         SapBatchNumber INT,
         InspectionLotNumber NUMERIC,
@@ -207,6 +228,7 @@ BEGIN
     )
 
             DECLARE @materialNumber INT
+            DECLARE @vendor VARCHAR(25)
             DECLARE @vendorBatchNumber VARCHAR(25)
             DECLARE @inspectionLotNumber NUMERIC
             DECLARE @sapBatchNumber INT
@@ -224,6 +246,7 @@ BEGIN
             WHILE(@index <= @rows)
                 BEGIN
                 SET @materialNumber = (select materialnumber from #rawMaterial where id = @index)
+                SET @vendor = (select vendor from #rawMaterial where id = @index)
                 SET @vendorBatchNumber = (select VendorBatchNumber from #rawMaterial where id = @index)
                 SET @inspectionLotNumber = (select InspectionLotNumber from #rawMaterial where id = @index)
                 SET @sapBatchNumber = (select SapBatchNumber from #rawMaterial where id = @index)
@@ -233,7 +256,7 @@ BEGIN
                 SET @drumWeight = (select drumWeight from #rawMaterial where id = @index)
                 SET @sampleDate = (select SampleDate from #rawMaterial where id = @index)
 
-                EXEC Distillation.SetRawMaterial @materialNumber, @vendorBatchNumber, @inspectionLotNumber, @sapBatchNumber, @sampleSubmitNumber, @containerNumber, @numberOfDrums, @drumWeight, @sampleDate
+                EXEC Distillation.SetRawMaterial @materialNumber, @vendor, @vendorBatchNumber, @inspectionLotNumber, @sapBatchNumber, @sampleSubmitNumber, @containerNumber, @numberOfDrums, @drumWeight, @sampleDate
                 
                 SET @index += 1
                 END
@@ -243,7 +266,41 @@ GO
 
 EXEC MaterialInsertDB
 GO
+
 EXEC SystemDataInsertDB
 GO
+
 EXEC InsertRawMaterial
+GO
+
+EXEC Distillation.InsertProductLot
+GO
+
+EXEC Distillation.InsertProductLevels
+GO
+
+CREATE TABLE #tmpReceiver(
+    Id int PRIMARY KEY IDENTITY(1,1),
+    MaterialName VARCHAR(10),
+    MaterialNumber INT,
+    ReceiverName VARCHAR(6),
+    MaxReceiverLevel INT,
+)
+
+BULK INSERT #tmpReceiver FROM '..\..\usr\dbfiles\BuildFiles\ReceiverData.csv'
+WITH(
+    FORMAT = 'csv',
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '\n',
+    KEEPNULLS
+)
+
+INSERT INTO Engineering.SystemReceivers(MaterialNumber,ReceiverName,MaxReceiverLevel)
+SELECT 
+(SELECT MaterialNumber FROM Materials.MaterialNumber WHERE MaterialNumber.MaterialNumber = #tmpReceiver.MaterialNumber),
+(SELECT ReceiverName FROM Engineering.Receiver WHERE Receiver.ReceiverName = #tmpReceiver.ReceiverName),
+MaxReceiverLevel 
+FROM #tmpReceiver
+GO
 

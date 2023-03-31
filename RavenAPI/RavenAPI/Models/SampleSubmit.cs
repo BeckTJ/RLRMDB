@@ -16,8 +16,7 @@ namespace RavenAPI.Models
         public long? InspectionLotNumber { get; set; }
         public DateTime? SampleDate { get; set; }
         public bool? Rejected { get; set; }
-        public DateTime? RejectedDate { get; set; }
-        public DateTime? ApprovalDate { get; set; }
+        public DateTime? ReviewDate { get; set; }
         public DateTime? ExperiationDate { get; set; }
         public string? EmployeeId { get; set; }
 

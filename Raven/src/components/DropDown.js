@@ -1,27 +1,65 @@
-import React, {FC, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import React, {FC, useState, useRef} from 'react';
+import {
+  StyleSheet,
+  Text,
+  Modal,
+  FlatList,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-interface props {
-  label: String;
-}
-
-const Dropdown: FC<props> = ({label}) => {
+const Dropdown = props => {
   const [visible, setVisible] = useState(false);
+  const DropdownButton = useRef();
+  const [dropdownTop, setDropdownTop] = useState(0);
+  const [selected, setSelected] = useState(undefined);
 
   const toggleDropdown = () => {
-    setVisible(!visible);
+    visible ? setVisible(false) : openDropdown();
+  };
+
+  const openDropdown = (): void => {
+    DropdownButton.current.measure((_fx, _fy, _width, height, _px, py) => {
+      setDropdownTop(py + height);
+    });
+    setVisible(true);
+  };
+  const renderItem = ({item}) => (
+    <TouchableOpacity style={styles.item} onPress={() => onItemPress(item)}>
+      <Text>{item}</Text>
+    </TouchableOpacity>
+  );
+  const onItemPress = (item): void => {
+    setSelected(item);
+    props.onSelect(item);
+    setVisible(false);
   };
 
   const renderDropdown = () => {
-    if (visible) {
-      return <Text style={styles.dropdown}></Text>;
-    }
+    return (
+      <Modal visible={visible} transparent animationType="none">
+        <TouchableOpacity
+          style={styles.overlay}
+          onPress={() => setVisible(false)}>
+          <View style={[styles.dropdown, {top: dropdownTop}]}>
+            <FlatList
+              data={props.data}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    );
   };
 
   return (
-    <TouchableOpacity style={styles.button} onPress={toggleDropdown}>
+    <TouchableOpacity
+      ref={DropdownButton}
+      style={styles.button}
+      onPress={toggleDropdown}>
       {renderDropdown()}
-      <Text style={styles.buttonText}>{label}</Text>
+      <Text style={styles.buttonText}>{selected || props.label}</Text>
     </TouchableOpacity>
   );
 };
@@ -43,7 +81,16 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     backgroundColor: '#fff',
-    top: 50,
+    width: '100%',
+    shadowColor: '#000000',
+    shadowRadius: 4,
+    shadowOffset: {height: 4, width: 0},
+    shadowOpacity: 0.5,
+  },
+  item: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
   },
 });
 

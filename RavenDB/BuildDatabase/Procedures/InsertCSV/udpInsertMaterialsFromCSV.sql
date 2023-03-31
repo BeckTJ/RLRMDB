@@ -48,32 +48,33 @@ BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
 
             set @index = 1
 
-            while(@index <= (select count(*)FROM #tempTbl))
-
-            SET @materialNumber = (SELECT MaterialNumber FROM #tempTbl WHERE ID = @index)
-            SET @materialName = (SELECT MaterialNameAbreviation FROM #tempTbl WHERE ID = @index)
-            SET @parentMaterialNumber = (SELECT MaterialNumber FROM Materials.Material WHERE Material.MaterialNameAbreviation = @materialName)
-            SET @batchManaged  = (SELECT BatchManaged FROM #tempTbl WHERE ID = @index)
-            SET @requiresProcessOrder  = (SELECT RequiresProcessOrder FROM #tempTbl WHERE ID = @index)
-            SET @unitofIssue  = (SELECT UnitOfIssue FROM #tempTbl WHERE ID = @index)
-            SET @isRawMaterial  = (SELECT IsRawMaterial FROM #tempTbl WHERE ID = @index)
-            set @index += 1
-
             INSERT INTO Materials.Material(MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,CarbonDrumRequired,CarbonDrumDaysAllowed,CarbonDrumWeightAllowed,VacuumTrapRequired,VacuumTrapDaysAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns)
             SELECT TOP(6) MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,CarbonDrumRequired,CarbonDrumDays,CarbonDrumWeight,VacuumTrapRequired,VacuumTrapDaysAllowed,SpecificGravity,PrefractionRefluxRatio,CollectRefluxRatio,NumberOfRuns
             FROM #tempTbl
             WHERE NOT EXISTS(SELECT * FROM Materials.Material WHERE Material.MaterialName = #tempTbl.MaterialName)
-            
-            EXEC Materials.InsertMaterialNumber @materialNumber,@parentMaterialNumber,@batchManaged,@requiresProcessOrder,@unitOfIssue,@isRawMaterial
-        
-            INSERT INTO Vendors.Vendor(VendorName,IsMPPS)
-            SELECT DISTINCT Vendor,IsMPPS
-            FROM #tempTbl
-            WHERE NOT EXISTS(Select * FROM Vendors.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
 
-            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, MaterialCode, SequenceId)
-            SELECT MaterialNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = #tempTbl.Vendor),MaterialCode,
-            (SELECT SequenceId FROM Distillation.ProductNumberSequence WHERE SequenceId = #tempTbl.SequenceId)
+
+            while(@index <= (select count(*)FROM #tempTbl))
+            BEGIN
+                SET @materialNumber = (SELECT MaterialNumber FROM #tempTbl WHERE ID = @index)
+                SET @materialName = (SELECT MaterialNameAbreviation FROM #tempTbl WHERE ID = @index)
+                SET @parentMaterialNumber = (SELECT MaterialNumber FROM Materials.Material WHERE Material.MaterialNameAbreviation = @materialName)
+                SET @batchManaged  = (SELECT BatchManaged FROM #tempTbl WHERE ID = @index)
+                SET @requiresProcessOrder  = (SELECT RequiresProcessOrder FROM #tempTbl WHERE ID = @index)
+                SET @unitofIssue  = (SELECT UnitOfIssue FROM #tempTbl WHERE ID = @index)
+                SET @isRawMaterial  = (SELECT IsRawMaterial FROM #tempTbl WHERE ID = @index)
+                set @index += 1
+
+                EXEC Materials.InsertMaterialNumber @materialNumber,@parentMaterialNumber,@batchManaged,@requiresProcessOrder,@unitOfIssue,@isRawMaterial
+            END
+
+            INSERT INTO Materials.Vendor(VendorName)
+            SELECT DISTINCT Vendor
+            FROM #tempTbl
+            WHERE NOT EXISTS(Select * FROM Materials.Vendor WHERE Vendor.VendorName = #tempTbl.Vendor)
+
+            INSERT INTO Materials.MaterialId(MaterialNumber, VendorName, MaterialCode, SequenceId, TotalRecords)
+            SELECT MaterialNumber,(SELECT VendorName FROM Materials.Vendor WHERE VendorName = #tempTbl.Vendor),MaterialCode, SequenceId, 100
             FROM #tempTbl
 
             COMMIT TRAN;

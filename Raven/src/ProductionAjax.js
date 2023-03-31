@@ -30,7 +30,7 @@ export default {
   async fetchProduct(materialNumber) {
     try {
       const response = await fetch(
-        apiHost + '/Product/(MaterialNumber)?materialNumber=' + materialNumber,
+        apiHost + '/Product/(Selection)?materialNumber=' + materialNumber,
       );
       const responseJson = await response.json();
       return responseJson;
@@ -39,7 +39,7 @@ export default {
     }
   },
   async postProduct(product) {
-    await fetch(apiHost + '/Product', {
+    await fetch(apiHost + '/Product/UpdateProductLot', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -53,9 +53,21 @@ export default {
         receiverId: product.receiver,
         sampleSubmitNumber: product.sampleNumber,
         startDate: product.startDate,
+        vendor: product.vendor,
       }),
     }).then(response => {
       response.json();
     });
+  },
+  async fetchRawMaterial(vendor) {
+    try {
+      const response = await fetch(
+        apiHost + '/Product/(RawMaterial)?vendor=' + vendor,
+      );
+      const responseJson = await response.json();
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

@@ -11,14 +11,14 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER PROCEDURE Vendors.AddVendor(@vendorName AS VARCHAR(25), @isMpps AS BIT)
+CREATE OR ALTER PROCEDURE Materials.AddVendor(@vendorName AS VARCHAR(25))
 AS
 BEGIN
 
-IF NOT EXISTS (SELECT VendorName FROM Vendors.Vendor WHERE VendorName = @vendorName)
+IF NOT EXISTS (SELECT VendorName FROM Materials.Vendor WHERE VendorName = @vendorName)
 
-INSERT INTO Vendors.Vendor(VendorName,IsMPPS)
-VALUES (@vendorName, @isMpps);
+INSERT INTO Materials.Vendor(VendorName)
+VALUES (@vendorName);
 
 END
 GO
@@ -64,13 +64,13 @@ SET SampleSubmitNumber = (SELECT SampleSubmitNumber FROM QualityControl.SampleSu
 WHERE InspectionLotNumber = @lotNumber
 GO
 
-CREATE OR ALTER PROCEDURE Vendors.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(25),@materialNumber INT, @qty INT = 1)
+CREATE OR ALTER PROCEDURE Materials.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(25),@materialNumber INT, @qty INT = 1)
 AS
 BEGIN TRAN VendorBatch
 BEGIN TRY
 
-    INSERT INTO Vendors.VendorBatch(VendorBatchNumber,VendorName,Quantity,MaterialNumber)
-    VALUES(@batchNumber,(SELECT VendorName FROM Vendors.Vendor WHERE VendorName = @vendorName), @qty, (SELECT MaterialNumber FROM Materials.MaterialNumber WHERE MaterialNumber = @materialNumber))
+    INSERT INTO Materials.VendorBatch(VendorBatchNumber,VendorName,Quantity,MaterialNumber)
+    VALUES(@batchNumber,(SELECT VendorName FROM Materials.Vendor WHERE VendorName = @vendorName), @qty, (SELECT MaterialNumber FROM Materials.MaterialNumber WHERE MaterialNumber = @materialNumber))
 
 COMMIT TRAN
 END TRY
@@ -95,7 +95,7 @@ CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     BEGIN TRY
 
     DECLARE @vendor VARCHAR(50)
-    SET @vendor = (SELECT VendorName FROM Vendors.VendorBatch
+    SET @vendor = (SELECT VendorName FROM Materials.VendorBatch
                     WHERE VendorBatchNumber = @vendorBatchNumber)
                     
     WHILE(@quantity > 0)
@@ -117,6 +117,7 @@ GO
 
 CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
     @materialNumber INT,
+    @vendor CHAR(25),
     @vendorBatchNumber VARCHAR(25) = NULL,
     @inspectionLotNumber NUMERIC = NULL,
     @sapBatchNumber INT = NULL,
@@ -124,15 +125,12 @@ CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
     @containerNumber CHAR(7) = NULL,
     @numberOfDrums INT = 1,
     @drumWeight DECIMAL(6,2) = NULL,
-    @sampleDate DATE
+    @sampleDate DATE    
 )
 AS
 
-    DECLARE @vendorName AS VARCHAR(25)
-    SET @vendorName = (SELECT VendorName FROM Materials.MaterialId WHERE MaterialNumber = @materialNumber)
-
     EXEC QualityControl.SubmitSample @sampleSubmitNumber,@inspectionlotNumber,@sampleDate;
-    EXEC Vendors.AddVendorBatch @vendorName, @vendorBatchNumber, @materialNumber, @numberOfDrums;
+    EXEC Materials.AddVendorBatch @vendor, @vendorBatchNumber, @materialNumber, @numberOfDrums;
     EXEC Distillation.RawMaterialUpdate @materialNumber, @vendorBatchNumber,@inspectionLotNumber,@sapBatchNumber,@sampleSubmitNumber,@sampleDate,@containerNumber,@numberOfDrums,@drumWeight
 GO
 
@@ -152,8 +150,7 @@ BEGIN
 
     IF @id = NULL OR NOT EXISTS(SELECT TOP(1) ProductLotNumber FROM Distillation.Production WHERE MaterialNumber = @materialNumber ORDER BY ProductLotNumber DESC)
         BEGIN
-        SET @sequenceId = (SELECT SequenceIdStart FROM Distillation.ProductNumberSequence 
-                            JOIN Materials.MaterialId ON ProductNumberSequence.SequenceId = MaterialId.SequenceId
+        SET @sequenceId = (SELECT SequenceId FROM Materials.MaterialId 
                             WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendor)
             SET @id = (CONCAT(@sequenceId,@materialCode))
         END
@@ -227,8 +224,7 @@ BEGIN
     WHERE materialnumber = @materialNumber
     ORDER BY DrumLotNumber DESC))
         BEGIN
-        SET @sequenceId = (SELECT SequenceIdStart FROM Distillation.ProductNumberSequence 
-                            JOIN Materials.MaterialId ON ProductNumberSequence.SequenceId = MaterialId.SequenceId
+        SET @sequenceId = (SELECT SequenceId FROM Materials.MaterialId 
                             WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendorName)
 
         SET @drumLotNumber = (SELECT CONCAT(@sequenceId, MaterialId.MaterialCode,RIGHT(YEAR(@sampleDate),1),@alphabeticDate,FORMAT(@sampleDate,'dd'))
@@ -274,3 +270,77 @@ RETURN @weightKG;
 END
 GO
 
+CREATE OR ALTER PROCEDURE Distillation.InsertProductLevels
+AS
+BEGIN
+
+CREATE TABLE #tmpRun
+(
+    LotNumber VARCHAR(10),
+    RunNumber INT,
+    SystemStatus VARCHAR(2),
+    VisualVerification BIT,
+    ReceiverLevel INT,
+    PrefractionLevel INT,
+    ReboilerLevel INT,
+    ReadTime TIME,
+)
+
+BULK INSERT #tmpRun FROM '..\..\usr\dbfiles\BuildFiles\RunData.csv'
+    WITH
+    (
+        FORMAT = 'csv',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        KEEPNULLS
+    );
+
+    INSERT INTO Distillation.ProductLevels(ProductLotNumber,RunNumber,SystemStatus,VisualVerification,ReboilerLevel,PrefractionLevel,ReceiverLevel,ReadTime)
+    SELECT LotNumber,RunNumber,SystemStatus,VisualVerification,ReboilerLevel,PrefractionLevel,ReceiverLevel,ReadTime
+    FROM #tmpRun
+END
+GO
+
+CREATE OR ALTER PROCEDURE Distillation.InsertProductLot
+AS
+BEGIN
+
+CREATE TABLE #tmpProduct
+(
+LotNumber VARCHAR(10),
+MaterialNumber INT,
+ReceiverName VARCHAR(5),
+ProcessOrder NUMERIC,
+BatchNumber INT,
+InspectionLotNumber NUMERIC,
+RunNumber INT,
+DrumLotNumber VARCHAR(10),
+RawMaterialUsed INT,
+StartDate DATE
+)
+
+BULK INSERT #tmpProduct FROM '..\..\usr\dbfiles\BuildFiles\ProductLotData.csv'
+    WITH
+    (
+        FORMAT = 'csv',
+        FIRSTROW = 2,
+        FIELDTERMINATOR = ',',
+        ROWTERMINATOR = '\n',
+        KEEPNULLS
+    );
+
+    INSERT INTO Distillation.Production(ProductLotNumber,MaterialNumber,ProductBatchNumber,ProcessOrder,ReceiverName)
+    SELECT DISTINCT LotNumber,MaterialNumber,BatchNumber,ProcessOrder,ReceiverName FROM #tmpProduct
+    WHERE NOT EXISTS(SELECT 1 FROM Distillation.Production WHERE Production.ProductLotNumber = #tmpProduct.LotNumber)
+
+    INSERT INTO Distillation.ProductRun(ProductLotNumber,RunNumber,DrumLotNumber,RawMaterialUsed,RunStartDate)
+    SELECT 
+        (SELECT ProductLotNumber FROM Distillation.Production WHERE Production.ProductLotNumber = #tmpProduct.LotNumber),
+        RunNumber,
+        (SELECT DrumLotNumber FROM Distillation.RawMaterial WHERE RawMaterial.DrumLotNumber = #tmpProduct.DrumLotNumber),
+        RawMaterialUsed,
+        StartDate
+      FROM #tmpProduct
+END
+GO

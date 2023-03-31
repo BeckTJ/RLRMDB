@@ -10,11 +10,12 @@ namespace RavenAPI.Models
             IndicatorSetPoints = new HashSet<IndicatorSetPoint>();
             MaterialNumbers = new HashSet<MaterialNumber>();
             PreStartChecks = new HashSet<PreStartCheck>();
+            SystemReceivers = new HashSet<SystemReceiver>();
         }
 
         public int MaterialNumber { get; set; }
         public string MaterialName { get; set; } = null!;
-        public string? MaterialNameAbreviation { get; set; }
+        public string MaterialNameAbreviation { get; set; } = null!;
         public string? PermitNumber { get; set; }
         public bool CarbonDrumRequired { get; set; }
         public int? CarbonDrumDaysAllowed { get; set; }
@@ -32,5 +33,6 @@ namespace RavenAPI.Models
         public virtual ICollection<IndicatorSetPoint> IndicatorSetPoints { get; set; }
         public virtual ICollection<MaterialNumber> MaterialNumbers { get; set; }
         public virtual ICollection<PreStartCheck> PreStartChecks { get; set; }
+        public virtual ICollection<SystemReceiver> SystemReceivers { get; set; }
     }
 }

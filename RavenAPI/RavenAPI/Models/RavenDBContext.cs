@@ -23,7 +23,7 @@ namespace RavenAPI.Models
         public virtual DbSet<MaterialId> MaterialIds { get; set; } = null!;
         public virtual DbSet<MaterialNumber> MaterialNumbers { get; set; } = null!;
         public virtual DbSet<PreStartCheck> PreStartChecks { get; set; } = null!;
-        public virtual DbSet<ProductNumberSequence> ProductNumberSequences { get; set; } = null!;
+        public virtual DbSet<ProductLevel> ProductLevels { get; set; } = null!;
         public virtual DbSet<ProductRun> ProductRuns { get; set; } = null!;
         public virtual DbSet<Production> Productions { get; set; } = null!;
         public virtual DbSet<RawMaterial> RawMaterials { get; set; } = null!;
@@ -32,6 +32,9 @@ namespace RavenAPI.Models
         public virtual DbSet<SampleSubmit> SampleSubmits { get; set; } = null!;
         public virtual DbSet<SystemIndicator> SystemIndicators { get; set; } = null!;
         public virtual DbSet<SystemNomenclature> SystemNomenclatures { get; set; } = null!;
+        public virtual DbSet<SystemReceiver> SystemReceivers { get; set; } = null!;
+        public virtual DbSet<SystemStatus> SystemStatuses { get; set; } = null!;
+        public virtual DbSet<UnitOfIssue> UnitOfIssues { get; set; } = null!;
         public virtual DbSet<Vendor> Vendors { get; set; } = null!;
         public virtual DbSet<VendorBatch> VendorBatches { get; set; } = null!;
 
@@ -40,7 +43,7 @@ namespace RavenAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=localhost; Initial Catalog = RavenDB; Persist Security Info = True; User Id = SA; Password = FR*@ger12");
+                optionsBuilder.UseSqlServer("Data Source= Localhost;Initial Catalog = RavenDB; Persist Security Info = True; User Id = SA; Password = FR*@ger12;");
             }
         }
 
@@ -49,7 +52,7 @@ namespace RavenAPI.Models
             modelBuilder.Entity<AlphabeticDate>(entity =>
             {
                 entity.HasKey(e => e.MonthNumber)
-                    .HasName("PK__Alphabet__C6DA02F1980DCF91");
+                    .HasName("PK__Alphabet__C6DA02F1380440E8");
 
                 entity.ToTable("AlphabeticDate", "Distillation");
 
@@ -84,7 +87,7 @@ namespace RavenAPI.Models
             modelBuilder.Entity<IndicatorSetPoint>(entity =>
             {
                 entity.HasKey(e => e.SystemId)
-                    .HasName("PK__Indicato__9394F68A3517FF3C");
+                    .HasName("PK__Indicato__9394F68ABCEC5C92");
 
                 entity.ToTable("IndicatorSetPoint", "Engineering");
 
@@ -108,19 +111,19 @@ namespace RavenAPI.Models
                     .WithMany(p => p.IndicatorSetPoints)
                     .HasForeignKey(d => d.MaterialNumber)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Indicator__Mater__36B12243");
+                    .HasConstraintName("FK__Indicator__Mater__398D8EEE");
 
                 entity.HasOne(d => d.NomenclatureNavigation)
                     .WithMany(p => p.IndicatorSetPoints)
                     .HasForeignKey(d => d.Nomenclature)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Indicator__Nomen__37A5467C");
+                    .HasConstraintName("FK__Indicator__Nomen__3A81B327");
             });
 
             modelBuilder.Entity<Material>(entity =>
             {
                 entity.HasKey(e => e.MaterialNumber)
-                    .HasName("PK__Material__E4D2E4BF912D9136");
+                    .HasName("PK__Material__E4D2E4BF2B2709D8");
 
                 entity.ToTable("Material", "Materials");
 
@@ -158,7 +161,7 @@ namespace RavenAPI.Models
             modelBuilder.Entity<MaterialId>(entity =>
             {
                 entity.HasKey(e => new { e.MaterialNumber, e.VendorName })
-                    .HasName("PK__Material__93E0EE8AD799B30E");
+                    .HasName("PK__Material__93E0EE8A2E679012");
 
                 entity.ToTable("MaterialId", "Materials");
 
@@ -174,7 +177,7 @@ namespace RavenAPI.Models
             modelBuilder.Entity<MaterialNumber>(entity =>
             {
                 entity.HasKey(e => e.MaterialNumber1)
-                    .HasName("PK__Material__E4D2E4BFE8D4510F");
+                    .HasName("PK__Material__E4D2E4BF7FEEDE3F");
 
                 entity.ToTable("MaterialNumber", "Materials");
 
@@ -190,13 +193,13 @@ namespace RavenAPI.Models
                     .WithMany(p => p.MaterialNumbers)
                     .HasForeignKey(d => d.ParentMaterialNumber)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__MaterialN__Paren__3D5E1FD2");
+                    .HasConstraintName("FK__MaterialN__Paren__403A8C7D");
             });
 
             modelBuilder.Entity<PreStartCheck>(entity =>
             {
                 entity.HasKey(e => e.CheckId)
-                    .HasName("PK__PreStart__86815706D35DE93D");
+                    .HasName("PK__PreStart__86815706192A5D04");
 
                 entity.ToTable("PreStartChecks", "Distillation");
 
@@ -209,26 +212,46 @@ namespace RavenAPI.Models
                 entity.HasOne(d => d.MaterialNumberNavigation)
                     .WithMany(p => p.PreStartChecks)
                     .HasForeignKey(d => d.MaterialNumber)
-                    .HasConstraintName("FK__PreStartC__Mater__619B8048");
+                    .HasConstraintName("FK__PreStartC__Mater__693CA210");
 
                 entity.HasOne(d => d.Run)
                     .WithMany(p => p.PreStartChecks)
                     .HasForeignKey(d => d.RunId)
-                    .HasConstraintName("FK__PreStartC__RunId__60A75C0F");
+                    .HasConstraintName("FK__PreStartC__RunId__68487DD7");
             });
 
-            modelBuilder.Entity<ProductNumberSequence>(entity =>
+            modelBuilder.Entity<ProductLevel>(entity =>
             {
-                entity.HasKey(e => e.SequenceId)
-                    .HasName("PK__ProductN__BAD6149186B48E82");
+                entity.HasKey(e => e.LevelId)
+                    .HasName("PK__ProductL__09F03C261BA5D351");
 
-                entity.ToTable("ProductNumberSequence", "Distillation");
+                entity.ToTable("ProductLevels", "Distillation");
+
+                entity.Property(e => e.ProductLotNumber)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.SystemStatus)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.VisualVerification).HasDefaultValueSql("((0))");
+
+                entity.HasOne(d => d.ProductLotNumberNavigation)
+                    .WithMany(p => p.ProductLevels)
+                    .HasForeignKey(d => d.ProductLotNumber)
+                    .HasConstraintName("FK__ProductLe__Produ__6383C8BA");
+
+                entity.HasOne(d => d.RunNumberNavigation)
+                    .WithMany(p => p.ProductLevels)
+                    .HasForeignKey(d => d.RunNumber)
+                    .HasConstraintName("FK__ProductLe__RunNu__6477ECF3");
             });
 
             modelBuilder.Entity<ProductRun>(entity =>
             {
                 entity.HasKey(e => e.RunId)
-                    .HasName("PK__ProductR__A259D4DDDE2C718D");
+                    .HasName("PK__ProductR__A259D4DD89F80AD2");
 
                 entity.ToTable("ProductRun", "Distillation");
 
@@ -250,23 +273,23 @@ namespace RavenAPI.Models
                 entity.HasOne(d => d.DrumLotNumberNavigation)
                     .WithMany(p => p.ProductRuns)
                     .HasForeignKey(d => d.DrumLotNumber)
-                    .HasConstraintName("FK__ProductRu__DrumL__5BE2A6F2");
+                    .HasConstraintName("FK__ProductRu__DrumL__5EBF139D");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.ProductRuns)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__ProductRu__Emplo__5DCAEF64");
+                    .HasConstraintName("FK__ProductRu__Emplo__60A75C0F");
 
                 entity.HasOne(d => d.ProductLotNumberNavigation)
                     .WithMany(p => p.ProductRuns)
                     .HasForeignKey(d => d.ProductLotNumber)
-                    .HasConstraintName("FK__ProductRu__Produ__5CD6CB2B");
+                    .HasConstraintName("FK__ProductRu__Produ__5FB337D6");
             });
 
             modelBuilder.Entity<Production>(entity =>
             {
                 entity.HasKey(e => e.ProductLotNumber)
-                    .HasName("PK__Producti__36A9702275FE8195");
+                    .HasName("PK__Producti__36A97022B8BC1EA6");
 
                 entity.ToTable("Production", "Distillation");
 
@@ -280,35 +303,40 @@ namespace RavenAPI.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.InspectionLotNumber).HasColumnType("numeric(18, 0)");
+
                 entity.Property(e => e.ProcessOrder).HasColumnType("numeric(18, 0)");
+
+                entity.Property(e => e.ReceiverName)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .IsFixedLength();
 
                 entity.Property(e => e.SampleSubmitNumber)
                     .HasMaxLength(8)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.StartDate).HasColumnType("date");
-
                 entity.HasOne(d => d.MaterialNumberNavigation)
                     .WithMany(p => p.Productions)
                     .HasForeignKey(d => d.MaterialNumber)
-                    .HasConstraintName("FK__Productio__Mater__571DF1D5");
+                    .HasConstraintName("FK__Productio__Mater__59FA5E80");
 
-                entity.HasOne(d => d.Receiver)
+                entity.HasOne(d => d.ReceiverNameNavigation)
                     .WithMany(p => p.Productions)
-                    .HasForeignKey(d => d.ReceiverId)
-                    .HasConstraintName("FK__Productio__Recei__5812160E");
+                    .HasForeignKey(d => d.ReceiverName)
+                    .HasConstraintName("FK__Productio__Recei__5AEE82B9");
 
                 entity.HasOne(d => d.SampleSubmitNumberNavigation)
                     .WithMany(p => p.Productions)
                     .HasForeignKey(d => d.SampleSubmitNumber)
-                    .HasConstraintName("FK__Productio__Sampl__59063A47");
+                    .HasConstraintName("FK__Productio__Sampl__5BE2A6F2");
             });
 
             modelBuilder.Entity<RawMaterial>(entity =>
             {
                 entity.HasKey(e => e.DrumLotNumber)
-                    .HasName("PK__RawMater__64C9F847210F97C2");
+                    .HasName("PK__RawMater__64C9F84786AD37B9");
 
                 entity.ToTable("RawMaterial", "Distillation");
 
@@ -340,27 +368,30 @@ namespace RavenAPI.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.RawMaterials)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__RawMateri__Emplo__5441852A");
+                    .HasConstraintName("FK__RawMateri__Emplo__571DF1D5");
 
                 entity.HasOne(d => d.MaterialNumberNavigation)
                     .WithMany(p => p.RawMaterials)
                     .HasForeignKey(d => d.MaterialNumber)
-                    .HasConstraintName("FK__RawMateri__Mater__5165187F");
+                    .HasConstraintName("FK__RawMateri__Mater__5441852A");
 
                 entity.HasOne(d => d.SampleSubmitNumberNavigation)
                     .WithMany(p => p.RawMaterials)
                     .HasForeignKey(d => d.SampleSubmitNumber)
-                    .HasConstraintName("FK__RawMateri__Sampl__52593CB8");
+                    .HasConstraintName("FK__RawMateri__Sampl__5535A963");
 
                 entity.HasOne(d => d.VendorBatchNumberNavigation)
                     .WithMany(p => p.RawMaterials)
                     .HasForeignKey(d => d.VendorBatchNumber)
-                    .HasConstraintName("FK__RawMateri__Vendo__534D60F1");
+                    .HasConstraintName("FK__RawMateri__Vendo__5629CD9C");
             });
 
             modelBuilder.Entity<Receiver>(entity =>
             {
-                entity.ToTable("Receiver", "Distillation");
+                entity.HasKey(e => e.ReceiverName)
+                    .HasName("PK__Receiver__FD2F0564A4BF896D");
+
+                entity.ToTable("Receiver", "Engineering");
 
                 entity.Property(e => e.ReceiverName)
                     .HasMaxLength(5)
@@ -370,25 +401,59 @@ namespace RavenAPI.Models
 
             modelBuilder.Entity<SampleRequired>(entity =>
             {
-                entity.HasKey(e => e.RequiredId)
-                    .HasName("PK__SampleRe__2A9DE230B735B012");
+                entity.HasKey(e => new { e.MaterialNumber, e.Vln })
+                    .HasName("PK__SampleRe__088F292ED8284CA5");
 
                 entity.ToTable("SampleRequired", "QualityControl");
 
-                entity.Property(e => e.NumberOfAmps).HasDefaultValueSql("((0))");
+                entity.Property(e => e.Vln)
+                    .HasMaxLength(25)
+                    .IsUnicode(false)
+                    .HasColumnName("VLN");
 
-                entity.Property(e => e.NumberOfMetals).HasDefaultValueSql("((0))");
+                entity.Property(e => e.AmpUnitOfIssue)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.MaterialNumberNavigation)
-                    .WithMany(p => p.SampleRequireds)
-                    .HasForeignKey(d => d.MaterialNumber)
-                    .HasConstraintName("FK__SampleReq__Mater__4316F928");
+                entity.Property(e => e.Amps).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Assay).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.AssayBulb).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Boron).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.BubblerUnitOfIssue)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Chloride).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.MaterialType)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MetalBubbler).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Metals).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Phosphorus).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Retain).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.VialUnitOfIssue)
+                    .HasMaxLength(3)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Vials).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Water).HasDefaultValueSql("((0))");
             });
 
             modelBuilder.Entity<SampleSubmit>(entity =>
             {
                 entity.HasKey(e => e.SampleSubmitNumber)
-                    .HasName("PK__SampleSu__DFFEFAA06BA65B1A");
+                    .HasName("PK__SampleSu__DFFEFAA0324DDCB2");
 
                 entity.ToTable("SampleSubmit", "QualityControl");
 
@@ -397,8 +462,6 @@ namespace RavenAPI.Models
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.ApprovalDate).HasColumnType("date");
-
                 entity.Property(e => e.EmployeeId)
                     .HasMaxLength(7)
                     .IsUnicode(false)
@@ -406,14 +469,14 @@ namespace RavenAPI.Models
 
                 entity.Property(e => e.ExperiationDate).HasColumnType("date");
 
-                entity.Property(e => e.RejectedDate).HasColumnType("date");
+                entity.Property(e => e.ReviewDate).HasColumnType("date");
 
                 entity.Property(e => e.SampleDate).HasColumnType("date");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.SampleSubmits)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__SampleSub__Emplo__3A81B327");
+                    .HasConstraintName("FK__SampleSub__Emplo__3D5E1FD2");
             });
 
             modelBuilder.Entity<SystemIndicator>(entity =>
@@ -430,7 +493,7 @@ namespace RavenAPI.Models
             modelBuilder.Entity<SystemNomenclature>(entity =>
             {
                 entity.HasKey(e => e.Nomenclature)
-                    .HasName("PK__SystemNo__8F9251AF9EE9118D");
+                    .HasName("PK__SystemNo__8F9251AF8FB82E8C");
 
                 entity.ToTable("SystemNomenclature", "Engineering");
 
@@ -439,26 +502,80 @@ namespace RavenAPI.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<SystemReceiver>(entity =>
+            {
+                entity.HasKey(e => e.ReceiverId)
+                    .HasName("PK__SystemRe__FEBB5F276D18E8F5");
+
+                entity.ToTable("SystemReceivers", "Engineering");
+
+                entity.Property(e => e.ReceiverName)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.MaterialNumberNavigation)
+                    .WithMany(p => p.SystemReceivers)
+                    .HasForeignKey(d => d.MaterialNumber)
+                    .HasConstraintName("FK__SystemRec__Mater__34C8D9D1");
+
+                entity.HasOne(d => d.ReceiverNameNavigation)
+                    .WithMany(p => p.SystemReceivers)
+                    .HasForeignKey(d => d.ReceiverName)
+                    .HasConstraintName("FK__SystemRec__Recei__35BCFE0A");
+            });
+
+            modelBuilder.Entity<SystemStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusCode)
+                    .HasName("PK__SystemSt__6A7B44FDCF403068");
+
+                entity.ToTable("SystemStatus", "Distillation");
+
+                entity.Property(e => e.StatusCode)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.StatusName)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UnitOfIssue>(entity =>
+            {
+                entity.HasKey(e => e.UnitOfIssue1)
+                    .HasName("PK__UnitOfIs__B79EB8A2D27511DD");
+
+                entity.ToTable("UnitOfIssue", "Materials");
+
+                entity.Property(e => e.UnitOfIssue1)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("UnitOfIssue");
+
+                entity.Property(e => e.Nomenclature)
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Vendor>(entity =>
             {
                 entity.HasKey(e => e.VendorName)
-                    .HasName("PK__Vendor__7320A356EAE2E7FF");
+                    .HasName("PK__Vendor__7320A35654F1FC70");
 
-                entity.ToTable("Vendor", "Vendors");
+                entity.ToTable("Vendor", "Materials");
 
                 entity.Property(e => e.VendorName)
                     .HasMaxLength(25)
                     .IsUnicode(false);
-
-                entity.Property(e => e.IsMpps).HasColumnName("IsMPPS");
             });
 
             modelBuilder.Entity<VendorBatch>(entity =>
             {
                 entity.HasKey(e => e.VendorBatchNumber)
-                    .HasName("PK__VendorBa__4E4125DBECBCDCD6");
+                    .HasName("PK__VendorBa__4E4125DBBC8F3CFD");
 
-                entity.ToTable("VendorBatch", "Vendors");
+                entity.ToTable("VendorBatch", "Materials");
 
                 entity.Property(e => e.VendorBatchNumber)
                     .HasMaxLength(25)
@@ -476,17 +593,17 @@ namespace RavenAPI.Models
                 entity.HasOne(d => d.MaterialNumberNavigation)
                     .WithMany(p => p.VendorBatches)
                     .HasForeignKey(d => d.MaterialNumber)
-                    .HasConstraintName("FK__VendorBat__Mater__4CA06362");
+                    .HasConstraintName("FK__VendorBat__Mater__4F7CD00D");
 
                 entity.HasOne(d => d.SampleSubmitNumberNavigation)
                     .WithMany(p => p.VendorBatches)
                     .HasForeignKey(d => d.SampleSubmitNumber)
-                    .HasConstraintName("FK__VendorBat__Sampl__4BAC3F29");
+                    .HasConstraintName("FK__VendorBat__Sampl__4E88ABD4");
 
                 entity.HasOne(d => d.VendorNameNavigation)
                     .WithMany(p => p.VendorBatches)
                     .HasForeignKey(d => d.VendorName)
-                    .HasConstraintName("FK__VendorBat__Vendo__4AB81AF0");
+                    .HasConstraintName("FK__VendorBat__Vendo__4D94879B");
             });
 
             OnModelCreatingPartial(modelBuilder);

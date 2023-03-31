@@ -1,0 +1,19 @@
+﻿MaterialNumber,MaterialType,VLN,Assay,Water,Metals,Chloride,Boron,Phosphorus,Amps,AmpVolume,AmpUI,MetalBubblers,BubblerVolume,BubblerUI,AssayBulb,Vials,VialVolume,VialUI,Retain
+58245,Finish Product,Finish Product,1,1,1,1,0,0,,,,4,200,mL,1,,,,1
+58423,Finish Product,Finish Product,1,0,1,0,1,0,,,,3,500,mL,1,,,,1
+58931,Finish Product,Finish Product,1,1,1,0,1,1,1,100,mL,3,1500,mL,,,,,1
+58765,Finish Product,Finish Product,1,0,1,1,0,0,2,100,mL,,,,,,,,1
+58971,Finish Product,Finish Product,1,0,1,1,1,1,1,100,mL,3,200,mL,,,,,1
+58143,Finish Product,Finish Product,1,1,1,1,0,0,1,100,mL,4,200,mL,,,,,1
+58245,Raw Material,New,1,1,1,0,0,0,1,100,mL,1,200,mL,,,,,0
+58245,Raw Material,Old,1,1,0,0,0,0,1,100,mL,,,,,,,,0
+58423,Raw Material,New,1,1,1,1,1,0,,,,1,1500,mL,1,,,,0
+58931,Raw Material,New,1,1,1,1,1,1,1,100,mL,1,1500,mL,,,,,0
+58765,Raw Material,New,0,0,1,1,0,0,2,100,mL,,,,,,,,0
+58971,Raw Material,New,1,0,1,1,1,1,1,100,mL,1,200,mL,,,,,0
+58971,Raw Material,Old,1,0,0,0,0,0,,,,,,,,1,2,mL,0
+58143,Raw Material,New,1,1,1,0,0,0,1,100,mL,1,200,mL,,,,,0
+58143,Raw Material,Old,1,1,0,0,0,0,,,,,,,,1,5,mL,0
+58423,Reclaim,Reclaim,1,1,0,0,1,0,1,100,mL,,,,,,,,0
+58931,Reclaim,Reclaim,1,1,0,0,0,0,1,100,mL,,,,,,,,0
+58765,Reclaim,Reclaim,0,0,1,0,0,0,1,100,mL,,,,,,,,0

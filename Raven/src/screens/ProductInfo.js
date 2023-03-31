@@ -1,33 +1,36 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, TextInput} from 'react-native';
 import ajax from '../ProductionAjax';
-import Dropdown from '../components/DropDown';
 import SmallButton from '../components/SmallButton';
+import Dropdown from '../components/DropDown';
 
 const ProductInfo = (props, {navigation, route}) => {
   const material = props.route.params.data;
   const distillationOption = props.route.params.choice;
   const [productLot, setProductLot] = useState([]);
-  const [order, setOrder] = useState();
   const [batch, setBatch] = useState();
+  const [processOrder, setProcessOrder] = useState();
+  const [selectedReceiver, setSelectedReceiver] = useState(undefined);
+  const [selectedVendor, setSelectedVendor] = useState(undefined);
 
   let LotInfo = {};
 
   useEffect(() => {
-    async function getLotNumber() {
-      return setProductLot(await ajax.fetchProduct(material.materialNumber));
+    async function getNextLot() {
+      setProductLot(await ajax.fetchProduct(material.materialNumber));
     }
-    getLotNumber();
-  });
+    getNextLot();
+  }, [material.materialNumber]);
 
-  const updateLotInfo = async () => {
+  const updateLotInfo = () => {
     LotInfo.lotNumber = productLot.productLotNumber;
-    LotInfo.materialNumber = productLot.materialNumber;
-    LotInfo.processOrder = order;
+    LotInfo.materialNumber = material.materialNumber;
+    LotInfo.processOrder = processOrder;
     LotInfo.batchNumber = batch;
-    LotInfo.reciever = 'A-123';
-    LotInfo.sampleNumber = null;
-    await ajax.postProduct(LotInfo);
+    LotInfo.reciever = selectedReceiver;
+    LotInfo.vendor = selectedVendor;
+    ajax.postProduct(LotInfo);
+    // ajax.fetchRawMaterial(selectedVendor);
   };
 
   const handleSubmit = () => {
@@ -45,7 +48,7 @@ const ProductInfo = (props, {navigation, route}) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.header}>
-          {distillationOption}: {productLot.materialNumber}
+          {distillationOption}: {material.materialName}
         </Text>
       </View>
       <View style={styles.display}>
@@ -60,8 +63,8 @@ const ProductInfo = (props, {navigation, route}) => {
           <TextInput
             style={styles.productInput}
             keyboardType={'numeric'}
-            onChangeText={setOrder}
-            value={order}
+            onChangeText={setProcessOrder}
+            value={processOrder}
           />
         </View>
         <View style={styles.rm}>
@@ -75,11 +78,19 @@ const ProductInfo = (props, {navigation, route}) => {
         </View>
         <View style={styles.dropdown}>
           <Text style={styles.text}>Reciever: </Text>
-          <Dropdown label={'Select Item'} />
+          <Dropdown
+            label={'Select Reciever'}
+            data={productLot.receivers}
+            onSelect={setSelectedReceiver}
+          />
         </View>
         <View style={styles.dropdown}>
           <Text style={styles.text}>Raw Material: </Text>
-          <Dropdown label={'Select Item'} />
+          <Dropdown
+            label={'Select Vendor'}
+            data={productLot.vendors}
+            onSelect={setSelectedVendor}
+          />
         </View>
       </View>
       <View style={styles.button}>

@@ -25,7 +25,7 @@ const RunLog = (props, {navigation, route}) => {
       setRead(await ajax.fetchRunLog(material.materialNumber));
     }
     setDistillation();
-  });
+  }, [material.materialNumber]);
 
   return (
     <View style={styles.container}>

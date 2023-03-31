@@ -11,7 +11,6 @@ namespace RavenAPI.Models
         }
 
         public string VendorName { get; set; } = null!;
-        public bool IsMpps { get; set; }
 
         public virtual ICollection<VendorBatch> VendorBatches { get; set; }
     }

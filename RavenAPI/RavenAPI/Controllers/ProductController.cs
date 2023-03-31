@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RavenAPI.Services;
 using RavenAPI.DTO;
+using RavenAPI.src;
 
 namespace RavenAPI.Controllers;
 
@@ -27,11 +28,11 @@ public class ProductController : ControllerBase
         return product;
     }
 
-    [HttpGet("(MaterialNumber)")]
-    public ActionResult<ProductDTO> GetNextLotNumber(int materialNumber)
+    [HttpGet("(Selection)")]
+    public ActionResult<ProductLot> ProductSelection(int materialNumber)
     {
-        ProductDTO product = new ProductDTO();
-        product = ProductServices.getNextProductLotNumber(materialNumber);
+        ProductLot product;
+        product = ProductServices.ProductSelection(materialNumber);
 
         if (product == null)
             return NotFound();
@@ -47,9 +48,21 @@ public class ProductController : ControllerBase
             return NotFound();
         return vendors;
     }
-    [HttpPost]
+    [HttpGet("(RawMaterial)")]
+    public void GetRawMaterial(int materialNumber, string vendor)
+    {
+        ProductServices.NewRun(materialNumber, vendor);
+    }
+
+    [HttpPost("(Update Product Lot)")]
     public void InsertProductLot(ProductDTO product)
     {
         ProductServices.InsertProductLot(product);
     }
+    [HttpPost("(Selected Vendor)")]
+    public void SetSelectedVendor(int materialNumber, string vendor)
+    {
+        ProductServices.NewRun(materialNumber, vendor);
+    }
+
 }
