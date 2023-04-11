@@ -32,10 +32,10 @@ public class SampleDTO
             .Where(x => x.SampleSubmitNumber == sampleSubmitNumber)
             .Select(x => x.SampleDate).FirstOrDefault();
     }
-    public static bool SampleRequired(VendorDTO vendor)
+    public static bool SampleRequired(int materialNumber)
     {
         List<string> VLN = ctx.SampleRequireds
-                    .Where(v => v.MaterialNumber == vendor.MaterialNumber && v.MaterialType == "Raw Material")
+                    .Where(v => v.MaterialNumber == materialNumber && v.MaterialType == "Raw Material")
                     .Select(x => x.Vln).ToList();
         if (VLN.Count() > 1)
             return true;

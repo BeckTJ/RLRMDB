@@ -8,6 +8,10 @@ public class ProductLot
     public List<string>? Receivers { get; set; }
     public List<string>? Vendors { get; set; }
     public List<string>? RawMaterial { get; set; }
+    /* 
+    Verify if current lot is running, 
+    needs to be sampled or a new lot is required. 
+    */
     public void VerifyOpenLot(int materialNumber)
     {
         ProductDTO ProductLot = ProductDTO.GetCurrentProductLot(materialNumber);
@@ -50,7 +54,7 @@ public class ProductLot
     public static ProductLot StartNewRun(int materialNumber, string vendor)
     {
         ProductLot selection = new ProductLot();
-        selection.RawMaterial = RawMaterialSelection(materialNumber, vendor);
+        selection.RawMaterial = RawMaterialSelection(MaterialDTO.GetVendorMaterialNumber(materialNumber, vendor), vendor);
 
         return selection;
     }
@@ -64,12 +68,20 @@ public class ProductLot
         used for user selection. Process needs to check if 
         sample has been approved, if drum has been used, 
     */
+    /* On selection of a vendor a list of raw material drums
+    or vendor lot numbers should be given to the UI depending on
+    the sample criteria of the chemicals raw material. If a drum
+    is selected the program should add the drum to the product run
+    if a vendor lot is select the program should auto generate 
+    the drum id and add it to the raw material log and the product run
+    */
     public static List<string> RawMaterialSelection(int materialNumber, string vendor)
     {
-        if (SampleDTO.SampleRequired(VendorDTO.GetVendor(materialNumber, vendor)))
+        if (SampleDTO.SampleRequired(MaterialDTO.GetParentMaterialNumber(materialNumber)))
         {
             return RawMaterialDTO.GetDrumLotNumbers(materialNumber, vendor);
         }
         return VendorDTO.GetVendorBatch(materialNumber, vendor);
+
     }
 }

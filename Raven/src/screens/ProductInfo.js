@@ -30,7 +30,6 @@ const ProductInfo = (props, {navigation, route}) => {
     LotInfo.reciever = selectedReceiver;
     LotInfo.vendor = selectedVendor;
     ajax.postProduct(LotInfo);
-    // ajax.fetchRawMaterial(selectedVendor);
   };
 
   const handleSubmit = () => {

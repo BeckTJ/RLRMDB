@@ -59,10 +59,4 @@ public class ProductController : ControllerBase
     {
         ProductServices.InsertProductLot(product);
     }
-    [HttpPost("(Selected Vendor)")]
-    public void SetSelectedVendor(int materialNumber, string vendor)
-    {
-        ProductServices.NewRun(materialNumber, vendor);
-    }
-
 }

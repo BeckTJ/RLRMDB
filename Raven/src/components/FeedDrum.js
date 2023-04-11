@@ -1,15 +1,28 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
+import Dropdown from './DropDown';
 
-const FeedDrum = () => {
+const rawMaterialType = props => {
+  <Dropdown data={props} />;
+};
+
+const FeedDrum = props => {
+  const rawMaterial = props.rawMaterial;
   let feedDrum, batch, startWeight, endWeight;
 
   return (
     <View style={styles.preStart}>
       <View>
         <View style={styles.drumWeight}>
-          <Text style={styles.preStartText}>Feed Drum #:</Text>
-          <TextInput style={styles.preStartInput} value={feedDrum} />
+          <Text style={styles.preStartText}>Raw Material:</Text>
+          {/* Need To Determine if vendor lot or drum id
+          if vendor lot next drum id should be used, however
+          the vendor lot must still be selected. */}
+          <Dropdown
+            label={'Select Raw Material'}
+            data={rawMaterial}
+            onSelect={feedDrum}
+          />
         </View>
         <View style={styles.drumWeight}>
           <Text style={styles.preStartText}>Batch #:</Text>

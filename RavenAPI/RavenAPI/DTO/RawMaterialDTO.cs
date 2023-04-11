@@ -55,19 +55,12 @@ public class RawMaterialDTO : MaterialDTO
                     SampleSubmit = SampleDTO.GetSample(RawMaterial.SampleSubmitNumber),
                     DrumWeight = RawMaterial.DrumWeight,
                 })
-                .Where(x => x.SampleSubmit.Rejected == false).ToList();
+                /*.Where(x => x.SampleSubmit.Rejected == false)*/.ToList();
     }
     public static List<string> GetDrumLotNumbers(int materialNumber, string vendor)
     {
-        List<RawMaterialDTO> drumList = GetRawMaterial(materialNumber, vendor);
-        List<string> newDrumList = new List<string>();
-        foreach (var drum in drumList)
-        {
-            if (drum.SampleSubmit.Rejected == false)
-            {
-                newDrumList.Add(drum.DrumLotNumber);
-            }
-        }
-        return newDrumList;
+        return ctx.RawMaterials
+            .Where(x => x.MaterialNumber == materialNumber)
+            .Select(x => x.DrumLotNumber).ToList();
     }
 }

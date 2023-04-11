@@ -40,7 +40,6 @@ public class VendorDTO
     }
     public static List<string> GetVendorBatch(int materialNumber, string vendor)
     {
-        //&& SampleDTO.SampleRejected(vb.SampleSubmitNumber) == false
         return ctx.VendorBatches
         .Where(vb => vb.VendorName == vendor && vb.MaterialNumber == materialNumber)
         .Select(vb => vb.VendorBatchNumber)
@@ -55,10 +54,9 @@ public class VendorDTO
 
         foreach (var number in materialNumbers)
         {
-            string name = ctx.MaterialIds
+            vendor.Add(ctx.MaterialIds
                         .Where(v => v.MaterialNumber == number)
-                        .Select(v => v.VendorName).First();
-            vendor.Add(name);
+                        .Select(v => v.VendorName).FirstOrDefault());
         }
         return vendor;
     }

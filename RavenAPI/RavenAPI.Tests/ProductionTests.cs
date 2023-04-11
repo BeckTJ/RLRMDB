@@ -8,33 +8,25 @@ public class ProductTests
 {
 
     [Fact]
-    public void getProductLotNumberTest2()
+    public void getProductLotNumberTest()
     {
-        // ProductDTO product = new ProductDTO();
-        // product.MaterialNumber = 58245;
-        // product.ProductLotNumber = LotNumber.GetNextProductLotNumber((int)product.MaterialNumber);
-        // product.ProcessOrder = 9999123456;
-        // product.ProductBatchNumber = 9991234;
-        // product.ReceiverName = "A";
-
-        // ProductDTO.SetProductLot(product);
-
         int number = 58245;
-        var current = LotNumber.GetProductLotNumber(number);
+
+        var current = LotNumber.GetLastMaterialLotNumber(number);
 
         var lot = LotNumber.GetNextProductLotNumber(number);
 
-        Assert.NotEqual(current.ProductLotNumber, lot);
+        Assert.NotEqual(current, lot);
     }
 
     [Fact]
     public void firstLotNumber()
     {
         string product;
-        int materialnumber = 58245;
-        product = LotNumber.GetFirstLotNumber(materialnumber);
+        int materialnumber = 58143;
+        product = LotNumber.GetNextProductLotNumber(materialnumber);
 
-        Assert.Equal("200DB", product);
+        Assert.Equal("700EB", product);
     }
     [Fact]
     public void receiverTest()
@@ -42,5 +34,12 @@ public class ProductTests
         List<string> product = ProductDTO.GetReceivers(58245);
 
         Assert.Equal(3, product.Count());
+    }
+    [Fact]
+    public void NewRunTest()
+    {
+        var rawMaterial = ProductLot.StartNewRun(58423, "Ralphs");
+
+        Assert.Equal(2, rawMaterial.RawMaterial.Count());
     }
 }

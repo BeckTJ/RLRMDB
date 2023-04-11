@@ -53,16 +53,19 @@ export default {
         receiverId: product.receiver,
         sampleSubmitNumber: product.sampleNumber,
         startDate: product.startDate,
-        vendor: product.vendor,
       }),
     }).then(response => {
       response.json();
     });
   },
-  async fetchRawMaterial(vendor) {
+  async fetchRawMaterial(materialNumber, vendor) {
     try {
       const response = await fetch(
-        apiHost + '/Product/(RawMaterial)?vendor=' + vendor,
+        apiHost +
+          '/Product/(RawMaterial)?materialNumber=' +
+          materialNumber +
+          '&vendor=' +
+          vendor,
       );
       const responseJson = await response.json();
       return responseJson;

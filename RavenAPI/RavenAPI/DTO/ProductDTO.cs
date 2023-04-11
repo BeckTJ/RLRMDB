@@ -97,7 +97,6 @@ public class ProductDTO : MaterialDTO
     }
     public static List<string> GetReceivers(int materialNumber)
     {
-
         return ctx.SystemReceivers
             .Where(x => x.MaterialNumber == materialNumber)
             .Select(x => x.ReceiverName).ToList();

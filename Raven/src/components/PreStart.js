@@ -4,17 +4,16 @@ import CarbonDrum from './CarbonDrum';
 import FeedDrum from './FeedDrum';
 import InputValue from './InputValue';
 
-const PreStart = data => {
-  const material = data.material;
+const PreStart = props => {
+  const rawMaterial = props.param;
+  const material = props.material;
 
   return (
     <View style={styles.preStart}>
       <View>
         <View style={styles.drum}>
-          <FeedDrum />
-          <View>
-            <CarbonDrum material={material} />
-          </View>
+          <FeedDrum param={rawMaterial} />
+          <CarbonDrum material={material} />
         </View>
         <FlatList
           numColumns={2}
