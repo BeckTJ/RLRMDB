@@ -27,6 +27,7 @@ public class LotNumber
 
     public static string GetNextProductLotNumber(int materialNumber)
     {
+
         string code = MaterialDTO.getMaterialCode(materialNumber);
         int id;
 

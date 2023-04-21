@@ -53,6 +53,7 @@ public class MaterialDTO
     }
     public static string getMaterialCode(int materialNumber)
     {
+        RavenDBContext ctx = new RavenDBContext();
         return ctx.MaterialIds
             .Where(x => x.MaterialNumber == materialNumber)
             .Select(x => x.MaterialCode).FirstOrDefault();
@@ -67,6 +68,8 @@ public class MaterialDTO
     // write test to build this function
     public static int GetVendorMaterialNumber(int materialNumber, string vendor)
     {
+        RavenDBContext ctx = new RavenDBContext();
+
         return (from MaterialId in ctx.MaterialIds
                 join MaterialNumber in ctx.MaterialNumbers on MaterialId.MaterialNumber equals MaterialNumber.MaterialNumber1
                 where MaterialNumber.ParentMaterialNumber == materialNumber && MaterialId.VendorName == vendor

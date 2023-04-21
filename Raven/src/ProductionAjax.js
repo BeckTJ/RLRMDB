@@ -14,7 +14,32 @@ export default {
       console.error(error);
     }
   },
-
+  async fetchRawMaterial(materialNumber, vendor) {
+    try {
+      const response = await fetch(
+        apiHost +
+          '/Product/(RawMaterial)?materialNumber=' +
+          materialNumber +
+          '&vendor=' +
+          vendor,
+      );
+      const responseJson = await response.json();
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async fetchRawMaterialId(rawMaterial) {
+    try {
+      const response = await fetch(
+        apiHost + '/Product/(BatchNumber)?batchNumber' + rawMaterial,
+      );
+      const responseJson = await response.json();
+      return responseJson;
+    } catch (error) {
+      console.error(error);
+    }
+  },
   async fetchPreStart(materialNumber) {
     try {
       const response = await fetch(
@@ -57,20 +82,5 @@ export default {
     }).then(response => {
       response.json();
     });
-  },
-  async fetchRawMaterial(materialNumber, vendor) {
-    try {
-      const response = await fetch(
-        apiHost +
-          '/Product/(RawMaterial)?materialNumber=' +
-          materialNumber +
-          '&vendor=' +
-          vendor,
-      );
-      const responseJson = await response.json();
-      return responseJson;
-    } catch (error) {
-      console.error(error);
-    }
   },
 };

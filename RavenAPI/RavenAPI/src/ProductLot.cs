@@ -79,9 +79,10 @@ public class ProductLot
     {
         if (SampleDTO.SampleRequired(MaterialDTO.GetParentMaterialNumber(materialNumber)))
         {
-            return RawMaterialDTO.GetDrumLotNumbers(materialNumber, vendor);
+            return RawMaterialDTO.GetDrumLotNumbersList(materialNumber, vendor);
         }
-        return VendorDTO.GetVendorBatch(materialNumber, vendor);
+        return VendorDTO.GetVendorBatchList(materialNumber, vendor);
 
     }
+
 }

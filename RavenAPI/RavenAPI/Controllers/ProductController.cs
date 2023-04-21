@@ -49,9 +49,13 @@ public class ProductController : ControllerBase
         return vendors;
     }
     [HttpGet("(RawMaterial)")]
-    public void GetRawMaterial(int materialNumber, string vendor)
+    public ActionResult<List<string>> GetRawMaterial(int materialNumber, string vendor)
     {
-        ProductServices.NewRun(materialNumber, vendor);
+        ProductLot product = ProductServices.NewRun(materialNumber, vendor);
+
+        if (product == null)
+            return NotFound();
+        return product.RawMaterial;
     }
 
     [HttpPost("(Update Product Lot)")]

@@ -19,13 +19,6 @@ public class RawMaterialDTO : MaterialDTO
     {
 
     }
-    public static List<string> GetRawMaterialByVendorBatch(string vendorBatchNumber)
-    {
-        return ctx.RawMaterials
-            .Where(vb => vb.VendorBatchNumber == vendorBatchNumber)
-            .Select(rm => rm.DrumLotNumber).ToList();
-    }
-
     public static RawMaterialDTO GetRawMaterialByDrumNumber(string drumLotNumber)
     {
         return ctx.RawMaterials
@@ -57,7 +50,7 @@ public class RawMaterialDTO : MaterialDTO
                 })
                 /*.Where(x => x.SampleSubmit.Rejected == false)*/.ToList();
     }
-    public static List<string> GetDrumLotNumbers(int materialNumber, string vendor)
+    public static List<string> GetDrumLotNumbersList(int materialNumber, string vendor)
     {
         return ctx.RawMaterials
             .Where(x => x.MaterialNumber == materialNumber)

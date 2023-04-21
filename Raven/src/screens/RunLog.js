@@ -26,14 +26,11 @@ const RunLog = (props, {navigation, route}) => {
       setPreStart(await ajax.fetchPreStart(material.materialNumber));
       setRead(await ajax.fetchRunLog(material.materialNumber));
       setRawMaterial(
-        await ajax.fetchRawMaterial(
-          material.materialNumber,
-          productLot.selectedVendor,
-        ),
+        await ajax.fetchRawMaterial(material.materialNumber, productLot.vendor),
       );
     }
     setDistillation();
-  }, [material.materialNumber, productLot.selectedVendor]);
+  }, [material.materialNumber, productLot.vendor]);
 
   return (
     <View style={styles.container}>

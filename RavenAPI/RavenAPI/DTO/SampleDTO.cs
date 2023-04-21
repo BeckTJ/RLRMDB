@@ -34,6 +34,7 @@ public class SampleDTO
     }
     public static bool SampleRequired(int materialNumber)
     {
+        RavenDBContext ctx = new RavenDBContext();
         List<string> VLN = ctx.SampleRequireds
                     .Where(v => v.MaterialNumber == materialNumber && v.MaterialType == "Raw Material")
                     .Select(x => x.Vln).ToList();

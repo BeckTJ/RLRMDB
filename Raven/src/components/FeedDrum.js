@@ -1,27 +1,31 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, StyleSheet, FlatList} from 'react-native';
 import Dropdown from './DropDown';
-
-const rawMaterialType = props => {
-  <Dropdown data={props} />;
-};
+import ajax from '../ProductionAjax';
 
 const FeedDrum = props => {
-  const rawMaterial = props.rawMaterial;
+  const [selection, setSelection] = useState({});
+  const rawMaterial = props.param;
   let feedDrum, batch, startWeight, endWeight;
+
+  const handleSelection = async () => {
+    setSelection(await ajax.fetchRawMaterialId(rawMaterial));
+  };
+  <Dropdown
+    label={'Select Raw Material'}
+    data={props}
+    onSelect={handleSelection}
+  />;
 
   return (
     <View style={styles.preStart}>
       <View>
         <View style={styles.drumWeight}>
           <Text style={styles.preStartText}>Raw Material:</Text>
-          {/* Need To Determine if vendor lot or drum id
-          if vendor lot next drum id should be used, however
-          the vendor lot must still be selected. */}
           <Dropdown
             label={'Select Raw Material'}
             data={rawMaterial}
-            onSelect={feedDrum}
+            onSelect={handleSelection}
           />
         </View>
         <View style={styles.drumWeight}>

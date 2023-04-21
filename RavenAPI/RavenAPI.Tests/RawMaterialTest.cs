@@ -59,4 +59,5 @@ public class RawMaterialTests
         Assert.Equal(5, rawMaterialDrum.RawMaterial.Count());
         Assert.Equal(2, rawMaterialLot.RawMaterial.Count());
     }
+
 }
