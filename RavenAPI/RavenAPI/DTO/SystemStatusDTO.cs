@@ -10,6 +10,7 @@ public class SystemStatusDTO
     public int? ReboilerLevel { get; set; }
     public int? PrefractionLevel { get; set; }
     public int? ReceiverLevel { get; set; }
+    public List<RunLogDTO> RunLogs { get; set; }
     public TimeSpan? ReadTime { get; set; }
 
 

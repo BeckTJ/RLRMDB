@@ -12,6 +12,12 @@ public class SampleDTO
     public DateTime? ReviewDate { get; set; }
     public DateTime? ExperationDate { get; set; }
 
+    // Create a sample submit connect to access DB.
+    internal static SampleDTO SetSample()
+    {
+        throw new NotImplementedException();
+    }
+
     public static SampleDTO GetSample(string sampleSubmitNumber)
     {
         return ctx.SampleSubmits

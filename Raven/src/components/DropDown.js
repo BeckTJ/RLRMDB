@@ -70,13 +70,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#efefef',
     height: 50,
-    width: 450,
+    width: 250,
     paddingHorizontal: 10,
     zIndex: 1,
   },
   buttonText: {
     flex: 1,
     textAlign: 'center',
+  },
+  overlay: {
+    width: 250,
   },
   dropdown: {
     position: 'absolute',
@@ -86,6 +89,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowOffset: {height: 4, width: 0},
     shadowOpacity: 0.5,
+    alignItems: 'center',
   },
   item: {
     paddingHorizontal: 10,

@@ -10,11 +10,6 @@ namespace RavenAPI.Controllers;
 
 public class ProductController : ControllerBase
 {
-    public ProductController()
-    {
-
-    }
-
     [HttpGet]
     public ActionResult<List<ProductDTO>> GetAll() => ProductServices.GetAll();
 
@@ -37,7 +32,6 @@ public class ProductController : ControllerBase
         if (product == null)
             return NotFound();
         return product;
-
     }
     [HttpGet("(MaterialNumberForVendor)")]
     public ActionResult<List<string>> GetVendor(int materialNumber)
@@ -47,15 +41,6 @@ public class ProductController : ControllerBase
         if (vendors == null)
             return NotFound();
         return vendors;
-    }
-    [HttpGet("(RawMaterial)")]
-    public ActionResult<List<string>> GetRawMaterial(int materialNumber, string vendor)
-    {
-        ProductLot product = ProductServices.NewRun(materialNumber, vendor);
-
-        if (product == null)
-            return NotFound();
-        return product.RawMaterial;
     }
 
     [HttpPost("(Update Product Lot)")]

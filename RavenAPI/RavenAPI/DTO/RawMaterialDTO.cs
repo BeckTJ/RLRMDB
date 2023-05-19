@@ -1,4 +1,5 @@
 using RavenAPI.Models;
+using RavenAPI.src;
 
 namespace RavenAPI.DTO;
 
@@ -9,15 +10,25 @@ public class RawMaterialDTO : MaterialDTO
     public int? DrumBatchNumber { get; set; }
     public string? ContainerNumber { get; set; }
     public VendorDTO Vendor { get; set; }
-    public SampleDTO SampleSubmit { get; set; }
     public int? DrumWeight { get; set; }
-    public RawMaterialDTO()
-    {
 
+    public static void SetRawMaterial(int materialNumber, int batchNumber, string ctn, string vendor, string vendorBatch)
+    {
+        RawMaterialDTO rm = new RawMaterialDTO();
+        rm.DrumLotNumber = LotNumber.GetNextProductLotNumber(materialNumber);
+        rm.DrumBatchNumber = batchNumber;
+        rm.ContainerNumber = ctn;
+        rm.Vendor = VendorDTO.SetVendorBatch(materialNumber, vendor, vendorBatch);
     }
-    public RawMaterialDTO(int materialNumber)
+    internal static RawMaterialDTO SetRawMaterialFromVendorBatch(string rawMaterial)
     {
-
+        RawMaterialDTO rm = new RawMaterialDTO();
+        rm.Vendor = VendorDTO.GetVendor(rawMaterial);
+        rm.DrumLotNumber = LotNumber.GetNextProductLotNumber((int)rm.Vendor.MaterialNumber);
+        rm.DrumBatchNumber = null; // Fix DB to have vendorbatch set up with material batch number
+        rm.ContainerNumber = null;
+        rm.DrumWeight = null; // set standard Drum Weight in DB for each material
+        return rm;
     }
     public static RawMaterialDTO GetRawMaterialByDrumNumber(string drumLotNumber)
     {
@@ -30,7 +41,6 @@ public class RawMaterialDTO : MaterialDTO
             Vendor = VendorDTO.GetVendor((int)rm.MaterialNumber, vb.VendorName),
             DrumBatchNumber = rm.SapBatchNumber,
             ContainerNumber = rm.ContainerNumber,
-            SampleSubmit = SampleDTO.GetSample(rm.SampleSubmitNumber),
             DrumWeight = rm.DrumWeight,
         }).FirstOrDefault();
     }
@@ -45,7 +55,6 @@ public class RawMaterialDTO : MaterialDTO
                     MaterialNumber = RawMaterial.MaterialNumber,
                     DrumBatchNumber = RawMaterial.SapBatchNumber,
                     ContainerNumber = RawMaterial.ContainerNumber,
-                    SampleSubmit = SampleDTO.GetSample(RawMaterial.SampleSubmitNumber),
                     DrumWeight = RawMaterial.DrumWeight,
                 })
                 /*.Where(x => x.SampleSubmit.Rejected == false)*/.ToList();

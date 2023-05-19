@@ -4,25 +4,21 @@ import Dropdown from './DropDown';
 import ajax from '../ProductionAjax';
 
 const FeedDrum = props => {
-  const [selection, setSelection] = useState({});
+  const [selection, setSelection] = useState();
   const rawMaterial = props.param;
   let feedDrum, batch, startWeight, endWeight;
 
   const handleSelection = async () => {
-    setSelection(await ajax.fetchRawMaterialId(rawMaterial));
+    setSelection(await ajax.fetchRawMaterialInfo(rawMaterial));
   };
-  <Dropdown
-    label={'Select Raw Material'}
-    data={props}
-    onSelect={handleSelection}
-  />;
 
   return (
-    <View style={styles.preStart}>
+    <View style={styles.feedDrum}>
       <View>
         <View style={styles.drumWeight}>
           <Text style={styles.preStartText}>Raw Material:</Text>
           <Dropdown
+            style={styles.feedDrumDropdown}
             label={'Select Raw Material'}
             data={rawMaterial}
             onSelect={handleSelection}
@@ -50,7 +46,7 @@ const FeedDrum = props => {
 };
 
 const styles = StyleSheet.create({
-  preStart: {
+  feedDrum: {
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
@@ -65,6 +61,12 @@ const styles = StyleSheet.create({
     width: 125,
     marginRight: 11,
     paddingBottom: 0,
+  },
+  feedDrumDropdown: {
+    width: 250,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    borderWidth: 1.5,
   },
   smallInput: {
     fontSize: 20,

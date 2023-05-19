@@ -29,7 +29,7 @@ export default {
       console.error(error);
     }
   },
-  async fetchRawMaterialId(rawMaterial) {
+  async fetchRawMaterialInfo(rawMaterial) {
     try {
       const response = await fetch(
         apiHost + '/Product/(BatchNumber)?batchNumber' + rawMaterial,

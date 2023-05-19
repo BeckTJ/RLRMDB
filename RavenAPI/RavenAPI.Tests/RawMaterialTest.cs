@@ -1,18 +1,19 @@
 using Xunit;
 using RavenAPI.src;
 using RavenAPI.DTO;
+using RavenAPI.Services;
 
 namespace RavenAPI.Tests;
 
 public class RawMaterialTests
 {
     [Fact]
-    public void getVendorFromDB()
+    public void GetVendorFromDB()
     {
         int materialNumber = 58143;
         var vendor = VendorDTO.getVendorFromParent(materialNumber);
 
-        Assert.Equal(4, vendor.Count());
+        Assert.Equal(4, vendor.Count);
     }
     [Fact]
     public void getMaterialNumber()
@@ -20,10 +21,10 @@ public class RawMaterialTests
         int materialNumber = 58971;
         var materialNumbers = MaterialDTO.GetMaterialNumberFromParent(materialNumber);
 
-        Assert.Equal(3, materialNumbers.Count());
+        Assert.Equal(3, materialNumbers.Count);
     }
     [Fact]
-    public void checkRMforParent()
+    public void CheckRMforParent()
     {
         var test = RawMaterialDTO.GetRawMaterialByDrumNumber("100CA1C02");
 
@@ -56,8 +57,22 @@ public class RawMaterialTests
         var rawMaterialDrum = ProductLot.StartNewRun(58245, "Liquor Store"); // all drum sampled (drum)
         var rawMaterialLot = ProductLot.StartNewRun(58423, "Ralphs"); // 1 drums sampled (lot)
 
-        Assert.Equal(5, rawMaterialDrum.RawMaterial.Count());
-        Assert.Equal(2, rawMaterialLot.RawMaterial.Count());
+        Assert.Equal(5, rawMaterialDrum.RawMaterial.Count);
+        Assert.Equal(2, rawMaterialLot.RawMaterial.Count);
     }
 
+    public static void GetRawMaterialFromService()
+    {
+        string drumId = "702DA1C01";
+        string drumVendorNumber = "222-761-767";
+        string vendorBatch = "780-531-555";
+
+        var drum = ProductServices.GetRawMaterial(drumId);
+        var vendor = ProductServices.GetRawMaterial(vendorBatch);
+        var id = LotNumber.GetNextProductLotNumber(3322187);
+
+        Assert.Equal(drumId, drum.DrumLotNumber);
+        Assert.Equal(drumVendorNumber, drum.Vendor.VendorBatchNumber);
+        Assert.Equal(id, vendor.DrumLotNumber);
+    }
 }

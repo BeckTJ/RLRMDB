@@ -16,6 +16,6 @@ public class ProductServices
     public static void InsertProductLot(ProductDTO product) => ProductDTO.SetProductLot(product);
     public static List<String> GetVendors(int materialNumber) => VendorDTO.getVendorFromParent(materialNumber);
     public static List<String> GetReceivers(int materialNumber) => ProductDTO.GetReceivers(materialNumber);
-    public static ProductLot NewRun(int materialNumber, string vendor) => ProductLot.StartNewRun(materialNumber, vendor);
+
 
 }

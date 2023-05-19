@@ -12,13 +12,15 @@ public class VendorDTO
     public SampleDTO SampleSubmit { get; set; }
     public int? Quantity { get; set; }
 
-    public VendorDTO()
+    internal static VendorDTO SetVendorBatch(int materialNumber, string vendor, string vendorBatch)
     {
+        VendorDTO vb = new VendorDTO();
+        vb.MaterialNumber = materialNumber;
+        vb.VendorName = vendor;
+        vb.VendorBatchNumber = vendorBatch;
+        vb.SampleSubmit = SampleDTO.SetSample();
 
-
-    }
-    public VendorDTO(int materialNumber, string vendor)
-    {
+        return vb;
     }
 
     internal static VendorDTO GetVendor(int materialNumber, string? vendorName)
@@ -34,6 +36,20 @@ public class VendorDTO
                 Quantity = x.Quantity
             }).FirstOrDefault();
     }
+    internal static VendorDTO GetVendor(string batchNumber)
+    {
+        return ctx.VendorBatches
+            .Where(v => v.VendorBatchNumber == batchNumber)
+            .Select(x => new VendorDTO
+            {
+                MaterialNumber = x.MaterialNumber,
+                VendorName = x.VendorName,
+                VendorBatchNumber = x.VendorBatchNumber,
+                SampleSubmit = SampleDTO.GetSample(x.SampleSubmitNumber),
+                Quantity = x.Quantity
+            }).FirstOrDefault();
+    }
+
 
     public static List<string> GetVendorBatchList(int materialNumber, string vendor)
     {

@@ -48,14 +48,12 @@ public class ProductLot
         selection.ProductLotNumber = LotNumber.GetNextProductLotNumber(materialNumber);
         selection.Receivers = ProductDTO.GetReceivers(materialNumber);
         selection.Vendors = VendorDTO.getVendorFromParent(materialNumber);
-
         return selection;
     }
     public static ProductLot StartNewRun(int materialNumber, string vendor)
     {
         ProductLot selection = new ProductLot();
         selection.RawMaterial = RawMaterialSelection(MaterialDTO.GetVendorMaterialNumber(materialNumber, vendor), vendor);
-
         return selection;
     }
 
