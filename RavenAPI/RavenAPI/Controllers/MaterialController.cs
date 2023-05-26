@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using RavenAPI.Services;
-using RavenAPI.Models;
 using RavenAPI.DTO;
+using RavenAPI.Services;
 
 namespace RavenAPI.Controllers;
 
@@ -20,7 +19,7 @@ public class MaterialController : ControllerBase
 
 
     // GET by Id action
-    [HttpGet("(id)")]
+    [HttpGet("(Materials)")]
     public ActionResult<MaterialDTO> Get(int id)
     {
         var material = MaterialServices.Get(id);
@@ -28,6 +27,15 @@ public class MaterialController : ControllerBase
         if (material == null)
             return NotFound();
         return material;
+    }
+    [HttpGet("(Vendors)")]
+    public ActionResult<List<VendorDTO>> GetVendors(int materialNumber)
+    {
+        var vendors = MaterialServices.GetVendors(materialNumber);
+
+        if (vendors == null)
+            return NotFound();
+        return vendors;
     }
 
     // POST action

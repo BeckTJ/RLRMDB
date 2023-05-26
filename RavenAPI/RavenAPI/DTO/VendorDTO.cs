@@ -6,6 +6,7 @@ public class VendorDTO
 {
     static RavenDBContext ctx = new RavenDBContext();
 
+    public int? ParentMaterialNumber { get; set; }
     public int? MaterialNumber { get; set; }
     public string? VendorName { get; set; }
     public string? VendorBatchNumber { get; set; }
@@ -23,7 +24,7 @@ public class VendorDTO
         return vb;
     }
 
-    internal static VendorDTO GetVendor(int materialNumber, string? vendorName)
+    internal static List<VendorDTO> GetVendor(int materialNumber, string? vendorName)
     {
         return ctx.VendorBatches
             .Where(v => v.VendorName == vendorName && v.MaterialNumber == materialNumber)
@@ -34,7 +35,7 @@ public class VendorDTO
                 VendorBatchNumber = x.VendorBatchNumber,
                 SampleSubmit = SampleDTO.GetSample(x.SampleSubmitNumber),
                 Quantity = x.Quantity
-            }).FirstOrDefault();
+            }).ToList();
     }
     internal static VendorDTO GetVendor(string batchNumber)
     {
@@ -48,6 +49,11 @@ public class VendorDTO
                 SampleSubmit = SampleDTO.GetSample(x.SampleSubmitNumber),
                 Quantity = x.Quantity
             }).FirstOrDefault();
+    }
+
+    public static List<VendorDTO> GetRawMaterial(int materialNumber, string vendor)
+    {
+        return GetVendor(materialNumber, vendor);
     }
 
 

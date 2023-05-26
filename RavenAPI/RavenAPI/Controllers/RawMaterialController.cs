@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using RavenAPI.Services;
 using RavenAPI.DTO;
+using RavenAPI.Services;
 
 
 namespace RavenAPI.Controllers;
@@ -24,15 +24,16 @@ public class RawMaterialController : ControllerBase
     }
 
     [HttpGet("(RawMaterial)")]
-    public ActionResult<List<string>> GetRawMaterial(int materialNumber, string vendor)
+    public ActionResult<object> GetRawMaterial(int materialNumber, string vendor)
     {
-        ProductLot product = RawMaterialServices.NewRun(materialNumber, vendor);
+        var rawMaterial = RawMaterialServices.RawMaterialSelection(materialNumber, vendor);
 
-        if (product == null)
+        if (rawMaterial == null)
             return NotFound();
-        return product.RawMaterial;
+        return rawMaterial;
     }
-    [HttpGet("(DrumId)")]
-    public ActionResult<RawMaterialDTO> GetRawMaterialInfo(string drumId) => ProductServices.GetRawMaterial(drumId);
+
+    [HttpGet("(VendorBatchNumberForRawMaterialDrumId)")]
+    public ActionResult<RawMaterialDTO> GetRawMaterialDrumId(string drumId) => RawMaterialServices.GetRawMaterial(drumId);
 
 }

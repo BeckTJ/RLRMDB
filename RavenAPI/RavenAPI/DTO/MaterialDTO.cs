@@ -7,8 +7,9 @@ public class MaterialDTO
     public string? MaterialName { get; set; } //Material
     public int? MaterialNumber { get; set; } //Material
     public string? MaterialAbrev { get; set; } //Material
-    public string? MaterialCode { get; set; } //MaterialId
+    public decimal? SpecificGravity { get; set; } //Material
     public string? PermitNumber { get; set; } //Material
+    public string? MaterialCode { get; set; } //MaterialId
     public string? UnitOfIssue { get; set; } //MaterialNumber
     public bool BatchManaged { get; set; } //MaterialNumber
     public int? SequenceId { get; set; } //MaterialId
@@ -25,6 +26,7 @@ public class MaterialDTO
              MaterialName = Material.MaterialName,
              MaterialNumber = MaterialNumbers.MaterialNumber1,
              MaterialAbrev = Material.MaterialNameAbreviation,
+             SpecificGravity = Material.SpecificGravity,
              MaterialCode = MaterialId.MaterialCode,
              PermitNumber = Material.PermitNumber,
              UnitOfIssue = MaterialNumbers.UnitOfIssue,

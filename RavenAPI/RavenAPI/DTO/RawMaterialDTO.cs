@@ -38,7 +38,7 @@ public class RawMaterialDTO : MaterialDTO
         {
             DrumLotNumber = rm.DrumLotNumber,
             MaterialNumber = rm.MaterialNumber,
-            Vendor = VendorDTO.GetVendor((int)rm.MaterialNumber, vb.VendorName),
+            Vendor = VendorDTO.GetVendor(rm.VendorBatchNumber),
             DrumBatchNumber = rm.SapBatchNumber,
             ContainerNumber = rm.ContainerNumber,
             DrumWeight = rm.DrumWeight,
@@ -54,10 +54,10 @@ public class RawMaterialDTO : MaterialDTO
                     DrumLotNumber = RawMaterial.DrumLotNumber,
                     MaterialNumber = RawMaterial.MaterialNumber,
                     DrumBatchNumber = RawMaterial.SapBatchNumber,
+                    Vendor = VendorDTO.GetVendor(RawMaterial.VendorBatchNumber),
                     ContainerNumber = RawMaterial.ContainerNumber,
                     DrumWeight = RawMaterial.DrumWeight,
-                })
-                /*.Where(x => x.SampleSubmit.Rejected == false)*/.ToList();
+                }).ToList();
     }
     public static List<string> GetDrumLotNumbersList(int materialNumber, string vendor)
     {

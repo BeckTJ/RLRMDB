@@ -1,23 +1,26 @@
-using RavenAPI.Models;
 using RavenAPI.DTO;
+using RavenAPI.Models;
 
 namespace RavenAPI.src;
 
 public class LotNumber
 {
-    static RavenDBContext ctx = new RavenDBContext();
 
     public static string SetMaterialSequenceId(int materialNumber)
     {
+
         MaterialDTO materialId = new MaterialDTO(materialNumber);
         return materialId.SequenceId + materialId.MaterialCode;
     }
     public static string GetFirstLotNumber(int materialNumber)
     {
+
         return MaterialDTO.GetSequenceId(materialNumber) + MaterialDTO.getMaterialCode(materialNumber);
     }
     public static string GetLastMaterialLotNumber(int materialNumber)
     {
+         RavenDBContext ctx = new RavenDBContext();
+
         return ctx.Productions
             .Where(x => x.MaterialNumber == materialNumber)
             .OrderByDescending(x => x.ProductLotNumber)
@@ -27,6 +30,7 @@ public class LotNumber
 
     public static string GetNextProductLotNumber(int materialNumber)
     {
+
 
         string code = MaterialDTO.getMaterialCode(materialNumber);
         int id;

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RavenAPI.Models
+﻿namespace RavenAPI.Models
 {
     public partial class Receiver
     {
