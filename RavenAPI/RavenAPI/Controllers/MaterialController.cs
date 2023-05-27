@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using RavenAPI.DTO;
-using RavenAPI.Services;
+using RavenBAL.DTO;
+using RavenDAL.Interface;
+using RavenBAL.Services;
+using RavenDAL.Models;
 
 namespace RavenAPI.Controllers;
 
@@ -8,15 +10,31 @@ namespace RavenAPI.Controllers;
 [Route("[controller]")]
 public class MaterialController : ControllerBase
 {
+    private readonly MaterialServices _materialServices;
+    private readonly IRepository<Material> _Material;
 
-    public MaterialController()
+    public MaterialController(IRepository<Material> material, MaterialServices materialServices)
     {
-
+        _materialServices = materialServices;
+        _Material = material;
     }
+    [HttpPost("(AddMaterial)")]
+    public async Task<Object> AddMaterial([FromBody] Material material)
+    {
+        try
+        {
+            await _materialServices.AddMaterial(material);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
     // GET all action
     [HttpGet]
     public ActionResult<List<MaterialDTO>> GetAll() => MaterialServices.GetAll();
-
 
     // GET by Id action
     [HttpGet("(Materials)")]
