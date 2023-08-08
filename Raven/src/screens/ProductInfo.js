@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   display: {
-    borderColor: 'black',
     borderWidth: 1.5,
     justifyContent: 'center',
     padding: 20,
@@ -141,7 +140,6 @@ const styles = StyleSheet.create({
   },
   productLotNumber: {
     borderBottomWidth: 1.5,
-    borderColor: 'black',
     fontSize: 32,
     textAlign: 'center',
     width: 350,
@@ -154,7 +152,6 @@ const styles = StyleSheet.create({
   },
   productInput: {
     fontSize: 24,
-    borderColor: 'black',
     borderBottomWidth: 1.5,
     width: 350,
     marginRight: 30,

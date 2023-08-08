@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     borderWidth: 1.5,
-    borderColor: 'black',
     padding: 5,
     marginBottom: 5,
   },
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
   },
   preStartInput: {
     fontSize: 20,
-    borderColor: 'black',
     borderBottomWidth: 1.5,
     width: 125,
     marginRight: 11,

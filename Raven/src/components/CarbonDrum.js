@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   },
   preStartInput: {
     fontSize: 20,
-    borderColor: 'black',
     borderBottomWidth: 1.5,
     width: 125,
     marginRight: 10,

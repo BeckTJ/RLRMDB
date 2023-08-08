@@ -18,7 +18,7 @@ export default {
     try {
       const response = await fetch(
         apiHost +
-          '/Product/(RawMaterial)?materialNumber=' +
+          '/RawMaterial/(RawMaterial)?materialNumber=' +
           materialNumber +
           '&vendor=' +
           vendor,

@@ -7,6 +7,8 @@ const FeedDrum = props => {
   const [selection, setSelection] = useState();
   const rawMaterial = props.param;
   let feedDrum, batch, startWeight, endWeight;
+  let rawMaterialData =
+    rawMaterial.drumLotNumber + ' ' + rawMaterial.MaterialNumber;
 
   const handleSelection = async () => {
     setSelection(await ajax.fetchRawMaterialInfo(rawMaterial));
@@ -20,7 +22,7 @@ const FeedDrum = props => {
           <Dropdown
             style={styles.feedDrumDropdown}
             label={'Select Raw Material'}
-            data={rawMaterial}
+            data={rawMaterialData}
             onSelect={handleSelection}
           />
         </View>
@@ -56,7 +58,6 @@ const styles = StyleSheet.create({
   },
   preStartInput: {
     fontSize: 20,
-    borderColor: 'black',
     borderBottomWidth: 1.5,
     width: 125,
     marginRight: 11,
@@ -65,12 +66,9 @@ const styles = StyleSheet.create({
   feedDrumDropdown: {
     width: 250,
     borderStyle: 'solid',
-    borderColor: 'black',
-    borderWidth: 1.5,
   },
   smallInput: {
     fontSize: 20,
-    borderColor: 'black',
     borderBottomWidth: 1.5,
     width: 50,
     marginRight: 10,

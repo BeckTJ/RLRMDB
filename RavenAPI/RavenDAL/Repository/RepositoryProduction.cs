@@ -11,7 +11,7 @@ namespace RavenDAL.Repository
 {
     public class RepositoryProduction : IRepository<Production>
     {
-        RavenDBContext _ctx;
+        private readonly RavenDBContext _ctx;
         public RepositoryProduction(RavenDBContext ctx) => _ctx = new RavenDBContext();
         public async Task<Production> Create(Production _object)
         {
@@ -36,14 +36,18 @@ namespace RavenDAL.Repository
                 throw;
             }
         }
-        public Production GetById(int id)
+        public Production GetById(string id)
         {
-            return _ctx.Productions.Where(x => x.MaterialNumber == id).FirstOrDefault();
+            return _ctx.Productions.Where(x => x.ProductLotNumber == id).FirstOrDefault();
         }
         public void Update(Production _object)
         {
             _ctx.Productions.Update(_object);
             _ctx.SaveChanges();
+        }
+        public Production GetById(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

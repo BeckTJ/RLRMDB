@@ -51,7 +51,6 @@ const styles = StyleSheet.create({
   },
   values: {
     borderBottomWidth: 1.5,
-    bordercolor: 'black',
     width: 150,
     textAlign: 'center',
     fontSize: 20,

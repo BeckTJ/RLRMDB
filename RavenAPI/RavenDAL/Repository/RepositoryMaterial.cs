@@ -11,8 +11,8 @@ namespace RavenDAL.Repository
 {
     public class RepositoryMaterial : IRepository<Material>
     {
-        RavenDBContext _ctx;
-        public RepositoryMaterial(RavenDBContext ctx) => _ctx = new RavenDBContext();
+        private readonly RavenDBContext _ctx;
+        public RepositoryMaterial(RavenDBContext ctx) => _ctx = ctx;
         public async Task<Material> Create(Material _object)
         {
             var obj = await _ctx.Materials.AddAsync(_object);

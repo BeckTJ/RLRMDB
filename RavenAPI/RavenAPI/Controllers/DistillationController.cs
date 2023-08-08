@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using RavenBAL.DTO;
-using RavenBAL.Services;
+using RavenDAL.DTO;
+using RavenBAL.Repository;
 
 namespace RavenAPI.Controllers;
 
@@ -10,26 +10,26 @@ namespace RavenAPI.Controllers;
 public class DistillationController : ControllerBase
 {
     [HttpGet("(AllProductLots)")]
-    public ActionResult<List<ProductDTO>> GetAllProductLots() => ProductServices.GetAll();
+    //public ActionResult<List<ProductDTO>> GetAllProductLots() => RepoProduct.GetAll();
     
     [HttpGet("(AllDistillationSystems)")]
-    public ActionResult<List<DistillationSystemDTO>> GetAllSystems() => DistillationServices.GetAll();
-
-    [HttpGet("(DistillationSystemByMaterialNumber)")]
-    public ActionResult<DistillationSystemDTO> GetDistillationSystem(int materialNumber)
-    {
-        var distillationSystem = DistillationServices.StartDistillation(materialNumber);
-
-        if (distillationSystem == null)
-            return NotFound();
-        return distillationSystem;
-    }
+    //public ActionResult<List<DistillationSystemDTO>> GetAllSystems() => RepoDistillation.GetAll();
+    //
+    //[HttpGet("(DistillationSystemByMaterialNumber)")]
+    //public ActionResult<DistillationSystemDTO> GetDistillationSystem(int materialNumber)
+    //{
+    //    var distillationSystem = RepoDistillation.StartDistillation(materialNumber);
+    //
+    //    if (distillationSystem == null)
+    //        return NotFound();
+    //    return distillationSystem;
+    //}
     [HttpGet("(NewProductLot)")]
-    public ActionResult<ProductDTO> NewLot(int materialNumber) => ProductServices.StartNewLot(materialNumber);
+    //public ActionResult<ProductDTO> NewLot(int materialNumber) => RepoProduct.StartNewLot(materialNumber);
 
     [HttpPost("(Update Product Lot)")]
     public void InsertProductLot(ProductDTO product)
     {
-        ProductServices.InsertProductLot(product);
+     //   RepoProduct.InsertProductLot(product);
     }
 }

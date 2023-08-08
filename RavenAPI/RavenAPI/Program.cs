@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using RavenDAL.Data;
-using RavenDAL.Models;
-using RavenDAL.Interface;
-using RavenDAL.Repository;
-using RavenBAL.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Nest;
+using RavenDAL.DTO;
+using RavenDAL.Interface;
+using RavenDAL.DTORepo;
+using RavenBAL.Interface;
+using RavenBAL.src;
+using RavenBAL.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
-builder.Services.AddTransient<RavenDAL.Interface.IRepository<Material>, RepositoryMaterial>();
-builder.Services.AddTransient<MaterialServices, MaterialServices>();
+
+#region Service Injected
+builder.Services.AddTransient<IRawMaterialDrum<RawMaterialDrumDTO>, RepoRawMaterialDrum>();
+builder.Services.AddTransient<IMaterialData<MaterialDataDTO>, RepoMaterialDataDTO>();
+builder.Services.AddTransient<IVendor<VendorBatchDTO>, RepoVendorBatchDTO>();
+
+builder.Services.AddTransient<IProductId,ProductId>();
+builder.Services.AddTransient<IVendorLot<VendorLot>, RepoVendorLot>();
+builder.Services.AddTransient<IRawMaterial<RavenBAL.src.RawMaterialData>, RepoRawMaterial>();    
+
+#endregion
 
 builder.Services.AddDbContext<RavenDBContext>(options
 => options.UseSqlServer("Data Source=localhost; Initial Catalog=RavenDB; Persist Security Info=True; User Id=SA; Password=FR*@ger12"));

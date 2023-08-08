@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     borderWidth: 1.5,
-    borderColor: 'Black',
     height: 50,
     width: 75,
     fontSize: 24,
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 5,
     borderWidth: 1.5,
-    borderColor: 'Black',
     padding: 5,
   },
   flatListView: {
@@ -84,7 +82,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginRight: 5,
     borderWidth: 1.5,
-    borderColor: 'Black',
   },
   table: {
     flexDirection: 'row',
