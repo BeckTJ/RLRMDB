@@ -14,7 +14,7 @@ namespace RavenDAL.DTO
         public int? BatchNumber { get; set; }
         public string? Reciever { get; set; }
         public string? InspectionLotNumber { get; set; }
-        public int? RecieverWeight { get; set; }
+        public int? RecieverLevel { get; set; }
         public string? SampleId { get; set; }
     }
 }

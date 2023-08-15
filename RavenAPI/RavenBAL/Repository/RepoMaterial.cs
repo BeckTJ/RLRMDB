@@ -3,50 +3,44 @@ using RavenDAL.Models;
 using RavenDAL.Data;
 using RavenBAL.Interface;
 using RavenDAL.Interface;
+using RavenBAL.src;
 
 namespace RavenBAL.Repository;
-public class RepoMaterial : IMaterial<Material>
+public class RepoMaterial : IMaterial<MaterialInfo>
 {
-    private readonly IRepository<MaterialDTO> _materialRepo;
-    private readonly MaterialDTO _materialDTO;
+    private readonly IMaterialData<MaterialDTO> _materialRepo;
 
-    public RepoMaterial(IRepository<MaterialDTO> materialRepository)
+    public RepoMaterial(IMaterialData<MaterialDTO> materialRepository)
     {
         _materialRepo = materialRepository;
-        _materialDTO = new MaterialDTO();
     }
 
-    public Task AddMaterial(Material material)
+    public void Delete(MaterialInfo entity)
     {
         throw new NotImplementedException();
     }
 
-    IEnumerable<Material> IMaterial<Material>.GetAll()
+    public MaterialInfo Get(int id)
     {
         throw new NotImplementedException();
     }
 
-    Material IMaterial<Material>.Get(int id)
+    public IEnumerable<MaterialInfo> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public void Insert(Material entity)
+    public void Insert(MaterialInfo entity)
     {
         throw new NotImplementedException();
     }
 
-    public void Update(Material entity)
+    public void Remove(MaterialInfo entity)
     {
         throw new NotImplementedException();
     }
 
-    public void Delete(Material entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Remove(Material entity)
+    public void Update(MaterialInfo entity)
     {
         throw new NotImplementedException();
     }

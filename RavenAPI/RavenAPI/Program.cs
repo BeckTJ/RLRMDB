@@ -8,6 +8,8 @@ using RavenDAL.DTORepo;
 using RavenBAL.Interface;
 using RavenBAL.src;
 using RavenBAL.Repository;
+using RavenDAL.Models;
+using RavenDAL.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +19,19 @@ builder.Services.AddControllers();
 builder.Services.AddHttpClient();
 
 #region Service Injected
-builder.Services.AddTransient<IRawMaterialDrum<RawMaterialDrumDTO>, RepoRawMaterialDrum>();
+builder.Services.AddTransient <IRepository<RawMaterial>, RepositoryRawMaterial> ();
+builder.Services.AddTransient<IRawMaterial<RawMaterialDTO>, RepoRawMaterial>();
 builder.Services.AddTransient<IMaterialData<MaterialDataDTO>, RepoMaterialDataDTO>();
 builder.Services.AddTransient<IVendor<VendorBatchDTO>, RepoVendorBatchDTO>();
+builder.Services.AddTransient<ISampleSubmit<SampleDTO>, RepoSampleDTO>();
 
 builder.Services.AddTransient<IProductId,ProductId>();
 builder.Services.AddTransient<IVendorLot<VendorLot>, RepoVendorLot>();
-builder.Services.AddTransient<IRawMaterial<RavenBAL.src.RawMaterialData>, RepoRawMaterial>();    
-
+builder.Services.AddTransient<IRawMaterialDrum<RawMaterialDrum>, RepoRawMaterialDrum>();
+builder.Services.AddTransient<ISample<Sample>, RepoSample>();
+builder.Services.AddTransient<IMaterial<MaterialInfo>, RepoMaterial>();
 #endregion
+
 
 builder.Services.AddDbContext<RavenDBContext>(options
 => options.UseSqlServer("Data Source=localhost; Initial Catalog=RavenDB; Persist Security Info=True; User Id=SA; Password=FR*@ger12"));
@@ -38,6 +44,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
 
 //Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

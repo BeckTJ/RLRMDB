@@ -14,37 +14,30 @@ namespace RavenBAL.Repository
     public class RepoVendorLot : IVendorLot<VendorLot>
     {
         private readonly IVendor<VendorBatchDTO> _vendorBatchDTO;
-        private readonly IRawMaterialDrum<RawMaterialDrumDTO> _rawMaterial;
+        private readonly IRawMaterialDrum<RawMaterialDrum> _rawMaterial;
+        private readonly ISample<Sample> _sample;
 
-        public RepoVendorLot( IVendor<VendorBatchDTO> vendorBatch, IRawMaterialDrum<RawMaterialDrumDTO> rawMaterial)
+        public RepoVendorLot( IVendor<VendorBatchDTO> vendorBatch, IRawMaterialDrum<RawMaterialDrum> rawMaterial,ISample<Sample> sample)
         {
             _vendorBatchDTO = vendorBatch;
             _rawMaterial = rawMaterial;
+            _sample = sample;
         }
-
         public IEnumerable<VendorLot> GetAll(int materialNumber)
         {
-            List<VendorLot> vendorLot = new List<VendorLot>();
-            List <VendorBatchDTO> vendorBatch = new List<VendorBatchDTO>();
-            vendorBatch = (List<VendorBatchDTO>)_vendorBatchDTO.GetAllVendorBatch(materialNumber);
-            
-            foreach(var vendor in vendorBatch)
-            {
-                vendorLot.Add(new VendorLot
-                {
-                    VendorBatch = vendor,
-                    RawMaterialDrum = _rawMaterial.GetAllByVendorLotNumber(vendor.VendorLotNumber),
-                });
-            }
-            return vendorLot;
+            throw new NotImplementedException();            
         }
-
-        public VendorLot GetVendorLot(string LotNumber)
+        public VendorLot GetVendorLot(string lotNumber)
         {
-            return new() 
+            var batch = _vendorBatchDTO.GetVendorBatch(lotNumber);
+
+            return new VendorLot
             {
-                VendorBatch = (VendorBatchDTO)_vendorBatchDTO.GetVendorBatch(LotNumber),
-                RawMaterialDrum = _rawMaterial.GetAllByVendorLotNumber(LotNumber),
+                MaterialNumber = batch.MaterialNumber,
+                LotNumber = batch.VendorLotNumber,
+                Quantity = (int)batch.Quantity,
+                SampleId = batch.SampleId,
+                RawMaterialDrums = _rawMaterial.GetApprovedRawMaterial(batch.MaterialNumber),
             };
         }
     }

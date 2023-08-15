@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RavenDAL.Interface
 {
-    public interface IRawMaterialDrum<T>
+    public interface IRawMaterial<T>
     {
         public Task<T> Create(T _object);
         public void Update(T _object);

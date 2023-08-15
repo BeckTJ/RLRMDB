@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace RavenDAL.DTORepo
 {
-    public class RepoSampleDTO : IRepository<SampleDTO>
+    public class RepoSampleDTO : ISampleSubmit<SampleDTO>
     {
         private readonly RavenDBContext _ctx;
 
@@ -19,21 +19,10 @@ namespace RavenDAL.DTORepo
             _ctx = ctx;
         }
 
-        public Task<SampleDTO> Create(SampleDTO _object)
+        public Task<SampleDTO> SubmitSample(SampleDTO _object)
         {
             throw new NotImplementedException();
         }
-
-        public void Delete(SampleDTO _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<SampleDTO> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
         public SampleDTO GetByInspectionLotNumber(long id)
         {
             return _ctx.SampleSubmits.Where(x => x.InspectionLotNumber == id)
@@ -42,39 +31,26 @@ namespace RavenDAL.DTORepo
                 SampleSubmitNumber = x.SampleSubmitNumber,
                 InspectionLotNumber = x.InspectionLotNumber,
                 SampleDate = x.SampleDate,
+                Approved = x.Approved,
                 Rejected = x.Rejected,
                 ReviewDate = x.ReviewDate,
                 ExperationDate = x.ExperiationDate,
             }).FirstOrDefault();
         }
-        public SampleDTO GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SampleDTO GetBySampleNumber(string name)
+        public SampleDTO GetBySampleNumber(string sampleId)
         {
             return _ctx.SampleSubmits
-                .Where(x => x.SampleSubmitNumber == name)
+                .Where(x => x.SampleSubmitNumber == sampleId)
                 .Select(x => new SampleDTO
                 {
                     SampleSubmitNumber = x.SampleSubmitNumber,
                     InspectionLotNumber = x.InspectionLotNumber,
                     SampleDate = x.SampleDate,
+                    Approved = x.Approved,
                     Rejected = x.Rejected,
                     ReviewDate = x.ReviewDate,
                     ExperationDate = x.ExperiationDate,
                 }).FirstOrDefault();
-        }
-
-        public void Update(SampleDTO _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public SampleDTO GetByLotNumber(string LotNumber)
-        {
-            throw new NotImplementedException();
         }
     }
 }

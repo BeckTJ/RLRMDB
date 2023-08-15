@@ -13,9 +13,9 @@ namespace RavenBAL.Repository
     public class ProductId : IProductId
     {
         private readonly IMaterialData<MaterialDataDTO> _materialData;
-        private readonly IRawMaterialDrum<RawMaterialDrumDTO> _rawMaterialDrum;
+        private readonly IRawMaterial<RawMaterialDTO> _rawMaterialDrum;
 
-        public ProductId(IMaterialData<MaterialDataDTO> materialData, IRawMaterialDrum<RawMaterialDrumDTO> rawMaterialDrum)
+        public ProductId(IMaterialData<MaterialDataDTO> materialData, IRawMaterial<RawMaterialDTO> rawMaterialDrum)
         {
             _materialData = materialData;
             _rawMaterialDrum = rawMaterialDrum;
@@ -24,7 +24,7 @@ namespace RavenBAL.Repository
         {
             var material = _materialData.GetById(materialNumber) ?? throw new ArgumentNullException(nameof(materialNumber));
 
-            return GetNextProductId(_rawMaterialDrum.GetAllByMaterialNumber((int)material.MaterialNumber!).LastOrDefault()!.DrumLotNumber!) ?? GetFirstProductId(material);
+            return GetNextProductId(_rawMaterialDrum.GetAllByMaterialNumber((int)material.MaterialNumber).LastOrDefault().ProductId) ?? GetFirstProductId(material);
         }
         private string GetFirstProductId(MaterialDataDTO material)
         {

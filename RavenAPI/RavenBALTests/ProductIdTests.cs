@@ -15,9 +15,9 @@ namespace RavenBALTests
             MaterialCode = "AA",
             SequenceId = 100,
         };
-        private RawMaterialDrumDTO _rawMaterialDrumDTO;
+        private RawMaterialDTO _rawMaterialDrumDTO;
         private readonly Mock<IRepository<MaterialDataDTO>> _material;
-        private readonly Mock<IRawMaterialDrum<RawMaterialDrumDTO>> _rawMaterial;
+        private readonly Mock<IRawMaterial<RawMaterialDTO>> _rawMaterial;
         private readonly ProductId _productId;
 
         public ProductIdTests()
@@ -25,8 +25,8 @@ namespace RavenBALTests
             _material = new();
             _rawMaterial = new();
             _material.Setup(m => m.GetById(It.IsAny<int>())).Returns(() => _materialDataDTO);
-            _rawMaterial.Setup(m => m.GetByMaterialNumber(It.IsAny<int>())).Returns(() => _rawMaterial.Object
-            .GetByMaterialNumber((int)_materialDataDTO.MaterialNumber));
+            _rawMaterial.Setup(m => m.GetAllByMaterialNumber(It.IsAny<int>())).Returns(() => _rawMaterial.Object
+            .GetAllByMaterialNumber((int)_materialDataDTO.MaterialNumber));
 
             //_productId = new((IRepository<MaterialDataDTO>) _material,(IRawMaterialDrum<RawMaterialDrumDTO>)_rawMaterial);
 
@@ -41,8 +41,8 @@ namespace RavenBALTests
         {
             int materialNumber = 123456;
             string productId = "100AA";
-            _rawMaterialDrumDTO.DrumLotNumber = _productId.GetProductId(materialNumber);
-            Assert.Equal(productId, _rawMaterialDrumDTO.DrumLotNumber);
+            _rawMaterialDrumDTO.ProductId = _productId.GetProductId(materialNumber);
+            Assert.Equal(productId, _rawMaterialDrumDTO.ProductId);
         }
 
         [Fact]
@@ -50,8 +50,8 @@ namespace RavenBALTests
         {
             string productId = "101AA";
             int materialNumber = 123456;
-            _rawMaterialDrumDTO.DrumLotNumber = _productId.GetProductId(materialNumber);
-            Assert.Equal(productId, _rawMaterialDrumDTO.DrumLotNumber);
+            _rawMaterialDrumDTO.ProductId = _productId.GetProductId(materialNumber);
+            Assert.Equal(productId, _rawMaterialDrumDTO.ProductId);
         }
     }
 }

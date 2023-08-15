@@ -15,7 +15,7 @@ namespace RavenDAL.Models
         public int? DrumWeight { get; set; }
         public int? SapBatchNumber { get; set; }
         public string? ContainerNumber { get; set; }
-        public decimal? InspectionLotNumber { get; set; }
+        public long? InspectionLotNumber { get; set; }
         public string? SampleSubmitNumber { get; set; }
         public string? VendorBatchNumber { get; set; }
         public string? EmployeeId { get; set; }

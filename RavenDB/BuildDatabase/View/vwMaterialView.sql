@@ -1,25 +1,23 @@
-CREATE OR ALTER VIEW Materials.MaterialView
-AS
-SELECT MaterialNumber.MaterialNumber,
-MaterialName,
+-- CREATE OR ALTER VIEW Materials.MaterialView
+-- AS
+SELECT 
+MaterialNumber.ParentMaterialNumber,
+MaterialNumber.MaterialNumber,
 MaterialNameAbreviation,
-Material.ParentMaterialNumber,
+VendorBatch.VendorName,
+MaterialName,
 PermitNumber,
-RawMaterialCode,
-ProductCode,
+MaterialCode,
 SpecificGravity,
---SequenceIdStart,
---SequenceIdEnd,
+SequenceId,
 UnitOfIssue,
 BatchManaged,
-IsRawMaterial,5
-IsMPPS,
+IsRawMaterial,
 CarbonDrumRequired,
 CarbonDrumDaysAllowed,
-CarbonDrumWeightAllowed,
-Vendor.VendorName
+CarbonDrumWeightAllowed
 FROM Materials.Material
-JOIN Materials.MaterialNumber ON MaterialNumber.ParentMaterialNumber = Material.ParentMaterialNumber
-JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
-JOIN Vendors.Vendor ON MaterialId.VendorName = Vendor.VendorName
---JOIN Distillation.ProductNumberSequence ON MaterialId.SequenceId = ProductNumberSequence.SequenceId
+Left JOIN Materials.MaterialNumber ON MaterialNumber.ParentMaterialNumber = Material.MaterialNumber
+right JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
+right JOIN Materials.VendorBatch ON MaterialId.VendorName = VendorBatch.VendorName
+ORDER BY MaterialNumber.ParentMaterialNumber

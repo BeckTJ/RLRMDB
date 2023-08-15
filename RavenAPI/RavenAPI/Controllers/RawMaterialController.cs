@@ -3,6 +3,7 @@ using RavenDAL.DTO;
 using RavenBAL.Interface;
 using RavenBAL.Repository;
 using RavenBAL.src;
+using RavenDAL.Models;
 
 namespace RavenAPI.Controllers;
 
@@ -11,10 +12,10 @@ namespace RavenAPI.Controllers;
 
 public class RawMaterialController : ControllerBase
 {
-    private readonly IRawMaterial<RawMaterialData> _rawMaterial;
+    private readonly IRawMaterialDrum<RawMaterialDrum> _rawMaterial;
     private readonly IVendorLot<VendorLot> _vendorLot;
 
-    public RawMaterialController(IRawMaterial<RawMaterialData> rawMaterial, IVendorLot<VendorLot> vendorLot)
+    public RawMaterialController(IRawMaterialDrum<RawMaterialDrum> rawMaterial, IVendorLot<VendorLot> vendorLot)
     {
         _rawMaterial = rawMaterial;
         _vendorLot = vendorLot;
@@ -24,13 +25,32 @@ public class RawMaterialController : ControllerBase
     public ActionResult<List<VendorLot>> GetAll(int materialNumber) => _vendorLot.GetAll(materialNumber).ToList();
 
     [HttpGet("(ParentMaterialNumber)")]
-    public ActionResult<List<RawMaterialData>> GetAllRawMaterial(int parentMaterialNumber) 
+    public ActionResult<List<RawMaterialDrum>> GetAllRawMaterial(int parentMaterialNumber) 
     {
-        var rawMaterial = _rawMaterial.GetAllRawMaterial(parentMaterialNumber).ToList();
+        var rawMaterial = _rawMaterial.GetAllRawMaterialDrum(parentMaterialNumber).ToList();
 
         if (rawMaterial == null)
             return NotFound();
         return rawMaterial;
+    }
+    [HttpGet("(Vendor)")]
+
+    public ActionResult<List<VendorLot>> GetVendorLot(int materialNumber)
+    {
+        var rawMaterial = _vendorLot.GetAll(materialNumber).ToList();
+
+        if (rawMaterial == null)
+            return NotFound();
+        return rawMaterial;
+    }
+    public ActionResult<string> GetProductId(int materialNumber, string vendorLot, string containerNumber, int weight, int batchNumber, long inspectionLotNumber)
+    {
+        var productId = _rawMaterial.CreateRawMaterialDrum(materialNumber, vendorLot, containerNumber, weight, batchNumber, inspectionLotNumber);
+
+        if (productId == null)
+            return NotFound();
+        return productId;
+
     }
 
     //[HttpGet("(RawMaterialByMaterialNumber)")]

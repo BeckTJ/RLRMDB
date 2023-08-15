@@ -114,8 +114,9 @@ CREATE TABLE QualityControl.SampleSubmit
 (
     SampleSubmitNumber CHAR(8) PRIMARY KEY,
     InspectionLotNumber BIGINT,
-    SampleDate DATE,
-    Rejected BIT,
+    SampleDate DATE NOT NULL,
+    Rejected BIT DEFAULT(0) NOT NULL,
+    Approved BIT DEFAULT(0) NOT NULL,
     ReviewDate DATE,
     ExperiationDate DATE,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
