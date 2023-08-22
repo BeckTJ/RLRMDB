@@ -1,0 +1,2 @@
+Building an api to connect the database to a react native application. while attempting to add DI to the project 
+I will need to learn MOQ. Working on Learning Moq and building unit test, then I will continue on with the build.
