@@ -54,7 +54,7 @@ CREATE TABLE HumanResources.Employee
 (
     EmployeeId CHAR(7) PRIMARY KEY,
     FirstName CHAR(25) NOT NULL,
-    LastName CHAR(25) NOT NULL
+    LastName CHAR(25) NOT NULL,
 )
 
 CREATE TABLE Engineering.Receiver
