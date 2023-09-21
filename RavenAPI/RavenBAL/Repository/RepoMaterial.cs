@@ -8,9 +8,9 @@ using RavenBAL.src;
 namespace RavenBAL.Repository;
 public class RepoMaterial : IMaterial<MaterialInfo>
 {
-    private readonly IMaterialData<MaterialDTO> _materialRepo;
+    private readonly IMaterialData<MaterialDataDTO> _materialRepo;
 
-    public RepoMaterial(IMaterialData<MaterialDTO> materialRepository)
+    public RepoMaterial(IMaterialData<MaterialDataDTO> materialRepository)
     {
         _materialRepo = materialRepository;
     }

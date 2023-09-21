@@ -12,8 +12,8 @@
     "RavenAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchBrowser": false,
+      "launchUrl": "RavenAPI",
       "applicationUrl": "http://localhost:5263",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -21,8 +21,8 @@
     },
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchBrowser": false,
+      "launchUrl": "RavenAPI",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

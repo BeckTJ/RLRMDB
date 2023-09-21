@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "nIXUjhxnU4jLtkx6loKQg7OFTiutAvm2Z5+zynjGhRIVvgK0osCjVY8Pg7zPNhLWplEpspZZtB/GbJPiAQYcgQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TBeck\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512"
+  ],
+  "logs": []
+}

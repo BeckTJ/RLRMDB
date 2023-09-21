@@ -12,14 +12,12 @@ public class RepoRawMaterialDrum : IRawMaterialDrum<RawMaterialDrum>
     private readonly IRawMaterial<RawMaterialDTO> _rawMaterial;
     private readonly IProductId _productId;
     private readonly ISample<Sample> _sample;
-    private readonly IMaterialData<MaterialInfo> _material;
 
-    public RepoRawMaterialDrum(IRawMaterial<RawMaterialDTO> rawMaterial,ISample<Sample> sample, IProductId productId, IMaterialData<MaterialInfo> material)
+    public RepoRawMaterialDrum(IRawMaterial<RawMaterialDTO> rawMaterial,ISample<Sample> sample, IProductId productId)
     {
         _rawMaterial = rawMaterial;
         _sample = sample;
         _productId = productId;
-        _material = material;
     }
 
     public void AddRawMaterialToProductLot(RawMaterialDrum rawMaterial)

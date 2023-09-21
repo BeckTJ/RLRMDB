@@ -137,7 +137,6 @@ C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.GeneratedMSBuil
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.AssemblyInfoInputs.cache
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.AssemblyInfo.cs
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.csproj.CoreCompileInputs.cache
-C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\refint\RavenAPI.dll
@@ -221,3 +220,12 @@ C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenDAL.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenBAL.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenDAL.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Castle.Core.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\NSubstitute.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\nlog.config
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\NLog.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\LoggerService.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\LoggerService.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.MvcApplicationPartsAssemblyInfo.cs

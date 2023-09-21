@@ -15,9 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDAL", "RavenDAL\RavenD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenBAL.Tests", "RavenBALTests\RavenBAL.Tests.csproj", "{2CCA3BD3-BEC5-4EC0-8E12-7C01284BFBB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenDAL.Tests", "RavenDAL.Tests\RavenDAL.Tests.csproj", "{4AB55DC0-9861-4D74-9CD3-7308871ADA1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDAL.Tests", "RavenDAL.Tests\RavenDAL.Tests.csproj", "{4AB55DC0-9861-4D74-9CD3-7308871ADA1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RavenAPI.Tests", "RavenAPI.Tests\RavenAPI.Tests.csproj", "{871A9D8A-6E10-4BD3-8BCB-604750103B94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenAPI.Tests", "RavenAPI.Tests\RavenAPI.Tests.csproj", "{871A9D8A-6E10-4BD3-8BCB-604750103B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{C6901512-B79A-4694-A996-2B435B15FA98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{48E57E76-2386-4D13-93BC-1F56120BB6AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,14 @@ Global
 		{871A9D8A-6E10-4BD3-8BCB-604750103B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{871A9D8A-6E10-4BD3-8BCB-604750103B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{871A9D8A-6E10-4BD3-8BCB-604750103B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6901512-B79A-4694-A996-2B435B15FA98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6901512-B79A-4694-A996-2B435B15FA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6901512-B79A-4694-A996-2B435B15FA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6901512-B79A-4694-A996-2B435B15FA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48E57E76-2386-4D13-93BC-1F56120BB6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E57E76-2386-4D13-93BC-1F56120BB6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E57E76-2386-4D13-93BC-1F56120BB6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E57E76-2386-4D13-93BC-1F56120BB6AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

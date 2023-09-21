@@ -23,10 +23,12 @@
     <PackageReference Include="Microsoft.Entityframeworkcore.SqlServer" Version="6.0.16" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="NEST" Version="7.17.5" />
+    <PackageReference Include="nsubstitute" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\RavenBAL\RavenBAL.csproj" />
     <ProjectReference Include="..\RavenDAL\RavenDAL.csproj" />
   </ItemGroup>
