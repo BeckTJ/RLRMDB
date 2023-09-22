@@ -23,6 +23,7 @@ LogManager.Setup().LoadConfigurationFromFile("/nlog.config");
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureMSSqlContext(builder.Configuration);
 
 builder.Services.AddControllers();
 //builder.Services.AddHttpClient();
@@ -43,8 +44,8 @@ builder.Services.AddTransient<IProductId,ProductId>()
 #endregion
 
 
-builder.Services.AddDbContext<RavenDBContext>(options
-=> options.UseSqlServer("Data Source=localhost; Initial Catalog=RavenDB; Persist Security Info=True; User Id=SA; Password=FR*@ger12"));
+//builder.Services.AddDbContext<RavenDBContext>(options
+//=> options.UseSqlServer("Data Source=localhost; Initial Catalog=RavenDB; Persist Security Info=True; User Id=SA; Password=FR*@ger12"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();

@@ -1357,6 +1357,9 @@
       "Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "RavenDAL": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Contracts.dll": {}
         },
@@ -3780,7 +3783,6 @@
       "Microsoft.Extensions.Configuration.UserSecrets >= 6.0.1",
       "NEST >= 7.17.5",
       "RavenBAL >= 1.0.0",
-      "RavenDAL >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "nsubstitute >= 5.0.0"
     ]
@@ -3824,9 +3826,6 @@
             },
             "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
               "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj"
-            },
-            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
-              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
             }
           }
         }
