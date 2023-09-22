@@ -1,16 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NLog;
-using RavenDAL.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Migrations;
-using RavenDAL.DTO;
-using RavenDAL.Interface;
-using RavenDAL.DTORepo;
-using RavenBAL.Interface;
-using RavenBAL.src;
-using RavenBAL.Repository;
-using RavenDAL.Models;
-using RavenDAL.Repository;
 using RavenAPI.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 
@@ -24,23 +15,15 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMSSqlContext(builder.Configuration);
+builder.Services.ConfigureRepoWrapper();
+builder.Services.AddAutoMapper(typeof(Program)); 
 
 builder.Services.AddControllers();
 //builder.Services.AddHttpClient();
 
 
 #region Service Injected
-builder.Services.AddTransient <IRepository<RawMaterial>, RepositoryRawMaterial> ()
-    .AddTransient<IRawMaterial<RawMaterialDTO>, RepoRawMaterial>()
-    .AddTransient<IMaterialData<MaterialDataDTO>, RepoMaterialDataDTO>()
-    .AddTransient<IVendor<VendorBatchDTO>, RepoVendorBatchDTO>()
-    .AddTransient<ISampleSubmit<SampleDTO>, RepoSampleDTO>();
 
-builder.Services.AddTransient<IProductId,ProductId>()
-    .AddTransient<IVendorLot<VendorLot>, RepoVendorLot>()
-    .AddTransient<IRawMaterialDrum<RawMaterialDrum>, RepoRawMaterialDrum>()
-    .AddTransient<ISample<Sample>, RepoSample>()
-    .AddTransient<IMaterial<MaterialInfo>, RepoMaterial>();
 #endregion
 
 

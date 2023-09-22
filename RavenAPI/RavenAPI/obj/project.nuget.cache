@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "AYezS43ZiydnXq82NO8kRWP+iozdOv6Ihe3lSDS5UZE9Pr54n9RKL9XoEM6569FzgyyFppPlFZX+F59spBkNNg==",
+  "dgSpecHash": "ktNPwfxsgSBYxKhs9dFoYVscwvdVwpxXEoibGgcVjagWzxYn1xuDpOWZ6qpasd6iYs1BQgCb0Un2jln4ebUWiw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\kcebs\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\kcebs\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\kcebs\\.nuget\\packages\\castle.core\\5.0.0\\castle.core.5.0.0.nupkg.sha512",
     "C:\\Users\\kcebs\\.nuget\\packages\\elasticsearch.net\\7.17.5\\elasticsearch.net.7.17.5.nupkg.sha512",
     "C:\\Users\\kcebs\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",

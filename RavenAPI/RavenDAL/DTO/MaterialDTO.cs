@@ -4,6 +4,6 @@ using RavenDAL.Data;
 namespace RavenDAL.DTO;
 public class MaterialDTO
 {
-    public int? MaterialNumber { get; set; } //Material
+    public int MaterialNumber { get; set; } //Material
     public string? MaterialAbrev { get; set; } //Material
 }

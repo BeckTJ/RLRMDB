@@ -52,7 +52,7 @@ INSERT into HumanResources.Employee (EmployeeId, FirstName, LastName)
             ('LAS3456', 'Brian', 'Squire')
 GO
 
-BULK INSERT QualityControl.SampleRequired FROM '..\..\usr\dbfiles\BuildFiles\MaterialSampleRequired.csv'
+BULK INSERT QualityControl.SampleRequired FROM '..\..\usr\raven\buildfiles\BuildFiles\MaterialSampleRequired.csv'
 WITH
 (
     FORMAT = 'csv',
@@ -77,7 +77,7 @@ Create Table #tempSystemTbl(
     Variance DECIMAL(6,2)
 );
 
-BULK INSERT #tempSystemTbl FROM '..\..\usr\dbfiles\BuildFiles\SystemData.csv'
+BULK INSERT #tempSystemTbl FROM '..\..\us\raven\buildfiles\BuildFiles\SystemData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -139,7 +139,7 @@ CREATE TABLE #tempTbl(
     IsMPPS BIT,
     SequenceId INT);
 
-BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
+BULK INSERT #tempTbl FROM '..\..\usr\raven\buildfiles\BuildFiles\MaterialData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -218,7 +218,7 @@ BEGIN
 
     )
 
-    BULK INSERT #rawMaterial FROM '..\..\usr\dbfiles\BuildFiles\RawMaterialData.csv'
+    BULK INSERT #rawMaterial FROM '..\..\usr\raven\buildfiles\BuildFiles\RawMaterialData.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -287,7 +287,7 @@ CREATE TABLE #tmpReceiver(
     MaxReceiverLevel INT,
 )
 
-BULK INSERT #tmpReceiver FROM '..\..\usr\dbfiles\BuildFiles\ReceiverData.csv'
+BULK INSERT #tmpReceiver FROM '..\..\usr\raven\buildfiles\BuildFiles\ReceiverData.csv'
 WITH(
     FORMAT = 'csv',
     FIRSTROW = 2,

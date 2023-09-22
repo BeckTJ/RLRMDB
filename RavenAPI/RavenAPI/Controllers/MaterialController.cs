@@ -1,73 +1,64 @@
+using AutoMapper;
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using RavenDAL.DTO;
-using RavenDAL.Interface;
-using RavenDAL.Models;
-using RavenBAL.Repository;
 
 namespace RavenAPI.Controllers;
 
+[Route("RavenAPI/Material")]
 [ApiController]
-[Route("[controller]")]
+
 public class MaterialController : ControllerBase
 {
-    private readonly IMaterialData<MaterialDataDTO> _Material;
-
-    public MaterialController(IMaterialData<MaterialDataDTO> material)
+    private ILoggerManager _log;
+    private IRepoWrapper _repo;
+    private IMapper _mapper;
+    public MaterialController(ILoggerManager log, IRepoWrapper repo, IMapper mapper)
     {
-        _Material = material;
-    }
-    //[HttpPost("(AddMaterial)")]
-    //public async Task<Object> AddMaterial([FromBody] Material material)
-    //{
-    //    try
-    //    {
-    //        await _materialServices.AddMaterial(material);
-    //        return true;
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        return false;
-    //    }
-    //}
-    [HttpGet("Parent")]
-    public ActionResult<List<MaterialDataDTO>> GetMaterialNumberFromParent(int materialNumber)
-    {
-        var material = _Material.GetMaterialNumberFromParent(materialNumber);
-
-        if (material == null)
-            return NotFound();
-        return material.ToList();
-
+        _repo = repo;
+        _log = log;
+        _mapper = mapper;
     }
 
-    // GET all action
-   //[HttpGet]
-   //public ActionResult<List<MaterialDTO>> GetAll() => MaterialServices.GetAll();
-   //
-   //// GET by Id action
-   //[HttpGet("(Materials)")]
-   //public ActionResult<MaterialDTO> Get(int id)
-   //{
-   //    var material = MaterialServices.Get(id);
-   //
-   //    if (material == null)
-   //        return NotFound();
-   //    return material;
-   //}
-   //[HttpGet("(Vendors)")]
-   //public ActionResult<List<VendorDTO>> GetVendors(int materialNumber)
-   //{
-   //    var vendors = MaterialServices.GetVendors(materialNumber);
-   //
-   //    if (vendors == null)
-   //        return NotFound();
-   //    return vendors;
-   //}
+    [HttpGet]
+    public IActionResult GetAllMaterial()
+    {
+        try
+        {
+            var materials = _repo.Material.GetAllMaterial();
+            _log.LogInfo($"Return all material from database.");
 
-    // POST action
+            var materialResult = _mapper.Map<IEnumerable<MaterialDTO>>(materials);
+            return Ok(materialResult);
 
-    // PUT action
+        }catch (Exception ex)
+        {
+            _log.LogError($"Something went wrong inside GetAllMaterial action: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
+    [HttpGet("(materialNumber)")]
+    public IActionResult GetMaterialByMaterialNumber(int materialNumber) 
+    {
+        try
+        {
+            var material = _repo.Material.GetMaterialByMaterialNumber(materialNumber);
 
-    // DELETE action
-
+            if(material is null)
+            {
+                _log.LogError($"Material with id: {materialNumber}, hasn't been found in db.");
+                return NotFound();
+            }
+            else
+            {
+                _log.LogInfo($"Returned Material with id: {materialNumber}");
+                return Ok(material);
+            }
+        }
+        catch (Exception ex)
+        {
+            _log.LogError($"Something went wrong inside GetMaterialByMaterialNumber action: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
+    }
 }

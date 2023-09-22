@@ -1,79 +1,43 @@
+using AutoMapper;
+using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RavenDAL.DTO;
 using RavenBAL.Interface;
-using RavenBAL.Repository;
 using RavenBAL.src;
-using RavenDAL.Models;
+using RavenDAL.DTO;
 
 namespace RavenAPI.Controllers;
 
+[Route("RavenAPI/[rawMaterial]")]
 [ApiController]
-[Route("[controller]")]
 
 public class RawMaterialController : ControllerBase
 {
-    private readonly IRawMaterialDrum<RawMaterialDrum> _rawMaterial;
-    private readonly IVendorLot<VendorLot> _vendorLot;
+    private ILoggerManager _log;
+    private IRepoWrapper _repo;
+    private IMapper _mapper;
 
-    public RawMaterialController(IRawMaterialDrum<RawMaterialDrum> rawMaterial, IVendorLot<VendorLot> vendorLot)
+    public RawMaterialController(ILoggerManager log, IRepoWrapper repo, IMapper mapper)
     {
-        _rawMaterial = rawMaterial;
-        _vendorLot = vendorLot;
+        _log = log;
+        _repo = repo;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public ActionResult<List<VendorLot>> GetAll(int materialNumber) => _vendorLot.GetAll(materialNumber).ToList();
-
-    [HttpGet("(ParentMaterialNumber)")]
-    public ActionResult<List<RawMaterialDrum>> GetAllRawMaterial(int parentMaterialNumber) 
+    public IActionResult GetAllRawMaterial()
     {
-        var rawMaterial = _rawMaterial.GetAllRawMaterialDrum(parentMaterialNumber).ToList();
+        try
+        {
+            var material = _repo.RawMaterial.GetAllRawMaterial();
+            _log.LogInfo($"Return all material from database.");
 
-        if (rawMaterial == null)
-            return NotFound();
-        return rawMaterial;
+            var rawMaterial = _mapper.Map<IEnumerable<RawMaterialDTO>>(material);
+            return Ok(rawMaterial);
+        }
+        catch (Exception ex)
+        {
+            _log.LogError($"Something went wrong inside GetAllRawMaterial action: {ex.Message}");
+            return StatusCode(500, "Internal server error");
+        }
     }
-    [HttpGet("(Vendor)")]
-
-    public ActionResult<List<VendorLot>> GetVendorLot(int materialNumber)
-    {
-        var rawMaterial = _vendorLot.GetAll(materialNumber).ToList();
-
-        if (rawMaterial == null)
-            return NotFound();
-        return rawMaterial;
-    }
-    public ActionResult<string> GetProductId(int materialNumber, string vendorLot, string containerNumber, int weight, int batchNumber, long inspectionLotNumber)
-    {
-        var productId = _rawMaterial.CreateRawMaterialDrum(materialNumber, vendorLot, containerNumber, weight, batchNumber, inspectionLotNumber);
-
-        if (productId == null)
-            return NotFound();
-        return productId;
-
-    }
-
-    //[HttpGet("(RawMaterialByMaterialNumber)")]
-    //public ActionResult<List<RawMaterialDTO>> Get(int materialNumber)
-    //{
-    //    var rawMaterial = RawMaterialServices.Get(materialNumber);
-    //
-    //    if (rawMaterial == null)
-    //        return NotFound();
-    //    return rawMaterial;
-    //}
-    //
-    //[HttpGet("(RawMaterial)")]
-    //public ActionResult<object> GetRawMaterial(int materialNumber, string vendor)
-    //{
-    //    var rawMaterial = RawMaterialServices.RawMaterialSelection(materialNumber, vendor);
-    //
-    //    if (rawMaterial == null)
-    //        return NotFound();
-    //    return rawMaterial;
-    //}
-    //
-    //[HttpGet("(VendorBatchNumberForRawMaterialDrumId)")]
-    //public ActionResult<RawMaterialDTO> GetRawMaterialDrumId(string drumId) => RawMaterialServices.GetRawMaterial(drumId);
-
 }

@@ -32,7 +32,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
+                "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

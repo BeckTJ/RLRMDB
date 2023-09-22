@@ -22,7 +22,6 @@ namespace Repository
             }
         }
 
-
         public IRawMaterialRepo RawMaterial
         {
             get
@@ -38,7 +37,6 @@ namespace Repository
         {
             _ctx = ctx;
         }
-
 
         public void Save()
         {

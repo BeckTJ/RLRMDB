@@ -1,8 +1,8 @@
 ﻿using Contracts;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
-using RavenDAL;
 using RavenDAL.Data;
+using Repository;
 
 namespace RavenAPI.Extensions
 {
@@ -30,6 +30,10 @@ namespace RavenAPI.Extensions
         {
             var connectionString = config["mssqlconnection:connectionString"];
             services.AddDbContext<RavenDBContext>(o => o.UseSqlServer(connectionString));
+        }
+        public static void ConfigureRepoWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<IRepoWrapper, RepoWrapper>();
         }
     }
 }
