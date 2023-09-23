@@ -5,6 +5,7 @@ namespace Contracts
     {
         IMaterialRepo Material { get; }
         IRawMaterialRepo RawMaterial { get; }
+        IVendorRepo Vendor { get; }
         void Save();
     }
 }

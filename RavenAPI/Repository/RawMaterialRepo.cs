@@ -25,5 +25,9 @@ namespace Repository
             return FindByCondition(rm => rm.MaterialNumber == materialNumber)
                 .FirstOrDefault();
         }
+        public IEnumerable<RawMaterial> GetRawMaterialByVendorLot(string vendorLot)
+        {
+            return FindByCondition(rm => rm.VendorBatchNumber == vendorLot).ToList();
+        }
     }
 }

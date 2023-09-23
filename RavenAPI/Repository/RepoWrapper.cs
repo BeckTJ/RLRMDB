@@ -9,6 +9,7 @@ namespace Repository
         private RavenDBContext _ctx;
         private IMaterialRepo _material;
         private IRawMaterialRepo _rawMaterial;
+        private IVendorRepo _vendor;
 
         public IMaterialRepo Material
         {
@@ -33,6 +34,19 @@ namespace Repository
                 return _rawMaterial;
             }
         }
+        public IVendorRepo Vendor
+        {
+            get
+            {
+                if(_vendor == null)
+                {
+                    _vendor = new VendorRepo(_ctx);
+                }
+                return _vendor;
+            }
+        }
+
+
         public RepoWrapper(RavenDBContext ctx)
         {
             _ctx = ctx;

@@ -10,6 +10,7 @@ namespace RavenAPI
         {
             CreateMap<Material, MaterialDTO>();
             CreateMap<RawMaterial, RawMaterialDTO>();
+            CreateMap<VendorBatch, VendorDTO>();
         }
     }
 }

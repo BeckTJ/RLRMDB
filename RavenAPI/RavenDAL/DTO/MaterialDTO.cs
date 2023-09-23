@@ -6,4 +6,5 @@ public class MaterialDTO
 {
     public int MaterialNumber { get; set; } //Material
     public string? MaterialAbrev { get; set; } //Material
+    public IEnumerable<int> VendorMaterialNumber { get; set; }
 }
