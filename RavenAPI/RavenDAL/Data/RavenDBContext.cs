@@ -336,12 +336,13 @@ namespace RavenDAL.Data
 
             modelBuilder.Entity<RawMaterial>(entity =>
             {
-                entity.HasKey(e => e.DrumLotNumber)
+                entity.HasKey(e => e.ProductId)
                     .HasName("PK__RawMater__64C9F84786AD37B9");
 
                 entity.ToTable("RawMaterial", "Distillation");
 
-                entity.Property(e => e.DrumLotNumber)
+                entity.Property(e => e.ProductId)
+                    .HasColumnName("DrumLotNumber")
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
@@ -355,14 +356,17 @@ namespace RavenDAL.Data
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.InspectionLotNumber).HasColumnType("numeric(18, 0)");
+                entity.Property(e => e.InspectionLotNumber)
+                    .HasColumnType("numeric(18, 0)");
 
-                entity.Property(e => e.SampleSubmitNumber)
+                entity.Property(e => e.SampleId)
+                    .HasColumnName("SampleSubmitNumber")
                     .HasMaxLength(8)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.VendorBatchNumber)
+                entity.Property(e => e.VendorLotNumber)
+                    .HasColumnName("VendorBatchNumber")
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
@@ -378,12 +382,12 @@ namespace RavenDAL.Data
 
                 entity.HasOne(d => d.SampleSubmitNumberNavigation)
                     .WithMany(p => p.RawMaterials)
-                    .HasForeignKey(d => d.SampleSubmitNumber)
+                    .HasForeignKey(d => d.SampleId)
                     .HasConstraintName("FK__RawMateri__Sampl__5535A963");
 
-                entity.HasOne(d => d.VendorBatchNumberNavigation)
+                entity.HasOne(d => d.VendorLotNumberNavigation)
                     .WithMany(p => p.RawMaterials)
-                    .HasForeignKey(d => d.VendorBatchNumber)
+                    .HasForeignKey(d => d.VendorLotNumber)
                     .HasConstraintName("FK__RawMateri__Vendo__5629CD9C");
             });
 
@@ -573,16 +577,18 @@ namespace RavenDAL.Data
 
             modelBuilder.Entity<VendorBatch>(entity =>
             {
-                entity.HasKey(e => e.VendorBatchNumber)
+                entity.HasKey(e => e.VendorLotNumber)
                     .HasName("PK__VendorBa__4E4125DBBC8F3CFD");
 
                 entity.ToTable("VendorBatch", "Materials");
 
-                entity.Property(e => e.VendorBatchNumber)
+                entity.Property(e => e.VendorLotNumber)
+                    .HasColumnName("VendorBatchNumber")
                     .HasMaxLength(25)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SampleSubmitNumber)
+                entity.Property(e => e.SampleId)
+                    .HasColumnName("SampleSubmitNumber")
                     .HasMaxLength(8)
                     .IsUnicode(false)
                     .IsFixedLength();
@@ -596,9 +602,9 @@ namespace RavenDAL.Data
                     .HasForeignKey(d => d.MaterialNumber)
                     .HasConstraintName("FK__VendorBat__Mater__4F7CD00D");
 
-                entity.HasOne(d => d.SampleSubmitNumberNavigation)
+                entity.HasOne(d => d.Sample)
                     .WithMany(p => p.VendorBatches)
-                    .HasForeignKey(d => d.SampleSubmitNumber)
+                    .HasForeignKey(d => d.SampleId)
                     .HasConstraintName("FK__VendorBat__Sampl__4E88ABD4");
 
                 entity.HasOne(d => d.VendorNameNavigation)

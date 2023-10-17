@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RavenDAL.DTO
 {
-    public class RequiredSamplesDTO : SampleType
+    public class RequiredSamplesDTO : CheckSampleDTO
     {
         public bool Assay { get; set; }
         public bool Water { get; set; }

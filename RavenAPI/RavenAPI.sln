@@ -10,6 +10,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenAPI", "RavenAPI\RavenA
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenBAL", "RavenBAL\RavenBAL.csproj", "{DE445275-2D66-48DB-8316-78ADDA682E9F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{48E57E76-2386-4D13-93BC-1F56120BB6AE} = {48E57E76-2386-4D13-93BC-1F56120BB6AE}
+		{C6901512-B79A-4694-A996-2B435B15FA98} = {C6901512-B79A-4694-A996-2B435B15FA98}
+		{D26383A9-216D-479F-9EAA-B3384C323D78} = {D26383A9-216D-479F-9EAA-B3384C323D78}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDAL", "RavenDAL\RavenDAL.csproj", "{B629F1C8-D79F-49FA-A761-04D779D683F6}"
 EndProject
@@ -19,11 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenDAL.Tests", "RavenDAL.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RavenAPI.Tests", "RavenAPI.Tests\RavenAPI.Tests.csproj", "{871A9D8A-6E10-4BD3-8BCB-604750103B94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{C6901512-B79A-4694-A996-2B435B15FA98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{C6901512-B79A-4694-A996-2B435B15FA98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "LoggerService\LoggerService.csproj", "{48E57E76-2386-4D13-93BC-1F56120BB6AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerService\LoggerService.csproj", "{48E57E76-2386-4D13-93BC-1F56120BB6AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{D26383A9-216D-479F-9EAA-B3384C323D78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{D26383A9-216D-479F-9EAA-B3384C323D78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

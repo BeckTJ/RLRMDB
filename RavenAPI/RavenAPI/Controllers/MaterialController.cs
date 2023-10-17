@@ -29,7 +29,7 @@ public class MaterialController : ControllerBase
             _log.LogInfo($"Return all material from database.");
 
             var materialResult = _mapper.Map<IEnumerable<MaterialDTO>>(materials);
-            return Ok(materialResult);
+            return Ok(materials);
 
         }catch (Exception ex)
         {

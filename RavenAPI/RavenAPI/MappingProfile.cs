@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RavenDAL.DTO;
+using RavenBAL.DTO;
 using RavenDAL.Models;
 
 namespace RavenAPI
@@ -8,9 +9,16 @@ namespace RavenAPI
     {
         public MappingProfile() 
         {
+            //DAL
             CreateMap<Material, MaterialDTO>();
-            CreateMap<RawMaterial, RawMaterialDTO>();
             CreateMap<VendorBatch, VendorDTO>();
+            CreateMap<RawMaterial, RawMaterialDTO>();
+            CreateMap<SampleSubmit, SampleDTO>();
+            CreateMap<CreateRawMaterialDTO, RawMaterial>();
+
+            //BAL
+            CreateMap<SampleRequired, CheckSampleDTO>();
+
         }
     }
 }

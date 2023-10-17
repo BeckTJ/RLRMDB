@@ -11,7 +11,8 @@ namespace Contracts
     {
         IEnumerable<VendorBatch> GetAllVendors(); 
         VendorBatch GetVendorByVendorLot(string lotNumber);
-        VendorBatch GetVendorWithRawMaterial(int materialNumber);
+        IEnumerable<VendorBatch> GetVendorLotsWithRawMaterials(int materialNumber);
+
     }
 }
  

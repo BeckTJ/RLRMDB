@@ -46,11 +46,14 @@
 -- select * from Distillation.RawMaterial
 -- where SampleSubmitNumber = 'RAW61560'
 
--- select * from Materials.MaterialNumber
--- where MaterialNumber = 3322187
+select * from Materials.VendorBatch
+join Distillation.RawMaterial on RawMaterial.VendorBatchNumber = VendorBatch.VendorBatchNumber
+where VendorBatch.MaterialNumber = 3322187
+
 
 select VendorBatch.MaterialNumber,VendorName, VendorBatchNumber from Materials.VendorBatch
 join Materials.MaterialNumber on VendorBatch.MaterialNumber = MaterialNumber.MaterialNumber
 where MaterialNumber.ParentMaterialNumber = 58423
 GROUP BY VendorBatch.MaterialNumber
 
+ 

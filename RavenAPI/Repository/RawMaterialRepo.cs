@@ -1,8 +1,6 @@
 ﻿using Contracts;
 using RavenDAL.Data;
 using RavenDAL.Models;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Repository
 {
@@ -12,14 +10,16 @@ namespace Repository
             : base(ctx) 
         { 
         }
-
+        public void CreateRawMaterial(RawMaterial rawMaterial)
+        {
+            Create(rawMaterial);
+        }
         public IEnumerable<RawMaterial> GetAllRawMaterial()
         {
             return FindAll()
                 .OrderBy(rm => rm.MaterialNumber)
                 .ToList();
         }
-
         public RawMaterial GetRawMaterialByMaterialNumber(int materialNumber)
         {
             return FindByCondition(rm => rm.MaterialNumber == materialNumber)
@@ -27,7 +27,7 @@ namespace Repository
         }
         public IEnumerable<RawMaterial> GetRawMaterialByVendorLot(string vendorLot)
         {
-            return FindByCondition(rm => rm.VendorBatchNumber == vendorLot).ToList();
+            return FindByCondition(rm => rm.VendorLotNumber == vendorLot).ToList();
         }
     }
 }

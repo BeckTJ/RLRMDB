@@ -1,8 +1,7 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using RavenDAL.Data;
 using RavenDAL.Models;
-using System.Data.Entity;
-using System.Linq.Expressions;
 
 namespace Repository
 {
@@ -11,6 +10,7 @@ namespace Repository
         public VendorRepo(RavenDBContext dbContext) 
             : base(dbContext) 
         {
+            
         }
 
         public IEnumerable<VendorBatch> GetAllVendors()
@@ -22,15 +22,15 @@ namespace Repository
 
         public VendorBatch GetVendorByVendorLot(string lotNumber)
         {
-            return FindByCondition(v => v.VendorBatchNumber == lotNumber)
+            return FindByCondition(v => v.VendorLotNumber == lotNumber)
                 .FirstOrDefault();
         }
 
-        public VendorBatch GetVendorWithRawMaterial(int materialNumber)
+        public IEnumerable<VendorBatch> GetVendorLotsWithRawMaterials(int materialNumber)
         {
-            return FindByCondition(v => v.MaterialNumber.Equals(materialNumber))
-                .Include(rm => rm.RawMaterials)
-                .FirstOrDefault();
+            return FindByCondition(v => v.MaterialNumber == materialNumber)
+                .Include(v => v.RawMaterials)
+                .ToList();
         }
     }
 }

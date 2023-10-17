@@ -8,8 +8,10 @@ namespace Repository
     {
         private RavenDBContext _ctx;
         private IMaterialRepo _material;
-        private IRawMaterialRepo _rawMaterial;
         private IVendorRepo _vendor;
+        private IRawMaterialRepo _rawMaterial;
+        private ISampleRequiredRepo _sampleRequired;
+        private ISampleRepo _sample;
 
         public IMaterialRepo Material
         {
@@ -45,6 +47,29 @@ namespace Repository
                 return _vendor;
             }
         }
+        public ISampleRepo Sample
+        {
+            get
+            {
+                if (_sample == null)
+                {
+                    _sample = new SampleRepo(_ctx);
+                }
+                return _sample;
+            }
+        }
+        public ISampleRequiredRepo SampleRequired
+        {
+            get
+            {
+                if (_sampleRequired == null)
+                {
+                    _sampleRequired = new SampleRequiredRepo(_ctx);
+                }
+                return _sampleRequired;
+            }
+        }
+
 
 
         public RepoWrapper(RavenDBContext ctx)

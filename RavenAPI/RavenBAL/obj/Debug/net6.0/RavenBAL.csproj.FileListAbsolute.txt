@@ -1,5 +1,4 @@
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.deps.json
-C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.runtimeconfig.json
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenDAL.dll
@@ -13,7 +12,6 @@ C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.csproj.CopyComp
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\refint\RavenBAL.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.pdb
-C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.genruntimeconfig.cache
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\ref\RavenBAL.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.csproj.AssemblyReference.cache
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.GeneratedMSBuildEditorConfig.editorconfig

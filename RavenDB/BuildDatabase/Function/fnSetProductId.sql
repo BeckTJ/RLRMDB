@@ -1,35 +1,34 @@
-CREATE OR ALTER FUNCTION Distillation.SetProductId(@materialNumber INT, @vendor VARCHAR(25))
-RETURNs VARCHAR(6)
+CREATE OR ALTER FUNCTION Distillation.SetProductId(@materialNumber INT)
+RETURNS VARCHAR(10)
 AS
 BEGIN
 
-    DECLARE @id VARCHAR(6)
-    DECLARE @sequenceId INT
-    DECLARE @materialCode VARCHAR(3)
+DECLARE @id INT
+DECLARE @code VARCHAR(3)
+DECLARE @productId VARCHAR(10)
 
-    SET @materialCode = (SELECT ProductCode FROM Materials.Material WHERE MaterialNumber = @materialNumber)
+SET @productId = (SELECT TOP(1) ProductLotNumber FROM Distillation.Production
+                WHERE MaterialNumber = @materialNumber
+                ORDER BY ProductLotNumber DESC) 
 
-    IF @id = NULL OR NOT EXISTS(SELECT TOP(1) ProductLotNumber FROM Distillation.Production WHERE MaterialNumber = @materialNumber ORDER BY ProductLotNumber DESC)
-        BEGIN
-        SET @sequenceId = (SELECT SequenceIdStart FROM Distillation.ProductNumberSequence 
-                            JOIN Materials.MaterialId ON ProductNumberSequence.SequenceId = MaterialId.SequenceId
-                            WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendor)
-            SET @id = (CONCAT(@sequenceId,@materialCode))
-        END
-    ELSE
-        BEGIN
-        SET @id = (SELECT TOP(1) ProductLotNumber FROM Distillation.Production WHERE MaterialNumber = @materialNumber ORDER BY ProductLotNumber DESC)
-        IF(LEN(@id)=10 OR LEN(@id)=6) 
-            BEGIN
-            SET @sequenceId = LEFT(@id,4)+1
-            SET @id = CONCAT(@sequenceId,@materialCode)
-            END
-        ELSE
-            BEGIN 
-            SET @sequenceId = LEFT(@id,3)+1
-            SET @id = CONCAT(@sequenceId,@materialCode)
-            END
-        END
+SET @code = (SELECT MaterialCode FROM Materials.MaterialId
+                WHERE MaterialNumber = @materialNumber)  
 
-        RETURN @id
+IF (LEN(@productId) = 10 OR LEN(@productId) = 6)
+BEGIN
+    SET @id = SUBSTRING(@productId,1,4)
+    SET @productId = CONCAT((@id+1),@code)
+END
+ELSE IF (LEN(@productId) = 9 OR LEN(@productId) = 5)
+BEGIN
+    SET @id = SUBSTRING(@productId,1,3)
+    SET @productId = CONCAT((@id+1),@code)
+END
+ELSE
+BEGIN
+    SET @id = (SELECT SequenceId FROM Materials.MaterialId
+                WHERE MaterialNumber = @materialNumber)
+    SET @productId = CONCAT(@id,  @code)
+END
+RETURN @productId
 END

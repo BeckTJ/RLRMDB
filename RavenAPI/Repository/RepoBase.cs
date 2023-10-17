@@ -19,7 +19,8 @@ namespace Repository
 
         public IQueryable<T> FindAll() => RavenDBContext.Set<T>().AsNoTracking();
 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) => RavenDBContext.Set<T>().Where(expression).AsNoTracking();
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) => 
+            RavenDBContext.Set<T>().Where(expression).AsNoTracking();
 
         public void Update(T entity) => RavenDBContext.Set<T>().Update(entity);
     }

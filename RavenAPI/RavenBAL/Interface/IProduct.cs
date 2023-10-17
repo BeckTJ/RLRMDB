@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace RavenBAL.Interface
 {
-    public interface IProduct<T> where T : class
+    public interface IProduct<T>
     {
-        IEnumerable<T> GetAllProduct(int MaterialNumber);
-        T GetProduct(T product);
-        void UpdateProduct(T product);
-        void DeleteProduct(T product);
+        T CreateProduct(T product);
+        T SampleProduct(T product);
 
     }
 }

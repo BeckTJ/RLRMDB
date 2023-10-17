@@ -4,8 +4,10 @@ namespace Contracts
     public interface IRepoWrapper
     {
         IMaterialRepo Material { get; }
-        IRawMaterialRepo RawMaterial { get; }
         IVendorRepo Vendor { get; }
+        IRawMaterialRepo RawMaterial { get; }
+        ISampleRequiredRepo SampleRequired { get; }
+        ISampleRepo SampleRepo { get; } 
         void Save();
     }
 }

@@ -1,0 +1,2 @@
+2023-10-07 23:56:27.6680 ERROR Something went wrong inside CreateRawMaterial action:Unable to track an entity of type 'RawMaterial' because its primary key property 'ProductId' is null.
+2023-10-07 23:57:50.2429 ERROR Something went wrong inside CreateRawMaterial action:Unable to track an entity of type 'RawMaterial' because its primary key property 'ProductId' is null.

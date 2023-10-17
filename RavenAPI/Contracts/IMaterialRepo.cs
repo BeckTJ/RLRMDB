@@ -7,5 +7,7 @@ namespace Contracts
     {
         IEnumerable<Material> GetAllMaterial();
         Material GetMaterialByMaterialNumber(int materialNumber);
+        Material GetParentMaterialNumberFromChild(int materialNumber);
+
     }
 }
