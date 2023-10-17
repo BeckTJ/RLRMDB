@@ -37,7 +37,7 @@ public class MaterialController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    [HttpGet("(materialNumber)")]
+    [HttpGet("{materialNumber}")]
     public IActionResult GetMaterialByMaterialNumber(int materialNumber) 
     {
         try
@@ -47,12 +47,15 @@ public class MaterialController : ControllerBase
             if(material is null)
             {
                 _log.LogError($"Material with id: {materialNumber}, hasn't been found in db.");
+
                 return NotFound();
             }
             else
             {
                 _log.LogInfo($"Returned Material with id: {materialNumber}");
-                return Ok(material);
+
+                var newMaterial = _mapper.Map<MaterialDTO>(material);
+                return Ok(newMaterial);
             }
         }
         catch (Exception ex)

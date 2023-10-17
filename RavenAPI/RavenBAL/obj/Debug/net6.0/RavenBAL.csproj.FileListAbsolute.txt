@@ -22,11 +22,11 @@ C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\refint\RavenBAL.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.deps.json
-C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.runtimeconfig.json
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenBAL.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenDAL.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\RavenDAL.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.csproj.CopyComplete
-C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\RavenBAL.genruntimeconfig.cache
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\obj\Debug\net6.0\ref\RavenBAL.dll
+C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.dll
+C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.pdb

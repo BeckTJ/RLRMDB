@@ -8,21 +8,8 @@ CREATE TABLE #tempTbl(
     MaterialNumber INT,
     PermitNumber VARCHAR(25),
     MaterialCode VARCHAR(3),
-    CarbonDrumRequired BIT,
-    CarbonDrumWeight INT, 
-    CarbonDrumDays INT,
-    VacuumTrapRequired BIT,
-    VacuumTrapDaysAllowed INT,
-    SpecificGravity DECIMAL(3,2),
-    PrefractionRefluxRatio VARCHAR(5),
-    CollectRefluxRatio VARCHAR(5),
-    NumberOfRuns INT,
     BatchManaged BIT,
-    RequiresProcessOrder BIT,
     UnitOfIssue VARCHAR(2),
-    IsRawMaterial BIT,
-    Vendor VARCHAR(25),
-    IsMPPS BIT,
     SequenceId INT);
 
 BULK INSERT #tempTbl FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'

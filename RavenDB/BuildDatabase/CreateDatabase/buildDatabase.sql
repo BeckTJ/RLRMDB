@@ -74,20 +74,14 @@ CREATE TABLE Materials.Material
     MaterialName VARCHAR(50) NOT NULL,
     MaterialNameAbreviation VARCHAR(15) NOT NULL,
     PermitNumber VARCHAR(25),
-    CarbonDrumRequired BIT DEFAULT(0) NOT NULL,
-    CarbonDrumDaysAllowed INT,
-    CarbonDrumWeightAllowed INT,
-    CarbonDrumInstallDate DATE,
-    VacuumTrapRequired BIT DEFAULT(0) NOT NULL,
-    VacuumTrapInstallDate DATE,
-    VacuumTrapDaysAllowed INT,
-    SpecificGravity DECIMAL(3,2),
-    PrefractionRefluxRatio VARCHAR(5),
-    CollectRefluxRatio VARCHAR(5),
-    NumberOfRuns INT,
-    HeelPumpFrequency INT,
+    UnitOfIssue VARCHAR(2) NOT NULL,
+    BatchManaged BIT NOT NULL DEFAULT(0),
+    MaterialCode VARCHAR(3) NOT NULL,
+    SequenceId INT NOT NULL,
+    TotalRecords INT NOT NULL,
 )
 GO
+
 
 CREATE NONCLUSTERED INDEX IX_Material_NameAbreviation
 ON Materials.Material(MaterialNameAbreviation ASC)
@@ -123,14 +117,15 @@ CREATE TABLE QualityControl.SampleSubmit
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
 )
 
-CREATE TABLE Materials.MaterialNumber
+CREATE TABLE Materials.MaterialVendor
 (
     MaterialNumber INT PRIMARY KEY,
-    ParentMaterialNumber INT FOREIGN KEY REFERENCES Materials.Material NOT NULL,
-    BatchManaged BIT NOT NULL DEFAULT(0),
-    RequiresProcessOrder BIT NOT NULL DEFAULT(0),
-    UnitOfIssue VARCHAR(2),
-    IsRawMaterial BIT NOT NULL DEFAULT(0)
+    VendorName VARCHAR(25) FOREIGN KEY REFERENCES Materials.Vendor,
+    ParentMaterialNumber INT FOREIGN KEY REFERENCES Materials.Material,
+    MaterialCode VARCHAR(3) NOT NULL,
+    SequenceId INT NOT NULL,
+    TotalRecords INT NOT NULL,
+    UnitOfIssue VARCHAR(3),
 )
 
 CREATE TABLE QualityControl.SampleRequired
@@ -158,43 +153,31 @@ CREATE TABLE QualityControl.SampleRequired
     PRIMARY KEY (MaterialNumber,VLN)
 )
 
-CREATE TABLE Materials.VendorBatch
+CREATE TABLE Materials.VendorLot
 (
-    VendorBatchNumber VARCHAR(25) PRIMARY KEY,
-    VendorName VARCHAR(25) FOREIGN KEY REFERENCES Materials.Vendor,
+    VendorLotNumber VARCHAR(25) PRIMARY KEY,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
     Quantity INT,
-    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber
-)
-
-CREATE TABLE Materials.MaterialId
-(
-    MaterialNumber INT,
-    VendorName VARCHAR(25),
-    MaterialCode VARCHAR(3),
-    SequenceId INT,
-    TotalRecords INT,
-    PRIMARY KEY (MaterialNumber,VendorName)
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialVendor
 )
 
 CREATE TABLE Distillation.RawMaterial
 (
     DrumLotNumber VARCHAR(10) PRIMARY KEY,
-    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialVendor,
     DrumWeight INT,
     SapBatchNumber INT ,
     ContainerNumber CHAR(7),
     InspectionLotNumber NUMERIC,
     SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
-    VendorBatchNumber VARCHAR(25) FOREIGN KEY REFERENCES Materials.VendorBatch,
+    VendorLotNumber VARCHAR(25) FOREIGN KEY REFERENCES Materials.VendorLot,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
-
 )
 
 CREATE TABLE Distillation.Production
 (
     ProductLotNumber VARCHAR(10) PRIMARY KEY,
-    MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialNumber,
+    MaterialNumber INT FOREIGN KEY REFERENCES Materials.Material,
     ProductBatchNumber INT,
     ProcessOrder NUMERIC,
     InspectionLotNumber NUMERIC,
@@ -255,6 +238,21 @@ CREATE TABLE Distillation.PreStartChecks(
     RunId INT FOREIGN KEY REFERENCES Distillation.ProductRun,
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.Material
 )
-
+CREATE TABLE Engineering.SystemInformation
+(
+    MaterialNumber INT PRIMARY KEY,
+    CarbonDrumRequired BIT DEFAULT(0) NOT NULL,
+    CarbonDrumDaysAllowed INT,
+    CarbonDrumWeightAllowed INT,
+    CarbonDrumInstallDate DATE,
+    VacuumTrapRequired BIT DEFAULT(0) NOT NULL,
+    VacuumTrapInstallDate DATE,
+    VacuumTrapDaysAllowed INT,
+    SpecificGravity DECIMAL(3,2),
+    PrefractionRefluxRatio VARCHAR(5),
+    CollectRefluxRatio VARCHAR(5),
+    NumberOfRuns INT,
+    HeelPumpFrequency INT,
+)
 
 GO

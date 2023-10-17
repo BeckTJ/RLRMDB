@@ -47,17 +47,7 @@ namespace Repository
                 return _vendor;
             }
         }
-        public ISampleRepo Sample
-        {
-            get
-            {
-                if (_sample == null)
-                {
-                    _sample = new SampleRepo(_ctx);
-                }
-                return _sample;
-            }
-        }
+ 
         public ISampleRequiredRepo SampleRequired
         {
             get
@@ -70,7 +60,17 @@ namespace Repository
             }
         }
 
-
+        public ISampleRepo SampleRepo
+        {
+            get
+            {
+                if (_sample == null)
+                {
+                    _sample = new SampleRepo(_ctx);
+                }
+                return _sample;
+            }
+        }
 
         public RepoWrapper(RavenDBContext ctx)
         {

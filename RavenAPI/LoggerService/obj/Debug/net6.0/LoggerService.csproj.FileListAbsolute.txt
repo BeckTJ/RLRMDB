@@ -14,7 +14,6 @@ C:\Users\TBeck\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\refint\LoggerServic
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.pdb
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.deps.json
-C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.runtimeconfig.json
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.pdb
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\Contracts.dll
@@ -30,7 +29,6 @@ C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.cspro
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\refint\LoggerService.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.pdb
-C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.genruntimeconfig.cache
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDAL.dll
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDAL.pdb

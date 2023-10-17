@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj": {}
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj": {
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj",
         "projectName": "RavenDAL.Tests",
-        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj",
-        "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL.Tests\\obj\\",
+        "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL.Tests\\RavenDAL.Tests.csproj",
+        "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

@@ -240,8 +240,6 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenAPI.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenAPI.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Castle.Core.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Elasticsearch.Net.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\EntityFramework.SqlServer.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\EntityFramework.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Humanizer.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -271,9 +269,7 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\NSubstitute.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.Data.SqlClient.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.Drawing.Common.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
@@ -288,11 +284,6 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-arm64\nativ
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll

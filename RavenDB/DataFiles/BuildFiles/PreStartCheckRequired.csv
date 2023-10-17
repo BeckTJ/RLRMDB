@@ -1,0 +1,7 @@
+﻿MaterialNumber,MaterialName,ReboilerSkinTempBelowValue,KnockOutPotDrained,HeelsPumped,HeliumCylinderPSI,HeliumFlowPSI,CoolantLevel,CoolantPurgeSet,NitrogenFlowRate,NitrogenPurge,HeatingMantlePurgeSet,NitrogenFlow,AftercoolerPressure,ChillerSetting,NitrogenToCondenserPurge,SecondaryPurgeSet,InspectLines,ControllerInitialSetBelowValue
+58143,WIN,90,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,1
+58245,BEER,75,1,1,0,0,0,0,0,0,0,0,1,1,0,0,0,1
+58423,FRJU,75,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+58765,LQR,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+58913,LMND,75,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+58971,MLK,90,1,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0

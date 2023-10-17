@@ -10,6 +10,7 @@ namespace RavenBAL.Services
         {
             _repo = repo;
         }
+        //
         public bool VerifyProductSample(RawMaterialDTO rawMaterial)
         {
             return true;
@@ -18,6 +19,7 @@ namespace RavenBAL.Services
         {
             return true;
         }
+
         private bool VerifySampleRequired(int materialNumber)
         {
             var material = _repo.Material.GetParentMaterialNumberFromChild(materialNumber);
@@ -25,6 +27,7 @@ namespace RavenBAL.Services
 
             if (sample != null)
             {
+                
                     return true;
             }
             return false;

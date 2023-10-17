@@ -1,5 +1,4 @@
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.deps.json
-C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.runtimeconfig.json
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.dll
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.pdb
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\Contracts.dll
@@ -15,7 +14,6 @@ C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.csproj.Copy
 C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.dll
 C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\refint\Repository.dll
 C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.pdb
-C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.genruntimeconfig.cache
 C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\ref\Repository.dll
 C:\Users\TBeck\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.deps.json
 C:\Users\TBeck\Raven\RavenAPI\Repository\bin\Debug\net6.0\Repository.dll
