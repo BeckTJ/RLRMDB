@@ -1,19 +1,11 @@
-﻿using RavenDAL.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RavenDAL.Models
+namespace RavenDAL.Models;
+
+public partial class Vendor
 {
-    public partial class Vendor
-    {
-        public Vendor()
-        {
-            VendorBatches = new HashSet<VendorBatch>();
-        }
+    public string VendorName { get; set; } = null!;
 
-        public string VendorName { get; set; } = null!;
-
-        public virtual ICollection<VendorBatch> VendorBatches { get; set; }
-
-    }
+    public virtual ICollection<MaterialVendor> MaterialVendors { get; set; } = new List<MaterialVendor>();
 }

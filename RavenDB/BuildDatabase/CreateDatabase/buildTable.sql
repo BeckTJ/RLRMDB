@@ -304,3 +304,6 @@ MaxReceiverLevel
 FROM #tmpReceiver
 GO
 
+-- select * from Distillation.RawMaterial
+-- select * from QualityControl.SampleSubmit
+-- select * from QualityControl.SampleRequired

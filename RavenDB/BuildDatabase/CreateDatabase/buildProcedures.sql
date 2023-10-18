@@ -1,46 +1,5 @@
 --PROCEDURES
 
-CREATE OR ALTER PROCEDURE Materials.InsertMaterialNumber(@materialNumber INT,@parentMaterialNumber INT,@batchManaged BIT,@requiresProcessOrder BIT,@unitOfIssue CHAR(2),@isRawMaterial BIT)
-AS
-BEGIN
-
-    IF NOT EXISTS(SELECT 1 FROM Materials.MaterialNumber WHERE MaterialNumber.MaterialNumber = @materialNumber)
-    INSERT INTO Materials.MaterialNumber(MaterialNumber,ParentMaterialNumber,BatchManaged,RequiresProcessOrder,UnitOfIssue,IsRawMaterial)
-    VALUES(@materialNumber,@parentMaterialNumber,@batchManaged,@requiresProcessOrder,@unitOfIssue,@isRawMaterial)
-
-END
-GO
-
-CREATE OR ALTER PROCEDURE Materials.AddVendor(@vendorName AS VARCHAR(25))
-AS
-BEGIN
-
-IF NOT EXISTS (SELECT VendorName FROM Materials.Vendor WHERE VendorName = @vendorName)
-
-INSERT INTO Materials.Vendor(VendorName)
-VALUES (@vendorName);
-
-END
-GO
-
-CREATE OR ALTER PROCEDURE Distillation.UpdateProduction(@materialNumber INT, @batchNumber INT, @processOrder NUMERIC, @inspectionLotNumber NUMERIC = NULL, @sampleNumber CHAR(8) = NULL)
-AS
-
-    DECLARE @productId VARCHAR(10)
-    SET @productId = Distillation.SetProductID(@materialNumber,'Finish Product')
-
-
-
-    INSERT INTO Distillation.Production(ProductLotNumber,MaterialNumber, ProductBatchNumber, ProcessOrder, InspectionLotNumber, SampleSubmitNumber)
-    VALUES(@productId,
-        (SELECT MaterialNumber FROM Materials.Material WHERE MaterialNumber = @materialNumber),
-        @batchNumber,
-        @processOrder,
-        @inspectionLotNumber,
-        (SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit WHERE SampleSubmitNumber = @sampleNumber))
-
-GO
-
 CREATE OR ALTER PROCEDURE QualityControl.SubmitSample
     (@sampleNumber AS CHAR(8), @lotNumber AS NUMERIC, @sampleDate DATE)
 AS
@@ -69,8 +28,8 @@ AS
 BEGIN TRAN VendorBatch
 BEGIN TRY
 
-    INSERT INTO Materials.VendorBatch(VendorBatchNumber,VendorName,Quantity,MaterialNumber)
-    VALUES(@batchNumber,(SELECT VendorName FROM Materials.Vendor WHERE VendorName = @vendorName), @qty, (SELECT MaterialNumber FROM Materials.MaterialNumber WHERE MaterialNumber = @materialNumber))
+    INSERT INTO Materials.VendorLot(VendorLotNumber,Quantity,MaterialNumber)
+    VALUES(@batchNumber,@qty, (SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber))
 
 COMMIT TRAN
 END TRY
@@ -93,17 +52,13 @@ CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     AS
     BEGIN TRAN EnterRawMaterial
     BEGIN TRY
-
-    DECLARE @vendor VARCHAR(50)
-    SET @vendor = (SELECT VendorName FROM Materials.VendorBatch
-                    WHERE VendorBatchNumber = @vendorBatchNumber)
                     
     WHILE(@quantity > 0)
         BEGIN
         INSERT INTO Distillation.RawMaterial
-            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorBatchNumber, SampleSubmitNumber)
+            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorLotNumber, SampleSubmitNumber)
         VALUES
-            (Distillation.SetDrumId(@materialNumber,@vendor,@sampleDate), @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber,@sampleSubmitNumber)
+            (Distillation.SetDrumId(@materialNumber,@sampleDate), @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber,@sampleSubmitNumber)
 
           SET @quantity=@quantity-1
         END
@@ -146,12 +101,12 @@ BEGIN
     DECLARE @sequenceId INT
     DECLARE @materialCode VARCHAR(3)
 
-    SET @materialCode = (SELECT MaterialCode FROM Materials.MaterialId WHERE MaterialNumber = @materialNumber)
+    SET @materialCode = (SELECT MaterialCode FROM Materials.Material WHERE MaterialNumber = @materialNumber)
 
     IF @id = NULL OR NOT EXISTS(SELECT TOP(1) ProductLotNumber FROM Distillation.Production WHERE MaterialNumber = @materialNumber ORDER BY ProductLotNumber DESC)
         BEGIN
-        SET @sequenceId = (SELECT SequenceId FROM Materials.MaterialId 
-                            WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendor)
+        SET @sequenceId = (SELECT SequenceId FROM Materials.Material
+                            WHERE Material.MaterialNumber = @materialNumber )
             SET @id = (CONCAT(@sequenceId,@materialCode))
         END
     ELSE
@@ -196,7 +151,7 @@ RETURN @productId
 END
 GO
 
-CREATE or ALTER FUNCTION Distillation.SetDrumId (@materialNumber AS INT, @vendorName VARCHAR(50) = NULL, @sampleDate DATE = NULL)
+CREATE or ALTER FUNCTION Distillation.SetDrumId (@materialNumber AS INT, @sampleDate DATE = NULL)
     RETURNS CHAR(10) 
     AS 
 BEGIN
@@ -205,7 +160,6 @@ BEGIN
     DECLARE @drumLotNumber AS VARCHAR(10)
     DECLARE @alphabeticDate AS CHAR(1)
     DECLARE @drumId VARCHAR(10)
-    DECLARE @sequenceId INT
 
     SET @alphabeticDate = (SELECT AlphabeticCode
     FROM Distillation.AlphabeticDate
@@ -224,14 +178,10 @@ BEGIN
     WHERE materialnumber = @materialNumber
     ORDER BY DrumLotNumber DESC))
         BEGIN
-        SET @sequenceId = (SELECT SequenceId FROM Materials.MaterialId 
-                            WHERE MaterialId.MaterialNumber = @materialNumber AND MaterialId.VendorName = @vendorName)
 
-        SET @drumLotNumber = (SELECT CONCAT(@sequenceId, MaterialId.MaterialCode,RIGHT(YEAR(@sampleDate),1),@alphabeticDate,FORMAT(@sampleDate,'dd'))
-        FROM Materials.MaterialNumber
-            JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
-            JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
-        WHERE MaterialNumber.MaterialNumber = @materialNumber)
+        SET @drumLotNumber = (SELECT CONCAT(MaterialVendor.SequenceId, MaterialVendor.MaterialCode,RIGHT(YEAR(@sampleDate),1),@alphabeticDate,FORMAT(@sampleDate,'dd'))
+        FROM Materials.MaterialVendor
+        WHERE MaterialVendor.MaterialNumber = @materialNumber)
         END
 
     ELSE
@@ -245,11 +195,9 @@ BEGIN
             SET @newDrumId = CAST(LEFT(@drumId,3)AS INT)+1
             END
 
-        SET @drumLotNumber = (SELECT CONCAT(@newdrumId, MaterialId.MaterialCode,RIGHT(YEAR(@sampleDate),1),@alphabeticDate,FORMAT(@sampleDate,'dd')) AS 'Drum ID'
-                                FROM Materials.MaterialNumber
-                                    JOIN Materials.MaterialId ON MaterialNumber.MaterialNumber = MaterialId.MaterialNumber
-                                    JOIN Materials.Material ON Material.MaterialNumber = MaterialNumber.ParentMaterialNumber
-                                WHERE MaterialNumber.MaterialNumber = @materialNumber)
+        SET @drumLotNumber = (SELECT CONCAT(@newdrumId, MaterialVendor.MaterialCode,RIGHT(YEAR(@sampleDate),1),@alphabeticDate,FORMAT(@sampleDate,'dd')) AS 'Drum ID'
+                                FROM Materials.MaterialVendor
+                                WHERE MaterialVendor.MaterialNumber = @materialNumber)
         END
 
     RETURN @drumLotNumber
@@ -263,8 +211,8 @@ BEGIN
 
 DECLARE @weightKG AS DECIMAL(5,3)
 SET @weightKG = (@weightLiters * (SELECT SpecificGravity 
-                                    FROM Materials.Material
-                                    WHERE MaterialNameAbreviation = @materialName ));
+                                    FROM Engineering.SystemInformation
+                                    WHERE MaterialNumber = @materialName ));
 
 RETURN @weightKG;
 END

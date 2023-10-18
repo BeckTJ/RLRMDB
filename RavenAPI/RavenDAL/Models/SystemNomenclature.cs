@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RavenDAL.Models
+namespace RavenDAL.Models;
+
+public partial class SystemNomenclature
 {
-    public partial class SystemNomenclature
-    {
-        public SystemNomenclature()
-        {
-            IndicatorSetPoints = new HashSet<IndicatorSetPoint>();
-        }
+    public string Nomenclature { get; set; } = null!;
 
-        public string Nomenclature { get; set; } = null!;
-
-        public virtual ICollection<IndicatorSetPoint> IndicatorSetPoints { get; set; }
-    }
+    public virtual ICollection<IndicatorSetPoint> IndicatorSetPoints { get; set; } = new List<IndicatorSetPoint>();
 }

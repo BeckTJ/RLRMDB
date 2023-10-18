@@ -55,7 +55,7 @@ public class RawMaterialController : ControllerBase
             {
                 _log.LogInfo($"Returned vendor with raw material for id: {materialNumber}");
 
-                var rawMaterial = _mapper.Map<List<VendorDTO>>(vendor);
+                var rawMaterial = _mapper.Map<List<MaterialVendorDTO>>(vendor);
                 return Ok(rawMaterial);
             }
         }
