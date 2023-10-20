@@ -11,7 +11,8 @@ namespace RavenAPI
         {
             //DAL
             CreateMap<Material, MaterialDTO>();
-            CreateMap<VendorLot, MaterialVendorDTO>();
+            CreateMap<MaterialVendor, MaterialVendorDTO>();
+            CreateMap<VendorLot, VendorLotDTO>();
             CreateMap<RawMaterial, RawMaterialDTO>();
             CreateMap<SampleSubmit, SampleDTO>();
             CreateMap<CreateRawMaterialDTO, RawMaterial>();

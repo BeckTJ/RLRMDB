@@ -29,7 +29,7 @@ namespace RavenAPI.Extensions
         public static void ConfigureMSSqlContext(this IServiceCollection services,IConfiguration config)
         {
             var connectionString = config["mssqlconnection:connectionString"];
-            services.AddDbContext<RavenDBContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<RavenContext>(o => o.UseSqlServer(connectionString));
         }
         public static void ConfigureRepoWrapper(this IServiceCollection services)
         {

@@ -5,7 +5,7 @@ namespace RavenDAL.Models;
 
 public partial class RawMaterial
 {
-    public string DrumLotNumber { get; set; } = null!;
+    public string ProductId { get; set; } = null!;
 
     public int? MaterialNumber { get; set; }
 
@@ -31,5 +31,5 @@ public partial class RawMaterial
 
     public virtual SampleSubmit? SampleSubmitNumberNavigation { get; set; }
 
-    public virtual VendorLot? VendorLotNumberNavigation { get; set; }
+    public virtual VendorLot? VendorLot { get; set; }
 }

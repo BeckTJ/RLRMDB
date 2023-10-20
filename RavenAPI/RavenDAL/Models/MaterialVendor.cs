@@ -24,6 +24,4 @@ public partial class MaterialVendor
     public virtual ICollection<RawMaterial> RawMaterials { get; set; } = new List<RawMaterial>();
 
     public virtual ICollection<VendorLot> VendorLots { get; set; } = new List<VendorLot>();
-
-    public virtual Vendor? VendorNameNavigation { get; set; }
 }

@@ -25,19 +25,14 @@ SET SampleSubmitNumber = (SELECT SampleSubmitNumber FROM QualityControl.SampleSu
 WHERE InspectionLotNumber = @lotNumber
 GO
 
-CREATE OR ALTER PROCEDURE Materials.AddVendorBatch(@vendorName AS VARCHAR(25), @batchNumber AS VARCHAR(25),@materialNumber INT, @qty INT = 1)
+CREATE OR ALTER PROCEDURE Materials.AddVendorBatch(@batchNumber AS VARCHAR(25),@materialNumber INT,@sampleId VARCHAR(8), @qty INT = 1)
 AS
 BEGIN TRAN VendorBatch
-BEGIN TRY
 
-    INSERT INTO Materials.VendorLot(VendorLotNumber,Quantity,MaterialNumber)
-    VALUES(@batchNumber,@qty, (SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber))
+    INSERT INTO Materials.VendorLot(VendorLotNumber,Quantity,SampleSubmitNumber,MaterialNumber)
+    VALUES(@batchNumber,@qty,(SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit Where SampleSubmitNumber = @sampleId), (SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber))
 
 COMMIT TRAN
-END TRY
-BEGIN CATCH
-    ROLLBACK TRAN
-END CATCH
 GO
 
 CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
@@ -53,25 +48,18 @@ CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     )
     AS
     BEGIN TRAN EnterRawMaterial
-    BEGIN TRY
                     
     WHILE(@quantity > 0)
         BEGIN
         INSERT INTO Distillation.RawMaterial
             (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorLotNumber, SampleSubmitNumber)
         VALUES
-            (Distillation.SetDrumId(@materialNumber,@sampleDate), @materialNumber, @drumWeight, @sapBatchNumber, @containerNumber, @vendorBatchNumber,@sampleSubmitNumber)
+            (Distillation.SetDrumId(@materialNumber,@sampleDate),(SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber), @drumWeight, @sapBatchNumber, @containerNumber, (SELECT VendorLotNumber FROM Materials.VendorLot WHERE VendorLotNumber = @vendorBatchNumber),(SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit WHERE SampleSubmitNumber = @sampleSubmitNumber))
 
           SET @quantity=@quantity-1
         END
-        
     COMMIT TRAN;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRAN;
-    END CATCH
 GO
-
 CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
     @materialNumber INT,
     @vendorBatchNumber VARCHAR(25) = NULL,
@@ -86,7 +74,7 @@ CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
 AS
 
     EXEC QualityControl.SubmitSample @sampleSubmitNumber,@inspectionlotNumber,@sampleDate;
-    EXEC Materials.AddVendorBatch @vendorBatchNumber, @materialNumber, @numberOfDrums;
+    EXEC Materials.AddVendorBatch @vendorBatchNumber, @materialNumber, @sampleSubmitNumber, @numberOfDrums;
     EXEC Distillation.RawMaterialUpdate @materialNumber, @vendorBatchNumber,@inspectionLotNumber,@sapBatchNumber,@sampleSubmitNumber,@sampleDate,@containerNumber,@numberOfDrums,@drumWeight
 GO
 

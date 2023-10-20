@@ -6,5 +6,5 @@ public class MaterialDTO
 {
     public int MaterialNumber { get; set; } 
     public string? MaterialAbrev { get; set; } 
-    public IEnumerable<MaterialVendorDTO> MaterialVendors { get; set; }
+    public IEnumerable<MaterialVendorDTO>? MaterialVendors { get; set; }
 }

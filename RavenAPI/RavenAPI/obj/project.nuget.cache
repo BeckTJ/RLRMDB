@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Zs/uZpmN/Bs2GImiEYTXfF7ArbV7gE4OlgvxvuVreLK0pf8zR/EJ+TIJbaTaBJD+qzzjn/YYzriHccu7SvoxGw==",
+  "dgSpecHash": "iEywA65rmJz3EFVHuM992LHo6gQ+NKY7EY1TZ/e03u41LyyKjrkuXwFu5wNhavV+5OptJm3sSuH7oU5cQGdiWg==",
   "success": true,
   "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,6 @@
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\castle.core\\5.0.0\\castle.core.5.0.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\elasticsearch.net\\7.17.5\\elasticsearch.net.7.17.5.nupkg.sha512",
-    "C:\\Users\\TBeck\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.22\\microsoft.aspnetcore.cryptography.internal.6.0.22.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.22\\microsoft.aspnetcore.cryptography.keyderivation.6.0.22.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.22\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.22.nupkg.sha512",
@@ -21,7 +20,6 @@
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.12\\microsoft.entityframeworkcore.abstractions.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.12\\microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",
-    "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.design\\6.0.22\\microsoft.entityframeworkcore.design.6.0.22.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.12\\microsoft.entityframeworkcore.relational.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.12\\microsoft.entityframeworkcore.sqlserver.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

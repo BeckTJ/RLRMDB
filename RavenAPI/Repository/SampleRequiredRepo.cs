@@ -6,7 +6,7 @@ namespace Repository
 {
     public class SampleRequiredRepo : RepoBase<SampleRequired>, ISampleRequiredRepo
     {
-        public SampleRequiredRepo(RavenDBContext ctx) : base(ctx) { }
+        public SampleRequiredRepo(RavenContext ctx) : base(ctx) { }
 
         public IEnumerable<SampleRequired> VerifySampleVLN(int parentMaterialNumber)
         {

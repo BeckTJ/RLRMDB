@@ -7,7 +7,7 @@ namespace Repository
 {
     public class MaterialRepo : RepoBase<Material>, IMaterialRepo
     {
-        public MaterialRepo(RavenDBContext ctx) 
+        public MaterialRepo(RavenContext ctx) 
             : base(ctx) 
         {
         
@@ -16,6 +16,7 @@ namespace Repository
         {
             return FindAll()
                 .OrderBy(m  => m.MaterialNumber)
+                .Include(m => m.MaterialVendors)
                 .ToList();
         }
 

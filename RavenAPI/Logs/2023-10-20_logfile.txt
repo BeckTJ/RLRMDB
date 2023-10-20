@@ -1,0 +1,56 @@
+2023-10-20 07:14:40.1696 INFO Return all material from database.
+2023-10-20 07:14:53.0964 INFO Return all material from database.
+2023-10-20 07:16:34.3080 INFO Return all material from database.
+2023-10-20 07:16:34.5282 ERROR Something went wrong inside GetAllMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[RavenDAL.Models.Material, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[RavenDAL.DTO.MaterialDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 07:20:35.2604 INFO Return all material from database.
+2023-10-20 07:20:35.4305 ERROR Something went wrong inside GetAllMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[RavenDAL.Models.Material, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[RavenDAL.DTO.MaterialDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 07:21:30.7657 INFO Return all material from database.
+2023-10-20 07:21:30.8974 ERROR Something went wrong inside GetAllMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[RavenDAL.Models.Material, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[RavenDAL.DTO.MaterialDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 07:24:45.0791 INFO Return all material from database.
+2023-10-20 07:30:25.8560 INFO Return all material from database.
+2023-10-20 08:01:02.7340 INFO Return all material from database.
+2023-10-20 08:01:41.0887 INFO Return all material from database.
+2023-10-20 08:41:03.3079 INFO Return all material from database.
+2023-10-20 08:41:50.9188 INFO Return all material from database.
+2023-10-20 08:41:52.5174 INFO Return all material from database.
+2023-10-20 08:41:53.3626 INFO Return all material from database.
+2023-10-20 08:43:38.6274 INFO Return all material from database.
+2023-10-20 08:43:38.7896 ERROR Something went wrong inside GetAllRawMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[RavenDAL.Models.RawMaterial, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[RavenDAL.DTO.MaterialVendorDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 08:47:15.2321 INFO Return all material from database.
+2023-10-20 08:47:15.3722 ERROR Something went wrong inside GetAllRawMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> IEnumerable`1
+System.Collections.Generic.List`1[[RavenDAL.Models.VendorLot, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.IEnumerable`1[[RavenDAL.DTO.VendorLotDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 09:07:13.5416 INFO Return all material from database.
+2023-10-20 09:41:11.8449 INFO Return all material from database.
+2023-10-20 09:47:05.9480 INFO Return all material from database.
+2023-10-20 09:50:21.8368 INFO Returned vendor with raw material for id: 3579790
+2023-10-20 09:50:21.9219 ERROR Something went wrong inside GetVendorWithRawMaterial action: Error mapping types.
+
+Mapping types:
+List`1 -> List`1
+System.Collections.Generic.List`1[[RavenDAL.Models.VendorLot, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]] -> System.Collections.Generic.List`1[[RavenDAL.DTO.MaterialVendorDTO, RavenDAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]
+2023-10-20 09:51:10.4946 INFO Returned vendor with raw material for id: 3579790
+2023-10-20 09:54:07.2167 INFO Returned vendor with raw material for id: 3579790
+2023-10-20 10:43:36.7507 INFO Returned vendor with raw material for id: 3579790
+2023-10-20 10:44:37.4302 INFO Return all material from database.
+2023-10-20 10:47:08.8714 ERROR Something went wrong inside GetAllMaterial action: Invalid column name 'MaterialAbrev'.
+2023-10-20 10:48:26.3921 INFO Return all material from database.
+2023-10-20 10:49:54.6672 INFO Return all material from database.

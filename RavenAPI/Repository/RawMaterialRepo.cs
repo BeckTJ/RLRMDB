@@ -6,7 +6,7 @@ namespace Repository
 {
     public class RawMaterialRepo : RepoBase<RawMaterial>, IRawMaterialRepo
     {
-        public RawMaterialRepo(RavenDBContext ctx) 
+        public RawMaterialRepo(RavenContext ctx) 
             : base(ctx) 
         { 
         }

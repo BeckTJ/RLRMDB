@@ -9,7 +9,7 @@ public partial class Material
 
     public string MaterialName { get; set; } = null!;
 
-    public string MaterialNameAbreviation { get; set; } = null!;
+    public string MaterialAbrev { get; set; } = null!;
 
     public string? PermitNumber { get; set; }
 
@@ -23,13 +23,9 @@ public partial class Material
 
     public int TotalRecords { get; set; }
 
-    public virtual ICollection<IndicatorSetPoint> IndicatorSetPoints { get; set; } = new List<IndicatorSetPoint>();
-
     public virtual ICollection<MaterialVendor> MaterialVendors { get; set; } = new List<MaterialVendor>();
 
     public virtual ICollection<PreStartCheck> PreStartChecks { get; set; } = new List<PreStartCheck>();
 
     public virtual ICollection<Production> Productions { get; set; } = new List<Production>();
-
-    public virtual ICollection<SystemReceiver> SystemReceivers { get; set; } = new List<SystemReceiver>();
 }

@@ -25,7 +25,5 @@ public partial class Production
 
     public virtual ICollection<ProductRun> ProductRuns { get; set; } = new List<ProductRun>();
 
-    public virtual Receiver? ReceiverNameNavigation { get; set; }
-
     public virtual SampleSubmit? SampleSubmitNumberNavigation { get; set; }
 }

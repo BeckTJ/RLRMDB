@@ -7,7 +7,7 @@ namespace Repository
 {
     public class VendorRepo : RepoBase<VendorLot>, IVendorRepo
     {
-        public VendorRepo(RavenDBContext dbContext) 
+        public VendorRepo(RavenContext dbContext) 
             : base(dbContext) 
         {
             
@@ -17,6 +17,7 @@ namespace Repository
         {
             return FindAll()
                 .OrderBy(v => v.MaterialNumber)
+                .Include(rm => rm.RawMaterials)
                 .ToList();
         }
 

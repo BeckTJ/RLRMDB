@@ -12,7 +12,7 @@ namespace RavenDAL.DTO
         public string? ProductId { get; set; }
         public int BatchNumber { get; set; }
         public string? ContainerNumber { get; set; }
-        public string? SampleId { get; set; } 
+        public string? SampleSubmitNumber { get; set; } 
         public int DrumWeight { get; set; }
         public long InspectionLotNumber { get; set; }
     }

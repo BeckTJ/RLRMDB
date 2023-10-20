@@ -8,20 +8,20 @@ namespace Repository
 {
     public abstract class RepoBase<T> : IRepoBase<T> where T : class
     {
-        protected RavenDBContext RavenDBContext { get; set; }
-        public RepoBase(RavenDBContext dbContext)
+        protected RavenContext RavenContext { get; set; }
+        public RepoBase(RavenContext dbContext)
         {
-            RavenDBContext = dbContext;
+            RavenContext = dbContext;
         }
-        public void Create(T entity) => RavenDBContext.Set<T>().Add(entity);
+        public void Create(T entity) => RavenContext.Set<T>().Add(entity);
 
-        public void Delete(T entity) => RavenDBContext.Set<T>().Remove(entity);
+        public void Delete(T entity) => RavenContext.Set<T>().Remove(entity);
 
-        public IQueryable<T> FindAll() => RavenDBContext.Set<T>().AsNoTracking();
+        public IQueryable<T> FindAll() => RavenContext.Set<T>().AsNoTracking();
 
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) => 
-            RavenDBContext.Set<T>().Where(expression).AsNoTracking();
+            RavenContext.Set<T>().Where(expression).AsNoTracking();
 
-        public void Update(T entity) => RavenDBContext.Set<T>().Update(entity);
+        public void Update(T entity) => RavenContext.Set<T>().Update(entity);
     }
 }

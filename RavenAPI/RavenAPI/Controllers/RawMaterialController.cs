@@ -27,10 +27,10 @@ public class RawMaterialController : ControllerBase
     {
         try
         {
-            var material = _repo.RawMaterial.GetAllRawMaterial();
+            var material = _repo.Vendor.GetAllVendors();
             _log.LogInfo($"Return all material from database.");
 
-            var rawMaterial = _mapper.Map<IEnumerable<RawMaterialDTO>>(material);
+            var rawMaterial = _mapper.Map<IEnumerable<VendorLotDTO>>(material);
             return Ok(rawMaterial);
         }
         catch (Exception ex)
@@ -55,7 +55,7 @@ public class RawMaterialController : ControllerBase
             {
                 _log.LogInfo($"Returned vendor with raw material for id: {materialNumber}");
 
-                var rawMaterial = _mapper.Map<List<MaterialVendorDTO>>(vendor);
+                var rawMaterial = _mapper.Map<List<VendorLotDTO>>(vendor);
                 return Ok(rawMaterial);
             }
         }

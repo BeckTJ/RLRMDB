@@ -6,7 +6,7 @@ namespace Repository
 {
     public class RepoWrapper : IRepoWrapper
     {
-        private RavenDBContext _ctx;
+        private RavenContext _ctx;
         private IMaterialRepo _material;
         private IVendorRepo _vendor;
         private IRawMaterialRepo _rawMaterial;
@@ -17,10 +17,7 @@ namespace Repository
         {
             get
             {
-                if(_material == null)
-                {
-                    _material = new MaterialRepo(_ctx);
-                }
+                _material ??= new MaterialRepo(_ctx);
                 return _material;
             }
         }
@@ -29,10 +26,7 @@ namespace Repository
         {
             get
             {
-                if (_rawMaterial == null)
-                {
-                    _rawMaterial = new RawMaterialRepo(_ctx);
-                }
+                _rawMaterial ??= new RawMaterialRepo(_ctx);
                 return _rawMaterial;
             }
         }
@@ -40,10 +34,7 @@ namespace Repository
         {
             get
             {
-                if(_vendor == null)
-                {
-                    _vendor = new VendorRepo(_ctx);
-                }
+                _vendor ??= new VendorRepo(_ctx);
                 return _vendor;
             }
         }
@@ -52,10 +43,7 @@ namespace Repository
         {
             get
             {
-                if (_sampleRequired == null)
-                {
-                    _sampleRequired = new SampleRequiredRepo(_ctx);
-                }
+                _sampleRequired ??= new SampleRequiredRepo(_ctx);
                 return _sampleRequired;
             }
         }
@@ -64,15 +52,12 @@ namespace Repository
         {
             get
             {
-                if (_sample == null)
-                {
-                    _sample = new SampleRepo(_ctx);
-                }
+                _sample ??= new SampleRepo(_ctx);
                 return _sample;
             }
         }
 
-        public RepoWrapper(RavenDBContext ctx)
+        public RepoWrapper(RavenContext ctx)
         {
             _ctx = ctx;
         }
