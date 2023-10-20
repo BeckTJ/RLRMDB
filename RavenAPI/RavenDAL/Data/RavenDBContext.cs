@@ -5,13 +5,13 @@ using RavenDAL.Models;
 
 namespace RavenDAL.Data;
 
-public partial class RavenDbContext : DbContext
+public partial class RavenDBContext : DbContext
 {
-    public RavenDbContext()
+    public RavenDBContext()
     {
     }
 
-    public RavenDbContext(DbContextOptions<RavenDbContext> options)
+    public RavenDBContext(DbContextOptions<RavenDBContext> options)
         : base(options)
     {
     }

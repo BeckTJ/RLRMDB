@@ -1,4 +1,4 @@
-BULK INSERT Materials.Material FROM '..\..\usr\BuildFiles\MaterialData.csv'
+BULK INSERT Materials.Material FROM '..\..\usr\dbfiles\BuildFiles\MaterialData.csv'
     WITH(
         FIRSTROW = 2,
         FIELDTERMINATOR = ',',
@@ -6,7 +6,7 @@ BULK INSERT Materials.Material FROM '..\..\usr\BuildFiles\MaterialData.csv'
         KEEPNULLS
     );
 
-    BULK INSERT Materials.MaterialVendor FROM '..\..\usr\BuildFiles\MaterialVender.csv'
+    BULK INSERT Materials.MaterialVendor FROM '..\..\usr\dbfiles\BuildFiles\MaterialVender.csv'
     WITH(
         FORMAT = 'csv',
         FIRSTROW = 2,
@@ -15,7 +15,7 @@ BULK INSERT Materials.Material FROM '..\..\usr\BuildFiles\MaterialData.csv'
         KEEPNULLS
     );
 
-select * from Materials.Vendor
+select * from Materials.materialVendor
 
 INSERT INTO Distillation.AlphabeticDate
     (MonthNumber, AlphabeticCode)
@@ -71,7 +71,7 @@ INSERT into HumanResources.Employee (EmployeeId, FirstName, LastName)
             ('LAS3456', 'Brian', 'Squire')
 GO
 
-BULK INSERT QualityControl.SampleRequired FROM '..\..\usr\raven\buildfiles\BuildFiles\MaterialSampleRequired.csv'
+BULK INSERT QualityControl.SampleRequired FROM '..\..\usr\dbfiles\BuildFiles\MaterialSampleRequired.csv'
 WITH
 (
     FORMAT = 'csv',

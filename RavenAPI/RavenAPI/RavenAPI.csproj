@@ -20,7 +20,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Entityframeworkcore.SqlServer" Version="6.0.16" />
+    <PackageReference Include="Microsoft.Entityframeworkcore.SqlServer" Version="7.0.12" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="NEST" Version="7.17.5" />
     <PackageReference Include="nsubstitute" Version="5.0.0" />

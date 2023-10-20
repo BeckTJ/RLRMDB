@@ -1,0 +1,5 @@
+2023-10-19 06:41:05.9583 ERROR Something went wrong inside GetAllMaterial action: Invalid column name 'BatchManaged'.
+Invalid column name 'MaterialCode'.
+Invalid column name 'SequenceId'.
+Invalid column name 'TotalRecords'.
+Invalid column name 'UnitOfIssue'.

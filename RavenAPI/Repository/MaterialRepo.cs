@@ -22,12 +22,12 @@ namespace Repository
         public Material GetMaterialByMaterialNumber(int materialNumber)
         {
             return FindByCondition(m => m.MaterialNumber == materialNumber)
-                .Include(m => m.MaterialNumbers)
+                .Include(m => m.MaterialVendors)
                 .FirstOrDefault();
         }
         public Material GetParentMaterialNumberFromChild(int materialNumber)
         {
-            return FindByCondition(m => m.MaterialNumbers.Equals(materialNumber))
+            return FindByCondition(m => m.MaterialVendors.Equals(materialNumber))
                 .FirstOrDefault();
         }
 

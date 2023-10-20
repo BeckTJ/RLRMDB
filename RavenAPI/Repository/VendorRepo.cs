@@ -5,7 +5,7 @@ using RavenDAL.Models;
 
 namespace Repository
 {
-    public class VendorRepo : RepoBase<VendorBatch>, IVendorRepo
+    public class VendorRepo : RepoBase<VendorLot>, IVendorRepo
     {
         public VendorRepo(RavenDBContext dbContext) 
             : base(dbContext) 
@@ -13,20 +13,20 @@ namespace Repository
             
         }
 
-        public IEnumerable<VendorBatch> GetAllVendors()
+        public IEnumerable<VendorLot> GetAllVendors()
         {
             return FindAll()
                 .OrderBy(v => v.MaterialNumber)
                 .ToList();
         }
 
-        public VendorBatch GetVendorByVendorLot(string lotNumber)
+        public VendorLot GetVendorByVendorLot(string lotNumber)
         {
             return FindByCondition(v => v.VendorLotNumber == lotNumber)
                 .FirstOrDefault();
         }
 
-        public IEnumerable<VendorBatch> GetVendorLotsWithRawMaterials(int materialNumber)
+        public IEnumerable<VendorLot> GetVendorLotsWithRawMaterials(int materialNumber)
         {
             return FindByCondition(v => v.MaterialNumber == materialNumber)
                 .Include(v => v.RawMaterials)

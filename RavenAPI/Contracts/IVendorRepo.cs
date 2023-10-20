@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Contracts
 {
-    public interface IVendorRepo : IRepoBase<VendorBatch>
+    public interface IVendorRepo : IRepoBase<VendorLot>
     {
-        IEnumerable<VendorBatch> GetAllVendors(); 
-        VendorBatch GetVendorByVendorLot(string lotNumber);
-        IEnumerable<VendorBatch> GetVendorLotsWithRawMaterials(int materialNumber);
+        IEnumerable<VendorLot> GetAllVendors(); 
+        VendorLot GetVendorByVendorLot(string lotNumber);
+        IEnumerable<VendorLot> GetVendorLotsWithRawMaterials(int materialNumber);
 
     }
 }
