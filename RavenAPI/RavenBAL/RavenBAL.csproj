@@ -7,16 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repository\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
     <ProjectReference Include="..\RavenDAL\RavenDAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="xunit" Version="2.6.0" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,9 @@
 ﻿
 namespace RavenBAL.Interface
 {
-    public interface IProductLotNumber<T>
+    public interface IProductLotNumber
     {
-        T CreateProductLotNumber(T product);
-        T UpdateProductLotNumber(T product);
-
+        string CreateProductLotNumber(int materialNumber);
+        string UpdateProductLotNumber(string lotNumber);
     }
 }

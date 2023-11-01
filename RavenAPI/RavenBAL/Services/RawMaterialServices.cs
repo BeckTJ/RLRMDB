@@ -10,12 +10,10 @@ namespace RavenBAL.Services
     public class RawMaterialServices : IRawMaterialService
     {
         private IRepoWrapper _repo;
-        private IMapper _mapper;
 
-        public RawMaterialServices(IRepoWrapper repo,IMapper mapper) 
+        public RawMaterialServices(IRepoWrapper repo) 
         {
             _repo = repo;
-            _mapper = mapper;
         }
 
         /*
