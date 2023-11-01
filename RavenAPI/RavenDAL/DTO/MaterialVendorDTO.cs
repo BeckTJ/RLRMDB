@@ -7,4 +7,4 @@ public class MaterialVendorDTO
 {
     public int MaterialNumber { get; set; }
     public string? VendorName { get; set; }
-} 
+}

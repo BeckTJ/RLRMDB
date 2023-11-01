@@ -819,6 +819,7 @@
       },
       "RavenBAL/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "Contracts": "1.0.0",
           "RavenDAL": "1.0.0"
         },

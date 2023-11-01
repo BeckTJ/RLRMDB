@@ -20,10 +20,10 @@ namespace Repository
                 .OrderBy(rm => rm.MaterialNumber)
                 .ToList();
         }
-        public RawMaterial GetRawMaterialByMaterialNumber(int materialNumber)
+        public IEnumerable<RawMaterial> GetRawMaterialByMaterialNumber(int materialNumber)
         {
             return FindByCondition(rm => rm.MaterialNumber == materialNumber)
-                .FirstOrDefault();
+                .ToList();
         }
         public IEnumerable<RawMaterial> GetRawMaterialByVendorLot(string vendorLot)
         {

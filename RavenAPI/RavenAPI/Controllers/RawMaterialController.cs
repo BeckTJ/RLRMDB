@@ -82,10 +82,9 @@ public class RawMaterialController : ControllerBase
             }
             var rawMaterial = _mapper.Map<RawMaterial>(material);
 
-            _repo.RawMaterial.CreateRawMaterial(rawMaterial);
             _repo.Save();
 
-            var createdRawMaterial = _mapper.Map<RawMaterialDTO>(rawMaterial);
+            var createdRawMaterial = _mapper.Map<RawMaterial>(rawMaterial);
             return CreatedAtRoute("RawMaterialByMaterialNumber", new { id = createdRawMaterial.ProductId }, createdRawMaterial);
         }
         catch (Exception ex)

@@ -1,8 +1,9 @@
 select * from Materials.VendorLot
 select * from Distillation.RawMaterial
+where MaterialNumber = 3322187
 select * from QualityControl.SampleSubmit
 
-
+GO
 
 
 

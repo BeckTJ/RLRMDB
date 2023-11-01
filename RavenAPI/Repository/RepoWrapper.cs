@@ -12,6 +12,7 @@ namespace Repository
         private IRawMaterialRepo _rawMaterial;
         private ISampleRequiredRepo _sampleRequired;
         private ISampleRepo _sample;
+        private IMaterialVendorRepo _materialVendor;
 
         public IMaterialRepo Material
         {
@@ -54,6 +55,15 @@ namespace Repository
             {
                 _sample ??= new SampleRepo(_ctx);
                 return _sample;
+            }
+        }
+
+        public IMaterialVendorRepo MaterialVendor
+        {
+            get 
+            {
+                _materialVendor ??= new MaterialVendorRepo(_ctx);
+                return _materialVendor; 
             }
         }
 

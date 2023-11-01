@@ -8,6 +8,7 @@ namespace Contracts
         IRawMaterialRepo RawMaterial { get; }
         ISampleRequiredRepo SampleRequired { get; }
         ISampleRepo SampleRepo { get; } 
+        IMaterialVendorRepo MaterialVendor { get; }
         void Save();
     }
 }

@@ -1,12 +1,12 @@
-﻿
-using RavenDAL.DTO;
+﻿using RavenDAL.DTO;
+using RavenDAL.Models;
 
 namespace RavenBAL.Interface
 {
-    public interface IRawMaterial
+    public interface IRawMaterialService
     {
-        RawMaterialDTO CreateRawMaterialDrum(CreateRawMaterialDTO material);
+        RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO material);
         RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material);
-        IEnumerable<RawMaterialDTO> SelectRawMaterials(int materialNumber);
+        IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber);
     }
 }

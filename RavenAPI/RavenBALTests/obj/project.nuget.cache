@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "q+Mz2Yvlk2/MqnIrC45r6G62+vn4iSPjFytF649dOGhPhuq7K0h2+n9rKTSsz5p46Tk0zLK2+Y+Scrq/0P2tdQ==",
+  "dgSpecHash": "A5X1yrlTmNwCnQ4dPBFwIJvNoeLt3JdInOZKq3WG8zp6MPygVtQqDo+PZEYNJTiDB3wtiXhkyTcsWtRTm++2kQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBALTests\\RavenBAL.Tests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\TBeck\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\castle.core\\5.0.0\\castle.core.5.0.0.nupkg.sha512",
@@ -13,7 +14,7 @@
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.22\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.22.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.codecoverage\\17.5.0\\microsoft.codecoverage.17.5.0.nupkg.sha512",
-    "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.1\\microsoft.data.sqlclient.5.1.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\5.1.0\\microsoft.data.sqlclient.sni.runtime.5.1.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",
