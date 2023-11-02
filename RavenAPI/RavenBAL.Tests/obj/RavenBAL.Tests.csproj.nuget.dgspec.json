@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj": {}
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -33,8 +33,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
-                "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+              "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
+                "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
               }
             }
           }
@@ -64,24 +64,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj": {
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj",
         "projectName": "RavenBAL.Tests",
-        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj",
-        "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\obj\\",
+        "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL.Tests\\RavenBAL.Tests.csproj",
+        "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -97,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
-                "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj"
+              "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
+                "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj"
               }
             }
           }
@@ -160,24 +160,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj",
+        "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj",
         "projectName": "RavenBAL",
-        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj",
-        "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\obj\\",
+        "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj",
+        "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -193,11 +193,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj"
+              "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj"
               },
-              "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
-                "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+              "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
+                "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
               }
             }
           }
@@ -233,24 +233,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
+    "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
+        "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
         "projectName": "RavenDAL",
-        "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
-        "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\obj\\",
+        "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
+        "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -319,7 +319,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
