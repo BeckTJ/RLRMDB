@@ -75,7 +75,7 @@
           }
         }
       },
-      "Castle.Core/5.0.0": {
+      "Castle.Core/5.1.1": {
         "type": "package",
         "dependencies": {
           "System.Diagnostics.EventLog": "6.0.0"
@@ -896,10 +896,10 @@
           }
         }
       },
-      "NSubstitute/5.0.0": {
+      "NSubstitute/5.1.0": {
         "type": "package",
         "dependencies": {
-          "Castle.Core": "5.0.0"
+          "Castle.Core": "5.1.1"
         },
         "compile": {
           "lib/net6.0/NSubstitute.dll": {
@@ -911,6 +911,9 @@
             "related": ".xml"
           }
         }
+      },
+      "NSubstitute.Analyzers.CSharp/1.0.16": {
+        "type": "package"
       },
       "Swashbuckle.AspNetCore/6.5.0": {
         "type": "package",
@@ -1560,10 +1563,10 @@
         "lib/netstandard2.0/Azure.Identity.xml"
       ]
     },
-    "Castle.Core/5.0.0": {
-      "sha512": "edc8jjyXqzzy8jFdhs36FZdwmlDDTgqPb2Zy1Q5F/f2uAc88bu/VS/0Tpvgupmpl9zJOvOo5ZizVANb0ltN1NQ==",
+    "Castle.Core/5.1.1": {
+      "sha512": "rpYtIczkzGpf+EkZgDr9CClTdemhsrwA/W5hMoPjLkRFnXzH44zDLoovXeKtmxb1ykXK9aJVODSpiJml8CTw2g==",
       "type": "package",
-      "path": "castle.core/5.0.0",
+      "path": "castle.core/5.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1571,7 +1574,7 @@
         "CHANGELOG.md",
         "LICENSE",
         "castle-logo.png",
-        "castle.core.5.0.0.nupkg.sha512",
+        "castle.core.5.1.1.nupkg.sha512",
         "castle.core.nuspec",
         "lib/net462/Castle.Core.dll",
         "lib/net462/Castle.Core.xml",
@@ -2929,10 +2932,10 @@
         "nlog.nuspec"
       ]
     },
-    "NSubstitute/5.0.0": {
-      "sha512": "CWGy4oXvcJcZzL7m5Rr/eMSejFXMDq1RRMlsbL6eltS3AuN/d8GH3ZzUcuStQcCSlcx+hpsgTxdnb3lhozWG6w==",
+    "NSubstitute/5.1.0": {
+      "sha512": "ZCqOP3Kpp2ea7QcLyjMU4wzE+0wmrMN35PQMsdPOHYc2IrvjmusG9hICOiqiOTPKN0gJon6wyCn6ZuGHdNs9hQ==",
       "type": "package",
-      "path": "nsubstitute/5.0.0",
+      "path": "nsubstitute/5.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2943,8 +2946,25 @@
         "lib/net6.0/NSubstitute.xml",
         "lib/netstandard2.0/NSubstitute.dll",
         "lib/netstandard2.0/NSubstitute.xml",
-        "nsubstitute.5.0.0.nupkg.sha512",
+        "nsubstitute.5.1.0.nupkg.sha512",
         "nsubstitute.nuspec"
+      ]
+    },
+    "NSubstitute.Analyzers.CSharp/1.0.16": {
+      "sha512": "+sdWbGyEQl22A4fBWo17/T53TMdbxegNjqwCxdBUS5/tp8ESJwfvHvGdIGj83sR0jKxvpUQoHO35qcf9tdgmdw==",
+      "type": "package",
+      "path": "nsubstitute.analyzers.csharp/1.0.16",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "analyzers/dotnet/cs/NSubstitute.Analyzers.CSharp.dll",
+        "analyzers/dotnet/cs/NSubstitute.Analyzers.Shared.dll",
+        "nsubstitute.analyzers.csharp.1.0.16.nupkg.sha512",
+        "nsubstitute.analyzers.csharp.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Swashbuckle.AspNetCore/6.5.0": {
@@ -3980,11 +4000,12 @@
       "LoggerService >= 1.0.0",
       "Microsoft.Extensions.Configuration.UserSecrets >= 6.0.1",
       "NEST >= 7.17.5",
+      "NSubstitute >= 5.1.0",
+      "NSubstitute.Analyzers.CSharp >= 1.0.16",
       "RavenBAL >= 1.0.0",
       "RavenDAL >= 1.0.0",
       "Repository >= 1.0.0",
-      "Swashbuckle.AspNetCore >= 6.5.0",
-      "nsubstitute >= 5.0.0"
+      "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
@@ -4057,13 +4078,19 @@
             "target": "Package",
             "version": "[7.17.5, )"
           },
+          "NSubstitute": {
+            "target": "Package",
+            "version": "[5.1.0, )"
+          },
+          "NSubstitute.Analyzers.CSharp": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.0.16, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.5.0, )"
-          },
-          "nsubstitute": {
-            "target": "Package",
-            "version": "[5.0.0, )"
           }
         },
         "imports": [
