@@ -9,6 +9,7 @@ namespace Contracts
         ISampleRequiredRepo SampleRequired { get; }
         ISampleRepo SampleRepo { get; } 
         IMaterialVendorRepo MaterialVendor { get; }
+        IDateCode DateCode { get; }
         void Save();
     }
 }

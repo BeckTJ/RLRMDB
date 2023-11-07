@@ -25,17 +25,18 @@ namespace RavenBAL.Services
        */
         public RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO rawMaterial)
         {
+            ProductLotNumber lot = new ProductLotNumber();
             var material = _repo.Material.GetMaterialByMaterialNumber(rawMaterial.MaterialNumber);
             RawMaterial raw = new()
             {
-                ProductId = GetProductLotNumber(rawMaterial.MaterialNumber),
+                ProductId = lot.CreateProductLotNumber(material.MaterialVendors.First(x => x.MaterialNumber == rawMaterial.MaterialNumber)),
                 MaterialNumber = rawMaterial.MaterialNumber,
                 VendorLotNumber = rawMaterial.VendorLotNumber,
                 SapBatchNumber = rawMaterial.BatchNumber,
                 ContainerNumber = rawMaterial.ContainerNumber,
                 InspectionLotNumber = rawMaterial.InspectionLotNumber,
                 SampleSubmitNumber = rawMaterial.SampleId,
-            };
+             };
 
             _repo.RawMaterial.CreateRawMaterial(raw);
 
