@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using RavenDAL.Data;
+using RavenDAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,12 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class DateCodeRepo : IDateCode
+    public class DateCodeRepo : RepoBase<AlphabeticDate>,IDateCode
     {
-        private RavenContext _ctx;
-        public DateCodeRepo(RavenContext ctx) 
+        public DateCodeRepo(RavenContext ctx) :base(ctx) { }
+        public AlphabeticDate GetDateCode(int month)
         {
-            _ctx = ctx;
-        }
-        public string GetDateCode(int month)
-        {
-            return _ctx.AlphabeticDates.FirstOrDefault(x => x.MonthNumber == month).AlphabeticCode;
-        }
+            return FindByCondition(x => x.MonthNumber.Equals(month)).FirstOrDefault();
+        } 
     }
 }

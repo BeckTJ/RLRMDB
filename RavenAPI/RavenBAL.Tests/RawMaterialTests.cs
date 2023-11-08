@@ -55,13 +55,9 @@ namespace RavenBAL.Tests
         [Fact]
         public void getInitialProductLotNumber()
         {
-            IEnumerable<RawMaterial> rawMaterial = new List<RawMaterial>();
-            _repo.RawMaterial.GetRawMaterialByMaterialNumber(_createRawMaterialDTO.MaterialNumber).Returns(rawMaterial);
-
-
             var product = _material.SequenceId + _material.MaterialCode;
 
-            ProductLotNumber lot = new ProductLotNumber(_repo);
+            ProductLotNumber lot = new(_repo);
             var productId = lot.CreateProductLotNumber(_material);
 
             Assert.Equal(product, productId);
@@ -69,16 +65,30 @@ namespace RavenBAL.Tests
         [Fact]
         public void UpdateProductLot()
         {
-            _repo.DateCode.GetDateCode(int.Parse(DateTime.Now.ToString("MM")));
+
             var product = "100AA";
-            ProductLotNumber lot = new ProductLotNumber();
+            var updateProduct = "100AA3L07";
+
+            AlphabeticDate ad = new AlphabeticDate()
+            {
+                MonthNumber = 11,
+                AlphabeticCode = "L",
+            };
+
+            DateTime today = new(2023-11-07);
+            _repo.DateCode.GetDateCode(int.Parse(today.ToString("MM"))).Returns(ad);
+
+            ProductLotNumber lot = new(_repo);
             var productId = lot.UpdateProductLotNumber(product);
-            Assert.Equal(productId, productId);
+
+            Assert.Equal(updateProduct, productId);
         }
         [Fact]
         public void CreateRawMaterial()
         {
-            var rawMaterialDTO = new RawMaterial();
+            ProductLotNumber lot = new ProductLotNumber(_repo);
+            
+
         }
     }
 }

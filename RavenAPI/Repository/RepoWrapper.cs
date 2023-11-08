@@ -13,6 +13,7 @@ namespace Repository
         private ISampleRequiredRepo _sampleRequired;
         private ISampleRepo _sample;
         private IMaterialVendorRepo _materialVendor;
+        private IDateCode _dateCode;
 
         public IMaterialRepo Material
         {
@@ -64,6 +65,15 @@ namespace Repository
             {
                 _materialVendor ??= new MaterialVendorRepo(_ctx);
                 return _materialVendor; 
+            }
+        }
+
+        public IDateCode DateCode
+        {
+            get
+            {
+                _dateCode ??= new DateCodeRepo(_ctx);
+                return _dateCode;
             }
         }
 

@@ -4,6 +4,7 @@ using RavenDAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +13,6 @@ namespace RavenBAL.Services
     public class ProductLotNumber : IProductLotNumber
     {
         private IRepoWrapper _repo;
-
-        public ProductLotNumber()
-        {
-        }
 
         public ProductLotNumber(IRepoWrapper repo) 
         {
@@ -48,9 +45,10 @@ namespace RavenBAL.Services
         public string UpdateProductLotNumber(string lotNumber)
         {
             var todaysDate = DateTime.Now;
-            var dateCode = _repo.DateCode.GetDateCode(int.Parse(todaysDate.ToString("MM")));
-            var day = todaysDate.ToString("DD");
-            return lotNumber + dateCode + day;
+            var dateCode = _repo.DateCode.GetDateCode(int.Parse(todaysDate.ToString("MM"))).AlphabeticCode;
+            var year = todaysDate.Year % 10;
+            var day = todaysDate.ToString("dd");
+            return lotNumber + year + dateCode + day;
         }
     }
 }

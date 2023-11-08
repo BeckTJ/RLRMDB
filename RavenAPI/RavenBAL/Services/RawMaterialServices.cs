@@ -25,7 +25,7 @@ namespace RavenBAL.Services
        */
         public RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO rawMaterial)
         {
-            ProductLotNumber lot = new ProductLotNumber();
+            ProductLotNumber lot = new ProductLotNumber(_repo);
             var material = _repo.Material.GetMaterialByMaterialNumber(rawMaterial.MaterialNumber);
             RawMaterial raw = new()
             {
