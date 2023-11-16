@@ -4,16 +4,35 @@ using Contracts;
 using RavenBAL.Interface;
 using RavenDAL.DTO;
 using RavenDAL.Models;
+using System.Numerics;
 
 namespace RavenBAL.Services
 {
     public class RawMaterialServices : IRawMaterialService
     {
-        private IRepoWrapper _repo;
+        private readonly IRepoWrapper _repo;
+        private readonly IMapper _mapper;
 
         public RawMaterialServices(IRepoWrapper repo) 
         {
             _repo = repo;
+        }
+        /*
+         * Check sample required for material number -> 
+         *     if only new required ->
+         *          if previously sampled -> add qty to vendorbatch
+         *              assign product id as material is used
+         *          else ->display required sample (future create sample id)
+         *      if new and old ->
+         *          display sample required
+         *              assign product id to all drums
+        */
+
+        public void InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        {
+            VerifySample verify = new VerifySample(_repo);
+
+            var materialVendor =_repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
         }
 
         /*
@@ -21,7 +40,7 @@ namespace RavenBAL.Services
        * -> requires MaterialNumber, Vendor Lot Number, Sample Id
        * -> (MPPS) Inspection Lot Number, Drum Weight 
        * -> (When Required) Container Number, SAP Batch Number
-       * -> return product id 
+       * -> return product
        */
         public RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO rawMaterial)
         {
@@ -29,7 +48,7 @@ namespace RavenBAL.Services
             var material = _repo.Material.GetMaterialByMaterialNumber(rawMaterial.MaterialNumber);
             RawMaterial raw = new()
             {
-                ProductId = lot.CreateProductLotNumber(material.MaterialVendors.First(x => x.MaterialNumber == rawMaterial.MaterialNumber)),
+                ProductId = lot.UpdateProductLotNumber(lot.CreateProductLotNumber(material.MaterialVendors.First(x => x.MaterialNumber == rawMaterial.MaterialNumber))),
                 MaterialNumber = rawMaterial.MaterialNumber,
                 VendorLotNumber = rawMaterial.VendorLotNumber,
                 SapBatchNumber = rawMaterial.BatchNumber,
@@ -42,28 +61,6 @@ namespace RavenBAL.Services
 
             return  raw;
         }
-        private string GetProductLotNumber(int materialNumber)
-        {
-            var material = _repo.MaterialVendor.GetMaterialVendor(materialNumber);
-            var rawMaterial = _repo.RawMaterial.GetRawMaterialByMaterialNumber(materialNumber).OrderByDescending(rm => rm.ProductId).FirstOrDefault();
-            int id;
-            if (rawMaterial != null)
-            {
-                if(rawMaterial.ProductId.Length == 10 ||  rawMaterial.ProductId.Length == 6)
-                {
-                    id = int.Parse(rawMaterial.ProductId[..3]) + 1;
-                }
-                else
-                {
-                    id = int.Parse(rawMaterial.ProductId[..2]) + 1;
-                }
-                return id + material.MaterialCode;
-            }
-            else
-            {
-                return material.SequenceId + material.MaterialCode;
-            }
-        }
         public RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material)
         {
             throw new NotImplementedException();
@@ -75,9 +72,30 @@ namespace RavenBAL.Services
         * -> Lot has been sampled
         * -> check Sample Approved/Not Expired
         */
-        public IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber)
+        public IEnumerable<MaterialVendor> GetRawMaterial(int ParentMaterialNumber)
         {
             throw new NotImplementedException();
+        }
+        public IEnumerable<RawMaterial> ApprovedRawMaterial(int materialNumber)
+        {
+            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
+                .Where(s => s.Sample.Approved && s.Sample.ExperiationDate >= DateTime.Today);
+        }
+        public IEnumerable<RawMaterial> ExpiredRawMaterial(int materialNumber)
+        {
+            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
+                .Where(s => s.Sample.ExperiationDate < DateTime.Today);
+        }
+        public IEnumerable<RawMaterial> RawMaterialAwaitingApproval(int materialNumber)
+        {
+            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
+                .Where(s => !s.Sample.Approved && !s.Sample.Rejected);
+        }
+        public IEnumerable<RawMaterial> RejectedRawMaterial(int materialNumber)
+        {
+            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
+                .Where(s => s.Sample.Rejected);
+
         }
     }
 }

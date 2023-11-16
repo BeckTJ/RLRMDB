@@ -29,7 +29,7 @@ public partial class RawMaterial
 
     public virtual ICollection<ProductRun> ProductRuns { get; set; } = new List<ProductRun>();
 
-    public virtual SampleSubmit? SampleSubmitNumberNavigation { get; set; }
+    public virtual SampleSubmit? Sample { get; set; }
 
     public virtual VendorLot? VendorLot { get; set; }
 }

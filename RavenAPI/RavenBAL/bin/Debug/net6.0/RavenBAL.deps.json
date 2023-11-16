@@ -10,7 +10,8 @@
         "dependencies": {
           "AutoMapper": "12.0.1",
           "Contracts": "1.0.0",
-          "RavenDAL": "1.0.0"
+          "RavenDAL": "1.0.0",
+          "Repository": "1.0.0"
         },
         "runtime": {
           "RavenBAL.dll": {}
@@ -733,6 +734,15 @@
         "runtime": {
           "RavenDAL.dll": {}
         }
+      },
+      "Repository/1.0.0": {
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "RavenDAL": "1.0.0"
+        },
+        "runtime": {
+          "Repository.dll": {}
+        }
       }
     }
   },
@@ -1217,6 +1227,11 @@
       "sha512": ""
     },
     "RavenDAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Repository/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

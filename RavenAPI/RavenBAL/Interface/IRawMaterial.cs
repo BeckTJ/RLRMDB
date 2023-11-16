@@ -7,6 +7,6 @@ namespace RavenBAL.Interface
     {
         RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO material);
         RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material);
-        IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber);
+        IEnumerable<RawMaterial> ApprovedRawMaterial(int materialNumber);
     }
 }

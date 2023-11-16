@@ -340,3 +340,5 @@ C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\obj\Debug\net6.0\refint\RavenBAL.Te
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\obj\Debug\net6.0\RavenBAL.Tests.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\obj\Debug\net6.0\RavenBAL.Tests.genruntimeconfig.cache
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\obj\Debug\net6.0\ref\RavenBAL.Tests.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\bin\Debug\net6.0\Repository.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\bin\Debug\net6.0\Repository.pdb

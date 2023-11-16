@@ -21,12 +21,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 //builder.Services.AddHttpClient();
 
-
-#region Service Injected
-
-#endregion
-
-
 //builder.Services.AddDbContext<RavenDBContext>(options
 //=> options.UseSqlServer("Data Source=localhost; Initial Catalog=RavenDB; Persist Security Info=True; User Id=SA; Password=FR*@ger12"));
 

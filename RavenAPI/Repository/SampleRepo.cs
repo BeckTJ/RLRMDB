@@ -7,9 +7,9 @@ namespace Repository
     public class SampleRepo : RepoBase<SampleSubmit>, ISampleRepo
     {
         public SampleRepo(RavenContext ctx) : base(ctx) { }
-        public SampleSubmit VerifySample(string lotNumber)
+        public SampleSubmit VerifySample(string sampleId)
         {
-            throw new NotImplementedException();
+            return FindByCondition(x => x.SampleSubmitNumber == sampleId).FirstOrDefault();
         }
 
     }

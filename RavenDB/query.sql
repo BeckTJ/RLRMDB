@@ -1,10 +1,22 @@
 select * from Materials.VendorLot
-select * from Distillation.RawMaterial
 where MaterialNumber = 3322187
-select * from QualityControl.SampleSubmit
 
+select * from Distillation.RawMaterial
+join QualityControl.SampleSubmit on SampleSubmit.SampleSubmitNumber = RawMaterial.SampleSubmitNumber
+where MaterialNumber = 3322187
 GO
+update QualityControl.SampleSubmit
+set Approved = 1
+where SampleSubmitNumber = 'RAW61560'
 
+
+select * from QualityControl.SampleRequired
+where MaterialNumber = (select ParentMaterialNumber from Materials.MaterialVendor
+                        where MaterialNumber = 3322187)
+
+select * from Distillation.AlphabeticDate
+
+select * from QualityControl.SampleRequired
 
 
 -- CREATE TABLE #tmpReceiver(

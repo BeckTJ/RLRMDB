@@ -44,8 +44,9 @@ namespace RavenBAL.Services
 
         public string UpdateProductLotNumber(string lotNumber)
         {
-            var todaysDate = DateTime.Now;
-            var dateCode = _repo.DateCode.GetDateCode(int.Parse(todaysDate.ToString("MM"))).AlphabeticCode;
+            var todaysDate = DateTime.Today;
+            var today = todaysDate.ToString("MM");
+            var dateCode = _repo.DateCode.GetDateCode(int.Parse(today)).AlphabeticCode;
             var year = todaysDate.Year % 10;
             var day = todaysDate.ToString("dd");
             return lotNumber + year + dateCode + day;

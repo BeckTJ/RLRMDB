@@ -275,7 +275,7 @@ public partial class RavenContext : DbContext
                 .HasForeignKey(d => d.MaterialNumber)
                 .HasConstraintName("FK__RawMateri__Mater__46E78A0C");
 
-            entity.HasOne(d => d.SampleSubmitNumberNavigation).WithMany(p => p.RawMaterials)
+            entity.HasOne(d => d.Sample).WithMany(p => p.RawMaterials)
                 .HasForeignKey(d => d.SampleSubmitNumber)
                 .HasConstraintName("FK__RawMateri__Sampl__47DBAE45");
 

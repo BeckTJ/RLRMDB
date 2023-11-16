@@ -32,3 +32,5 @@ C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Repository.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenBAL\bin\Debug\net6.0\Repository.pdb

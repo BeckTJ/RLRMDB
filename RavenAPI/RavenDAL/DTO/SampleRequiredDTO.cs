@@ -9,7 +9,7 @@ namespace RavenDAL.DTO
     public class SampleRequiredDTO 
     {
         public int MaterialNumber { get; set; }
-        public string Type { get; set; }
-        public string VLN { get; set; }
+        public string MaterialType { get; set; }
+        public List<string> VLN { get; set; }
     }
 }

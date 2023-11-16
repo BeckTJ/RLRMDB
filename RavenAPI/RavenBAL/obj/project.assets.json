@@ -1232,6 +1232,20 @@
         "runtime": {
           "bin/placeholder/RavenDAL.dll": {}
         }
+      },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "RavenDAL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
+        }
       }
     }
   },
@@ -3179,13 +3193,19 @@
       "type": "project",
       "path": "../RavenDAL/RavenDAL.csproj",
       "msbuildProject": "../RavenDAL/RavenDAL.csproj"
+    },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "../Repository/Repository.csproj",
+      "msbuildProject": "../Repository/Repository.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "AutoMapper >= 12.0.1",
       "Contracts >= 1.0.0",
-      "RavenDAL >= 1.0.0"
+      "RavenDAL >= 1.0.0",
+      "Repository >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3226,6 +3246,9 @@
             },
             "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
               "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+            },
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj"
             }
           }
         }

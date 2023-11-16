@@ -7,5 +7,7 @@ namespace Contracts
         IEnumerable<RawMaterial> GetAllRawMaterial();
         IEnumerable<RawMaterial> GetRawMaterialByMaterialNumber(int materialNumber);
         void CreateRawMaterial(RawMaterial rawMaterial);
+        IEnumerable<RawMaterial> GetRawMaterialWithSample(int materialNumber);
+
     }
 } 

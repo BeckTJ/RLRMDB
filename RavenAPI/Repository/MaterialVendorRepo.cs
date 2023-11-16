@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using RavenDAL.Data;
 using RavenDAL.Models;
 
@@ -13,6 +14,12 @@ namespace Repository
         {
             return FindByCondition(mv => mv.MaterialNumber == materialNumber)
                 .FirstOrDefault();
+        }
+        public IEnumerable<MaterialVendor> GetMaterialVendorsWithVendorLot(int materialNumber)
+        {
+            return FindByCondition(mv => mv.MaterialNumber.Equals(materialNumber))
+                .Include(vl => vl.VendorLots)
+                .ToList();
         }
     }
 }

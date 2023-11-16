@@ -40,11 +40,11 @@ public class RawMaterialController : ControllerBase
         }
     }
     [HttpGet("{materialNumber}", Name = "RawMaterialByMaterialNumber")]
-    public IActionResult GetRawMaterials(int materialNumber)
+    public IActionResult GetRawMaterial(int materialNumber)
     {
         try
         {
-            var vendor = _repo.Vendor.GetVendorLotsWithRawMaterials(materialNumber);
+            var vendor = _repo.MaterialVendor.GetMaterialVendorsWithVendorLot(materialNumber);
 
             if (vendor == null)
             {
@@ -55,8 +55,8 @@ public class RawMaterialController : ControllerBase
             {
                 _log.LogInfo($"Returned vendor with raw material for id: {materialNumber}");
 
-                var rawMaterial = _mapper.Map<List<VendorLotDTO>>(vendor);
-                return Ok(rawMaterial);
+                var rawMaterial = _mapper.Map<List<MaterialVendorDTO>>(vendor);
+                return Ok(vendor);
             }
         }
         catch (Exception ex)
@@ -81,7 +81,7 @@ public class RawMaterialController : ControllerBase
                 return BadRequest("Invalid object");
             }
             var rawMaterial = _mapper.Map<RawMaterial>(material);
-
+            
             _repo.Save();
 
             var createdRawMaterial = _mapper.Map<RawMaterial>(rawMaterial);

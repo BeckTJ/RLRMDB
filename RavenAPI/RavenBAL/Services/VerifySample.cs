@@ -1,16 +1,25 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts;
 using RavenDAL.DTO;
+using RavenDAL.Models;
 
 namespace RavenBAL.Services
 {
     public class VerifySample
     {
         private IRepoWrapper _repo;
-        public VerifySample(IRepoWrapper repo) 
+        private IMapper _mapper;
+        public VerifySample(IRepoWrapper repo, IMapper mapper) 
         {
             _repo = repo;
+            _mapper = mapper;
         }
-        //
+        /*
+         * Check if material needs to be sampled
+         *      -> If material is expired
+         *         if vendor lot old new or reclaim
+         *         
+         */
         public bool VerifyProductSample(RawMaterialDTO rawMaterial)
         {
             return true;
@@ -20,17 +29,12 @@ namespace RavenBAL.Services
             return true;
         }
 
-        private bool VerifySampleRequired(int materialNumber)
+        private SampleRequiredDTO VerifySampleRequired(int parentMaterialNumber, string materialType)
         {
-            var material = _repo.Material.GetParentMaterialNumberFromChild(materialNumber);
-            var sample = _repo.SampleRequired.VerifySampleVLN(material.MaterialNumber);
+            var sample = _repo.SampleRequired.VerifySampleVLN(parentMaterialNumber)
+                .GroupBy(s => s.MaterialType).Select(grp => grp.ToList()).ToList();
 
-            if (sample != null)
-            {
-                
-                    return true;
-            }
-            return false;
+            return _mapper.Map<SampleRequiredDTO>(sample);
         }
     }
 }
