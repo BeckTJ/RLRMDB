@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using RavenDAL.Models;
+using RavenDB.Models;
 
-namespace RavenDAL.Data;
+namespace RavenDB.Data;
 
 public partial class RavenContext : DbContext
 {

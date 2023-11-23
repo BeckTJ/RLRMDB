@@ -1,11 +1,6 @@
-﻿using RavenDAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RavenDB.Models;
 
-namespace RavenDAL.DTO
+namespace RavenDB.DTO
 {
     public class RawMaterialDTO
     {

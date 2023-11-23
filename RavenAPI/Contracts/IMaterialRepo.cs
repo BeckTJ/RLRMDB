@@ -1,4 +1,4 @@
-﻿using RavenDAL.Models;
+﻿using RavenDB.Models;
 
 
 namespace Contracts

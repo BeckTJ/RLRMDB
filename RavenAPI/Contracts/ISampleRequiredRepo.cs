@@ -1,9 +1,9 @@
-﻿using RavenDAL.Models;
+﻿using RavenDB.Models;
 
 namespace Contracts
 {
     public interface ISampleRequiredRepo : IRepoBase<SampleRequired>
     {
-        IEnumerable<SampleRequired> VerifySampleVLN(int parentMaterialNumber);
+        IEnumerable<SampleRequired> GetSampleRequired(int parentMaterialNumber);
     }
 }

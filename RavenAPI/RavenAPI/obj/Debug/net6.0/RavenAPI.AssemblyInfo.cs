@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RavenAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bddd7e6016c7946110677df44fe2a5f82bf3b06")]
 [assembly: System.Reflection.AssemblyProductAttribute("RavenAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RavenAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

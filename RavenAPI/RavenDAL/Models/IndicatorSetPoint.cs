@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RavenDAL.Models;
+﻿namespace RavenDB.Models;
 
 public partial class IndicatorSetPoint
 {

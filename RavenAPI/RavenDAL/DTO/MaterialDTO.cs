@@ -1,7 +1,4 @@
-using RavenDAL.Models;
-using RavenDAL.Data;
-
-namespace RavenDAL.DTO;
+namespace RavenDB.DTO;
 public class MaterialDTO
 {
     public int MaterialNumber { get; set; } 

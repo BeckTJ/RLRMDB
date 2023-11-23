@@ -1,7 +1,5 @@
-using RavenDAL.Models;
-using RavenDAL.Data;
 
-namespace RavenDAL.DTO;
+namespace RavenDB.DTO;
 
 public class SampleDTO
 {

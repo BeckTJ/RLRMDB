@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using RavenDAL.DTO;
-using RavenDAL.Models;
+using RavenDB.DTO;
+using RavenDB.Models;
 
 namespace RavenAPI
 {

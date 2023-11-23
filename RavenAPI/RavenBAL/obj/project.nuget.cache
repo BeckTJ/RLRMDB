@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RALINXuUVRnFNUzG+mbbdt4TIYGsO/p/hbAcNus1cAs6ChaYQ4PP6JqYBcj2vKHQAq9d+uHKvhso0QYqlcX5mg==",
+  "dgSpecHash": "jspgcpvG78lnzLwW95Y+2K5v4ge502VPaKven5UhFaftcTOL2OvXZr6a9m/j8tGUw3CfODPWLqaemMkR+hicKw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj",
+  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TBeck\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
@@ -49,6 +49,7 @@
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
+    "C:\\Users\\TBeck\\.nuget\\packages\\nlog\\5.2.4\\nlog.5.2.4.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.1\\system.configuration.configurationmanager.6.0.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512",

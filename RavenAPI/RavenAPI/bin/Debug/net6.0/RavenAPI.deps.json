@@ -14,9 +14,9 @@
           "NEST": "7.17.5",
           "NSubstitute": "5.1.0",
           "NSubstitute.Analyzers.CSharp": "1.0.16",
-          "RavenBAL": "1.0.0",
-          "RavenDAL": "1.0.0",
+          "RavenDB": "1.0.0",
           "Repository": "1.0.0",
+          "Service": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
@@ -804,7 +804,7 @@
       },
       "Contracts/1.0.0": {
         "dependencies": {
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "runtime": {
           "Contracts.dll": {}
@@ -819,34 +819,44 @@
           "LoggerService.dll": {}
         }
       },
-      "RavenBAL/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "Contracts": "1.0.0",
-          "RavenDAL": "1.0.0",
-          "Repository": "1.0.0"
-        },
-        "runtime": {
-          "RavenBAL.dll": {}
-        }
-      },
-      "RavenDAL/1.0.0": {
+      "RavenDB/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.22",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
           "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
         },
         "runtime": {
-          "RavenDAL.dll": {}
+          "RavenDB.dll": {}
         }
       },
       "Repository/1.0.0": {
         "dependencies": {
           "Contracts": "1.0.0",
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "runtime": {
           "Repository.dll": {}
+        }
+      },
+      "Service/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Contracts": "1.0.0",
+          "LoggerService": "1.0.0",
+          "RavenDB": "1.0.0",
+          "Repository": "1.0.0",
+          "Service.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "Service.dll": {}
+        }
+      },
+      "Service.Contracts/1.0.0": {
+        "dependencies": {
+          "RavenDB": "1.0.0"
+        },
+        "runtime": {
+          "Service.Contracts.dll": {}
         }
       }
     }
@@ -1441,17 +1451,22 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RavenBAL/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "RavenDAL/1.0.0": {
+    "RavenDB/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "Repository/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Service.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

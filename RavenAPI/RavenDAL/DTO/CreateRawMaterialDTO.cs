@@ -1,5 +1,5 @@
 ﻿
-namespace RavenDAL.DTO
+namespace RavenDB.DTO
 {
     public class CreateRawMaterialDTO
     {

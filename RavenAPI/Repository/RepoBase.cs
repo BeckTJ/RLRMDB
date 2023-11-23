@@ -1,8 +1,7 @@
 ﻿using Contracts;
-using RavenDAL;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using RavenDAL.Data;
+using RavenDB.Data;
 
 namespace Repository
 {

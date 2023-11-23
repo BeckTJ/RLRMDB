@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RavenDAL\RavenDAL.csproj" />
+    <ProjectReference Include="..\RavenDAL\RavenDB.csproj" />
   </ItemGroup>
 
 </Project>

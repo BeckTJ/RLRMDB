@@ -1,7 +1,6 @@
-using RavenDAL.Models;
-using RavenDAL.Data;
+using RavenDB.Models;
 
-namespace RavenDAL.DTO;
+namespace RavenDB.DTO;
 
 public class MaterialVendorDTO
 {

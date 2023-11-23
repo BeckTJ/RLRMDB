@@ -28,8 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
-    <ProjectReference Include="..\RavenBAL\RavenBAL.csproj" />
-    <ProjectReference Include="..\RavenDAL\RavenDAL.csproj" />
+    <ProjectReference Include="..\RavenBAL\Service.csproj" />
+    <ProjectReference Include="..\RavenDAL\RavenDB.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 

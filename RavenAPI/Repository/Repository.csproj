@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
-    <ProjectReference Include="..\RavenDAL\RavenDAL.csproj" />
+    <ProjectReference Include="..\RavenDAL\RavenDB.csproj" />
   </ItemGroup>
 
 </Project>

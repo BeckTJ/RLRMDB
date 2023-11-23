@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using RavenDAL.DTO;
 using RavenDAL.Models;
+using Service;
 using Xunit.Sdk;
 
 namespace RavenBAL.Tests

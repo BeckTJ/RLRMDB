@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Contracts/1.0.0": {
         "dependencies": {
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "runtime": {
           "Contracts.dll": {}
@@ -703,14 +703,14 @@
           }
         }
       },
-      "RavenDAL/1.0.0": {
+      "RavenDB/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.22",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
           "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
         },
         "runtime": {
-          "RavenDAL.dll": {}
+          "RavenDB.dll": {}
         }
       }
     }
@@ -1183,7 +1183,7 @@
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
-    "RavenDAL/1.0.0": {
+    "RavenDB/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

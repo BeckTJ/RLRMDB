@@ -1,6 +1,6 @@
 ﻿using Contracts;
-using RavenDAL.Data;
-using RavenDAL.Models;
+using RavenDB.Data;
+using RavenDB.Models;
 
 namespace Repository
 {
@@ -8,7 +8,7 @@ namespace Repository
     {
         public SampleRequiredRepo(RavenContext ctx) : base(ctx) { }
 
-        public IEnumerable<SampleRequired> VerifySampleVLN(int parentMaterialNumber)
+        public IEnumerable<SampleRequired> GetSampleRequired(int parentMaterialNumber)
         {
             return FindByCondition(s => s.MaterialNumber == parentMaterialNumber)
                 .ToList();

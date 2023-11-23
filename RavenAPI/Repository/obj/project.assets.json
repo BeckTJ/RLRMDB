@@ -1193,7 +1193,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Contracts.dll": {}
@@ -1202,7 +1202,7 @@
           "bin/placeholder/Contracts.dll": {}
         }
       },
-      "RavenDAL/1.0.0": {
+      "RavenDB/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -1211,10 +1211,10 @@
           "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
         },
         "compile": {
-          "bin/placeholder/RavenDAL.dll": {}
+          "bin/placeholder/RavenDB.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RavenDAL.dll": {}
+          "bin/placeholder/RavenDB.dll": {}
         }
       }
     }
@@ -3143,16 +3143,16 @@
       "path": "../Contracts/Contracts.csproj",
       "msbuildProject": "../Contracts/Contracts.csproj"
     },
-    "RavenDAL/1.0.0": {
+    "RavenDB/1.0.0": {
       "type": "project",
-      "path": "../RavenDAL/RavenDAL.csproj",
-      "msbuildProject": "../RavenDAL/RavenDAL.csproj"
+      "path": "../RavenDAL/RavenDB.csproj",
+      "msbuildProject": "../RavenDAL/RavenDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Contracts >= 1.0.0",
-      "RavenDAL >= 1.0.0"
+      "RavenDB >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -3191,8 +3191,8 @@
             "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj": {
               "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj"
             },
-            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
-              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj"
             }
           }
         }
@@ -3222,7 +3222,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

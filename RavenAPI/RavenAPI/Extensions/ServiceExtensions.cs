@@ -1,10 +1,10 @@
 ﻿using Contracts;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
-using RavenBAL.Interface;
-using RavenBAL.Services;
-using RavenDAL.Data;
+using RavenDB.Data;
 using Repository;
+using Service;
+using Service.Contracts;
 
 namespace RavenAPI.Extensions
 {
@@ -36,6 +36,14 @@ namespace RavenAPI.Extensions
         public static void ConfigureRepoWrapper(this IServiceCollection services)
         {
             services.AddTransient<IRepoWrapper, RepoWrapper>();
+        }
+        public static void ConfigureRepoManager(this IServiceCollection services)
+        {
+            services.AddScoped<IRepoManager, RepoManager>();
+        }
+        public static void ConfigureServiceManager(this IServiceCollection services)
+        {
+            services.AddScoped<IServiceManager, ServiceManager>();
         }
     }
 }

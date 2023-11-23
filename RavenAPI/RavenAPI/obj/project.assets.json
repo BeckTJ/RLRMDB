@@ -1426,7 +1426,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Contracts.dll": {}
@@ -1449,23 +1449,7 @@
           "bin/placeholder/LoggerService.dll": {}
         }
       },
-      "RavenBAL/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "Contracts": "1.0.0",
-          "RavenDAL": "1.0.0",
-          "Repository": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/RavenBAL.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RavenBAL.dll": {}
-        }
-      },
-      "RavenDAL/1.0.0": {
+      "RavenDB/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -1474,10 +1458,10 @@
           "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
         },
         "compile": {
-          "bin/placeholder/RavenDAL.dll": {}
+          "bin/placeholder/RavenDB.dll": {}
         },
         "runtime": {
-          "bin/placeholder/RavenDAL.dll": {}
+          "bin/placeholder/RavenDB.dll": {}
         }
       },
       "Repository/1.0.0": {
@@ -1485,13 +1469,44 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Contracts": "1.0.0",
-          "RavenDAL": "1.0.0"
+          "RavenDB": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Repository.dll": {}
         },
         "runtime": {
           "bin/placeholder/Repository.dll": {}
+        }
+      },
+      "Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "Contracts": "1.0.0",
+          "LoggerService": "1.0.0",
+          "RavenDB": "1.0.0",
+          "Repository": "1.0.0",
+          "Service.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Service.dll": {}
+        }
+      },
+      "Service.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "RavenDB": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Service.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Service.Contracts.dll": {}
         }
       }
     }
@@ -3979,20 +3994,25 @@
       "path": "../LoggerService/LoggerService.csproj",
       "msbuildProject": "../LoggerService/LoggerService.csproj"
     },
-    "RavenBAL/1.0.0": {
+    "RavenDB/1.0.0": {
       "type": "project",
-      "path": "../RavenBAL/RavenBAL.csproj",
-      "msbuildProject": "../RavenBAL/RavenBAL.csproj"
-    },
-    "RavenDAL/1.0.0": {
-      "type": "project",
-      "path": "../RavenDAL/RavenDAL.csproj",
-      "msbuildProject": "../RavenDAL/RavenDAL.csproj"
+      "path": "../RavenDAL/RavenDB.csproj",
+      "msbuildProject": "../RavenDAL/RavenDB.csproj"
     },
     "Repository/1.0.0": {
       "type": "project",
       "path": "../Repository/Repository.csproj",
       "msbuildProject": "../Repository/Repository.csproj"
+    },
+    "Service/1.0.0": {
+      "type": "project",
+      "path": "../RavenBAL/Service.csproj",
+      "msbuildProject": "../RavenBAL/Service.csproj"
+    },
+    "Service.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Service.Contracts/Service.Contracts.csproj",
+      "msbuildProject": "../Service.Contracts/Service.Contracts.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4003,9 +4023,9 @@
       "NEST >= 7.17.5",
       "NSubstitute >= 5.1.0",
       "NSubstitute.Analyzers.CSharp >= 1.0.16",
-      "RavenBAL >= 1.0.0",
-      "RavenDAL >= 1.0.0",
+      "RavenDB >= 1.0.0",
       "Repository >= 1.0.0",
+      "Service >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
@@ -4045,11 +4065,11 @@
             "C:\\Users\\TBeck\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj": {
               "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj"
             },
-            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj": {
-              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\RavenBAL.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\Service.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\Service.csproj"
             },
-            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj": {
-              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj"
             },
             "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj": {
               "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj"
@@ -4113,7 +4133,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,11 +1,6 @@
 ﻿using Contracts;
-using RavenDAL.Data;
-using RavenDAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RavenDB.Data;
+using RavenDB.Models;
 
 namespace Repository
 {

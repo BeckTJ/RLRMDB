@@ -1,6 +1,5 @@
 ﻿using Contracts;
-using RavenDAL;
-using RavenDAL.Data;
+using RavenDB.Data;
 
 namespace Repository
 {

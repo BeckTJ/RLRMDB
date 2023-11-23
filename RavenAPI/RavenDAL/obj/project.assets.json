@@ -3358,9 +3358,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
-      "projectName": "RavenDAL",
-      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDAL.csproj",
+      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj",
+      "projectName": "RavenDB",
+      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj",
       "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\obj\\",
       "projectStyle": "PackageReference",
@@ -3437,7 +3437,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

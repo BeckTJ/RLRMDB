@@ -1,0 +1,15 @@
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\bin\Debug\net6.0\RavenDB.deps.json
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\bin\Debug\net6.0\RavenDB.runtimeconfig.json
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\bin\Debug\net6.0\RavenDB.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\bin\Debug\net6.0\RavenDB.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.csproj.AssemblyReference.cache
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.AssemblyInfoInputs.cache
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.AssemblyInfo.cs
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.csproj.CoreCompileInputs.cache
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.sourcelink.json
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\refint\RavenDB.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.genruntimeconfig.cache
+C:\Users\TBeck\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\ref\RavenDB.dll

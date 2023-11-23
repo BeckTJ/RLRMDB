@@ -1,7 +1,7 @@
 using AutoMapper;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RavenDAL.DTO;
+using RavenDB.DTO;
 
 namespace RavenAPI.Controllers;
 
@@ -10,9 +10,9 @@ namespace RavenAPI.Controllers;
 
 public class MaterialController : ControllerBase
 {
-    private ILoggerManager _log;
-    private IRepoWrapper _repo;
-    private IMapper _mapper;
+    private readonly ILoggerManager _log;
+    private readonly IRepoWrapper _repo;
+    private readonly IMapper _mapper;
     public MaterialController(ILoggerManager log, IRepoWrapper repo, IMapper mapper)
     {
         _repo = repo;
