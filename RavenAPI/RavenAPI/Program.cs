@@ -17,9 +17,9 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMSSqlContext(builder.Configuration);
 builder.Services.ConfigureRepoManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
 

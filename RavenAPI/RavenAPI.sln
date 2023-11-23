@@ -26,7 +26,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Tests", "RavenBAL.Tests\Service.Tests.csproj", "{A7AD28F8-4040-4F96-985B-D783D1876507}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Contracts", "Service.Contracts\Service.Contracts.csproj", "{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Contracts", "Service.Contracts\Service.Contracts.csproj", "{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -340,3 +340,4 @@ C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.dll
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.MvcApplicationPartsAssemblyInfo.cs
