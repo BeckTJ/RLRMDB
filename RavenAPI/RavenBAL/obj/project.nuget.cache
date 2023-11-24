@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "jspgcpvG78lnzLwW95Y+2K5v4ge502VPaKven5UhFaftcTOL2OvXZr6a9m/j8tGUw3CfODPWLqaemMkR+hicKw==",
+  "dgSpecHash": "cQ/UkiT+5If8Ya+fdhn5UIA1ArNBAnvtiejiX1upxa60mKYPK2ULSZddKQDgOzNowXXbR7ae9SlkaWvhcKnVdA==",
   "success": true,
   "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TBeck\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\TBeck\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.22\\microsoft.aspnetcore.cryptography.internal.6.0.22.nupkg.sha512",

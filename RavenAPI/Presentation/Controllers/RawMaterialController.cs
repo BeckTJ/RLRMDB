@@ -1,8 +1,7 @@
-using AutoMapper;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RavenDB.DTO;
 using RavenDB.Models;
+using Shared.DTO;
 
 namespace Presentation.Controllers;
 
@@ -13,13 +12,11 @@ public class RawMaterialController : ControllerBase
 {
     private readonly ILoggerManager _log;
     private readonly IRepoWrapper _repo;
-    private readonly IMapper _mapper;
 
-    public RawMaterialController(ILoggerManager log, IRepoWrapper repo, IMapper mapper)
+    public RawMaterialController(ILoggerManager log, IRepoWrapper repo)
     {
         _log = log;
         _repo = repo;
-        _mapper = mapper;
     }
 
     [HttpGet]
@@ -30,8 +27,7 @@ public class RawMaterialController : ControllerBase
             var material = _repo.Vendor.GetAllVendors();
             _log.LogInfo($"Return all material from database.");
 
-            var rawMaterial = _mapper.Map<IEnumerable<VendorLotDTO>>(material);
-            return Ok(rawMaterial);
+            return Ok(material);
         }
         catch (Exception ex)
         {
@@ -55,7 +51,6 @@ public class RawMaterialController : ControllerBase
             {
                 _log.LogInfo($"Returned vendor with raw material for id: {materialNumber}");
 
-                var rawMaterial = _mapper.Map<List<MaterialVendorDTO>>(vendor);
                 return Ok(vendor);
             }
         }
@@ -65,32 +60,30 @@ public class RawMaterialController : ControllerBase
             return StatusCode(500, "Internal server error");
         }
     }
-    [HttpPost]
-    public IActionResult CreateRawMaterial([FromBody]CreateRawMaterialDTO material)
-    { //Need to build ProductId before I can create raw material
-        try
-        {
-            if(material is null)
-            {
-                _log.LogError("Raw Material from client is null");
-                return BadRequest("Raw Material is Null");
-            }
-            if (!ModelState.IsValid)
-            {
-                _log.LogError("Invalid Raw Material Object");
-                return BadRequest("Invalid object");
-            }
-            var rawMaterial = _mapper.Map<RawMaterial>(material);
-            
-            _repo.Save();
-
-            var createdRawMaterial = _mapper.Map<RawMaterial>(rawMaterial);
-            return CreatedAtRoute("RawMaterialByMaterialNumber", new { id = createdRawMaterial.ProductId }, createdRawMaterial);
-        }
-        catch (Exception ex)
-        {
-            _log.LogError($"Something went wrong inside CreateRawMaterial action:{ex.Message}");
-            return StatusCode(500, $"Internal sever error\t{ex.Message}");
-        }
-    }
+    //[HttpPost]
+    //public IActionResult CreateRawMaterial([FromBody]CreateRawMaterialDTO material)
+    //{ //Need to build ProductId before I can create raw material
+    //    try
+    //    {
+    //        if(material is null)
+    //        {
+    //            _log.LogError("Raw Material from client is null");
+    //            return BadRequest("Raw Material is Null");
+    //        }
+    //        if (!ModelState.IsValid)
+    //        {
+    //            _log.LogError("Invalid Raw Material Object");
+    //            return BadRequest("Invalid object");
+    //        }
+    //        
+    //        _repo.Save();
+    //
+    //        return CreatedAtRoute("RawMaterialByMaterialNumber", new { id = material.ProductId }, createdRawMaterial);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _log.LogError($"Something went wrong inside CreateRawMaterial action:{ex.Message}");
+    //        return StatusCode(500, $"Internal sever error\t{ex.Message}");
+    //    }
+    //}
 }

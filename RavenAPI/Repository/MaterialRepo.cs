@@ -5,7 +5,7 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class MaterialRepo : RepoBase<Material>, IMaterialRepo
+    internal sealed class MaterialRepo : RepoBase<Material>, IMaterialRepo
     {
         public MaterialRepo(RavenContext ctx) 
             : base(ctx) 
@@ -22,10 +22,11 @@ namespace Repository
 
         public Material GetMaterialByMaterialNumber(int materialNumber)
         {
-            return FindByCondition(m => m.MaterialNumber == materialNumber)
+            return FindByCondition(m => m.MaterialNumber.Equals(materialNumber))
+                .Include(mv => mv.MaterialVendors)
                 .FirstOrDefault();
         }
-        public Material GetParentMaterialNumberFromChild(int materialNumber)
+        public Material GetParentMaterialNumberForChild(int materialNumber)
         {
             return FindByCondition(m => m.MaterialVendors.Equals(materialNumber))
                 .FirstOrDefault();

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using RavenDB.DTO;
 using RavenDB.Models;
+using Shared.DTO;
 
 namespace RavenAPI
 {
@@ -8,7 +8,6 @@ namespace RavenAPI
     {
         public MappingProfile() 
         {
-            //DAL
             CreateMap<Material, MaterialDTO>();
             CreateMap<MaterialVendor, MaterialVendorDTO>();
             CreateMap<VendorLot, VendorLotDTO>();
@@ -16,8 +15,11 @@ namespace RavenAPI
             CreateMap<SampleSubmit, SampleDTO>();
             CreateMap<CreateRawMaterialDTO, RawMaterial>();
 
-            //BAL
-
         }
     }
 }
+/*
+ * CreateMap<Company, CompanyDTO>()
+ *      .ForCtorParam("FullAddress",
+ *          opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
+ */

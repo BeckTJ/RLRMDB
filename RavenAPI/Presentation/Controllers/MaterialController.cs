@@ -1,7 +1,5 @@
-using AutoMapper;
-using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RavenDB.DTO;
+using Service.Contracts;
 
 namespace Presentation.Controllers;
 
@@ -10,58 +8,25 @@ namespace Presentation.Controllers;
 
 public class MaterialController : ControllerBase
 {
-    private readonly ILoggerManager _log;
-    private readonly IRepoWrapper _repo;
-    private readonly IMapper _mapper;
-    public MaterialController(ILoggerManager log, IRepoWrapper repo, IMapper mapper)
+    private readonly IServiceManager _service;
+    public MaterialController(IServiceManager service)
     {
-        _repo = repo;
-        _log = log;
-        _mapper = mapper;
+        _service = service;
     }
 
     [HttpGet]
     public IActionResult GetAllMaterial()
     {
-        try
-        {
-            var materials = _repo.Material.GetAllMaterial();
-            _log.LogInfo($"Return all material from database.");
+        var materials = _service.MaterialServices.GetAllMaterials();
 
-            var materialResult = _mapper.Map<IEnumerable<MaterialDTO>>(materials);
-            return Ok(materialResult);
+        return Ok(materials);
 
-        }catch (Exception ex)
-        {
-            _log.LogError($"Something went wrong inside GetAllMaterial action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
     }
-    [HttpGet("{materialNumber}")]
+    [HttpGet("{materialNumber:int}")]
     public IActionResult GetMaterialByMaterialNumber(int materialNumber) 
     {
-        try
-        {
-            var material = _repo.Material.GetMaterialByMaterialNumber(materialNumber);
+        var material = _service.MaterialServices.GetMaterialByMaterialNumber(materialNumber);
 
-            if(material is null)
-            {
-                _log.LogError($"Material with id: {materialNumber}, hasn't been found in db.");
-
-                return NotFound();
-            }
-            else
-            {
-                _log.LogInfo($"Returned Material with id: {materialNumber}");
-
-                var newMaterial = _mapper.Map<MaterialDTO>(material);
-                return Ok(newMaterial);
-            }
-        }
-        catch (Exception ex)
-        {
-            _log.LogError($"Something went wrong inside GetMaterialByMaterialNumber action: {ex.Message}");
-            return StatusCode(500, "Internal server error");
-        }
+        return Ok(material);        
     }
 }

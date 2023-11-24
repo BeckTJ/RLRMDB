@@ -1,21 +1,23 @@
 ﻿
 using AutoMapper;
 using Contracts;
-using RavenDB.DTO;
 using RavenDB.Models;
 using Service.Contracts;
+using Shared.DTO;
 
 namespace Service
 {
-    internal sealed class RawMaterialServices : IRawMaterialService
+    internal sealed class RawMaterialServices : IRawMaterialServices
     {
         private readonly IRepoManager _repo;
         private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
 
-        public RawMaterialServices(IRepoManager repo, ILoggerManager log)
+        public RawMaterialServices(IRepoManager repo, ILoggerManager log, IMapper mapper)
         {
             _repo = repo;
             _logger = log;
+            _mapper = mapper;
         }
         /*
          * Check sample required for material number -> 
@@ -94,6 +96,16 @@ namespace Service
             return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
                 .Where(s => s.Sample.Rejected);
 
+        }
+
+        RawMaterialDTO IRawMaterialServices.CreateRawMaterialDrum(CreateRawMaterialDTO material)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<RawMaterialDTO> IRawMaterialServices.ApprovedRawMaterial(int materialNumber)
+        {
+            throw new NotImplementedException();
         }
     }
 }

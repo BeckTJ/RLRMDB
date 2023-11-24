@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Contracts;
-using RavenDB.DTO;
 using RavenDB.Models;
+using Shared.DTO;
 
 namespace Service
 {

@@ -3,6 +3,7 @@ namespace Service.Contracts
 {
     public interface IServiceManager
     {
-        IRawMaterialService RawMaterialService { get; }
+        IRawMaterialServices RawMaterialService { get; }
+        IMaterialServices MaterialServices { get; }
     }
 }

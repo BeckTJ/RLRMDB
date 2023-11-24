@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using RavenDB.Models;
 using Service.Contracts;
+using Shared.DTO;
 
 namespace Service
 {
@@ -35,6 +36,11 @@ namespace Service
                 return productId;
             }
 
+        }
+
+        public string CreateProductLotNumber(MaterialVendorDTO material)
+        {
+            throw new NotImplementedException();
         }
 
         public string UpdateProductLotNumber(string lotNumber)
