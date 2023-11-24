@@ -9,8 +9,7 @@ namespace Repository
     {
         public MaterialRepo(RavenContext ctx) 
             : base(ctx) 
-        {
-        
+        {        
         }
         public IEnumerable<Material> GetAllMaterial()
         {
@@ -19,7 +18,6 @@ namespace Repository
                 .Include(m => m.MaterialVendors)
                 .ToList();
         }
-
         public Material GetMaterialByMaterialNumber(int materialNumber)
         {
             return FindByCondition(m => m.MaterialNumber.Equals(materialNumber))

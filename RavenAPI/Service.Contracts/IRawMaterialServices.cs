@@ -4,8 +4,11 @@ namespace Service.Contracts
 {
     public interface IRawMaterialServices
     {
+        IEnumerable<RawMaterialDTO> GetAllRawMaterial();
         RawMaterialDTO CreateRawMaterialDrum(CreateRawMaterialDTO material);
         RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material);
-        IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber);
+        IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
+        public IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber);
+
     }
 }

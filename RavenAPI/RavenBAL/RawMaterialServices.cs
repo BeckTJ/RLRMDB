@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using Contracts;
+using RavenDB.Exceptions;
 using RavenDB.Models;
 using Service.Contracts;
 using Shared.DTO;
@@ -19,6 +20,46 @@ namespace Service
             _logger = log;
             _mapper = mapper;
         }
+
+        public IEnumerable<RawMaterialDTO> GetAllRawMaterial()
+        {
+            var material = _repo.RawMaterial.GetAllRawMaterial();
+            var rawMaterial = _mapper.Map<IEnumerable<RawMaterialDTO>>(material);
+            return rawMaterial;
+        }
+        public IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber)
+        {
+            var vendorLot = _repo.MaterialVendor.GetMaterialVendorsWithVendorLot(parentMaterialNumber);
+
+            if (vendorLot == null)
+                throw new MaterialNotFoundException(parentMaterialNumber);
+
+            var vendorLotDTO = _mapper.Map<IEnumerable<MaterialVendorDTO>>(vendorLot);
+
+            foreach (var material in vendorLotDTO)
+            {
+                if (material.VendorLots != null)
+                {
+                    foreach (var lot in material.VendorLots)
+                    {
+                        lot.RawMaterials = ApprovedRawMaterial(lot.MaterialNumber);
+                    }
+                }
+            }
+
+            return vendorLotDTO;
+        }
+        public IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber)
+        {
+            var rawMaterial = _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
+                .Where(s => s.Sample.Approved && s.Sample.ExperiationDate >= DateTime.Today);
+            
+
+            return _mapper.Map<IEnumerable<RawMaterialDTO>>(rawMaterial);
+        }
+
+
+
         /*
          * Check sample required for material number -> 
          *     if only new required ->
@@ -72,26 +113,17 @@ namespace Service
         * -> Lot has been sampled
         * -> check Sample Approved/Not Expired
         */
-        public IEnumerable<MaterialVendor> GetRawMaterial(int ParentMaterialNumber)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<RawMaterial> ApprovedRawMaterial(int materialNumber)
-        {
-            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
-                .Where(s => s.Sample.Approved && s.Sample.ExperiationDate >= DateTime.Today);
-        }
-        public IEnumerable<RawMaterial> ExpiredRawMaterial(int materialNumber)
+        private IEnumerable<RawMaterial> ExpiredRawMaterial(int materialNumber)
         {
             return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
                 .Where(s => s.Sample.ExperiationDate < DateTime.Today);
         }
-        public IEnumerable<RawMaterial> RawMaterialAwaitingApproval(int materialNumber)
+        private IEnumerable<RawMaterial> RawMaterialAwaitingApproval(int materialNumber)
         {
             return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
                 .Where(s => !s.Sample.Approved && !s.Sample.Rejected);
         }
-        public IEnumerable<RawMaterial> RejectedRawMaterial(int materialNumber)
+        private IEnumerable<RawMaterial> RejectedRawMaterial(int materialNumber)
         {
             return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
                 .Where(s => s.Sample.Rejected);
@@ -99,11 +131,6 @@ namespace Service
         }
 
         RawMaterialDTO IRawMaterialServices.CreateRawMaterialDrum(CreateRawMaterialDTO material)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<RawMaterialDTO> IRawMaterialServices.ApprovedRawMaterial(int materialNumber)
         {
             throw new NotImplementedException();
         }

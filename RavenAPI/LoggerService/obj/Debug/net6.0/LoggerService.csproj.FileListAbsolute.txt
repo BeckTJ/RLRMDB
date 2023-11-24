@@ -17,9 +17,7 @@ C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.deps.
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\LoggerService.pdb
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\Contracts.dll
-C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDAL.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\Contracts.pdb
-C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDAL.pdb
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.csproj.AssemblyReference.cache
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.AssemblyInfoInputs.cache
@@ -33,3 +31,6 @@ C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\ref\LoggerService.d
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.dll
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json
+C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.dll
+C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.pdb
+C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json

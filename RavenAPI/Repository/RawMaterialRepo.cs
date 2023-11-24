@@ -30,9 +30,11 @@ namespace Repository
         {
             return FindByCondition(rm => rm.VendorLotNumber == vendorLot).ToList();
         }
-        public IEnumerable<RawMaterial> GetRawMaterialWithSample(int MaterialNumber)
+        public IEnumerable<RawMaterial> GetRawMaterialWithSample(int materialNumber)
         {
-            return FindByCondition(rm => rm.Equals(MaterialNumber))
+
+            // why is it returning an int ????
+            return FindByCondition(rm => rm.Equals(materialNumber))
                 .Include(s => s.Sample).ToList();
         }
     }

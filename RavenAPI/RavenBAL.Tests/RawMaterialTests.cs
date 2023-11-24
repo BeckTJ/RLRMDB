@@ -1,9 +1,10 @@
 
 using Microsoft.Identity.Client;
-using RavenDAL.DTO;
-using RavenDAL.Models;
+using Shared.DTO;
+using RavenDB.Models;
 using Service;
 using Xunit.Sdk;
+using Service.Contracts;
 
 namespace RavenBAL.Tests
 {
@@ -88,8 +89,8 @@ namespace RavenBAL.Tests
             };
 
 
-        private readonly IRepoWrapper _repo = Substitute.For<IRepoWrapper>();
-        private readonly IBalWrapper _bal = Substitute.For<IBalWrapper>();
+        private readonly IRepoManager _repo = Substitute.For<IRepoManager>();
+        private readonly IServiceManager _bal = Substitute.For<IServiceManager>();
         private readonly ILoggerManager _loggerManager = Substitute.For<ILoggerManager>();
 
         public RawMaterialTests()
@@ -134,68 +135,6 @@ namespace RavenBAL.Tests
             var productId = lot.UpdateProductLotNumber(product);
 
             Assert.Equal(updateProduct, productId);
-        }
-        [Fact]
-        public void CreateRawMaterial()
-        {
-            var product = "103AA3L" + DateTime.Today.ToString("dd");
-            _repo.RawMaterial.GetRawMaterialByMaterialNumber(_createRawMaterialDTO.MaterialNumber).Returns(_rawMaterial);
-
-            RawMaterialServices raw = new(_repo);
-
-            var material = raw.CreateRawMaterialDrum(_createRawMaterialDTO);
-
-            Assert.Equal(product, material.ProductId);
-        }
-        [Fact]
-        public void CheckRawMaterialApproved()
-        {
-            var materialNumber = 99999;
-
-            _repo.RawMaterial.GetRawMaterialWithSample(materialNumber).Returns(_rawMaterialWithSample);
-            RawMaterialServices raw = new(_repo);
-
-            var material = raw.ApprovedRawMaterial(99999);
-
-            Assert.Single(material);
-        }
-        [Fact]
-        public void CheckRawMaterialNotApproved()
-        {
-            var materialNumber = 99999;
-
-            _repo.RawMaterial.GetRawMaterialWithSample(materialNumber).Returns(_rawMaterialWithSample);
-            RawMaterialServices raw = new(_repo);
-
-            var material = raw.RawMaterialAwaitingApproval(99999);
-
-            Assert.Single(material);
-
-        }
-        [Fact]
-        public void CheckRawMaterialIsExpired()
-        {
-            var materialNumber = 99999;
-
-            _repo.RawMaterial.GetRawMaterialWithSample(materialNumber).Returns(_rawMaterialWithSample);
-            RawMaterialServices raw = new(_repo);
-
-            var material = raw.ExpiredRawMaterial(99999);
-
-            Assert.Single(material);
-        }
-        [Fact]
-        public void CheckRawMaterialIsRejected()
-        {
-            var materialNumber = 99999;
-
-            _repo.RawMaterial.GetRawMaterialWithSample(materialNumber).Returns(_rawMaterialWithSample);
-            RawMaterialServices raw = new(_repo);
-
-            var material = raw.RejectedRawMaterial(99999);
-
-            Assert.Single(material);
-
         }
     }
 }

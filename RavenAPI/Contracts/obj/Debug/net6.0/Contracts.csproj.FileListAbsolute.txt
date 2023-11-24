@@ -13,8 +13,6 @@ C:\Users\TBeck\Raven\RavenAPI\Contracts\obj\Debug\net6.0\ref\Contracts.dll
 C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\Contracts.deps.json
 C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\Contracts.dll
 C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\Contracts.pdb
-C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDAL.dll
-C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDAL.pdb
 C:\Users\kcebs\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.csproj.AssemblyReference.cache
 C:\Users\kcebs\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\kcebs\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.AssemblyInfoInputs.cache
@@ -29,3 +27,6 @@ C:\Users\TBeck\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.csproj.CopyCo
 C:\Users\TBeck\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.dll
 C:\Users\TBeck\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.sourcelink.json
+C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.dll
+C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.pdb
+C:\Users\kcebs\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.sourcelink.json

@@ -9,7 +9,6 @@ update QualityControl.SampleSubmit
 set Approved = 1
 where SampleSubmitNumber = 'RAW61560'
 
-
 select * from QualityControl.SampleRequired
 where MaterialNumber = (select ParentMaterialNumber from Materials.MaterialVendor
                         where MaterialNumber = 3322187)
