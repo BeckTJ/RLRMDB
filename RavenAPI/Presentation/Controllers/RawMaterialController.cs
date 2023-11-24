@@ -28,7 +28,7 @@ public class RawMaterialController : ControllerBase
     [HttpGet("{ParentMaterialNumber:int}")]
     public IActionResult GetApprovedRawMaterial(int parentMaterialNumber)
     {
-        var rawMaterial = _repo.RawMaterialService.ApprovedRawMaterial(parentMaterialNumber);
+        var rawMaterial = _repo.RawMaterialService.GetApprovedRawMaterial(parentMaterialNumber);
         return Ok(rawMaterial);
     }
 }

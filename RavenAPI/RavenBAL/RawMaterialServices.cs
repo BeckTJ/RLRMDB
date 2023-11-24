@@ -42,19 +42,21 @@ namespace Service
                 {
                     foreach (var lot in material.VendorLots)
                     {
-                        lot.RawMaterials = ApprovedRawMaterial(lot.MaterialNumber);
+                        var approved = _repo.RawMaterial.GetRawMaterialByMaterialNumber(lot.MaterialNumber);
+                        if(approved != null)
+                        {
+                            lot.RawMaterials = _mapper.Map<IEnumerable<RawMaterialDTO>>(approved);
+                        }
                     }
                 }
             }
-
             return vendorLotDTO;
         }
-        public IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber)
+        private IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber)
         {
             var rawMaterial = _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
                 .Where(s => s.Sample.Approved && s.Sample.ExperiationDate >= DateTime.Today);
             
-
             return _mapper.Map<IEnumerable<RawMaterialDTO>>(rawMaterial);
         }
 

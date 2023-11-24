@@ -8,7 +8,6 @@ namespace Service.Contracts
         RawMaterialDTO CreateRawMaterialDrum(CreateRawMaterialDTO material);
         RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material);
         IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
-        public IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber);
 
     }
 }

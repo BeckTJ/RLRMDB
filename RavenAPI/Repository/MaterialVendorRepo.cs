@@ -18,7 +18,7 @@ namespace Repository
         public IEnumerable<MaterialVendor> GetMaterialVendorsWithVendorLot(int materialNumber)
         {
             return FindByCondition(mv => mv.MaterialNumber.Equals(materialNumber))
-                //.Include(vl => vl.VendorLots)
+                .Include(vl => vl.VendorLots)
                 .ToList();
         }
     }

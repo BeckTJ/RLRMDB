@@ -23,7 +23,7 @@ namespace Repository
         }
         public IEnumerable<RawMaterial> GetRawMaterialByMaterialNumber(int materialNumber)
         {
-            return FindByCondition(rm => rm.MaterialNumber == materialNumber)
+            return FindByCondition(rm => rm.MaterialNumber.Equals(materialNumber))
                 .ToList();
         }
         public IEnumerable<RawMaterial> GetRawMaterialByVendorLot(string vendorLot)
@@ -32,7 +32,6 @@ namespace Repository
         }
         public IEnumerable<RawMaterial> GetRawMaterialWithSample(int materialNumber)
         {
-
             // why is it returning an int ????
             return FindByCondition(rm => rm.Equals(materialNumber))
                 .Include(s => s.Sample).ToList();
