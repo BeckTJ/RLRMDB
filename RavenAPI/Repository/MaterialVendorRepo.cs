@@ -13,11 +13,12 @@ namespace Repository
         public MaterialVendor GetMaterialVendor(int materialNumber)
         {
             return FindByCondition(mv => mv.MaterialNumber == materialNumber)
+                .Include(vl => vl.VendorLots)
                 .FirstOrDefault();
         }
-        public IEnumerable<MaterialVendor> GetMaterialVendorsWithVendorLot(int materialNumber)
+        public IEnumerable<MaterialVendor> GetMaterialVendorWithVendorLot(int materialNumber)
         {
-            return FindByCondition(mv => mv.MaterialNumber.Equals(materialNumber))
+            return FindByCondition(mv => mv.ParentMaterialNumber.Equals(materialNumber))
                 .Include(vl => vl.VendorLots)
                 .ToList();
         }

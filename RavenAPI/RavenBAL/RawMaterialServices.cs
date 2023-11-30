@@ -27,40 +27,58 @@ namespace Service
             var rawMaterial = _mapper.Map<IEnumerable<RawMaterialDTO>>(material);
             return rawMaterial;
         }
-        public IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber)
+        public IEnumerable<MaterialVendorDTO> GetRawMaterialByMaterialNumber(int parentMaterialNumber)
         {
-            var vendorLot = _repo.MaterialVendor.GetMaterialVendorsWithVendorLot(parentMaterialNumber);
+            var rawMaterial = _repo.RawMaterial.GetRawMaterialByMaterialNumber(parentMaterialNumber);
 
-            if (vendorLot == null)
+            if (rawMaterial == null)
                 throw new MaterialNotFoundException(parentMaterialNumber);
 
-            var vendorLotDTO = _mapper.Map<IEnumerable<MaterialVendorDTO>>(vendorLot);
+            return _mapper.Map<IEnumerable<MaterialVendorDTO>>(rawMaterial);
+        }
+        //Still need to work on how material is sampled. 
+        //Should sample be check by lot or individually
+        public IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber)
+        {
+            var vendor = _repo.MaterialVendor.GetMaterialVendorWithVendorLot(parentMaterialNumber);
 
-            foreach (var material in vendorLotDTO)
+            if (vendor == null)
+                throw new MaterialNotFoundException(parentMaterialNumber);
+
+            var materialVendor = _mapper.Map<IEnumerable<MaterialVendorDTO>>(vendor);
+
+            foreach (var material in materialVendor)
             {
                 if (material.VendorLots != null)
                 {
                     foreach (var lot in material.VendorLots)
                     {
-                        var approved = _repo.RawMaterial.GetRawMaterialByMaterialNumber(lot.MaterialNumber);
-                        if(approved != null)
-                        {
-                            lot.RawMaterials = _mapper.Map<IEnumerable<RawMaterialDTO>>(approved);
-                        }
+                        var rawMaterial = _repo.RawMaterial.GetRawMaterialByMaterialNumber(material.MaterialNumber)
+                            .Where(s => s.VendorLotNumber == lot.VendorLotNumber).ToList();
+                        
+                        var approved = VerifyRawMaterialSample(_mapper.Map<List<RawMaterialDTO>>(rawMaterial));
+                        lot.RawMaterials = approved;
                     }
                 }
             }
-            return vendorLotDTO;
+            return materialVendor;
         }
-        private IEnumerable<RawMaterialDTO> ApprovedRawMaterial(int materialNumber)
+
+        private IEnumerable<RawMaterialDTO> VerifyRawMaterialSample(List<RawMaterialDTO> rawMaterial)
         {
-            var rawMaterial = _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
-                .Where(s => s.Sample.Approved && s.Sample.ExperiationDate >= DateTime.Today);
-            
-            return _mapper.Map<IEnumerable<RawMaterialDTO>>(rawMaterial);
+            List<RawMaterialDTO> approved = new List<RawMaterialDTO>();
+
+            foreach(var material in rawMaterial)
+            {
+                var sample = _repo.SampleRepo.VerifySample(material.SampleSubmitNumber);
+                //create error check for not sampled
+                if (sample.Approved && sample.ExperiationDate >= DateTime.Today)
+                {
+                    approved.Add(material);
+                }
+            }
+            return approved;
         }
-
-
 
         /*
          * Check sample required for material number -> 
@@ -73,9 +91,55 @@ namespace Service
          *              assign product id to all drums
         */
 
-        public void InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        public RawMaterialDTO InputRawMaterial(CreateRawMaterialDTO rawMaterial)
         {
-            var materialVendor = _repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
+            SamplingServices sample = new SamplingServices(_repo, _logger, _mapper);
+            VendorServices vendor = new VendorServices(_repo,_logger,_mapper);
+            ProductLotNumber productId = new ProductLotNumber(_repo);
+            RawMaterialDTO rawMaterialDrum = new RawMaterialDTO();
+
+            var material = _repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
+            var requiredSample = _repo.SampleRequired.GetSampleRequired((int)material.ParentMaterialNumber)
+                .Where(mt => mt.MaterialType.Equals("RawMaterial"));
+
+            if(requiredSample.Any(x => x.Vln == "New") && requiredSample.Any(x => x.Vln == "Old"))
+            {       //Change sample submit so it creates sample id.
+                _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
+                {
+                    SampleSubmitNumber = rawMaterial.SampleId,
+                    SampleDate = DateTime.Today,
+                }));
+
+                _repo.Vendor.SubmitVendorLot(_mapper.Map<VendorLot>(new CreateVendorLotDTO
+                {
+                    MaterialNumber = rawMaterial.MaterialNumber,
+                    VendorLotNumber = rawMaterial.VendorLotNumber,
+                    Quantity = rawMaterial.Quantity,
+                    SampleId = rawMaterial.SampleId,
+                }));
+
+                rawMaterialDrum = CreateRawMaterialDrum(rawMaterial);
+                _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
+                _repo.Save();
+
+                return rawMaterialDrum;
+            }
+            else
+            {       //Check Sample
+                var wasSampled = _repo.SampleRepo.VerifySample
+                    (material.VendorLots.Where(x => x.VendorLotNumber == rawMaterial.VendorLotNumber)
+                    .Select(x => x.SampleSubmitNumber).First());
+
+                return rawMaterialDrum;
+                if(wasSampled != null)
+                {       //Create Product Id
+                    return rawMaterialDrum;
+                }
+                else
+                {       //Need to Sample and add to vendor lot
+                    return rawMaterialDrum;
+                }
+            }
         }
 
         /*
@@ -85,56 +149,20 @@ namespace Service
        * -> (When Required) Container Number, SAP Batch Number
        * -> return product
        */
-        public RawMaterial CreateRawMaterialDrum(CreateRawMaterialDTO rawMaterial)
+        private RawMaterialDTO CreateRawMaterialDrum(CreateRawMaterialDTO rawMaterial)
         {
-            ProductLotNumber lot = new ProductLotNumber(_repo);
-            var material = _repo.Material.GetMaterialByMaterialNumber(rawMaterial.MaterialNumber);
-            RawMaterial raw = new()
+            ProductLotNumber productId = new ProductLotNumber(_repo);
+            var material = _repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
+            return new RawMaterialDTO
             {
-                ProductId = lot.UpdateProductLotNumber(lot.CreateProductLotNumber(material.MaterialVendors.First(x => x.MaterialNumber == rawMaterial.MaterialNumber))),
-                MaterialNumber = rawMaterial.MaterialNumber,
-                VendorLotNumber = rawMaterial.VendorLotNumber,
-                SapBatchNumber = rawMaterial.BatchNumber,
-                ContainerNumber = rawMaterial.ContainerNumber,
+                ProductId = productId.UpdateProductLotNumber(productId.CreateProductLotNumber(material)),
+                BatchNumber = rawMaterial.BatchNumber,
                 InspectionLotNumber = rawMaterial.InspectionLotNumber,
+                ContainerNumber = rawMaterial.ContainerNumber,
+                DrumWeight = rawMaterial.DrumWeight,
+                VendorLotNumber = rawMaterial.VendorLotNumber,
                 SampleSubmitNumber = rawMaterial.SampleId,
             };
-
-            _repo.RawMaterial.CreateRawMaterial(raw);
-
-            return raw;
-        }
-        public RawMaterialDTO SampleRawMaterialDrum(RawMaterialDTO material)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*
-        * Get Raw Material
-        * -> return List of RawMaterialDTO
-        * -> Lot has been sampled
-        * -> check Sample Approved/Not Expired
-        */
-        private IEnumerable<RawMaterial> ExpiredRawMaterial(int materialNumber)
-        {
-            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
-                .Where(s => s.Sample.ExperiationDate < DateTime.Today);
-        }
-        private IEnumerable<RawMaterial> RawMaterialAwaitingApproval(int materialNumber)
-        {
-            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
-                .Where(s => !s.Sample.Approved && !s.Sample.Rejected);
-        }
-        private IEnumerable<RawMaterial> RejectedRawMaterial(int materialNumber)
-        {
-            return _repo.RawMaterial.GetRawMaterialWithSample(materialNumber)
-                .Where(s => s.Sample.Rejected);
-
-        }
-
-        RawMaterialDTO IRawMaterialServices.CreateRawMaterialDrum(CreateRawMaterialDTO material)
-        {
-            throw new NotImplementedException();
         }
     }
 }

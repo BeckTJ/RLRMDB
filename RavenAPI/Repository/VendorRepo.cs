@@ -12,7 +12,10 @@ namespace Repository
         {
             
         }
-
+        public void SubmitVendorLot(VendorLot vendorLot)
+        {
+            Create(vendorLot);
+        }
         public IEnumerable<VendorLot> GetAllVendors()
         {
             return FindAll()

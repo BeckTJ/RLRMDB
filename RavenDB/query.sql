@@ -1,17 +1,22 @@
 select * from Materials.VendorLot
 where MaterialNumber = 3322187
 
+GO
+update QualityControl.SampleSubmit
+set Approved = 1, SampleDate = DATEADD(DAY,-3,GETDATE())
+where SampleSubmitNumber = 'RAW61560'
+
 select * from Distillation.RawMaterial
 join QualityControl.SampleSubmit on SampleSubmit.SampleSubmitNumber = RawMaterial.SampleSubmitNumber
 where MaterialNumber = 3322187
-GO
-update QualityControl.SampleSubmit
-set Approved = 1
-where SampleSubmitNumber = 'RAW61560'
+
 
 select * from QualityControl.SampleRequired
 where MaterialNumber = (select ParentMaterialNumber from Materials.MaterialVendor
                         where MaterialNumber = 3322187)
+
+select * from Materials.MaterialVendor where ParentMaterialNumber = 58423
+
 
 select * from Distillation.AlphabeticDate
 

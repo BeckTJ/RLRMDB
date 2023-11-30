@@ -10,9 +10,7 @@ namespace Repository
 
         public IEnumerable<SampleRequired> GetSampleRequired(int parentMaterialNumber)
         {
-            return FindByCondition(s => s.MaterialNumber == parentMaterialNumber)
-                .ToList();
+            return FindByCondition(s => s.MaterialNumber.Equals(parentMaterialNumber));
         }
-
     }
 }

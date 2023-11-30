@@ -389,7 +389,7 @@ public partial class RavenContext : DbContext
                 .HasForeignKey(d => d.MaterialNumber)
                 .HasConstraintName("FK__VendorLot__Mater__440B1D61");
 
-            entity.HasOne(d => d.SampleSubmitNumberNavigation).WithMany(p => p.VendorLots)
+            entity.HasOne(d => d.Sample).WithMany(p => p.VendorLots)
                 .HasForeignKey(d => d.SampleSubmitNumber)
                 .HasConstraintName("FK__VendorLot__Sampl__4316F928");
         });

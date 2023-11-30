@@ -7,15 +7,19 @@ DECLARE @rejected AS BIT
 SET @rejected = (SELECT inserted.Rejected
                     FROM inserted)
 
-IF(@rejected = 0)
+DECLARE @approved AS BIT
+SET @approved = (SELECT inserted.Approved 
+                    FROM inserted)
+
+IF(@approved = 1)
     UPDATE QualityControl.SampleSubmit
-    SET ApprovalDate = GETDATE(),
+    SET ReviewDate = GETDATE(),
         ExperiationDate = DATEADD(YEAR,1,GETDATE())
-    WHERE Rejected = @rejected;    
+    WHERE SampleSubmitNumber = (SELECT inserted.SampleSubmitNumber FROM inserted);    
 
 ELSE IF(@rejected = 1)
 
     UPDATE QualityControl.SampleSubmit
-    SET RejectedDate = GETDATE()
-    WHERE Rejected = @rejected;
+    SET ReviewDate = GETDATE()
+    WHERE SampleSubmitNumber = (SELECT inserted.SampleSubmitNumber FROM inserted);    
 

@@ -5,6 +5,6 @@ namespace Shared.DTO
     {
         public int MaterialNumber { get; set; }
         public string MaterialType { get; set; }
-        public List<string> VLN { get; set; }
+        public string Vln { get; set; }
     }
 }

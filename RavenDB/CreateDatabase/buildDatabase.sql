@@ -68,7 +68,9 @@ GO
 
 CREATE TABLE QualityControl.SampleSubmit
 (
-    SampleSubmitNumber CHAR(8) PRIMARY KEY,
+    --SampleId INT PRIMARY KEY IDENTITY(1,1),
+    --SampleType CHAR(3),
+    SampleId CHAR(8) PRIMARY KEY,
     InspectionLotNumber BIGINT,
     SampleDate DATE NOT NULL,
     Rejected BIT DEFAULT(0) NOT NULL,

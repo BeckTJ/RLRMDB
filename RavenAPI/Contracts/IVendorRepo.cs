@@ -7,6 +7,7 @@ namespace Contracts
         IEnumerable<VendorLot> GetAllVendors(); 
         VendorLot GetVendorByVendorLot(string lotNumber);
         IEnumerable<VendorLot> GetVendorLotsWithRawMaterials(int materialNumber);
+        void SubmitVendorLot(VendorLot vendorLot);
 
     }
 }

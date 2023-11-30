@@ -1,8 +1,5 @@
-using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using RavenDB.Models;
 using Service.Contracts;
-using Shared.DTO;
 
 namespace Presentation.Controllers;
 

@@ -32,9 +32,9 @@ namespace Repository
         }
         public IEnumerable<RawMaterial> GetRawMaterialWithSample(int materialNumber)
         {
-            // why is it returning an int ????
             return FindByCondition(rm => rm.Equals(materialNumber))
                 .Include(s => s.Sample).ToList();
+
         }
     }
 }
