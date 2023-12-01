@@ -91,12 +91,12 @@ namespace Service
          *              assign product id to all drums
         */
 
-        public RawMaterialDTO InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        public IEnumerable<RawMaterialDTO> InputRawMaterial(CreateRawMaterialDTO rawMaterial)
         {
-            SamplingServices sample = new SamplingServices(_repo, _logger, _mapper);
-            VendorServices vendor = new VendorServices(_repo,_logger,_mapper);
-            ProductLotNumber productId = new ProductLotNumber(_repo);
-            RawMaterialDTO rawMaterialDrum = new RawMaterialDTO();
+            SamplingServices sample = new(_repo, _logger, _mapper);
+            VendorServices vendor = new(_repo,_logger,_mapper);
+            ProductLotNumber productId = new(_repo);
+            List<RawMaterialDTO> rawMaterialDrum = new();
 
             var material = _repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
             var requiredSample = _repo.SampleRequired.GetSampleRequired((int)material.ParentMaterialNumber)
@@ -104,6 +104,7 @@ namespace Service
 
             if(requiredSample.Any(x => x.Vln == "New") && requiredSample.Any(x => x.Vln == "Old"))
             {       //Change sample submit so it creates sample id.
+                    // all material needs to be sampled.
                 _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
                 {
                     SampleSubmitNumber = rawMaterial.SampleId,
@@ -117,10 +118,13 @@ namespace Service
                     Quantity = rawMaterial.Quantity,
                     SampleId = rawMaterial.SampleId,
                 }));
-
-                rawMaterialDrum = CreateRawMaterialDrum(rawMaterial);
-                _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
-                _repo.Save();
+                for (int i = 0; i <= rawMaterial.Quantity; i++)
+                {
+                    var drum = CreateRawMaterialDrum(rawMaterial);
+                    rawMaterialDrum.Add(drum);
+                    _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
+                    _repo.Save();
+                }
 
                 return rawMaterialDrum;
             }
@@ -130,9 +134,16 @@ namespace Service
                     (material.VendorLots.Where(x => x.VendorLotNumber == rawMaterial.VendorLotNumber)
                     .Select(x => x.SampleSubmitNumber).First());
 
-                return rawMaterialDrum;
                 if(wasSampled != null)
                 {       //Create Product Id
+                    for (int i = 0; i <= rawMaterial.Quantity; i++)
+                    {
+                        var drum = CreateRawMaterialDrum(rawMaterial);
+                        rawMaterialDrum.Add(drum);
+                        _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
+                        _repo.Save();
+                    }
+
                     return rawMaterialDrum;
                 }
                 else
