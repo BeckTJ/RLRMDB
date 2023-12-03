@@ -31,7 +31,6 @@ namespace Service
         {
             return true;
         }
-
         public IEnumerable<RequiredSampleDTO> VerifySampleRequired(int parentMaterialNumber)
         {
             var sample = _repo.SampleRequired.GetSampleRequired(parentMaterialNumber);

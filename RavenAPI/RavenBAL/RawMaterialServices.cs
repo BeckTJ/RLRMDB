@@ -103,14 +103,7 @@ namespace Service
                 .Where(mt => mt.MaterialType.Equals("RawMaterial"));
 
             if(requiredSample.Any(x => x.Vln == "New") && requiredSample.Any(x => x.Vln == "Old"))
-            {       //Change sample submit so it creates sample id.
-                    // all material needs to be sampled.
-                _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
-                {
-                    SampleSubmitNumber = rawMaterial.SampleId,
-                    SampleDate = DateTime.Today,
-                }));
-
+            {       
                 _repo.Vendor.SubmitVendorLot(_mapper.Map<VendorLot>(new CreateVendorLotDTO
                 {
                     MaterialNumber = rawMaterial.MaterialNumber,
@@ -119,13 +112,20 @@ namespace Service
                     SampleId = rawMaterial.SampleId,
                 }));
                 for (int i = 0; i <= rawMaterial.Quantity; i++)
-                {
+                {   //Change sample submit so it creates sample id.
+                    // all material needs to be sampled.
+                    _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
+                    {
+                        SampleSubmitNumber = rawMaterial.SampleId,
+                        SampleDate = DateTime.Today,
+                    }));
+
                     var drum = CreateRawMaterialDrum(rawMaterial);
                     rawMaterialDrum.Add(drum);
                     _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
-                    _repo.Save();
+                   
                 }
-
+                _repo.Save();
                 return rawMaterialDrum;
             }
             else
