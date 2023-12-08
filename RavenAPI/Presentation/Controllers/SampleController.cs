@@ -18,7 +18,7 @@ public class SampleController : ControllerBase
     [HttpGet("{parentMaterialNumber:int}")]
     public IActionResult GetSample(int parentMaterialNumber)
     {
-        var sample = _repo.SamplingServices.VerifySampleRequired(parentMaterialNumber, "RawMaterial");
+        var sample = _repo.SamplingServices.VerifySampleRequired(parentMaterialNumber);
         return Ok(sample);
     }
 }

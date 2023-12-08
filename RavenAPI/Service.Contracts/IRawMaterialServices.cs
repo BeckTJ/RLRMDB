@@ -7,5 +7,7 @@ namespace Service.Contracts
         IEnumerable<RawMaterialDTO> GetAllRawMaterial();
         IEnumerable<RawMaterialDTO> InputRawMaterial(CreateRawMaterialDTO rawMaterial);
         IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
+        IEnumerable<MaterialVendorDTO> GetRawMaterialByMaterialNumber(int parentMaterialNumber);
+        RawMaterialDTO GetRawMaterialByProductId(string productId);
     }
 }

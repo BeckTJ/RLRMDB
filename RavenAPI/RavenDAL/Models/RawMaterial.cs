@@ -15,7 +15,7 @@ public partial class RawMaterial
 
     public string? ContainerNumber { get; set; }
 
-    public decimal? InspectionLotNumber { get; set; }
+    public long? InspectionLotNumber { get; set; }
 
     public string? SampleSubmitNumber { get; set; }
 

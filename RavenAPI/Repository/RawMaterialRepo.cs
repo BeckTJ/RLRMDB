@@ -34,7 +34,10 @@ namespace Repository
         {
             return FindByCondition(rm => rm.Equals(materialNumber))
                 .Include(s => s.Sample).ToList();
-
+        }
+        public RawMaterial GetRawMaterialByProductId(string  productId)
+        {
+            return FindByCondition(x => x.ProductId.Equals(productId)).FirstOrDefault();
         }
     }
 }

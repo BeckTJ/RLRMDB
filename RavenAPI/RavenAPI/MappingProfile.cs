@@ -21,7 +21,7 @@ namespace RavenAPI
                 .ForMember("BubblerSampleSize", opt => opt.MapFrom(s => s.BubblerVolume + s.BubblerUnitOfIssue))
                 .ForMember("VialSampleSize", opt => opt.MapFrom(s => s.VialVolume + s.VialUnitOfIssue));
 
-            CreateMap<RawMaterialDTO, RawMaterial>();
+            CreateMap<CreateRawMaterialDTO, RawMaterial>();
             CreateMap<CreateVendorLotDTO, VendorLot>();
             CreateMap<SampleSubmitDTO, SampleSubmit>();
         }

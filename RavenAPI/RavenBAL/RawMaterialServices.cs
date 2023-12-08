@@ -63,6 +63,11 @@ namespace Service
             }
             return materialVendor;
         }
+        public RawMaterialDTO GetRawMaterialByProductId(string productId)
+        {
+            var rawMaterial = _repo.RawMaterial.GetRawMaterialByProductId(productId); 
+            return _mapper.Map<RawMaterialDTO>(rawMaterial);
+        }
 
         private IEnumerable<RawMaterialDTO> VerifyRawMaterialSample(List<RawMaterialDTO> rawMaterial)
         {
@@ -92,13 +97,13 @@ namespace Service
          *              assign product id to all drums
         */
 
-        public void InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        public IEnumerable<RawMaterialDTO> InputRawMaterial(CreateRawMaterialDTO rawMaterial)
         {
             SamplingServices sample = new(_repo, _logger, _mapper);
             MaterialVendorServices vendor = new(_repo,_logger,_mapper);
             List<RawMaterialDTO> rawMaterialDrum = new();
 
-            var material = vendor.GetMaterialVendor(rawMaterial.MaterialNumber, rawMaterial.Vendor);
+            var material = vendor.GetMaterialVendor(rawMaterial.MaterialNumber, rawMaterial.VendorName);
             
             rawMaterial.MaterialNumber = material.MaterialNumber;
             vendor.CreateVendorLot(rawMaterial);
@@ -111,7 +116,7 @@ namespace Service
 
                 for (int i = 0; i < rawMaterial.Quantity; i++)
                 {
-                    sample.SubmitSample(rawMaterial.SampleId);
+                    sample.SubmitSample(rawMaterial.SampleSubmitNumber);
 
                     var drum = CreateRawMaterialDrum(rawMaterial);
                     rawMaterialDrum.Add(drum);
@@ -119,6 +124,7 @@ namespace Service
                     _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                 }
                 _repo.Save();
+                return rawMaterialDrum;
             }
             else
             {       //Check Sample
@@ -135,10 +141,11 @@ namespace Service
                         _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                         _repo.Save();
                     }
+                    return rawMaterialDrum;
                 }
                 else
                 {       //Need to Sample and add to vendor lot
-                    sample.SubmitSample(rawMaterial.SampleId);
+                    sample.SubmitSample(rawMaterial.SampleSubmitNumber);
 
                     for (int i = 0; i < rawMaterial.Quantity; i++)
                     {
@@ -148,7 +155,7 @@ namespace Service
                         _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                     }
                     _repo.Save();
-
+                    return rawMaterialDrum;
                 }
             }
         }
@@ -172,7 +179,7 @@ namespace Service
                 ContainerNumber = rawMaterial.ContainerNumber,
                 DrumWeight = rawMaterial.DrumWeight,
                 VendorLotNumber = rawMaterial.VendorLotNumber,
-                SampleSubmitNumber = rawMaterial.SampleId, 
+                SampleSubmitNumber = rawMaterial.SampleSubmitNumber, 
             };
         }
     }

@@ -28,7 +28,7 @@ namespace Service
             _repo.Vendor.Create(_mapper.Map<VendorLot>(new CreateVendorLotDTO{
                 MaterialNumber = RawMaterial.MaterialNumber,
                 VendorLotNumber = RawMaterial.VendorLotNumber,
-                SampleId = RawMaterial.SampleId,
+                SampleId = RawMaterial.SampleSubmitNumber,
                 Quantity = RawMaterial.Quantity,
             }));
         }

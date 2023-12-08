@@ -8,7 +8,7 @@ where SampleSubmitNumber = 'RAW61560'
 
 select * from Distillation.RawMaterial
 join QualityControl.SampleSubmit on SampleSubmit.SampleSubmitNumber = RawMaterial.SampleSubmitNumber
-where MaterialNumber = 3322187
+where MaterialNumber = 3081971 --3322187
 
 select * from QualityControl.SampleRequired
 where MaterialNumber = 58423
