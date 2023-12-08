@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Service.Tests
-build_property.ProjectDir = C:\Users\kcebs\Raven\RavenAPI\RavenBAL.Tests\
+build_property.ProjectDir = C:\Users\TBeck\Raven\RavenAPI\RavenBAL.Tests\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TxjWhqmDsAJMgDOF/X8QLzhi7k0nmcjCXPmPQDQUUftVUviFy2msnZBFqfK/0bEw1vjnpn6m0mmn0sLWyueN4w==",
+  "dgSpecHash": "xrum7QDhGK0URuFtsrKG04kK1Rs6f5sNUaO24hv5tg1WjJoBOWCWqujxINHvLE+Kf7k91ervPU63x0mBUUBupw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Shared\\Shared.csproj",
+  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\Shared.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -4,8 +4,9 @@ namespace Shared.DTO
     public class CreateRawMaterialDTO
     {
         public int MaterialNumber { get; set; }
-        public string? VendorLotNumber { get; set; }
+        public string? Vendor {  get; set; }
         public string? SampleId { get; set; }
+        public string? VendorLotNumber { get; set; } = null;
         public int BatchNumber { get; set; } = 0;
         public string? ContainerNumber { get; set; } = null;
         public int DrumWeight { get; set; } = 180;

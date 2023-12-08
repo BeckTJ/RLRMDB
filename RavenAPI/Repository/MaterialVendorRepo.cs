@@ -16,6 +16,11 @@ namespace Repository
                 .Include(vl => vl.VendorLots)
                 .FirstOrDefault();
         }
+        public IEnumerable<MaterialVendor> GetMaterialVendorFromParent(int parentMaterialNumber) 
+        {
+            return FindByCondition(x => x.ParentMaterialNumber.Equals(parentMaterialNumber))
+                .Include(v => v.VendorLots).ToList();
+        }
         public IEnumerable<MaterialVendor> GetMaterialVendorWithVendorLot(int materialNumber)
         {
             return FindByCondition(mv => mv.ParentMaterialNumber.Equals(materialNumber))

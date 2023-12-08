@@ -3137,23 +3137,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kcebs\\.nuget\\packages\\": {},
+    "C:\\Users\\TBeck\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
+      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
       "projectName": "Contracts",
-      "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
-      "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Contracts\\obj\\",
+      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\Contracts.csproj",
+      "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3169,8 +3169,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj"
             }
           }
         }

@@ -23,18 +23,17 @@ namespace Service
          *         if vendor lot old new or reclaim
          *         
          */
-        public bool VerifyProductSample(RawMaterialDTO rawMaterial)
+        public void SubmitSample(string sampleId) 
         {
-            return true;
-        }
-        private bool VerifyExpDate(string sampleId)
-        {
-            return true;
+            _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
+            {
+                SampleSubmitNumber = sampleId,
+                SampleDate = DateTime.Now,
+            }));
         }
         public IEnumerable<RequiredSampleDTO> VerifySampleRequired(int parentMaterialNumber)
         {
             var sample = _repo.SampleRequired.GetSampleRequired(parentMaterialNumber);
-                //.GroupBy(s => s.MaterialType).Select(grp => grp.ToList()).ToList();
             return _mapper.Map<IEnumerable<RequiredSampleDTO>>(sample);
         }
     }

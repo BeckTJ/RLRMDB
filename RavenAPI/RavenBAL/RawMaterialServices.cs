@@ -81,6 +81,7 @@ namespace Service
         }
 
         /*
+         * x4
          * Check sample required for material number -> 
          *     if only new required ->
          *          if previously sampled -> add qty to vendorbatch
@@ -91,42 +92,33 @@ namespace Service
          *              assign product id to all drums
         */
 
-        public IEnumerable<RawMaterialDTO> InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        public void InputRawMaterial(CreateRawMaterialDTO rawMaterial)
         {
             SamplingServices sample = new(_repo, _logger, _mapper);
-            VendorServices vendor = new(_repo,_logger,_mapper);
-            ProductLotNumber productId = new(_repo);
+            MaterialVendorServices vendor = new(_repo,_logger,_mapper);
             List<RawMaterialDTO> rawMaterialDrum = new();
 
-            var material = _repo.MaterialVendor.GetMaterialVendor(rawMaterial.MaterialNumber);
-            var requiredSample = _repo.SampleRequired.GetSampleRequired((int)material.ParentMaterialNumber)
+            var material = vendor.GetMaterialVendor(rawMaterial.MaterialNumber, rawMaterial.Vendor);
+            
+            rawMaterial.MaterialNumber = material.MaterialNumber;
+            vendor.CreateVendorLot(rawMaterial);
+
+            var checkRequiredSample = _repo.SampleRequired.GetSampleRequired((int)material.ParentMaterialNumber)
                 .Where(mt => mt.MaterialType.Equals("RawMaterial"));
 
-            if(requiredSample.Any(x => x.Vln == "New") && requiredSample.Any(x => x.Vln == "Old"))
-            {       
-                _repo.Vendor.SubmitVendorLot(_mapper.Map<VendorLot>(new CreateVendorLotDTO
+            if(checkRequiredSample.Any(x => x.Vln == "New") && checkRequiredSample.Any(x => x.Vln == "Old"))
+            {
+
+                for (int i = 0; i < rawMaterial.Quantity; i++)
                 {
-                    MaterialNumber = rawMaterial.MaterialNumber,
-                    VendorLotNumber = rawMaterial.VendorLotNumber,
-                    Quantity = rawMaterial.Quantity,
-                    SampleId = rawMaterial.SampleId,
-                }));
-                for (int i = 0; i <= rawMaterial.Quantity; i++)
-                {   //Change sample submit so it creates sample id.
-                    // all material needs to be sampled.
-                    _repo.SampleRepo.SubmitSample(_mapper.Map<SampleSubmit>(new SampleSubmitDTO
-                    {
-                        SampleSubmitNumber = rawMaterial.SampleId,
-                        SampleDate = DateTime.Today,
-                    }));
+                    sample.SubmitSample(rawMaterial.SampleId);
 
                     var drum = CreateRawMaterialDrum(rawMaterial);
                     rawMaterialDrum.Add(drum);
+
                     _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
-                   
                 }
                 _repo.Save();
-                return rawMaterialDrum;
             }
             else
             {       //Check Sample
@@ -143,12 +135,20 @@ namespace Service
                         _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                         _repo.Save();
                     }
-
-                    return rawMaterialDrum;
                 }
                 else
                 {       //Need to Sample and add to vendor lot
-                    return rawMaterialDrum;
+                    sample.SubmitSample(rawMaterial.SampleId);
+
+                    for (int i = 0; i < rawMaterial.Quantity; i++)
+                    {
+                        var drum = CreateRawMaterialDrum(rawMaterial);
+                        rawMaterialDrum.Add(drum);
+
+                        _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
+                    }
+                    _repo.Save();
+
                 }
             }
         }
@@ -172,7 +172,7 @@ namespace Service
                 ContainerNumber = rawMaterial.ContainerNumber,
                 DrumWeight = rawMaterial.DrumWeight,
                 VendorLotNumber = rawMaterial.VendorLotNumber,
-                SampleSubmitNumber = rawMaterial.SampleId,
+                SampleSubmitNumber = rawMaterial.SampleId, 
             };
         }
     }
