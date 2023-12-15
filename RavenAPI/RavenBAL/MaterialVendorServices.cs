@@ -25,12 +25,28 @@ namespace Service
         }
         public void CreateVendorLot(CreateRawMaterialDTO RawMaterial)
         {
-            _repo.Vendor.Create(_mapper.Map<VendorLot>(new CreateVendorLotDTO{
+             _repo.Vendor.Create(_mapper.Map<VendorLot>(new CreateVendorLotDTO{
                 MaterialNumber = RawMaterial.MaterialNumber,
                 VendorLotNumber = RawMaterial.VendorLotNumber,
                 SampleId = RawMaterial.SampleSubmitNumber,
                 Quantity = RawMaterial.Quantity,
             }));
+        }
+        public VendorLotDTO VerifyMaterialVendorLot(CreateRawMaterialDTO rawMaterial)
+        {
+            var lot = _repo.Vendor.GetVendorByVendorLot(rawMaterial.VendorLotNumber);
+
+            if(lot == null)
+            {
+                CreateVendorLot(rawMaterial);
+            }
+
+            return new VendorLotDTO
+            {
+                VendorLotNumber = rawMaterial.VendorLotNumber,
+                Quantity = rawMaterial.Quantity,
+                SampleSubmitNumber = rawMaterial.SampleSubmitNumber,
+            };
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Repository
         public VendorRepo(RavenContext dbContext) 
             : base(dbContext) 
         {
-            
         }
         public void SubmitVendorLot(VendorLot vendorLot)
         {

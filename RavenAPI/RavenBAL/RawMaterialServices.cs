@@ -97,7 +97,7 @@ namespace Service
          *              assign product id to all drums
         */
 
-        public IEnumerable<RawMaterialDTO> InputRawMaterial(CreateRawMaterialDTO rawMaterial)
+        public VendorLotDTO InputRawMaterial(CreateRawMaterialDTO rawMaterial)
         {
             SamplingServices sample = new(_repo, _logger, _mapper);
             MaterialVendorServices vendor = new(_repo,_logger,_mapper);
@@ -106,7 +106,10 @@ namespace Service
             var material = vendor.GetMaterialVendor(rawMaterial.MaterialNumber, rawMaterial.VendorName);
             
             rawMaterial.MaterialNumber = material.MaterialNumber;
-            vendor.CreateVendorLot(rawMaterial);
+
+            var vendorLot = vendor.VerifyMaterialVendorLot(rawMaterial);
+
+            //
 
             var checkRequiredSample = _repo.SampleRequired.GetSampleRequired((int)material.ParentMaterialNumber)
                 .Where(mt => mt.MaterialType.Equals("RawMaterial"));
@@ -123,8 +126,9 @@ namespace Service
 
                     _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                 }
+                vendorLot.RawMaterials = rawMaterialDrum;
                 _repo.Save();
-                return rawMaterialDrum;
+                return vendorLot;
             }
             else
             {       //Check Sample
@@ -141,7 +145,8 @@ namespace Service
                         _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                         _repo.Save();
                     }
-                    return rawMaterialDrum;
+                    vendorLot.RawMaterials = rawMaterialDrum;
+                    return vendorLot;
                 }
                 else
                 {       //Need to Sample and add to vendor lot
@@ -155,7 +160,8 @@ namespace Service
                         _repo.RawMaterial.CreateRawMaterial(_mapper.Map<RawMaterial>(rawMaterialDrum));
                     }
                     _repo.Save();
-                    return rawMaterialDrum;
+                    vendorLot.RawMaterials = rawMaterialDrum;
+                    return vendorLot;
                 }
             }
         }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace RavenDB.Models;
 
 public partial class RawMaterial
