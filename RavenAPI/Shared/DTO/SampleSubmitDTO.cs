@@ -8,7 +8,8 @@ namespace Shared.DTO
 {
     public class SampleSubmitDTO
     {
-        public string? SampleSubmitNumber { get; set; }
+        public int SampleId { get; set; }
+        public string? sampleType { get; set; }
         public DateTime? SampleDate { get; set; }
     }
 }

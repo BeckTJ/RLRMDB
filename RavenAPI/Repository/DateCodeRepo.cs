@@ -4,7 +4,7 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class DateCodeRepo : RepoBase<AlphabeticDate>,IDateCode
+    internal sealed class DateCodeRepo : RepoBase<AlphabeticDate>,IDateCode
     {
         public DateCodeRepo(RavenContext ctx) :base(ctx) { }
         public AlphabeticDate GetDateCode(int month)

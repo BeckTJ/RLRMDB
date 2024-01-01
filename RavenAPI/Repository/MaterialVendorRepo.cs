@@ -5,12 +5,18 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class MaterialVendorRepo:RepoBase<MaterialVendor>,IMaterialVendorRepo
+    internal sealed class MaterialVendorRepo:RepoBase<MaterialVendor>,IMaterialVendorRepo
     {
         public MaterialVendorRepo(RavenContext ctx) 
             : base(ctx){ }
 
         public MaterialVendor GetMaterialVendor(int materialNumber)
+        {
+            return FindByCondition(mv => mv.MaterialNumber == materialNumber)
+                .FirstOrDefault();
+
+        }
+        public MaterialVendor GetMaterialVendorWithVendorLots(int materialNumber)
         {
             return FindByCondition(mv => mv.MaterialNumber == materialNumber)
                 .Include(vl => vl.VendorLots)

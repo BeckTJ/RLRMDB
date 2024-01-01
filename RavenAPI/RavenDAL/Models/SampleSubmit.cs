@@ -5,7 +5,9 @@ namespace RavenDB.Models;
 
 public partial class SampleSubmit
 {
-    public string SampleSubmitNumber { get; set; } = null!;
+    public int SampleId { get; set; }
+
+    public string? SampleType { get; set; }
 
     public long? InspectionLotNumber { get; set; }
 

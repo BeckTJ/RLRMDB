@@ -4,9 +4,9 @@ using Shared.DTO;
 
 namespace Service.Contracts
 {
-    public interface IProductLotNumber
+    public interface IProductLotNumber<T> where T : class
     {
-        string CreateProductLotNumber(MaterialVendorDTO material);
+        string CreateProductLotNumber(T material);
         string UpdateProductLotNumber(string lotNumber);
     }
 }

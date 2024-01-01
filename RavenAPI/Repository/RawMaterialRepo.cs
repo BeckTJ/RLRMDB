@@ -5,7 +5,7 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class RawMaterialRepo : RepoBase<RawMaterial>, IRawMaterialRepo
+    internal sealed class RawMaterialRepo : RepoBase<RawMaterial>, IRawMaterialRepo
     {
         public RawMaterialRepo(RavenContext ctx) 
             : base(ctx) 
@@ -37,7 +37,7 @@ namespace Repository
         }
         public RawMaterial GetRawMaterialByProductId(string  productId)
         {
-            return FindByCondition(x => x.ProductId.Equals(productId)).FirstOrDefault();
+            return FindByCondition(x => x.DrumLotNumber.Equals(productId)).FirstOrDefault();
         }
     }
 }

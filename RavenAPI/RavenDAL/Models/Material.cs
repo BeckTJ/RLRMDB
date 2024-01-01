@@ -9,7 +9,7 @@ public partial class Material
 
     public string MaterialName { get; set; } = null!;
 
-    public string MaterialAbrev { get; set; } = null!;
+    public string MaterialNameAbreviation { get; set; } = null!;
 
     public string? PermitNumber { get; set; }
 

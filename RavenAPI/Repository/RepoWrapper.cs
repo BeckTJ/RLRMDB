@@ -35,7 +35,7 @@ namespace Repository
         {
             get
             {
-                _vendor ??= new VendorRepo(_ctx);
+                _vendor ??= new VendorLotRepo(_ctx);
                 return _vendor;
             }
         }

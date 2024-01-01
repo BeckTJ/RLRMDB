@@ -17,7 +17,7 @@ public partial class Production
 
     public string? ReceiverName { get; set; }
 
-    public string? SampleSubmitNumber { get; set; }
+    public int? SampleId { get; set; }
 
     public virtual Material? MaterialNumberNavigation { get; set; }
 
@@ -25,5 +25,5 @@ public partial class Production
 
     public virtual ICollection<ProductRun> ProductRuns { get; set; } = new List<ProductRun>();
 
-    public virtual SampleSubmit? SampleSubmitNumberNavigation { get; set; }
+    public virtual SampleSubmit? Sample { get; set; }
 }

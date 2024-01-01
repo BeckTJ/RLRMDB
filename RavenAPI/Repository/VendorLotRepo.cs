@@ -5,9 +5,9 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class VendorRepo : RepoBase<VendorLot>, IVendorRepo
+    internal sealed class VendorLotRepo : RepoBase<VendorLot>, IVendorRepo
     {
-        public VendorRepo(RavenContext dbContext) 
+        public VendorLotRepo(RavenContext dbContext) 
             : base(dbContext) 
         {
         }

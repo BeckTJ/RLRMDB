@@ -80,7 +80,8 @@ BEGIN
         SapBatchNumber INT,
         InspectionLotNumber NUMERIC,
         ContainerNumber VARCHAR(7),
-        SampleSubmitNumber CHAR(8),
+        SampleType CHAR(3),
+        sampleId INT,
         Quantity INT,
         DrumWeight DECIMAL(6,2),
 
@@ -99,7 +100,8 @@ BEGIN
             DECLARE @vendorBatchNumber VARCHAR(25)
             DECLARE @inspectionLotNumber NUMERIC
             DECLARE @sapBatchNumber INT
-            DECLARE @sampleSubmitNumber CHAR(8)
+            DECLARE @SampleType CHAR(3)
+            DECLARE @sampleId INT
             DECLARE @containerNumber CHAR(7)
             DECLARE @numberOfDrums INT
             DECLARE @drumWeight DECIMAL(6,2)
@@ -109,6 +111,8 @@ BEGIN
             
             SET @rows = (SELECT COUNT(*) FROM #rawMaterial)
             SET @index = 1
+            SET IDENTITY_INSERT QualityControl.SampleSubmit ON
+
 
             WHILE(@index <= @rows)
                 BEGIN
@@ -116,20 +120,22 @@ BEGIN
                 SET @vendorBatchNumber = (select VendorBatchNumber from #rawMaterial where id = @index)
                 SET @inspectionLotNumber = (select InspectionLotNumber from #rawMaterial where id = @index)
                 SET @sapBatchNumber = (select SapBatchNumber from #rawMaterial where id = @index)
-                SET @sampleSubmitNumber = (select SampleSubmitNumber from #rawMaterial where id = @index)
+                SET @SampleType = (select SampleType from #rawMaterial where id = @index)
+                SET @sampleId = (select SampleId from #rawMaterial where id = @index)
                 SET @containerNumber = (select ContainerNumber from #rawMaterial where id = @index)
                 SET @numberOfDrums = (select Quantity from #rawMaterial where id = @index)
                 SET @drumWeight = (select drumWeight from #rawMaterial where id = @index)
                 SET @sampleDate = (select SampleDate from #rawMaterial where id = @index)
-
-                EXEC Distillation.SetRawMaterial @materialNumber, @vendorBatchNumber, @inspectionLotNumber, @sapBatchNumber, @sampleSubmitNumber, @containerNumber, @numberOfDrums, @drumWeight, @sampleDate
+                
+                EXEC Distillation.SetRawMaterial @materialNumber, @vendorBatchNumber, @inspectionLotNumber, @sapBatchNumber, @sampleType,@sampleId, @containerNumber, @numberOfDrums, @drumWeight, @sampleDate
                 
                 SET @index += 1
                 END
-                
+        
+        SET IDENTITY_INSERT QualityControl.SampleSubmit OFF
+
 END
 GO
-delete QualityControl.SampleSubmit
 EXEC InsertRawMaterial
 GO
 

@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Contracts;
-using RavenDB.Models;
+using RavenDB.Exceptions;
+using Service.Contracts;
+using Service.src;
 using Shared.DTO;
 
 namespace Service
 {
-    public class MaterialVendorServices
+    internal sealed class MaterialVendorServices : IMaterialVendorServices
     {
         private readonly IRepoManager _repo;
         private readonly ILoggerManager _logger;
@@ -23,30 +25,59 @@ namespace Service
                 .Where(x => x.VendorName.Equals(vendorName));
             return _mapper.Map<MaterialVendorDTO>(vendor);
         }
-        public void CreateVendorLot(CreateRawMaterialDTO RawMaterial)
+        public IEnumerable<MaterialVendorDTO> GetRawMaterialByMaterialNumber(int parentMaterialNumber)
         {
-             _repo.Vendor.Create(_mapper.Map<VendorLot>(new CreateVendorLotDTO{
-                MaterialNumber = RawMaterial.MaterialNumber,
-                VendorLotNumber = RawMaterial.VendorLotNumber,
-                SampleId = RawMaterial.SampleSubmitNumber,
-                Quantity = RawMaterial.Quantity,
-            }));
-        }
-        public VendorLotDTO VerifyMaterialVendorLot(CreateRawMaterialDTO rawMaterial)
-        {
-            var lot = _repo.Vendor.GetVendorByVendorLot(rawMaterial.VendorLotNumber);
+            var rawMaterial = _repo.RawMaterial.GetRawMaterialByMaterialNumber(parentMaterialNumber);
 
-            if(lot == null)
+            if (rawMaterial == null)
+                throw new MaterialNotFoundException(parentMaterialNumber);
+
+            return _mapper.Map<IEnumerable<MaterialVendorDTO>>(rawMaterial);
+        }
+        public IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber)
+        {
+            RawMaterialDrum rawMaterialService = new(_repo,_logger, _mapper);
+            var vendor = _repo.MaterialVendor.GetMaterialVendorWithVendorLot(parentMaterialNumber);
+
+            if (vendor == null)
+                throw new MaterialNotFoundException(parentMaterialNumber);
+
+            var materialVendor = _mapper.Map<IEnumerable<MaterialVendorDTO>>(vendor);
+
+            foreach (var material in materialVendor)
             {
-                CreateVendorLot(rawMaterial);
+                if (material.VendorLots != null)
+                {
+                    foreach (var lot in material.VendorLots)
+                    {
+                        var rawMaterialList = _repo.RawMaterial.GetRawMaterialByMaterialNumber(material.MaterialNumber)
+                            .Where(s => s.VendorLotNumber == lot.VendorLotNumber).ToList();
+
+                        var approved = rawMaterialService.VerifyRawMaterialSample(_mapper.Map<List<RawMaterialDTO>>(rawMaterialList));
+                        lot.RawMaterials = approved;
+                    }
+                }
             }
-
-            return new VendorLotDTO
-            {
-                VendorLotNumber = rawMaterial.VendorLotNumber,
-                Quantity = rawMaterial.Quantity,
-                SampleSubmitNumber = rawMaterial.SampleSubmitNumber,
-            };
+            return materialVendor;
         }
+        //create a Material Vendor DTO for New Vendor Lot
+        public MaterialVendorDTO InputRawMaterial(CreateRawMaterialDTO material)
+        {
+            VendorLot vendorLot = new(_repo,_logger,_mapper);
+            var materialVendor = GetMaterialVendor(material.MaterialNumber, material.VendorName);
+            var lot = vendorLot.VerifyMaterialVendorLot(material);
+
+            _repo.Save();
+
+            materialVendor.VendorLots.ToList().Add(lot);
+
+            return materialVendor;
+        }
+        public ProductLotNumberDTO GetMaterialVendorForProductId(int materialNumber)
+        {
+            var vendor = _repo.MaterialVendor.GetMaterialVendor(materialNumber);
+            return _mapper.Map<ProductLotNumberDTO>(vendor);
+        }
+
     }
 }

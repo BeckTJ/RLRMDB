@@ -4,7 +4,7 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class SampleRepo : RepoBase<SampleSubmit>, ISampleRepo
+    internal sealed class SampleRepo : RepoBase<SampleSubmit>, ISampleRepo
     {
         public SampleRepo(RavenContext ctx) : base(ctx) { }
 
@@ -12,10 +12,9 @@ namespace Repository
         {
             Create(sampleSubmit);
         }
-
-        public SampleSubmit VerifySample(string sampleId)
+        public SampleSubmit VerifySample(string sampleType,int sampleId)
         {
-            return FindByCondition(x => x.SampleSubmitNumber == sampleId).FirstOrDefault();
+            return FindByCondition(x => x.SampleId == sampleId && x.SampleType == sampleType).FirstOrDefault();
         }
     }
 }

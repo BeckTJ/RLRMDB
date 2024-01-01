@@ -1,9 +1,11 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+
 namespace RavenDB.Models;
 
 public partial class RawMaterial
 {
-    public string ProductId { get; set; } = null!;
+    public string DrumLotNumber { get; set; } = null!;
 
     public int? MaterialNumber { get; set; }
 
@@ -13,9 +15,9 @@ public partial class RawMaterial
 
     public string? ContainerNumber { get; set; }
 
-    public long? InspectionLotNumber { get; set; }
+    public decimal? InspectionLotNumber { get; set; }
 
-    public string? SampleSubmitNumber { get; set; }
+    public int? SampleId { get; set; }
 
     public string? VendorLotNumber { get; set; }
 
@@ -29,5 +31,5 @@ public partial class RawMaterial
 
     public virtual SampleSubmit? Sample { get; set; }
 
-    public virtual VendorLot? VendorLot { get; set; }
+    public virtual VendorLot? VendorLotNumberNavigation { get; set; }
 }

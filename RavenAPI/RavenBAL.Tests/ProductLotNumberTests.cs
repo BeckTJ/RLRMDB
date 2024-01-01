@@ -2,17 +2,19 @@
 using Microsoft.Identity.Client;
 using Shared.DTO;
 using RavenDB.Models;
-using Service;
 using Xunit.Sdk;
 using Service.Contracts;
+using Service.src;
+using AutoMapper;
 
 namespace RavenBAL.Tests
 {
-    public class RawMaterialTests
+    public class ProductLotNumberTests
     {
         private readonly MaterialVendor _material = new MaterialVendor
         {
             MaterialNumber = 123456,
+            VendorName = "Test",
             MaterialCode = "AA",
             SequenceId = 100,
             TotalRecords = 100,
@@ -22,7 +24,6 @@ namespace RavenBAL.Tests
         {
             MaterialNumber = 123456,
             VendorLotNumber = "999-999-999",
-            SampleId = "Raw45678",
         };
 
         private readonly AlphabeticDate ad = new()
@@ -32,17 +33,18 @@ namespace RavenBAL.Tests
         };
         IEnumerable<RawMaterial> _rawMaterial = new List<RawMaterial>
         {
-            new RawMaterial{ProductId = "100AA", MaterialNumber = 123456, VendorLotNumber = "999-999-999"},
-            new RawMaterial{ProductId = "101AA", MaterialNumber = 123456, VendorLotNumber = "999-999-999"},
+            new RawMaterial{DrumLotNumber = "100AA", MaterialNumber = 123456, VendorLotNumber = "999-999-999"},
+            new RawMaterial{DrumLotNumber = "101AA", MaterialNumber = 123456, VendorLotNumber = "999-999-999"},
         };
         IEnumerable<RawMaterial> _rawMaterialWithSample = new List<RawMaterial>
             {
                 new RawMaterial{
                     MaterialNumber = 99999,
-                    ProductId = "999AA9A99",
+                    DrumLotNumber = "999AA9A99",
                     Sample = new SampleSubmit()
                     {
-                        SampleSubmitNumber = "Raw11111",
+                        SampleType = "Raw",
+                        SampleId = 11111,
                         SampleDate = new DateTime(2023 - 11 - 07),
                         Approved = true,
                         ExperiationDate =  DateTime.Today.AddYears(1),
@@ -51,10 +53,11 @@ namespace RavenBAL.Tests
                     },
                 new RawMaterial{
                     MaterialNumber = 99999,
-                    ProductId = "998AA9A99",
+                    DrumLotNumber = "998AA9A99",
                     Sample = new SampleSubmit()
                     {
-                        SampleSubmitNumber = "Raw11111",
+                        SampleType = "Raw",
+                        SampleId = 11111,
                         SampleDate = new DateTime(2023 - 11 - 07),
                         Approved = false,
                         ExperiationDate = null,
@@ -63,10 +66,11 @@ namespace RavenBAL.Tests
                     },
                 new RawMaterial{
                     MaterialNumber = 99999,
-                    ProductId = "997AA9A99",
+                    DrumLotNumber = "997AA9A99",
                     Sample = new SampleSubmit()
                     {
-                        SampleSubmitNumber = "Raw11111",
+                        SampleType = "Raw",
+                        SampleId = 11111,
                         SampleDate = new DateTime(2023 - 11 - 07),
                         Approved = true,
                         ExperiationDate = DateTime.Today.AddDays(-2),
@@ -75,10 +79,11 @@ namespace RavenBAL.Tests
                     },
                 new RawMaterial{
                     MaterialNumber = 99999,
-                    ProductId = "997AA9A99",
+                    DrumLotNumber = "997AA9A99",
                     Sample = new SampleSubmit()
                     {
-                        SampleSubmitNumber = "Raw11111",
+                        SampleType = "Raw",
+                        SampleId = 11111,
                         SampleDate = new DateTime(2023 - 11 - 07),
                         Rejected = true,
                         ExperiationDate = null,
@@ -92,22 +97,25 @@ namespace RavenBAL.Tests
         private readonly IRepoManager _repo = Substitute.For<IRepoManager>();
         private readonly IServiceManager _bal = Substitute.For<IServiceManager>();
         private readonly ILoggerManager _loggerManager = Substitute.For<ILoggerManager>();
+        private readonly IMapper _mapper;
 
-        public RawMaterialTests()
+        public ProductLotNumberTests()
         {
+
         }
 
         [Fact]
         public void getNextProductLotNumber()
         {
             //Arrange
+            _repo.MaterialVendor.GetMaterialVendor(_material.MaterialNumber).Returns(_material);
             _repo.RawMaterial.GetRawMaterialByMaterialNumber(_createRawMaterialDTO.MaterialNumber).Returns(_rawMaterial);
 
-            ProductLotNumber lot = new ProductLotNumber(_repo);
+            ProductLotNumber lot = new ProductLotNumber(_repo,_loggerManager,_mapper);
             var id = "102AA";
 
             //Act
-            var productId = lot.CreateProductLotNumber(_material);
+            var productId = lot.CreateProductLotNumber(_material.MaterialNumber, "Raw");
 
             //Assert
             Assert.Equal(id, productId);
@@ -117,8 +125,8 @@ namespace RavenBAL.Tests
         {
             var product = _material.SequenceId + _material.MaterialCode;
 
-            ProductLotNumber lot = new(_repo);
-            var productId = lot.CreateProductLotNumber(_material);
+            ProductLotNumber lot = new(_repo,_loggerManager, _mapper);
+            var productId = lot.CreateProductLotNumber(_material.MaterialNumber, "Raw");
 
             Assert.Equal(product, productId);
         }
@@ -131,7 +139,7 @@ namespace RavenBAL.Tests
 
             _repo.DateCode.GetDateCode(int.Parse(today)).Returns(ad);
 
-            ProductLotNumber lot = new(_repo);
+            ProductLotNumber lot = new(_repo, _loggerManager, _mapper);
             var productId = lot.UpdateProductLotNumber(product);
 
             Assert.Equal(updateProduct, productId);

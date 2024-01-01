@@ -68,9 +68,8 @@ GO
 
 CREATE TABLE QualityControl.SampleSubmit
 (
-    --SampleId INT PRIMARY KEY IDENTITY(1,1),
-    --SampleType CHAR(3),
-    SampleId CHAR(8) PRIMARY KEY,
+    SampleId INT PRIMARY KEY IDENTITY(1,1),
+    SampleType CHAR(3),
     InspectionLotNumber BIGINT,
     SampleDate DATE NOT NULL,
     Rejected BIT DEFAULT(0) NOT NULL,
@@ -79,6 +78,7 @@ CREATE TABLE QualityControl.SampleSubmit
     ExperiationDate DATE,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
 )
+
 
 CREATE TABLE Materials.MaterialVendor
 (
@@ -119,7 +119,7 @@ CREATE TABLE QualityControl.SampleRequired
 CREATE TABLE Materials.VendorLot
 (
     VendorLotNumber VARCHAR(25) PRIMARY KEY,
-    SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
+    SampleId INT FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
     Quantity INT,
     MaterialNumber INT FOREIGN KEY REFERENCES Materials.MaterialVendor
 )
@@ -132,7 +132,7 @@ CREATE TABLE Distillation.RawMaterial
     SapBatchNumber INT ,
     ContainerNumber CHAR(7),
     InspectionLotNumber NUMERIC,
-    SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
+    SampleId INT FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
     VendorLotNumber VARCHAR(25) FOREIGN KEY REFERENCES Materials.VendorLot,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee
 )
@@ -145,7 +145,7 @@ CREATE TABLE Distillation.Production
     ProcessOrder NUMERIC,
     InspectionLotNumber NUMERIC,
     ReceiverName CHAR(5),
-    SampleSubmitNumber CHAR(8) FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
+    SampleId INT FOREIGN KEY REFERENCES QualityControl.SampleSubmit,
 )
 CREATE NONCLUSTERED INDEX IX_Production_ProductLotNumber
 ON Distillation.Production(ProductLotNumber ASC)
@@ -160,7 +160,7 @@ CREATE TABLE Distillation.ProductRun
 (
     RunId INT IDENTITY(1,1) PRIMARY KEY,
     RunNumber INT,
-    DrumLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.RawMaterial,
+    ProductId VARCHAR(10) FOREIGN KEY REFERENCES Distillation.RawMaterial,
     RawMaterialUsed INT,
     RunStartDate DATE,
     ProductLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.Production,

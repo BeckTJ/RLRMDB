@@ -19,19 +19,19 @@ IF(@approved = 1)
     UPDATE QualityControl.SampleSubmit
     SET ReviewDate = GETDATE(),
         ExperiationDate = DATEADD(YEAR,1,GETDATE())
-    WHERE SampleSubmitNumber = (SELECT inserted.SampleSubmitNumber FROM inserted);    
+    WHERE sampleId = (SELECT inserted.sampleId FROM inserted);    
 
 ELSE IF(@rejected = 1)
 
     UPDATE QualityControl.SampleSubmit
     SET ReviewDate = GETDATE()
-    WHERE SampleSubmitNumber = (SELECT inserted.SampleSubmitNumber FROM inserted);    
+    WHERE sampleId = (SELECT inserted.sampleId FROM inserted);    
 
 GO
 --PROCEDURES
 
 CREATE OR ALTER PROCEDURE QualityControl.SubmitSample
-    (@sampleNumber AS CHAR(8), @lotNumber AS NUMERIC, @sampleDate DATE)
+    (@sampleType AS CHAR(3),@sampleNumber AS INT, @lotNumber AS NUMERIC, @sampleDate DATE)
 AS
 
 DECLARE @id VARCHAR(10)
@@ -42,13 +42,13 @@ SET @id = (SELECT ProductLotNumber FROM Distillation.Production
 
 set @productId = Distillation.UpdateProductId(@id,@sampleDate)
 
-INSERT INTO QualityControl.SampleSubmit(SampleSubmitNumber, InspectionLotNumber, SampleDate)
+INSERT INTO QualityControl.SampleSubmit(SampleType ,SampleId, InspectionLotNumber, SampleDate)
 VALUES
-    (@sampleNumber, @lotNumber, @sampleDate);
+    (@sampleType, @sampleNumber, @lotNumber, @sampleDate);
 
 UPDATE Distillation.Production
-SET SampleSubmitNumber = (SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit
-                            WHERE SampleSubmitNumber = @sampleNumber),
+SET sampleId = (SELECT sampleId FROM QualityControl.SampleSubmit
+                            WHERE sampleId = @sampleNumber),
     ProductLotNumber = @productId
 WHERE InspectionLotNumber = @lotNumber
 GO
@@ -57,8 +57,8 @@ CREATE OR ALTER PROCEDURE Materials.AddVendorBatch(@batchNumber AS VARCHAR(25),@
 AS
 BEGIN TRAN VendorBatch
 
-    INSERT INTO Materials.VendorLot(VendorLotNumber,Quantity,SampleSubmitNumber,MaterialNumber)
-    VALUES(@batchNumber,@qty,(SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit Where SampleSubmitNumber = @sampleId), (SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber))
+    INSERT INTO Materials.VendorLot(VendorLotNumber,Quantity,sampleId,MaterialNumber)
+    VALUES(@batchNumber,@qty,(SELECT sampleId FROM QualityControl.SampleSubmit Where sampleId = @sampleId), (SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber))
 
 COMMIT TRAN
 GO
@@ -68,7 +68,7 @@ CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     @vendorBatchNumber AS VARCHAR(25) = NULL,
     @inspectionLotNumber NUMERIC = NULL,
     @sapBatchNumber INT = NULL,
-    @sampleSubmitNumber CHAR(8) = NULL,
+    @sampleId INT = 0,
     @sampleDate DATE = NULL,
     @containerNumber CHAR(7) = NULL,
     @quantity INT = 1,
@@ -80,9 +80,9 @@ CREATE OR ALTER PROCEDURE Distillation.RawMaterialUpdate
     WHILE(@quantity > 0)
         BEGIN
         INSERT INTO Distillation.RawMaterial
-            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorLotNumber, SampleSubmitNumber)
+            (DrumLotNumber, MaterialNumber, DrumWeight, SapBatchNumber, ContainerNumber, VendorLotNumber, sampleId)
         VALUES
-            (Distillation.SetDrumId(@materialNumber,@sampleDate),(SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber), @drumWeight, @sapBatchNumber, @containerNumber, (SELECT VendorLotNumber FROM Materials.VendorLot WHERE VendorLotNumber = @vendorBatchNumber),(SELECT SampleSubmitNumber FROM QualityControl.SampleSubmit WHERE SampleSubmitNumber = @sampleSubmitNumber))
+            (Distillation.SetDrumId(@materialNumber,@sampleDate),(SELECT MaterialNumber FROM Materials.MaterialVendor WHERE MaterialNumber = @materialNumber), @drumWeight, @sapBatchNumber, @containerNumber, (SELECT VendorLotNumber FROM Materials.VendorLot WHERE VendorLotNumber = @vendorBatchNumber),(SELECT sampleId FROM QualityControl.SampleSubmit WHERE sampleId = @sampleId))
 
           SET @quantity=@quantity-1
         END
@@ -93,7 +93,8 @@ CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
     @vendorBatchNumber VARCHAR(25) = NULL,
     @inspectionLotNumber NUMERIC = NULL,
     @sapBatchNumber INT = NULL,
-    @sampleSubmitNumber CHAR(8),
+    @sampleType CHAR(3),
+    @sampleId INT,
     @containerNumber CHAR(7) = NULL,
     @numberOfDrums INT = 1,
     @drumWeight DECIMAL(6,2) = NULL,
@@ -101,9 +102,9 @@ CREATE OR ALTER PROCEDURE Distillation.SetRawMaterial(
 )
 AS
 
-    EXEC QualityControl.SubmitSample @sampleSubmitNumber,@inspectionlotNumber,@sampleDate;
-    EXEC Materials.AddVendorBatch @vendorBatchNumber, @materialNumber, @sampleSubmitNumber, @numberOfDrums;
-    EXEC Distillation.RawMaterialUpdate @materialNumber, @vendorBatchNumber,@inspectionLotNumber,@sapBatchNumber,@sampleSubmitNumber,@sampleDate,@containerNumber,@numberOfDrums,@drumWeight
+    EXEC QualityControl.SubmitSample @sampleType,@sampleId,@inspectionlotNumber,@sampleDate;
+    EXEC Materials.AddVendorBatch @vendorBatchNumber, @materialNumber, @sampleId, @numberOfDrums;
+    EXEC Distillation.RawMaterialUpdate @materialNumber, @vendorBatchNumber,@inspectionLotNumber,@sapBatchNumber,@sampleId,@sampleDate,@containerNumber,@numberOfDrums,@drumWeight
 GO
 
 --FUNCTIONS

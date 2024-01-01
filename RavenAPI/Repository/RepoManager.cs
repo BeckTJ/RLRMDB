@@ -18,7 +18,7 @@ namespace Repository
         { 
             _ctx = ctx;
             _material = new Lazy<IMaterialRepo>(() => new MaterialRepo(_ctx));
-            _vendor = new Lazy<IVendorRepo>(() => new VendorRepo(_ctx));    
+            _vendor = new Lazy<IVendorRepo>(() => new VendorLotRepo(_ctx));    
             _rawMaterial = new Lazy<IRawMaterialRepo>(() => new RawMaterialRepo(_ctx));
             _sampleRequired = new Lazy<ISampleRequiredRepo>(() => new SampleRequiredRepo(_ctx));
             _sample = new Lazy<ISampleRepo>(() => new SampleRepo(_ctx));
@@ -26,7 +26,7 @@ namespace Repository
             _dateCode = new Lazy<IDateCode>(() => new DateCodeRepo(_ctx));
         }
         public IMaterialRepo Material => _material.Value;
-        public IVendorRepo Vendor => _vendor.Value;
+        public IVendorRepo VendorLot => _vendor.Value;
         public IRawMaterialRepo RawMaterial => _rawMaterial.Value;
         public ISampleRequiredRepo SampleRequired => _sampleRequired.Value;
         public ISampleRepo SampleRepo => _sample.Value;

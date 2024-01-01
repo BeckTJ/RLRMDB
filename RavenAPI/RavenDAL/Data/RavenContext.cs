@@ -52,7 +52,7 @@ public partial class RavenContext : DbContext
     {
         modelBuilder.Entity<AlphabeticDate>(entity =>
         {
-            entity.HasKey(e => e.MonthNumber).HasName("PK__Alphabet__C6DA02F11A95E4FE");
+            entity.HasKey(e => e.MonthNumber).HasName("PK__Alphabet__C6DA02F1E99A2577");
 
             entity.ToTable("AlphabeticDate", "Distillation");
 
@@ -65,7 +65,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F1189185EEE");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04F119A977FB8");
 
             entity.ToTable("Employee", "HumanResources");
 
@@ -85,11 +85,11 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<Material>(entity =>
         {
-            entity.HasKey(e => e.MaterialNumber).HasName("PK__Material__E4D2E4BFDCF2F42E");
+            entity.HasKey(e => e.MaterialNumber).HasName("PK__Material__E4D2E4BF11CAD88F");
 
             entity.ToTable("Material", "Materials");
 
-            entity.HasIndex(e => e.MaterialAbrev, "IX_Material_NameAbreviation");
+            entity.HasIndex(e => e.MaterialNameAbreviation, "IX_Material_NameAbreviation");
 
             entity.Property(e => e.MaterialNumber).ValueGeneratedNever();
             entity.Property(e => e.MaterialCode)
@@ -98,8 +98,7 @@ public partial class RavenContext : DbContext
             entity.Property(e => e.MaterialName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.MaterialAbrev)
-                .HasColumnName("MaterialNameAbreviation")
+            entity.Property(e => e.MaterialNameAbreviation)
                 .HasMaxLength(15)
                 .IsUnicode(false);
             entity.Property(e => e.PermitNumber)
@@ -112,7 +111,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<MaterialVendor>(entity =>
         {
-            entity.HasKey(e => e.MaterialNumber).HasName("PK__Material__E4D2E4BF6EC3B57B");
+            entity.HasKey(e => e.MaterialNumber).HasName("PK__Material__E4D2E4BF628757E8");
 
             entity.ToTable("MaterialVendor", "Materials");
 
@@ -134,7 +133,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<PreStartCheck>(entity =>
         {
-            entity.HasKey(e => e.CheckId).HasName("PK__PreStart__86815706EBA49A1F");
+            entity.HasKey(e => e.CheckId).HasName("PK__PreStart__8681570671B04D19");
 
             entity.ToTable("PreStartChecks", "Distillation");
 
@@ -153,7 +152,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<ProductLevel>(entity =>
         {
-            entity.HasKey(e => e.LevelId).HasName("PK__ProductL__09F03C266609C579");
+            entity.HasKey(e => e.LevelId).HasName("PK__ProductL__09F03C26E042FDF4");
 
             entity.ToTable("ProductLevels", "Distillation");
 
@@ -176,7 +175,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<ProductRun>(entity =>
         {
-            entity.HasKey(e => e.RunId).HasName("PK__ProductR__A259D4DDEF4DC79C");
+            entity.HasKey(e => e.RunId).HasName("PK__ProductR__A259D4DD90B3AD4D");
 
             entity.ToTable("ProductRun", "Distillation");
 
@@ -207,7 +206,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<Production>(entity =>
         {
-            entity.HasKey(e => e.ProductLotNumber).HasName("PK__Producti__36A9702269B047E7");
+            entity.HasKey(e => e.ProductLotNumber).HasName("PK__Producti__36A9702297F2A478");
 
             entity.ToTable("Production", "Distillation");
 
@@ -226,28 +225,23 @@ public partial class RavenContext : DbContext
                 .HasMaxLength(5)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.SampleSubmitNumber)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
 
             entity.HasOne(d => d.MaterialNumberNavigation).WithMany(p => p.Productions)
                 .HasForeignKey(d => d.MaterialNumber)
                 .HasConstraintName("FK__Productio__Mater__4CA06362");
 
-            entity.HasOne(d => d.SampleSubmitNumberNavigation).WithMany(p => p.Productions)
-                .HasForeignKey(d => d.SampleSubmitNumber)
+            entity.HasOne(d => d.Sample).WithMany(p => p.Productions)
+                .HasForeignKey(d => d.SampleId)
                 .HasConstraintName("FK__Productio__Sampl__4D94879B");
         });
 
         modelBuilder.Entity<RawMaterial>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__RawMater__64C9F8477E8866C9");
+            entity.HasKey(e => e.DrumLotNumber).HasName("PK__RawMater__64C9F8475C2FDE0B");
 
             entity.ToTable("RawMaterial", "Distillation");
 
-            entity.Property(e => e.ProductId)
-                .HasColumnName("DrumLotNumber")
+            entity.Property(e => e.DrumLotNumber)
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.ContainerNumber)
@@ -259,10 +253,6 @@ public partial class RavenContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength();
             entity.Property(e => e.InspectionLotNumber).HasColumnType("numeric(18, 0)");
-            entity.Property(e => e.SampleSubmitNumber)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
             entity.Property(e => e.VendorLotNumber)
                 .HasMaxLength(25)
                 .IsUnicode(false);
@@ -276,17 +266,17 @@ public partial class RavenContext : DbContext
                 .HasConstraintName("FK__RawMateri__Mater__46E78A0C");
 
             entity.HasOne(d => d.Sample).WithMany(p => p.RawMaterials)
-                .HasForeignKey(d => d.SampleSubmitNumber)
+                .HasForeignKey(d => d.SampleId)
                 .HasConstraintName("FK__RawMateri__Sampl__47DBAE45");
 
-            entity.HasOne(d => d.VendorLot).WithMany(p => p.RawMaterials)
+            entity.HasOne(d => d.VendorLotNumberNavigation).WithMany(p => p.RawMaterials)
                 .HasForeignKey(d => d.VendorLotNumber)
                 .HasConstraintName("FK__RawMateri__Vendo__48CFD27E");
         });
 
         modelBuilder.Entity<SampleRequired>(entity =>
         {
-            entity.HasKey(e => new { e.MaterialNumber, e.Vln }).HasName("PK__SampleRe__088F292E9D051CBF");
+            entity.HasKey(e => new { e.MaterialNumber, e.Vln }).HasName("PK__SampleRe__088F292E27EC7D49");
 
             entity.ToTable("SampleRequired", "QualityControl");
 
@@ -321,14 +311,10 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<SampleSubmit>(entity =>
         {
-            entity.HasKey(e => e.SampleSubmitNumber).HasName("PK__SampleSu__DFFEFAA058CFF33E");
+            entity.HasKey(e => e.SampleId).HasName("PK__SampleSu__8B99EC6ACC32FAD0");
 
-            entity.ToTable("SampleSubmit", "QualityControl");
+            entity.ToTable("SampleSubmit", "QualityControl", tb => tb.HasTrigger("SetSampleDates"));
 
-            entity.Property(e => e.SampleSubmitNumber)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
             entity.Property(e => e.EmployeeId)
                 .HasMaxLength(7)
                 .IsUnicode(false)
@@ -336,6 +322,10 @@ public partial class RavenContext : DbContext
             entity.Property(e => e.ExperiationDate).HasColumnType("date");
             entity.Property(e => e.ReviewDate).HasColumnType("date");
             entity.Property(e => e.SampleDate).HasColumnType("date");
+            entity.Property(e => e.SampleType)
+                .HasMaxLength(3)
+                .IsUnicode(false)
+                .IsFixedLength();
 
             entity.HasOne(d => d.Employee).WithMany(p => p.SampleSubmits)
                 .HasForeignKey(d => d.EmployeeId)
@@ -344,7 +334,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<SystemStatus>(entity =>
         {
-            entity.HasKey(e => e.StatusCode).HasName("PK__SystemSt__6A7B44FDB0ACD589");
+            entity.HasKey(e => e.StatusCode).HasName("PK__SystemSt__6A7B44FDE5ACE861");
 
             entity.ToTable("SystemStatus", "Distillation");
 
@@ -358,7 +348,7 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<UnitOfIssue>(entity =>
         {
-            entity.HasKey(e => e.UnitOfIssue1).HasName("PK__UnitOfIs__B79EB8A2ED7A3CD0");
+            entity.HasKey(e => e.UnitOfIssue1).HasName("PK__UnitOfIs__B79EB8A20FBE0296");
 
             entity.ToTable("UnitOfIssue", "Materials");
 
@@ -373,24 +363,20 @@ public partial class RavenContext : DbContext
 
         modelBuilder.Entity<VendorLot>(entity =>
         {
-            entity.HasKey(e => e.VendorLotNumber).HasName("PK__VendorLo__050888CC571FF4CE");
+            entity.HasKey(e => e.VendorLotNumber).HasName("PK__VendorLo__050888CCA6085EB6");
 
             entity.ToTable("VendorLot", "Materials");
 
             entity.Property(e => e.VendorLotNumber)
                 .HasMaxLength(25)
                 .IsUnicode(false);
-            entity.Property(e => e.SampleSubmitNumber)
-                .HasMaxLength(8)
-                .IsUnicode(false)
-                .IsFixedLength();
 
             entity.HasOne(d => d.MaterialNumberNavigation).WithMany(p => p.VendorLots)
                 .HasForeignKey(d => d.MaterialNumber)
                 .HasConstraintName("FK__VendorLot__Mater__440B1D61");
 
             entity.HasOne(d => d.Sample).WithMany(p => p.VendorLots)
-                .HasForeignKey(d => d.SampleSubmitNumber)
+                .HasForeignKey(d => d.SampleId)
                 .HasConstraintName("FK__VendorLot__Sampl__4316F928");
         });
 

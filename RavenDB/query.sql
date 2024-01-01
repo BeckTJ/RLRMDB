@@ -4,10 +4,10 @@ where MaterialNumber = 3322187
 GO
 update QualityControl.SampleSubmit
 set Approved = 1, SampleDate = DATEADD(DAY,-3,GETDATE())
-where SampleSubmitNumber = 'RAW61560'
+where SampleType = 'RAW' and SampleId = 61560
 
 select * from Distillation.RawMaterial
-join QualityControl.SampleSubmit on SampleSubmit.SampleSubmitNumber = RawMaterial.SampleSubmitNumber
+join QualityControl.SampleSubmit on SampleSubmit.SampleId = RawMaterial.SampleId
 where MaterialNumber = 3081971 --3322187
 
 select * from QualityControl.SampleRequired
@@ -22,6 +22,7 @@ select * from Distillation.AlphabeticDate
 
 select * from QualityControl.SampleRequired
 
+select * from QualityControl.SampleSubmit
 
 -- CREATE TABLE #tmpReceiver(
 --     Id int PRIMARY KEY IDENTITY(1,1),

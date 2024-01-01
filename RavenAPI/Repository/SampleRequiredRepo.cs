@@ -4,7 +4,7 @@ using RavenDB.Models;
 
 namespace Repository
 {
-    public class SampleRequiredRepo : RepoBase<SampleRequired>, ISampleRequiredRepo
+    internal sealed class SampleRequiredRepo : RepoBase<SampleRequired>, ISampleRequiredRepo
     {
         public SampleRequiredRepo(RavenContext ctx) : base(ctx) { }
 
