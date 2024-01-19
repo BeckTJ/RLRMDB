@@ -24,13 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "LoggerServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{D26383A9-216D-479F-9EAA-B3384C323D78}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Tests", "RavenBAL.Tests\Service.Tests.csproj", "{A7AD28F8-4040-4F96-985B-D783D1876507}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Tests.Unit", "RavenBAL.Tests\Service.Tests.Unit.csproj", "{A7AD28F8-4040-4F96-985B-D783D1876507}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service.Contracts", "Service.Contracts\Service.Contracts.csproj", "{67E516C5-F2FC-49F9-A51C-8A3120F6CDD8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{43D49E5D-D84B-4921-866D-640FCDD02081}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{43D49E5D-D84B-4921-866D-640FCDD02081}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

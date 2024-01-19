@@ -61,17 +61,11 @@ namespace Service
             return materialVendor;
         }
         //create a Material Vendor DTO for New Vendor Lot
-        public MaterialVendorDTO InputRawMaterial(CreateRawMaterialDTO material)
+        public void InputRawMaterial(CreateRawMaterialDTO material)
         {
-            VendorLot vendorLot = new(_repo,_logger,_mapper);
-            var materialVendor = GetMaterialVendor(material.MaterialNumber, material.VendorName);
-            var lot = vendorLot.VerifyMaterialVendorLot(material);
+            if(material is null) throw new MaterialNotFoundException(material.MaterialNumber);
 
-            _repo.Save();
 
-            materialVendor.VendorLots.ToList().Add(lot);
-
-            return materialVendor;
         }
         public ProductLotNumberDTO GetMaterialVendorForProductId(int materialNumber)
         {

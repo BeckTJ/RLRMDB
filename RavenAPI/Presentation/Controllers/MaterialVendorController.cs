@@ -19,8 +19,14 @@ public class MaterialVendorController : ControllerBase
     [HttpGet("{parentMaterialNumber:int, vendor:string}")]
     public IActionResult GetMaterialVendor(int parentMaterialNumber, string vendorName)
     {
-            var materialVendor = _service.VendorServices.GetMaterialVendor(parentMaterialNumber, vendorName);
+            var materialVendor = _service.MaterialVendorServices.GetMaterialVendor(parentMaterialNumber, vendorName);
 
             return Ok(materialVendor);
     }
+
+    public void GetApprovedRawMaterial(int materialNumber) { }
+    public void GetExpiredRawMaterial(int materialNumber) { }
+    public void GetRawMaterialNeedingSample(int parentMaterialNumber) { }
+    public void InputRawMaterial(CreateRawMaterialDTO material) { }
+
 }

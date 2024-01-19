@@ -1,16 +1,3 @@
-
-using Microsoft.Identity.Client;
-using Shared.DTO;
-using RavenDB.Models;
-using Xunit.Sdk;
-using Service.Contracts;
-using Service.src;
-using AutoMapper;
-
-namespace RavenBAL.Tests
-{
-    public class ProductLotNumberTests
-    {
         private readonly MaterialVendor _material = new MaterialVendor
         {
             MaterialNumber = 123456,
@@ -92,57 +79,3 @@ namespace RavenBAL.Tests
                     },
 
             };
-
-
-        private readonly IRepoManager _repo = Substitute.For<IRepoManager>();
-        private readonly IServiceManager _bal = Substitute.For<IServiceManager>();
-        private readonly ILoggerManager _loggerManager = Substitute.For<ILoggerManager>();
-        private readonly IMapper _mapper;
-
-        public ProductLotNumberTests()
-        {
-
-        }
-
-        [Fact]
-        public void getNextProductLotNumber()
-        {
-            //Arrange
-            _repo.MaterialVendor.GetMaterialVendor(_material.MaterialNumber).Returns(_material);
-            _repo.RawMaterial.GetRawMaterialByMaterialNumber(_createRawMaterialDTO.MaterialNumber).Returns(_rawMaterial);
-
-            ProductLotNumber lot = new ProductLotNumber(_repo,_loggerManager,_mapper);
-            var id = "102AA";
-
-            //Act
-            var productId = lot.CreateProductLotNumber(_material.MaterialNumber, "Raw");
-
-            //Assert
-            Assert.Equal(id, productId);
-        }
-        [Fact]
-        public void getInitialProductLotNumber()
-        {
-            var product = _material.SequenceId + _material.MaterialCode;
-
-            ProductLotNumber lot = new(_repo,_loggerManager, _mapper);
-            var productId = lot.CreateProductLotNumber(_material.MaterialNumber, "Raw");
-
-            Assert.Equal(product, productId);
-        }
-        [Fact]
-        public void UpdateProductLot()
-        {
-            var today = DateTime.Today.ToString("MM");
-            var product = "100AA";
-            var updateProduct = "100AA3L"+DateTime.Today.ToString("dd");
-
-            _repo.DateCode.GetDateCode(int.Parse(today)).Returns(ad);
-
-            ProductLotNumber lot = new(_repo, _loggerManager, _mapper);
-            var productId = lot.UpdateProductLotNumber(product);
-
-            Assert.Equal(updateProduct, productId);
-        }
-    }
-}

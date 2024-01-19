@@ -18,6 +18,8 @@ public partial class MaterialVendor
     public int TotalRecords { get; set; }
 
     public string? UnitOfIssue { get; set; }
+    public bool BatchManaged { get; set; }
+    public bool ProcessOrderRequired { get; set; }
 
     public virtual Material? ParentMaterialNumberNavigation { get; set; }
 

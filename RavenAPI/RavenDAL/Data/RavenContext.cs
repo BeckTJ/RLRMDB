@@ -125,6 +125,9 @@ public partial class RavenContext : DbContext
             entity.Property(e => e.VendorName)
                 .HasMaxLength(25)
                 .IsUnicode(false);
+            entity.Property(e => e.BatchManaged).HasDefaultValueSql("((0))");
+            entity.Property(e => e.ProcessOrderRequired).HasDefaultValueSql("((0))");
+
 
             entity.HasOne(d => d.ParentMaterialNumberNavigation).WithMany(p => p.MaterialVendors)
                 .HasForeignKey(d => d.ParentMaterialNumber)

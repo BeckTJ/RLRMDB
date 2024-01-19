@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9Ndx7XMkWOtyHL1HcmBhLmwDB4ZLsA1tLmezDZsh3CfMMuvjZ0LwWubXzxq5HnSOa+HVQ84b09XwRdxd15WHBg==",
+  "dgSpecHash": "P3ilGQAqoA4mLmc8COf1SgYhgUXnHZ5lwaB6S8D6SxzaARzlffPc90BGTyx/j2T1q3upKNilFkYEYw3zaWVqYg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.csproj",
+  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.Unit.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TBeck\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
@@ -21,6 +21,7 @@
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.12\\microsoft.entityframeworkcore.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\7.0.12\\microsoft.entityframeworkcore.abstractions.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\7.0.12\\microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",
+    "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.inmemory\\6.0.26\\microsoft.entityframeworkcore.inmemory.6.0.26.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.12\\microsoft.entityframeworkcore.relational.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.12\\microsoft.entityframeworkcore.sqlserver.7.0.12.nupkg.sha512",
     "C:\\Users\\TBeck\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",

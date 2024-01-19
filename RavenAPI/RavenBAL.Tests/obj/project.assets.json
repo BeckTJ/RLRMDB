@@ -280,6 +280,22 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/6.0.26": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.26"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/7.0.12": {
         "type": "package",
         "dependencies": {
@@ -3468,6 +3484,20 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.7.0.12.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/6.0.26": {
+      "sha512": "YYI8SQf8OU6+MpKcc/nZnh+EMQzlue/qR0S52Z122GAfCQ02rA27rCekbRoAEpicdoHw+6ADSEHzo9PQ6h70nA==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/6.0.26",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net6.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.6.0.26.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/7.0.12": {
@@ -8629,6 +8659,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Microsoft.EntityFrameworkCore.InMemory >= 6.0.26",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "NSubstitute >= 5.1.0",
       "NSubstitute.Analyzers.CSharp >= 1.0.16",
@@ -8645,9 +8676,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.csproj",
-      "projectName": "Service.Tests",
-      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.Unit.csproj",
+      "projectName": "Service.Tests.Unit",
+      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\Service.Tests.Unit.csproj",
       "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenBAL.Tests\\obj\\",
       "projectStyle": "PackageReference",
@@ -8687,6 +8718,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[6.0.26, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.5.0, )"

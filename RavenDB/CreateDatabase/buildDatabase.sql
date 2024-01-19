@@ -89,6 +89,8 @@ CREATE TABLE Materials.MaterialVendor
     SequenceId INT NOT NULL,
     TotalRecords INT NOT NULL,
     UnitOfIssue VARCHAR(3),
+    BatchManaged BIT,
+    ProcessOrderRequired BIT,
 )
 
 CREATE TABLE QualityControl.SampleRequired
@@ -113,7 +115,6 @@ CREATE TABLE QualityControl.SampleRequired
     VialVolume INT,
     VialUnitOfIssue VARCHAR(3),
     Retain INT DEFAULT(0),
-    PRIMARY KEY (MaterialNumber,VLN)
 )
 
 CREATE TABLE Materials.VendorLot
@@ -166,6 +167,7 @@ CREATE TABLE Distillation.ProductRun
     ProductLotNumber VARCHAR(10) FOREIGN KEY REFERENCES Distillation.Production,
     EmployeeId CHAR(7) FOREIGN KEY REFERENCES HumanResources.Employee,
 )
+
 CREATE TABLE Distillation.ProductLevels
 (
     LevelId INT IDENTITY(1,1) PRIMARY KEY,
