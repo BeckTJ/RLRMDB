@@ -7,11 +7,11 @@ DECLARE @id INT
 DECLARE @code VARCHAR(3)
 DECLARE @productId VARCHAR(10)
 
-SET @productId = (SELECT TOP(1) ProductLotNumber FROM Distillation.RawMaterial
+SET @productId = (SELECT TOP(1) DrumLotNumber FROM Distillation.RawMaterial
                 WHERE MaterialNumber = @materialNumber
-                ORDER BY ProductLotNumber DESC) 
+                ORDER BY DrumLotNumber DESC) 
 
-SET @code = (SELECT MaterialCode FROM Materials.MaterialId
+SET @code = (SELECT MaterialCode FROM Materials.MaterialVendor
                 WHERE MaterialNumber = @materialNumber)  
 
 IF (LEN(@productId) = 10 OR LEN(@productId) = 6)
@@ -26,7 +26,7 @@ BEGIN
 END
 ELSE
 BEGIN
-    SET @id = (SELECT SequenceId FROM Materials.MaterialId
+    SET @id = (SELECT SequenceId FROM Materials.MaterialVendor
                 WHERE MaterialNumber = @materialNumber)
     SET @productId = CONCAT(@id,  @code)
 END

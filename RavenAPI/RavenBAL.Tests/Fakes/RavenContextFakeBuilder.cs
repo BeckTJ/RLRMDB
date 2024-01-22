@@ -5,30 +5,29 @@ namespace Service.Tests.Fakes
 {
     public class RavenContextFakeBuilder
     {
-        private readonly RavenContextFake _ctx = new();
-        private EntityEntry<MaterialVendor> _milk;
-        private EntityEntry<MaterialVendor> _lemon;
-        private EntityEntry<MaterialVendor> _liquor;
-        private EntityEntry<MaterialVendor> _juice;
+        private MaterialVendor _milk;
+        private List<MaterialVendor> _lemon;
+        private List<MaterialVendor> _liquor;
+        private List<MaterialVendor> _juice;
 
-        private EntityEntry<RawMaterial> _milkRM;
-        private EntityEntry<RawMaterial> _lemonRM;
-        private EntityEntry<RawMaterial> _juiceRM;
-        private EntityEntry<RawMaterial> _liquorRM;
+        private List<RawMaterial> _milkRM;
+        private List<RawMaterial> _lemonRM;
+        private List<RawMaterial> _juiceRM;
+        private List<RawMaterial> _liquorRM;
 
-        private EntityEntry<SampleRequired> _milkSR;
-        private EntityEntry<SampleRequired> _lemonSR;
-        private EntityEntry<SampleRequired> _juiceSR;
-        private EntityEntry<SampleRequired> _liquorSR;
+        private List<SampleRequired> _milkSR;
+        private List<SampleRequired> _lemonSR;
+        private List<SampleRequired> _juiceSR;
+        private List<SampleRequired> _liquorSR;
 
-        private EntityEntry<SampleSubmit> _milkSS;
-        private EntityEntry<SampleSubmit> _lemonSS;
-        private EntityEntry<SampleSubmit> _juiceSS;
-        private EntityEntry<SampleSubmit> _liquorSS;
+        private List<SampleSubmit> _milkSS;
+        private List<SampleSubmit> _lemonSS;
+        private List<SampleSubmit> _juiceSS;
+        private List<SampleSubmit> _liquorSS;
 
-        public RavenContextFakeBuilder WithMaterialVendorMilk()
+        public MaterialVendor WithMaterialVendorMilk()
         {
-            _milk = _ctx.Add(new MaterialVendor(){
+            return new MaterialVendor(){
                 ParentMaterialNumber = 58971,
                 MaterialNumber = 3282571,
                 VendorName = "Stop N Shop",
@@ -38,12 +37,11 @@ namespace Service.Tests.Fakes
                 UnitOfIssue = "kg",
                 BatchManaged = true,
                 ProcessOrderRequired = false,
-            });
-            return this;
+            };
         }
         public RavenContextFakeBuilder WithMilkRawMaterial()
         {
-            _milkRM = _ctx.Add(new RawMaterial()
+            _milkRM.Add(new RawMaterial()
             {
                 DrumLotNumber = "800AA4A01",
                 MaterialNumber = 3282571,
@@ -54,7 +52,7 @@ namespace Service.Tests.Fakes
                 SampleId = 123456,
                 VendorLotNumber = "999-111-222",
             });
-            _milkRM = _ctx.Add(new RawMaterial()
+            _milkRM.Add(new RawMaterial()
             {
                 DrumLotNumber = "802AA4A05",
                 MaterialNumber = 3282571,
@@ -70,7 +68,7 @@ namespace Service.Tests.Fakes
         }
         public RavenContextFakeBuilder WithMilkSampleSubmit()
         {
-            _milkSS = _ctx.Add(new SampleSubmit()
+            _milkSS.Add(new SampleSubmit()
             {
                 SampleId = 123456,
                 SampleType = "RAW",
@@ -80,7 +78,7 @@ namespace Service.Tests.Fakes
                 Rejected = false,
                 ReviewDate = new DateTime(2024,1,9),
             });
-            _milkSS = _ctx.Add(new SampleSubmit()
+            _milkSS.Add(new SampleSubmit()
             {
                 SampleId = 234567,
                 SampleType = "RAW",
@@ -90,7 +88,7 @@ namespace Service.Tests.Fakes
                 Rejected = false,
                 ReviewDate = null,
             });
-            _milkSS = _ctx.Add(new SampleSubmit()
+            _milkSS.Add(new SampleSubmit()
             {
                 SampleId = 999999,
                 SampleType = "RAW",
@@ -104,7 +102,7 @@ namespace Service.Tests.Fakes
         }
         public RavenContextFakeBuilder WithMilkSampleRequired()
         {
-            _milkSR = _ctx.Add(new SampleRequired()
+            _milkSR.Add(new SampleRequired()
             {
                 MaterialNumber = 58971,
                 MaterialType = "Finished Product",
@@ -120,7 +118,7 @@ namespace Service.Tests.Fakes
         }
         public RavenContextFakeBuilder WithMaterialVendorLemon()
         {
-            _lemon = _ctx.Add(new MaterialVendor()
+            _lemon.Add(new MaterialVendor()
             {
                 ParentMaterialNumber = 58143,
                 MaterialNumber = 32409,
@@ -136,7 +134,7 @@ namespace Service.Tests.Fakes
         }
         public RavenContextFakeBuilder WithMaterialVendorLiquor()
         {
-            _liquor = _ctx.Add(new MaterialVendor()
+            _liquor.Add(new MaterialVendor()
             {
                 ParentMaterialNumber = 58765,
                 MaterialNumber = 30173,
@@ -152,7 +150,7 @@ namespace Service.Tests.Fakes
         }
         public RavenContextFakeBuilder WithMaterialVendorJuice()
         {
-            _juice = _ctx.Add(new MaterialVendor()
+            _juice.Add(new MaterialVendor()
             {
                 ParentMaterialNumber = 58423,
                 MaterialNumber = 3195356,
@@ -165,16 +163,6 @@ namespace Service.Tests.Fakes
                 ProcessOrderRequired = true,
             });
             return this;
-        }
-        public RavenContextFake Build()
-        {
-            _ctx.SaveChanges();
-            return _ctx;
-        }
-        public void Dispose()
-        {
-            _ctx.Database.EnsureDeleted();
-            _ctx.Dispose();
         }
     }
 }

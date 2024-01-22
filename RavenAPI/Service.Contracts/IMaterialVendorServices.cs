@@ -1,13 +1,11 @@
-﻿
-using Shared.DTO;
+﻿using Shared.DTO;
 
 namespace Service.Contracts
 {
     public interface IMaterialVendorServices
     {
-        MaterialVendorDTO GetMaterialVendor(int parentMaterialNumber, string vendorName);
+        MaterialVendorDTO GetMaterialVendor(int materialNumber);
         IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
-        IEnumerable<MaterialVendorDTO> GetRawMaterialByMaterialNumber(int parentMaterialNumber);
         void InputRawMaterial(CreateRawMaterialDTO material);
 
     }

@@ -1,4 +1,7 @@
 ﻿
+using RavenDB.Models;
+using Service.Contracts;
+
 namespace Contracts
 {
     public interface IRepoManager
@@ -10,6 +13,7 @@ namespace Contracts
         ISampleRepo SampleRepo { get; }
         IMaterialVendorRepo MaterialVendor { get; }
         IDateCode DateCode { get; }
+        IProductLotNumber<MaterialVendor> RawMaterialLotNumber { get; }
         void Save();
 
     }

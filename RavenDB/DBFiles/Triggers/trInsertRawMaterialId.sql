@@ -10,5 +10,5 @@ SET @materialNumber = (select inserted.MaterialNumber FROM inserted)
 SET @productId = (Distillation.SetRawMaterialProductId(@materialNumber))
 
 
-INSERT INTO Distillation.RawMaterial(ProductLotNumber)
+INSERT INTO Distillation.RawMaterial(DrumLotNumber)
 VALUES (@productId)
