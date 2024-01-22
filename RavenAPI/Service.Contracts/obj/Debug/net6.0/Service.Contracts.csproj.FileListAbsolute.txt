@@ -24,7 +24,6 @@ C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contrac
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.AssemblyInfoInputs.cache
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.AssemblyInfo.cs
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.csproj.CoreCompileInputs.cache
-C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.csproj.CopyComplete
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\Service.Contracts.dll
 C:\Users\kcebs\Raven\RavenAPI\Service.Contracts\obj\Debug\net6.0\refint\Service.Contracts.dll

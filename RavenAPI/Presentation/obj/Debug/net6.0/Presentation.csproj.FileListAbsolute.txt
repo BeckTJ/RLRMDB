@@ -36,7 +36,6 @@ C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.Generat
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.AssemblyInfoInputs.cache
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.AssemblyInfo.cs
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.csproj.CoreCompileInputs.cache
-C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.csproj.CopyComplete
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\Presentation.dll
 C:\Users\kcebs\Raven\RavenAPI\Presentation\obj\Debug\net6.0\refint\Presentation.dll

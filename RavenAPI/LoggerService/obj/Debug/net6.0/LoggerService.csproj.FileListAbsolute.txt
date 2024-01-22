@@ -33,4 +33,3 @@ C:\Users\TBeck\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.dll
 C:\Users\kcebs\Raven\RavenAPI\LoggerService\bin\Debug\net6.0\RavenDB.pdb
-C:\Users\kcebs\Raven\RavenAPI\LoggerService\obj\Debug\net6.0\LoggerService.sourcelink.json

@@ -4,7 +4,7 @@ using Shared.DTO;
 
 namespace Presentation.Controllers;
 
-[Route("RavenAPI/RawMaterial")]
+[Route("RavenAPI/MaterialVendor")]
 [ApiController]
 
 public class MaterialVendorController : ControllerBase
@@ -16,10 +16,10 @@ public class MaterialVendorController : ControllerBase
         _service = repo;
     }
 
-    [HttpGet("{parentMaterialNumber:int, vendor:string}")]
-    public IActionResult GetMaterialVendor(int parentMaterialNumber, string vendorName)
+    [HttpGet("{materialNumber:int}")]
+    public IActionResult GetMaterialVendor(int materialNumber)
     {
-            var materialVendor = _service.MaterialVendorServices.GetMaterialVendor(parentMaterialNumber, vendorName);
+            var materialVendor = _service.MaterialVendorServices.GetMaterialVendor(materialNumber);
 
             return Ok(materialVendor);
     }

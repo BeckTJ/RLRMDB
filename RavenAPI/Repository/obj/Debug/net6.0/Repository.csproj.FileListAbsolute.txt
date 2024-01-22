@@ -33,4 +33,3 @@ C:\Users\TBeck\Raven\RavenAPI\Repository\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\RavenDB.dll
 C:\Users\kcebs\Raven\RavenAPI\Repository\bin\Debug\net6.0\RavenDB.pdb
-C:\Users\kcebs\Raven\RavenAPI\Repository\obj\Debug\net6.0\Repository.sourcelink.json

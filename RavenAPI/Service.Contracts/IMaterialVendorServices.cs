@@ -7,6 +7,5 @@ namespace Service.Contracts
         MaterialVendorDTO GetMaterialVendor(int materialNumber);
         IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
         void InputRawMaterial(CreateRawMaterialDTO material);
-
     }
 }

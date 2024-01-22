@@ -29,4 +29,3 @@ C:\Users\TBeck\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\TBeck\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.dll
 C:\Users\kcebs\Raven\RavenAPI\Contracts\bin\Debug\net6.0\RavenDB.pdb
-C:\Users\kcebs\Raven\RavenAPI\Contracts\obj\Debug\net6.0\Contracts.sourcelink.json

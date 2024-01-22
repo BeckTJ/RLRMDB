@@ -35,8 +35,8 @@ namespace Service.Tests.Fakes
                 SequenceId = 800,
                 TotalRecords = 100,
                 UnitOfIssue = "kg",
-                BatchManaged = true,
-                ProcessOrderRequired = false,
+                //BatchManaged = true,
+                //ProcessOrderRequired = false,
             };
         }
         public RavenContextFakeBuilder WithMilkRawMaterial()
@@ -127,8 +127,8 @@ namespace Service.Tests.Fakes
                 SequenceId = 900,
                 TotalRecords = 100,
                 UnitOfIssue = "kg",
-                BatchManaged = false,
-                ProcessOrderRequired = false,
+                //BatchManaged = false,
+                //ProcessOrderRequired = false,
             });
             return this;
         }
@@ -143,8 +143,8 @@ namespace Service.Tests.Fakes
                 SequenceId = 100,
                 TotalRecords = 100,
                 UnitOfIssue = "kg",
-                BatchManaged = true,
-                ProcessOrderRequired = false,
+                //BatchManaged = true,
+                //ProcessOrderRequired = false,
             });
             return this;
         }
@@ -159,8 +159,8 @@ namespace Service.Tests.Fakes
                 SequenceId = 1000,
                 TotalRecords = 1000,
                 UnitOfIssue = "kg",
-                BatchManaged = false,
-                ProcessOrderRequired = true,
+                //BatchManaged = false,
+                //ProcessOrderRequired = true,
             });
             return this;
         }

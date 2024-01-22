@@ -215,7 +215,6 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\refint\RavenAPI.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\appsettings.json
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\nlog.config
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenAPI.exe
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenAPI.deps.json
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenAPI.runtimeconfig.json
@@ -356,4 +355,4 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Contracts.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Shared.pdb
-C:\Users\kcebs\Raven\RavenAPI\RavenAPI\obj\Debug\net6.0\RavenAPI.sourcelink.json
+C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\nlog.config

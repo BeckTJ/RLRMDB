@@ -22,7 +22,6 @@ C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.GeneratedMSBuild
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.AssemblyInfoInputs.cache
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.AssemblyInfo.cs
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.csproj.CoreCompileInputs.cache
-C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.sourcelink.json
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\refint\RavenDB.dll
 C:\Users\kcebs\Raven\RavenAPI\RavenDAL\obj\Debug\net6.0\RavenDB.pdb
