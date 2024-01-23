@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "h2UMbXDhwdHgvfdhSC8GvNHUG+v3JpZRXavswGNz6F1WvPEghj3LVSVuK2tvxXwkzDdwfTGPU46qxpt8blxufA==",
+  "dgSpecHash": "SS8Njwcgtd/htQgOHz13T2OLx4FaoK6YiojD/cMwL+Wz/vxqmBBrmw7fUeWcaHb0dowH6HYTJ8IAXekrHkGrxA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Service.Contracts\\Service.Contracts.csproj",
+  "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Contracts\\Service.Contracts.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

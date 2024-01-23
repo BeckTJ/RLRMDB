@@ -33,10 +33,6 @@ namespace RavenAPI.Extensions
             var connectionString = config["mssqlconnection:connectionString"];
             services.AddDbContext<RavenContext>(o => o.UseSqlServer(connectionString));
         }
-        public static void ConfigureRepoWrapper(this IServiceCollection services)
-        {
-            services.AddTransient<IRepoWrapper, RepoWrapper>();
-        }
         public static void ConfigureRepoManager(this IServiceCollection services)
         {
             services.AddScoped<IRepoManager, RepoManager>();
