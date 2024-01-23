@@ -1,10 +1,5 @@
 ﻿using Contracts;
 using Shared.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.src
 {
@@ -20,7 +15,7 @@ namespace Service.src
         {
             return new RawMaterialDTO
             {
-                DrumLotNumber = _repoManager.RawMaterialLotNumber.CreateProductLotNumber(rawMaterial.MaterialNumber),
+                DrumLotNumber = null,
                 BatchNumber = rawMaterial.BatchNumber,
                 InspectionLotNumber = rawMaterial.InspectionLotNumber,
                 ContainerNumber = rawMaterial.ContainerNumber,

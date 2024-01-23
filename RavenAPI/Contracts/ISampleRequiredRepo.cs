@@ -4,6 +4,6 @@ namespace Contracts
 {
     public interface ISampleRequiredRepo : IRepoBase<SampleRequired>
     {
-        IEnumerable<SampleRequired> GetSampleRequired(int parentMaterialNumber);
+        Task<IEnumerable<SampleRequired>> GetSampleRequired(int parentMaterialNumber);
     }
 }

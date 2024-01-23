@@ -4,8 +4,8 @@ namespace Service.Contracts
 {
     public interface IMaterialVendorServices
     {
-        MaterialVendorDTO GetMaterialVendor(int materialNumber);
-        IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber);
-        void InputRawMaterial(CreateRawMaterialDTO material);
+        Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber);
+        Task<IEnumerable<MaterialVendorDTO>> GetApprovedRawMaterial(int parentMaterialNumber);
+        Task InputRawMaterial(CreateRawMaterialDTO material);
     }
 }

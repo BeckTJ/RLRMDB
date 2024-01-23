@@ -4,7 +4,7 @@ namespace Service.Contracts
 {
     public interface IMaterialServices
     {
-        IEnumerable<MaterialDTO> GetAllMaterials();
-        MaterialDTO GetMaterialByMaterialNumber(int materialNumber);
+        Task<IEnumerable<MaterialDTO>> GetAllMaterials();
+        Task<MaterialDTO> GetMaterialByMaterialNumber(int materialNumber);
     }
 }

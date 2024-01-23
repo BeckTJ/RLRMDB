@@ -13,8 +13,7 @@ namespace Contracts
         ISampleRepo SampleRepo { get; }
         IMaterialVendorRepo MaterialVendor { get; }
         IDateCode DateCode { get; }
-        IProductLotNumber<MaterialVendor> RawMaterialLotNumber { get; }
-        void Save();
+        Task Save();
 
     }
 }

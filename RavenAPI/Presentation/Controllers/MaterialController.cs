@@ -15,17 +15,17 @@ public class MaterialController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAllMaterial()
+    public async Task<IActionResult> GetAllMaterial()
     {
-        var materials = _service.MaterialServices.GetAllMaterials();
+        var materials = await _service.MaterialServices.GetAllMaterials();
 
         return Ok(materials);
 
     }
     [HttpGet("{materialNumber:int}")]
-    public IActionResult GetMaterialByMaterialNumber(int materialNumber) 
+    public async Task<IActionResult> GetMaterialByMaterialNumber(int materialNumber) 
     {
-        var material = _service.MaterialServices.GetMaterialByMaterialNumber(materialNumber);
+        var material = await _service.MaterialServices.GetMaterialByMaterialNumber(materialNumber);
 
         return Ok(material);        
     }

@@ -19,7 +19,7 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
         }
-        public MaterialVendorDTO GetMaterialVendor(int materialNumber)
+        public async Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber)
         {
             var materialVendor = _repo.MaterialVendor.GetMaterialVendor(materialNumber);
             
@@ -27,11 +27,11 @@ namespace Service
 
             return _mapper.Map<MaterialVendorDTO>(materialVendor);
         }
-        public IEnumerable<MaterialVendorDTO> GetApprovedRawMaterial(int parentMaterialNumber)
+        public async Task<IEnumerable<MaterialVendorDTO>> GetApprovedRawMaterial(int parentMaterialNumber)
         {
             throw new NotImplementedException();
         }
-        public void InputRawMaterial(CreateRawMaterialDTO material)
+        public Task InputRawMaterial(CreateRawMaterialDTO material)
         {
             throw new NotImplementedException();
         }

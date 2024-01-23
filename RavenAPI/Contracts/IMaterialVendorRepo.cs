@@ -4,9 +4,9 @@ namespace Contracts
 {
     public interface IMaterialVendorRepo:IRepoBase<MaterialVendor>
     {
-        MaterialVendor GetMaterialVendor(int materialNumber);
-        MaterialVendor GetMaterialVendorWithVendorLots(int materialNumber);
-        IEnumerable<MaterialVendor> GetMaterialVendorFromParent(int parentMaterialNumber);
-        IEnumerable<MaterialVendor> GetMaterialVendorWithVendorLot(int materialNumber);
+        Task<MaterialVendor> GetMaterialVendor(int materialNumber);
+        Task<MaterialVendor> GetMaterialVendorWithVendorLots(int materialNumber);
+        Task<IEnumerable<MaterialVendor>> GetMaterialVendorFromParent(int parentMaterialNumber);
+        Task<IEnumerable<MaterialVendor>> GetMaterialVendorWithVendorLot(int materialNumber);
     }
 }

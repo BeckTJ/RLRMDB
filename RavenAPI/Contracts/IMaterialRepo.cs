@@ -5,9 +5,9 @@ namespace Contracts
 {
     public interface IMaterialRepo:IRepoBase<Material>
     {
-        IEnumerable<Material> GetAllMaterial();
-        Material GetMaterialByMaterialNumber(int materialNumber);
-        Material GetParentMaterialNumberForChild(int materialNumber);
+        Task<IEnumerable<Material>> GetAllMaterial();
+        Task<Material> GetMaterialByMaterialNumber(int materialNumber);
+        Task<Material> GetParentMaterialNumberForChild(int materialNumber);
 
     }
 }

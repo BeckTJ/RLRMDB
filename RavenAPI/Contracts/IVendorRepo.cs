@@ -4,9 +4,9 @@ namespace Contracts
 {
     public interface IVendorRepo : IRepoBase<VendorLot>
     {
-        IEnumerable<VendorLot> GetAllVendors(); 
-        VendorLot GetVendorByVendorLot(string lotNumber);
-        IEnumerable<VendorLot> GetVendorLotsWithRawMaterials(int materialNumber);
+        Task<IEnumerable<VendorLot>> GetAllVendors(); 
+        Task<VendorLot> GetVendorByVendorLot(string lotNumber);
+        Task<IEnumerable<VendorLot>> GetVendorLotsWithRawMaterials(int materialNumber);
         void SubmitVendorLot(VendorLot vendorLot);
 
     }

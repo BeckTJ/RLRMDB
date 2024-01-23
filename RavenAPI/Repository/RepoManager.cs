@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using RavenDB.Data;
 using RavenDB.Models;
+using Repository.Async;
 using Service.Contracts;
 
 namespace Repository
@@ -15,7 +16,6 @@ namespace Repository
         private readonly Lazy<ISampleRepo> _sample;
         private readonly Lazy<IMaterialVendorRepo> _materialVendor;
         private readonly Lazy<IDateCode> _dateCode;
-        private readonly Lazy<IProductLotNumber<MaterialVendor>> _rawMaterialLotNumber;
 
         public RepoManager(RavenContext ctx) 
         { 
@@ -27,7 +27,6 @@ namespace Repository
             _sample = new Lazy<ISampleRepo>(() => new SampleRepo(_ctx));
             _materialVendor = new Lazy<IMaterialVendorRepo>(() => new MaterialVendorRepo(_ctx));
             _dateCode = new Lazy<IDateCode>(() => new DateCodeRepo(_ctx));
-            _rawMaterialLotNumber = new Lazy<IProductLotNumber<MaterialVendor>>(() => new ProductLotNumber(_ctx));
         }
         public IMaterialRepo Material => _material.Value;
         public IVendorRepo VendorLot => _vendor.Value;
@@ -37,8 +36,6 @@ namespace Repository
         public IMaterialVendorRepo MaterialVendor => _materialVendor.Value;
         public IDateCode DateCode => _dateCode.Value;
 
-        public IProductLotNumber<MaterialVendor> RawMaterialLotNumber => _rawMaterialLotNumber.Value;
-
-        public void Save() => _ctx.SaveChanges();
+        public async Task Save() => await _ctx.SaveChangesAsync();
     }
 }

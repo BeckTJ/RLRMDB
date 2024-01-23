@@ -1,8 +1,9 @@
 ﻿using Contracts;
+using Microsoft.EntityFrameworkCore;
 using RavenDB.Data;
 using RavenDB.Models;
 
-namespace Repository
+namespace Repository.Async
 {
     internal sealed class SampleRepo : RepoBase<SampleSubmit>, ISampleRepo
     {
@@ -12,9 +13,7 @@ namespace Repository
         {
             Create(sampleSubmit);
         }
-        public SampleSubmit VerifySample(string sampleType,int sampleId)
-        {
-            return FindByCondition(x => x.SampleId == sampleId && x.SampleType == sampleType).FirstOrDefault();
-        }
+        public async Task<SampleSubmit> VerifySample(string sampleType, int sampleId) =>
+            await FindByCondition(x => x.SampleId == sampleId && x.SampleType == sampleType).FirstOrDefaultAsync();
     }
 }

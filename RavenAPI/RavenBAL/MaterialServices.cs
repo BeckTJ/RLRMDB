@@ -18,17 +18,17 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
         }
-        public IEnumerable<MaterialDTO> GetAllMaterials()
+        public async Task<IEnumerable<MaterialDTO>> GetAllMaterials()
         {
-                var materials = _repo.Material.GetAllMaterial();
+                var materials = await _repo.Material.GetAllMaterial();
                 var materialDTO = _mapper.Map<IEnumerable<MaterialDTO>>(materials);
 
                 return materialDTO;
         }
 
-        public MaterialDTO GetMaterialByMaterialNumber(int materialNumber)
+        public async Task<MaterialDTO> GetMaterialByMaterialNumber(int materialNumber)
         {
-            var materials = _repo.Material.GetMaterialByMaterialNumber(materialNumber);
+            var materials = await _repo.Material.GetMaterialByMaterialNumber(materialNumber);
             if (materials == null)
                 throw new MaterialNotFoundException(materialNumber);
             var materialDTO = _mapper.Map<MaterialDTO>(materials);
