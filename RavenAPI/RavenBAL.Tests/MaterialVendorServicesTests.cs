@@ -7,7 +7,6 @@ using Service.Tests.Fakes;
 using RavenDB.Exceptions;
 using RavenDB.Models;
 using LoggerService;
-using NLog.Fluent;
 
 namespace RavenBAL.Tests
 {
@@ -26,19 +25,19 @@ namespace RavenBAL.Tests
         }
 
         [Fact]
-        public void GetMaterialVendor_MaterialNotFound_MaterialNotFoundException()
+        public async void GetMaterialVendor_MaterialNotFound_MaterialNotFoundException()
         {
             //Arrange
             int materialNumber = 0;
             _sut = new ServiceManager(_repo, null, null);
             //Act
-            var e = Record.Exception(() => _sut.MaterialVendorServices.GetMaterialVendor(materialNumber));
+            var e = await Record.ExceptionAsync(() => _sut.MaterialVendorServices.GetMaterialVendor(materialNumber));
             //Assert
             var ex = Assert.IsType<MaterialNotFoundException>(e);
             Assert.StartsWith("The material number", ex.Message);
         }
         [Fact]
-        public void GetMaterialVendor_ReturnMaterialVendor()
+        public async void GetMaterialVendor_ReturnMaterialVendor()
         {
             //Arrange
             var _mapper = config.CreateMapper();
@@ -49,7 +48,7 @@ namespace RavenBAL.Tests
             _sut = new ServiceManager(_repo, null, _mapper);
 
             //Act
-            mv = _sut.MaterialVendorServices.GetMaterialVendor(materialNumber);
+            mv = await _sut.MaterialVendorServices.GetMaterialVendor(materialNumber);
 
             //Assert
             Assert.IsType<MaterialVendorDTO>(mv);

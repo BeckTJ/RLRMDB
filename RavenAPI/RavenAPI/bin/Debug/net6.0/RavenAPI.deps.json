@@ -1311,7 +1311,6 @@
       },
       "Presentation/1.0.0": {
         "dependencies": {
-          "Contracts": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Service.Contracts": "1.0.0"
         },

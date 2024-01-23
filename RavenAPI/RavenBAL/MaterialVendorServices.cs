@@ -21,7 +21,7 @@ namespace Service
         }
         public async Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber)
         {
-            var materialVendor = _repo.MaterialVendor.GetMaterialVendor(materialNumber);
+            var materialVendor = await _repo.MaterialVendor.GetMaterialVendor(materialNumber);
             
             if(materialVendor is null) throw new MaterialNotFoundException(materialNumber);
 

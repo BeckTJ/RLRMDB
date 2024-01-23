@@ -1,0 +1,113 @@
+2024-01-23 06:45:12.2498 Debug Message Template Auto Format enabled
+2024-01-23 06:45:12.3173 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2024-01-23 06:45:12.3173 Trace Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2024-01-23 06:45:12.3173 Debug FileTarget FilePathLayout with FilePathKind.Relative using AppDomain.BaseDirectory: C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\
+2024-01-23 06:45:12.3173 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2024-01-23 06:45:12.3173 Trace Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2024-01-23 06:45:12.3173 Warn Error has been raised. Exception: NLog.NLogConfigurationException: 'FileTarget' cannot assign property 'Layout'='${longdate} ${level:uppercase=true ${message}'. Error: 'LevelLayoutRenderer' cannot assign property 'Uppercase'='true ${message'. Error: String 'true ${message' was not recognized as a valid Boolean.
+ ---> NLog.NLogConfigurationException: 'LevelLayoutRenderer' cannot assign property 'Uppercase'='true ${message'. Error: String 'true ${message' was not recognized as a valid Boolean.
+ ---> System.FormatException: String 'true ${message' was not recognized as a valid Boolean.
+   at System.Boolean.Parse(ReadOnlySpan`1 value)
+   at System.Boolean.Parse(String value)
+   at System.String.System.IConvertible.ToBoolean(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, TypeCode typeCode, IFormatProvider provider)
+   at NLog.Internal.PropertyHelper.TryNLogSpecificConversion(Type propertyType, String value, ConfigurationItemFactory configurationItemFactory, Object& newValue)
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, PropertyInfo propInfo, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   --- End of inner exception stack trace ---
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, PropertyInfo propInfo, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Layouts.LayoutParser.ParseLayoutRenderer(ConfigurationItemFactory configurationItemFactory, SimpleStringReader stringReader, Nullable`1 throwConfigExceptions)
+   at NLog.Layouts.LayoutParser.CompileLayout(ConfigurationItemFactory configurationItemFactory, SimpleStringReader sr, Nullable`1 throwConfigExceptions, Boolean isNested, String& text)
+   at NLog.Layouts.LayoutParser.CompileLayout(String value, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions, String& text)
+   at NLog.Internal.PropertyHelper.TryParseLayoutValue(String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Internal.PropertyHelper.TryNLogSpecificConversion(Type propertyType, String value, ConfigurationItemFactory configurationItemFactory, Object& newValue)
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, PropertyInfo propInfo, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   --- End of inner exception stack trace ---
+   at NLog.Internal.PropertyHelper.SetPropertyFromString(Object targetObject, PropertyInfo propInfo, String stringValue, ConfigurationItemFactory configurationItemFactory)
+   at NLog.Config.LoggingConfigurationParser.SetPropertyValueFromString[T](T targetObject, String propertyName, String propertyValue, ValidatedConfigurationElement element)
+2024-01-23 06:45:12.3173 Debug Adding target NLog.Targets.FileTarget(Name=logfile)
+2024-01-23 06:45:12.3173 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-01-23 06:45:12.3173 Trace ParseRulesElement
+2024-01-23 06:45:12.3473 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.4.2092. Product version: 5.2.4+5ed75b125a691ce9f01e64641f1a79f438385847. GlobalAssemblyCache: False
+2024-01-23 06:45:12.3532 Debug Watching file-filter 'NLog.config' in directory: C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0
+2024-01-23 06:45:12.3532 Debug --- NLog configuration dump ---
+2024-01-23 06:45:12.3532 Debug Targets:
+2024-01-23 06:45:12.3532 Debug FileTarget(Name=logfile)
+2024-01-23 06:45:12.3532 Debug Rules:
+2024-01-23 06:45:12.3532 Debug logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]
+2024-01-23 06:45:12.3532 Debug --- End of NLog configuration dump ---
+2024-01-23 06:45:12.3532 Trace FindReachableObject<System.Object>:
+2024-01-23 06:45:12.3532 Trace Scanning LoggingRule 'logNamePattern: (:All) levels: [ Debug Info Warn Error Fatal ] writeTo: [ logfile ]'
+2024-01-23 06:45:12.3532 Trace  Scanning Property Targets 'System.Collections.Generic.List`1[NLog.Targets.Target]' System.Collections.Generic.IList`1[NLog.Targets.Target]
+2024-01-23 06:45:12.3532 Trace  Scanning FileTarget 'FileTarget(Name=logfile)'
+2024-01-23 06:45:12.3643 Trace   Scanning Property FileName '.\logs\${shortdate}_logfile.txt' NLog.Layouts.Layout
+2024-01-23 06:45:12.3643 Trace   Scanning SimpleLayout '.\logs\${shortdate}_logfile.txt'
+2024-01-23 06:45:12.3643 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic.IEnumerable`1[NLog.LayoutRenderers.LayoutRenderer]
+2024-01-23 06:45:12.3643 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3643 Trace    Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2024-01-23 06:45:12.3643 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3643 Trace   Scanning Property Layout '${longdate}|${level:uppercase=true}|${logger}|${message:withexception=true}' NLog.Layouts.Layout
+2024-01-23 06:45:12.3643 Trace   Scanning SimpleLayout '${longdate}|${level:uppercase=true}|${logger}|${message:withexception=true}'
+2024-01-23 06:45:12.3643 Trace    Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic.IEnumerable`1[NLog.LayoutRenderers.LayoutRenderer]
+2024-01-23 06:45:12.3643 Trace    Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2024-01-23 06:45:12.3643 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3643 Trace    Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2024-01-23 06:45:12.3643 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3643 Trace    Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${loggername}'
+2024-01-23 06:45:12.3643 Trace    Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3643 Trace    Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2024-01-23 06:45:12.3643 Trace  Scanning Property ChildRules 'System.Collections.Generic.List`1[NLog.Config.LoggingRule]' System.Collections.Generic.IList`1[NLog.Config.LoggingRule]
+2024-01-23 06:45:12.3643 Trace  Scanning Property Filters 'System.Collections.Generic.List`1[NLog.Filters.Filter]' System.Collections.Generic.IList`1[NLog.Filters.Filter]
+2024-01-23 06:45:12.3643 Info Validating config: TargetNames=logfile, ConfigItems=14, FilePath=C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\NLog.config
+2024-01-23 06:45:12.3643 Debug Unused target checking is started... Rule Count: 1, Target Count: 1
+2024-01-23 06:45:12.3643 Debug Unused target checking is completed. Total Rule Count: 1, Total Target Count: 1, Unused Target Count: 0
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${message}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${literal}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${loggername}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${literal}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${level}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${literal}
+2024-01-23 06:45:12.3643 Trace Initializing Layout Renderer: ${longdate}
+2024-01-23 06:45:12.3643 Trace Initializing ${longdate}|${level:uppercase=true}|${logger}|${message:withexception=true}
+2024-01-23 06:45:12.3817 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2024-01-23 06:45:12.3817 Trace Scanning SimpleLayout '${longdate}|${level:uppercase=true}|${logger}|${message:withexception=true}'
+2024-01-23 06:45:12.3817 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic.IEnumerable`1[NLog.LayoutRenderers.LayoutRenderer]
+2024-01-23 06:45:12.3817 Trace  Scanning LongDateLayoutRenderer 'Layout Renderer: ${longdate}'
+2024-01-23 06:45:12.3817 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3817 Trace  Scanning LevelLayoutRenderer 'Layout Renderer: ${level}'
+2024-01-23 06:45:12.3817 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3817 Trace  Scanning LoggerNameLayoutRenderer 'Layout Renderer: ${loggername}'
+2024-01-23 06:45:12.3817 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3817 Trace  Scanning MessageLayoutRenderer 'Layout Renderer: ${message}'
+2024-01-23 06:45:12.3817 Trace Initializing Layout Renderer: ${literal}
+2024-01-23 06:45:12.3817 Trace Initializing Layout Renderer: ${shortdate}
+2024-01-23 06:45:12.3817 Trace Initializing Layout Renderer: ${literal}
+2024-01-23 06:45:12.3817 Trace Initializing .\logs\${shortdate}_logfile.txt
+2024-01-23 06:45:12.3817 Trace FindReachableObject<NLog.Internal.IRenderable>:
+2024-01-23 06:45:12.3817 Trace Scanning SimpleLayout '.\logs\${shortdate}_logfile.txt'
+2024-01-23 06:45:12.3817 Trace  Scanning Property LayoutRenderers 'NLog.LayoutRenderers.LayoutRenderer[]' System.Collections.Generic.IEnumerable`1[NLog.LayoutRenderers.LayoutRenderer]
+2024-01-23 06:45:12.3817 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3817 Trace  Scanning ShortDateLayoutRenderer 'Layout Renderer: ${shortdate}'
+2024-01-23 06:45:12.3817 Trace  Scanning LiteralLayoutRenderer 'Layout Renderer: ${literal}'
+2024-01-23 06:45:12.3817 Trace Initializing FileTarget(Name=logfile)
+2024-01-23 06:45:12.3817 Trace FindReachableObject<NLog.Layouts.Layout>:
+2024-01-23 06:45:12.3817 Trace Scanning FileTarget 'FileTarget(Name=logfile)'
+2024-01-23 06:45:12.3817 Trace  Scanning Property FileName '.\logs\${shortdate}_logfile.txt' NLog.Layouts.Layout
+2024-01-23 06:45:12.3817 Trace  Scanning Property Layout '${longdate}|${level:uppercase=true}|${logger}|${message:withexception=true}' NLog.Layouts.Layout
+2024-01-23 06:45:12.3817 Trace FileTarget(Name=logfile) has 2 layouts
+2024-01-23 06:45:12.3817 Trace FileTarget(Name=logfile): Using appenderFactory: NLog.Internal.FileAppenders.SingleProcessFileAppender+Factory
+2024-01-23 06:45:12.3817 Info Configuration initialized.
+2024-01-23 06:45:12.3969 Debug Targets configured when LogLevel >= Debug for Logger: LoggerService.LoggerManager
+2024-01-23 06:45:12.3969 Debug Logger LoggerService.LoggerManager [Debug] => logfile
+2024-01-23 06:45:12.3969 Debug Logger LoggerService.LoggerManager [Info] => logfile
+2024-01-23 06:45:12.3969 Debug Logger LoggerService.LoggerManager [Warn] => logfile
+2024-01-23 06:45:12.3969 Debug Logger LoggerService.LoggerManager [Error] => logfile
+2024-01-23 06:45:12.3969 Debug Logger LoggerService.LoggerManager [Fatal] => logfile
+2024-01-23 06:45:12.4137 Debug FileTarget(Name=logfile): Preparing for new file: 'C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\.\logs\2024-01-23_logfile.txt'
+2024-01-23 06:45:12.4137 Debug FileTarget(Name=logfile): Creating file appender: 'C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\.\logs\2024-01-23_logfile.txt'
+2024-01-23 06:45:12.4137 Trace FileTarget(Name=logfile): Opening C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\.\logs\2024-01-23_logfile.txt with allowFileSharedWriting=False
+2024-01-23 06:45:12.4137 Debug FileTarget(Name=logfile): Failed to retrieve FileInfo.CreationTimeUtc from FileName: C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\.\logs\2024-01-23_logfile.txt Exception: System.IO.DirectoryNotFoundException: Could not find a part of the path 'C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\logs\2024-01-23_logfile.txt'.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at NLog.Internal.FileAppenders.BaseFileAppender.UpdateCreationTime()
+2024-01-23 06:45:12.4137 Debug FileTarget(Name=logfile): DirectoryNotFoundException - Attempting to create directory for FileName: C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\.\logs\2024-01-23_logfile.txt
