@@ -27,7 +27,8 @@ namespace Service.Tests.Fakes
 
         public MaterialVendor WithMaterialVendorMilk()
         {
-            return new MaterialVendor(){
+            return new MaterialVendor()
+            {
                 ParentMaterialNumber = 58971,
                 MaterialNumber = 3282571,
                 VendorName = "Stop N Shop",
@@ -37,34 +38,209 @@ namespace Service.Tests.Fakes
                 UnitOfIssue = "kg",
                 //BatchManaged = true,
                 //ProcessOrderRequired = false,
+                VendorLots = new List<VendorLot>()
+                {
+                    new VendorLot()
+                    {
+                        VendorLotNumber = "999-111-222",
+                        SampleId = 123456,
+                        Quantity = 3,
+                        MaterialNumber = 3282571
+                    },
+                    new VendorLot()
+                    {
+                        VendorLotNumber = "999-111-333",
+                        SampleId = 11111,
+                        Quantity = 3,
+                        MaterialNumber = 3282571,
+                    },
+                }
+
             };
         }
-        public RavenContextFakeBuilder WithMilkRawMaterial()
+        public IEnumerable<MaterialVendor> WithListMaterialVendorMilk()
         {
-            _milkRM.Add(new RawMaterial()
-            {
-                DrumLotNumber = "800AA4A01",
-                MaterialNumber = 3282571,
-                DrumWeight = 180,
-                SapBatchNumber = null,
-                ContainerNumber = null,
-                InspectionLotNumber = null,
-                SampleId = 123456,
-                VendorLotNumber = "999-111-222",
-            });
-            _milkRM.Add(new RawMaterial()
-            {
-                DrumLotNumber = "802AA4A05",
-                MaterialNumber = 3282571,
-                DrumWeight = 180,
-                SapBatchNumber = null,
-                ContainerNumber = null,
-                InspectionLotNumber = null,
-                SampleId = 123456,
-                VendorLotNumber = "999-111-222",
-            });
+            return new List<MaterialVendor>{
+                new MaterialVendor()
+                {
+                    ParentMaterialNumber = 58971,
+                    MaterialNumber = 3282571,
+                    VendorName = "Stop N Shop",
+                    MaterialCode = "AA",
+                    SequenceId = 800,
+                    TotalRecords = 100,
+                    UnitOfIssue = "kg",
+                    RawMaterials = new List<RawMaterial>()
+                    {
+                        new RawMaterial
+                        {
+                            DrumLotNumber = "800AA4A01",
+                            MaterialNumber = 3282571,
+                            DrumWeight = 180,
+                            SapBatchNumber = null,
+                            ContainerNumber = null,
+                            InspectionLotNumber = null,
+                            SampleId = 123456,
+                            VendorLotNumber = "999-111-222",
+                            Sample = new SampleSubmit
+                            {
+                                SampleId = 123456,
+                                SampleType = "RAW",
+                                InspectionLotNumber = null,
+                                SampleDate = new DateTime(2024,1,7),
+                                Approved = true,
+                                Rejected = false,
+                                ReviewDate = new DateTime(2024,1,9),
 
-            return this;
+                            }
+                        },
+                    },
+                },
+                new MaterialVendor()
+                {
+                    ParentMaterialNumber = 58971,
+                    MaterialNumber = 3282571,
+                    VendorName = "Stop N Shop",
+                    MaterialCode = "AA",
+                    SequenceId = 800,
+                    TotalRecords = 100,
+                    UnitOfIssue = "kg",
+                    //BatchManaged = true,
+                    //ProcessOrderRequired = false,
+                    RawMaterials = new List<RawMaterial>()
+                    {
+                        new RawMaterial
+                        {
+                            DrumLotNumber = "802AA4A05",
+                            MaterialNumber = 31777,
+                            DrumWeight = 180,
+                            SapBatchNumber = null,
+                            ContainerNumber = null,
+                            InspectionLotNumber = null,
+                            SampleId = 234567,
+                            VendorLotNumber = "999-111-222",
+                            Sample = new SampleSubmit()
+                                {
+                                    SampleId = 234567,
+                                    SampleType = "RAW",
+                                    InspectionLotNumber = null,
+                                    SampleDate = new DateTime(2024, 1, 7),
+                                    Approved = false,
+                                    Rejected = false,
+                                    ReviewDate = null,
+                                }
+                        }
+                    },
+                },
+                new MaterialVendor()
+                {
+                    ParentMaterialNumber = 58971,
+                    MaterialNumber = 3282571,
+                    VendorName = "Stop N Shop",
+                    MaterialCode = "AA",
+                    SequenceId = 800,
+                    TotalRecords = 100,
+                    UnitOfIssue = "kg",
+                    //BatchManaged = true,
+                    //ProcessOrderRequired = false,
+                    RawMaterials = new List<RawMaterial>
+                    {
+                        new RawMaterial
+                        {
+                            DrumLotNumber = "400AA4A05",
+                            MaterialNumber = 337203,
+                            DrumWeight = 180,
+                            SapBatchNumber= null,
+                            ContainerNumber = null,
+                            InspectionLotNumber= 9999000001,
+                            SampleId = 99999,
+                            VendorLotNumber = null,
+                            Sample = new SampleSubmit()
+                                {
+                                    SampleId = 999999,
+                                    SampleType = "RAW",
+                                    InspectionLotNumber = null,
+                                    SampleDate = new DateTime(2024, 1, 10),
+                                    Approved = false,
+                                    Rejected = true,
+                                    ReviewDate = new DateTime(2024, 1, 15),
+                                }
+                        }
+                    },
+                }
+            };
+        }
+
+        public IEnumerable<RawMaterial> WithMilkRawMaterial()
+        {
+            return new List<RawMaterial>()
+            {
+                new RawMaterial
+                {
+                    DrumLotNumber = "800AA4A01",
+                    MaterialNumber = 3282571,
+                    DrumWeight = 180,
+                    SapBatchNumber = null,
+                    ContainerNumber = null,
+                    InspectionLotNumber = null,
+                    SampleId = 123456,
+                    VendorLotNumber = "999-111-222",
+                    Sample = new SampleSubmit
+                    {
+                        SampleId = 123456,
+                        SampleType = "RAW",
+                        InspectionLotNumber = null,
+                        SampleDate = new DateTime(2024,1,7),
+                        Approved = true,
+                        Rejected = false,
+                        ReviewDate = new DateTime(2024,1,9),
+
+                    }
+                },
+                new RawMaterial
+                {
+                    DrumLotNumber = "802AA4A05",
+                    MaterialNumber = 31777,
+                    DrumWeight = 180,
+                    SapBatchNumber = null,
+                    ContainerNumber = null,
+                    InspectionLotNumber = null,
+                    SampleId = 123456,
+                    VendorLotNumber = "999-111-222",
+                    Sample = new SampleSubmit()
+                        {
+                            SampleId = 234567,
+                            SampleType = "RAW",
+                            InspectionLotNumber = null,
+                            SampleDate = new DateTime(2024, 1, 7),
+                            Approved = false,
+                            Rejected = false,
+                            ReviewDate = null,
+                        }
+                },
+                new RawMaterial
+                {
+                    DrumLotNumber = "400AA4A05",
+                    MaterialNumber = 337203,
+                    DrumWeight = 180,
+                    SapBatchNumber= null,
+                    ContainerNumber = null,
+                    InspectionLotNumber= 9999000001,
+                    SampleId = 99999,
+                    VendorLotNumber = null,
+                    Sample = new SampleSubmit()
+                        {
+                            SampleId = 999999,
+                            SampleType = "RAW",
+                            InspectionLotNumber = null,
+                            SampleDate = new DateTime(2024, 1, 10),
+                            Approved = false,
+                            Rejected = true,
+                            ReviewDate = new DateTime(2024, 1, 15),
+                        }
+                }
+            };
+
         }
         public RavenContextFakeBuilder WithMilkSampleSubmit()
         {
@@ -73,10 +249,10 @@ namespace Service.Tests.Fakes
                 SampleId = 123456,
                 SampleType = "RAW",
                 InspectionLotNumber = null,
-                SampleDate = new DateTime(2024,1,7),
+                SampleDate = new DateTime(2024, 1, 7),
                 Approved = true,
                 Rejected = false,
-                ReviewDate = new DateTime(2024,1,9),
+                ReviewDate = new DateTime(2024, 1, 9),
             });
             _milkSS.Add(new SampleSubmit()
             {

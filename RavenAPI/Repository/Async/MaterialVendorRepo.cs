@@ -23,9 +23,14 @@ namespace Repository.Async
             await FindByCondition(x => x.ParentMaterialNumber.Equals(parentMaterialNumber))
                 .Include(v => v.VendorLots).ToListAsync();
 
-        public async Task<IEnumerable<MaterialVendor>> GetMaterialVendorWithVendorLot(int materialNumber) =>
-            await FindByCondition(mv => mv.ParentMaterialNumber.Equals(materialNumber))
+        public async Task<IEnumerable<MaterialVendor>> GetAllMaterialVendorWithVendorLot(int materialNumber) =>
+            await FindByCondition(mv => mv.MaterialNumber.Equals(materialNumber))
                 .Include(vl => vl.VendorLots)
                 .ToListAsync();
+
+        public async Task<IEnumerable<MaterialVendor>> GetMaterialVendorWithRawMaterial(int ParentMaterialNumber) =>
+            await FindByCondition(mv => mv.ParentMaterialNumber.Equals(ParentMaterialNumber))
+            .Include(rm => rm.RawMaterials).ToListAsync();
+
     }
 }

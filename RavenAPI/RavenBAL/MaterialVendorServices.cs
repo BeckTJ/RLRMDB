@@ -19,17 +19,27 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber)
+        public async Task<MaterialVendorWithVendorLotDTO> GetMaterialVendor(int materialNumber)
         {
             var materialVendor = await _repo.MaterialVendor.GetMaterialVendor(materialNumber);
             
             if(materialVendor is null) throw new MaterialNotFoundException(materialNumber);
 
-            return _mapper.Map<MaterialVendorDTO>(materialVendor);
+            return _mapper.Map<MaterialVendorWithVendorLotDTO>(materialVendor);
         }
-        public async Task<IEnumerable<MaterialVendorDTO>> GetApprovedRawMaterial(int parentMaterialNumber)
+        public async Task<IEnumerable<MaterialVendorWithRawMaterialDTO>> GetApprovedRawMaterial(int ParentMaterialNumber)
         {
-            throw new NotImplementedException();
+            var materialVendor = await _repo.MaterialVendor.GetMaterialVendorWithRawMaterial(ParentMaterialNumber);
+
+            foreach(var material in materialVendor)
+            {
+                if(material.RawMaterials is null) throw new NullReferenceException(nameof(material.RawMaterials));
+
+            }
+
+            if (materialVendor is null) throw new MaterialNotFoundException(ParentMaterialNumber);
+
+            return _mapper.Map<IEnumerable<MaterialVendorWithRawMaterialDTO>>(materialVendor);
         }
         public Task InputRawMaterial(CreateRawMaterialDTO material)
         {
