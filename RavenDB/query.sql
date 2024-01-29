@@ -15,7 +15,8 @@ where MaterialNumber = 58423
 -- where MaterialNumber = (select ParentMaterialNumber from Materials.MaterialVendor
 --                         where MaterialNumber = 3322187)
 
-select * from Materials.MaterialVendor where ParentMaterialNumber = 58423
+select * from Materials.MaterialVendor where ParentMaterialNumber = 58971
+
 select * from Materials.VendorLot
 
 select * from Distillation.AlphabeticDate

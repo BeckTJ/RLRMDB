@@ -15,7 +15,7 @@ namespace RavenBAL.Tests
         private readonly IRepoManager _repo = Substitute.For<IRepoManager>();
         private readonly MapperConfiguration config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<MaterialVendor, MaterialVendorWithVendorLotDTO>();
+            cfg.CreateMap<MaterialVendor, MaterialVendorDTO>();
             cfg.CreateMap<MaterialVendor, MaterialVendorWithRawMaterialDTO>();
             cfg.CreateMap<RawMaterial, RawMaterialDTO>();
         });
@@ -52,7 +52,7 @@ namespace RavenBAL.Tests
             var mv = await _sut.MaterialVendorServices.GetMaterialVendor(materialNumber);
 
             //Assert
-            Assert.IsType<MaterialVendorWithVendorLotDTO>(mv);
+            Assert.IsType<MaterialVendorDTO>(mv);
             Assert.Equal(materialNumber, mv.MaterialNumber);
         }
         [Fact]

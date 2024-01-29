@@ -12,7 +12,7 @@ namespace Repository.Async
 
         public async Task<MaterialVendor> GetMaterialVendor(int materialNumber) =>
             await FindByCondition(mv => mv.MaterialNumber == materialNumber)
-                .SingleOrDefaultAsync();
+                .FirstOrDefaultAsync();
 
         public async Task<MaterialVendor> GetMaterialVendorWithVendorLots(int materialNumber) =>
             await FindByCondition(mv => mv.MaterialNumber == materialNumber)

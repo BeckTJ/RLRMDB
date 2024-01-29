@@ -9,7 +9,7 @@ namespace RavenAPI
         public MappingProfile() 
         {
             CreateMap<Material, MaterialDTO>();
-            CreateMap<MaterialVendor, MaterialVendorWithVendorLotDTO>();
+            CreateMap<MaterialVendor, MaterialVendorDTO>();
             CreateMap<MaterialVendor, MaterialVendorWithRawMaterialDTO>();
             CreateMap<VendorLot, VendorLotDTO>();
             CreateMap<VendorLot, VendorLotWithSampleDTO>();

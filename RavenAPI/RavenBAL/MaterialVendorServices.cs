@@ -19,13 +19,13 @@ namespace Service
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<MaterialVendorWithVendorLotDTO> GetMaterialVendor(int materialNumber)
+        public async Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber)
         {
             var materialVendor = await _repo.MaterialVendor.GetMaterialVendor(materialNumber);
             
             if(materialVendor is null) throw new MaterialNotFoundException(materialNumber);
 
-            return _mapper.Map<MaterialVendorWithVendorLotDTO>(materialVendor);
+            return _mapper.Map<MaterialVendorDTO>(materialVendor);
         }
         public async Task<IEnumerable<MaterialVendorWithRawMaterialDTO>> GetApprovedRawMaterial(int ParentMaterialNumber)
         {
