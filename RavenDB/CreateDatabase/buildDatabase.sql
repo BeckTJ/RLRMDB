@@ -58,6 +58,7 @@ CREATE TABLE Materials.Material
     BatchManaged BIT NOT NULL DEFAULT(0),
     MaterialCode VARCHAR(3) NOT NULL,
     SequenceId INT NOT NULL,
+    CurrentSequenceId INT NOT NULL,
     TotalRecords INT NOT NULL,
 )
 GO
@@ -87,10 +88,11 @@ CREATE TABLE Materials.MaterialVendor
     ParentMaterialNumber INT FOREIGN KEY REFERENCES Materials.Material,
     MaterialCode VARCHAR(3) NOT NULL,
     SequenceId INT NOT NULL,
+    CurrentSequenceId INT NOT NULL,
     TotalRecords INT NOT NULL,
-    UnitOfIssue VARCHAR(3),
-    BatchManaged BIT,
-    ProcessOrderRequired BIT,
+    UnitOfIssue VARCHAR(2),
+    BatchManaged BIT DEFAULT(0),
+    ProcessOrderRequired BIT DEFAULT(0),
 )
 
 CREATE TABLE QualityControl.SampleRequired

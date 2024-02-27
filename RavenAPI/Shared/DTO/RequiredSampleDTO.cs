@@ -9,19 +9,17 @@ namespace Shared.DTO
     public record RequiredSampleDTO
     {
         public int MaterialNumber { get; set; }
-        public bool? Assay { get; set; }
-        public bool? Water { get; set; }
-        public bool? Metals { get; set; }
-        public bool? Chloride { get; set; }
-        public bool? Boron { get; set; }
-        public bool? Phosphorus { get; set; }
-        public int? Amps { get; set; }
+        public string? ProductLotNumber { get; set; }
+        public string? VendorLotNumber { get; set; }
+        public string? SampleId { get; set; }
+        public long InspectionLotNumber { get; set; }
+        public int NumberOfAmps { get; set; }
         public string? AmpSampleSize { get; set; }
-        public int? MetalBubbler { get; set; }
+        public int NumberOfMetalBubbler { get; set; }
         public string? BubblerSampleSize{ get; set; }
-        public int? AssayBulb { get; set; }
-        public int? Vials { get; set; }
+        public int AssayBulb { get; set; }
+        public int NumberOfVials { get; set; }
         public string? VialSampleSize { get; set; }
-        public int? Retain { get; set; }
+        public int Retain { get; set; }
     }
 }

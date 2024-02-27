@@ -356,3 +356,7 @@ C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\RavenDB.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Contracts.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Shared.pdb
 C:\Users\kcebs\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\nlog.config
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Repo.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Repo.Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Repo.dll
+C:\Users\TBeck\Raven\RavenAPI\RavenAPI\bin\Debug\net6.0\Service.Repo.pdb

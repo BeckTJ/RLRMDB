@@ -13,7 +13,7 @@ namespace RavenAPI
             CreateMap<MaterialVendor, MaterialVendorWithRawMaterialDTO>();
             CreateMap<VendorLot, VendorLotDTO>();
             CreateMap<VendorLot, VendorLotWithSampleDTO>();
-            CreateMap<RawMaterial, RawMaterialDTO>();
+            CreateMap<RawMaterial, RawMaterialDrumDTO>();
             CreateMap<RawMaterial, RawMaterialWithSampleDTO>();
             CreateMap<SampleSubmit, SampleDTO>();
             CreateMap<SampleRequired, SampleRequiredDTO>();

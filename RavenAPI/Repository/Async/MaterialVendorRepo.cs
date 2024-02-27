@@ -30,7 +30,7 @@ namespace Repository.Async
 
         public async Task<IEnumerable<MaterialVendor>> GetMaterialVendorWithRawMaterial(int ParentMaterialNumber) =>
             await FindByCondition(mv => mv.ParentMaterialNumber.Equals(ParentMaterialNumber))
-            .Include(rm => rm.RawMaterials).ToListAsync();
+            .Include(rm => rm.RawMaterials).ThenInclude(s => s.Sample.Approved).ToListAsync();
 
     }
 }

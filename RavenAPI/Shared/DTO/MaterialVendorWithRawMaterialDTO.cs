@@ -11,7 +11,7 @@ namespace Shared.DTO
         public int ParentMaterialNumber { get; set; }
         public int MaterialNumber { get; set; }
         public string? VendorName { get; set; }
-        public IEnumerable<RawMaterialDTO>? RawMaterials { get; set; }
+        public IEnumerable<RawMaterialDrumDTO>? RawMaterials { get; set; }
 
     }
 }

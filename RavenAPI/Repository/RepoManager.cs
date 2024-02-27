@@ -32,7 +32,7 @@ namespace Repository
         public IVendorRepo VendorLot => _vendor.Value;
         public IRawMaterialRepo RawMaterial => _rawMaterial.Value;
         public ISampleRequiredRepo SampleRequired => _sampleRequired.Value;
-        public ISampleRepo SampleRepo => _sample.Value;
+        public ISampleRepo Sample => _sample.Value;
         public IMaterialVendorRepo MaterialVendor => _materialVendor.Value;
         public IDateCode DateCode => _dateCode.Value;
 

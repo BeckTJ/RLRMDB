@@ -6,6 +6,6 @@ namespace Shared.DTO
         public string? VendorLotNumber { get; set; }
         public int Quantity { get; set; }
         public string? SampleSubmitNumber { get; set; }
-        public IEnumerable<RawMaterialDTO>? RawMaterials { get; set; }
+        public IEnumerable<RawMaterialDrumDTO>? RawMaterials { get; set; }
     }
 }

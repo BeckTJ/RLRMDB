@@ -1,7 +1,7 @@
-﻿MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,UnitOfIssue,BatchManaged,MaterialCode,SequenceId,TotalRecords
-58971,Milk,MLK,123-ABC-1234,kg,1,AB,900,100
-58423,Fruit Juice,FRJU,234-ABC-1235,kg,1,BB,200,100
-58913,Lemonade,LMND,345-ABC-1236,kg,1,CB,400,100
-58245,Beer,BEER,456-ABC-1237,kg,1,DB,200,100
-58143,Wine,WIN,,kg,1,EB,700,100
-58765,Liquor,LQR,678-ABC-1239,kg,1,FB,600,100
+﻿MaterialNumber,MaterialName,MaterialNameAbreviation,PermitNumber,UnitOfIssue,BatchManaged,MaterialCode,SequenceId,CurrentSequenceId,TotalRecords
+58971,Milk,MLK,123-ABC-1234,kg,1,AB,900,900,100
+58423,Fruit Juice,FRJU,234-ABC-1235,kg,1,BB,200,200,100
+58913,Lemonade,LMND,345-ABC-1236,kg,1,CB,400,400,100
+58245,Beer,BEER,456-ABC-1237,kg,1,DB,200,200,100
+58143,Wine,WIN,,kg,1,EB,700,700,100
+58765,Liquor,LQR,678-ABC-1239,kg,1,FB,600,600,100

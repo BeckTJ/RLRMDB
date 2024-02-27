@@ -28,9 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\Presentation\Presentation.csproj" />
-    <ProjectReference Include="..\RavenBAL\Service.csproj" />
-    <ProjectReference Include="..\RavenDAL\RavenDB.csproj" />
+    <ProjectReference Include="..\Service\Service.csproj" />
+    <ProjectReference Include="..\RavenDB\RavenDB.csproj" />
     <ProjectReference Include="..\Repository\Repository.csproj" />
+	<ProjectReference Include="..\Service.Repo\Service.Repo.csproj" />
   </ItemGroup>
 
 </Project>

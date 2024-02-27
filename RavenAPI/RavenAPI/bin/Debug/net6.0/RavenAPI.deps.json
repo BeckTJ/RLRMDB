@@ -17,7 +17,8 @@
           "RavenDB": "1.0.0",
           "Repository": "1.0.0",
           "Service": "1.0.0",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "Service.Repo": "1.0.0.0"
         },
         "runtime": {
           "RavenAPI.dll": {}
@@ -1318,16 +1319,6 @@
           "Presentation.dll": {}
         }
       },
-      "RavenDB/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.22",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
-          "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
-        },
-        "runtime": {
-          "RavenDB.dll": {}
-        }
-      },
       "Repository/1.0.0": {
         "dependencies": {
           "Contracts": "1.0.0",
@@ -1335,20 +1326,6 @@
         },
         "runtime": {
           "Repository.dll": {}
-        }
-      },
-      "Service/1.0.0": {
-        "dependencies": {
-          "AutoMapper": "12.0.1",
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
-          "Contracts": "1.0.0",
-          "LoggerService": "1.0.0",
-          "RavenDB": "1.0.0",
-          "Repository": "1.0.0",
-          "Service.Contracts": "1.0.0"
-        },
-        "runtime": {
-          "Service.dll": {}
         }
       },
       "Service.Contracts/1.0.0": {
@@ -1359,9 +1336,25 @@
           "Service.Contracts.dll": {}
         }
       },
+      "Service.Repo.Contracts/1.0.0": {
+        "dependencies": {
+          "Shared": "1.0.0"
+        },
+        "runtime": {
+          "Service.Repo.Contracts.dll": {}
+        }
+      },
       "Shared/1.0.0": {
         "runtime": {
           "Shared.dll": {}
+        }
+      },
+      "Service.Repo/1.0.0.0": {
+        "runtime": {
+          "Service.Repo.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }
@@ -2339,17 +2332,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "RavenDB/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Repository/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -2359,8 +2342,18 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Service.Repo.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Shared/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Service.Repo/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

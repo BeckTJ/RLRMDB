@@ -10,7 +10,7 @@ namespace Contracts
         IVendorRepo VendorLot { get; }
         IRawMaterialRepo RawMaterial { get; }
         ISampleRequiredRepo SampleRequired { get; }
-        ISampleRepo SampleRepo { get; }
+        ISampleRepo Sample { get; }
         IMaterialVendorRepo MaterialVendor { get; }
         IDateCode DateCode { get; }
         Task Save();

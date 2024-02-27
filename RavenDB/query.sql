@@ -21,7 +21,8 @@ select * from Materials.VendorLot
 
 select * from Distillation.AlphabeticDate
 
-select * from QualityControl.SampleRequired
+select * from QualityControl.SampleRequired where MaterialNumber = 58245
+select * from QualityControl.SampleRequired where MaterialNumber = 58423
 
 select * from QualityControl.SampleSubmit
 

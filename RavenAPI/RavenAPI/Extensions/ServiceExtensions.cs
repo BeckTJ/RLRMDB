@@ -5,6 +5,7 @@ using RavenDB.Data;
 using Repository;
 using Service;
 using Service.Contracts;
+using Service.Repo.Contracts;
 
 namespace RavenAPI.Extensions
 {
@@ -40,6 +41,10 @@ namespace RavenAPI.Extensions
         public static void ConfigureServiceManager(this IServiceCollection services)
         {
             services.AddScoped<IServiceManager, ServiceManager>();
+        }
+        public static void ConfigureServiceRepoManager(this IServiceCollection services)
+        {
+            services.AddScoped<IServiceRepoManager, IServiceRepoManager>();
         }
     }
 }

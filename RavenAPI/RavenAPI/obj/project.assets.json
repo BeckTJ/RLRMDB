@@ -2453,9 +2453,8 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "Contracts": "1.0.0",
           "LoggerService": "1.0.0",
-          "RavenDB": "1.0.0",
-          "Repository": "1.0.0",
-          "Service.Contracts": "1.0.0"
+          "Service.Contracts": "1.0.0",
+          "Service.Repo.Contracts": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Service.dll": {}
@@ -2475,6 +2474,38 @@
         },
         "runtime": {
           "bin/placeholder/Service.Contracts.dll": {}
+        }
+      },
+      "Service.Repo/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Contracts": "1.0.0",
+          "RavenDB": "1.0.0",
+          "Service.Contracts": "1.0.0",
+          "Service.Repo.Contracts": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Service.Repo.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Service.Repo.dll": {}
+        }
+      },
+      "Service.Repo.Contracts/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "RavenDB": "1.0.0",
+          "Shared": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Service.Repo.Contracts.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Service.Repo.Contracts.dll": {}
         }
       },
       "Shared/1.0.0": {
@@ -7229,13 +7260,23 @@
     },
     "Service/1.0.0": {
       "type": "project",
-      "path": "../RavenBAL/Service.csproj",
-      "msbuildProject": "../RavenBAL/Service.csproj"
+      "path": "../Service/Service.csproj",
+      "msbuildProject": "../Service/Service.csproj"
     },
     "Service.Contracts/1.0.0": {
       "type": "project",
       "path": "../Service.Contracts/Service.Contracts.csproj",
       "msbuildProject": "../Service.Contracts/Service.Contracts.csproj"
+    },
+    "Service.Repo/1.0.0": {
+      "type": "project",
+      "path": "../Service.Repo/Service.Repo.csproj",
+      "msbuildProject": "../Service.Repo/Service.Repo.csproj"
+    },
+    "Service.Repo.Contracts/1.0.0": {
+      "type": "project",
+      "path": "../Service.Repo.Contracts/Service.Repo.Contracts.csproj",
+      "msbuildProject": "../Service.Repo.Contracts/Service.Repo.Contracts.csproj"
     },
     "Shared/1.0.0": {
       "type": "project",
@@ -7254,27 +7295,28 @@
       "RavenDB >= 1.0.0",
       "Repository >= 1.0.0",
       "Service >= 1.0.0",
+      "Service.Repo >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kcebs\\.nuget\\packages\\": {},
+    "C:\\Users\\TBeck\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
+      "projectUniqueName": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
       "projectName": "RavenAPI",
-      "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
-      "packagesPath": "C:\\Users\\kcebs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenAPI\\obj\\",
+      "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI\\RavenAPI.csproj",
+      "packagesPath": "C:\\Users\\TBeck\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\kcebs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\TBeck\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -7290,20 +7332,23 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\LoggerService\\LoggerService.csproj"
             },
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\Presentation\\Presentation.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Presentation\\Presentation.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\Presentation\\Presentation.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Presentation\\Presentation.csproj"
             },
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\Service.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenBAL\\Service.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDB\\RavenDB.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\RavenDB\\RavenDB.csproj"
             },
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\RavenDAL\\RavenDB.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Repository.csproj"
             },
-            "C:\\Users\\kcebs\\Raven\\RavenAPI\\Repository\\Repository.csproj": {
-              "projectPath": "C:\\Users\\kcebs\\Raven\\RavenAPI\\Repository\\Repository.csproj"
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\Service.Repo.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\Service.Repo.csproj"
+            },
+            "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\Service.csproj": {
+              "projectPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\Service.csproj"
             }
           }
         }

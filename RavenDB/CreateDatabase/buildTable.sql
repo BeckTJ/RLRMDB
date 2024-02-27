@@ -50,7 +50,6 @@ BULK INSERT Materials.Material FROM '..\..\usr\raven\BuildFiles\MaterialData.csv
 
 BULK INSERT Materials.MaterialVendor FROM '..\..\usr\raven\BuildFiles\MaterialVendor.csv'
     WITH(
-        FORMAT='csv',
         FIRSTROW = 2,
         FIELDTERMINATOR = ',',
         ROWTERMINATOR = '\n',

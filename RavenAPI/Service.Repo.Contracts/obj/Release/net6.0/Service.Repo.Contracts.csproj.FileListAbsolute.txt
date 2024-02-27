@@ -1,0 +1,16 @@
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\Service.Repo.Contracts.deps.json
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\Service.Repo.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\Service.Repo.Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\Shared.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\Shared.pdb
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.csproj.AssemblyReference.cache
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.AssemblyInfoInputs.cache
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.AssemblyInfo.cs
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.sourcelink.json
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.csproj.CopyComplete
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\refint\Service.Repo.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.pdb
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\ref\Service.Repo.Contracts.dll

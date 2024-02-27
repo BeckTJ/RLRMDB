@@ -18,6 +18,7 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMSSqlContext(builder.Configuration);
 builder.Services.ConfigureRepoManager();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureServiceRepoManager();
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers(config =>
