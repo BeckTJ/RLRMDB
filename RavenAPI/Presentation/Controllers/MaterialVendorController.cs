@@ -23,10 +23,16 @@ public class MaterialVendorController : ControllerBase
 
             return Ok(materialVendor);
     }
+    [HttpPost]
+    public IActionResult InputRawMaterial(CreateRawMaterialDTO material) 
+    {
+        var requiredSample = _service.MaterialVendorServices.InputRawMaterial(material);
+
+        return Ok(requiredSample);
+    }
 
     public void GetApprovedRawMaterial(int materialNumber) { }
     public void GetExpiredRawMaterial(int materialNumber) { }
     public void GetRawMaterialNeedingSample(int parentMaterialNumber) { }
-    public void InputRawMaterial(CreateRawMaterialDTO material) { }
 
 }

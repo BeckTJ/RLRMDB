@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
 using RavenDB.Exceptions;
-using RavenDB.Models;
 using Service.Repo.Contracts;
 using Shared.DTO;
 
@@ -24,7 +23,7 @@ namespace Service.Repo
          * else
          * check if material has been sampled. If it has check if material requires old vendor lots to be sampled.
          */
-        public async Task<IEnumerable<RequiredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material)
+        public async Task<IEnumerable<RequliredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material)
         {
             string materialType;
 
@@ -43,12 +42,12 @@ namespace Service.Repo
             //check the to see if material has been sampled
             return required;
         }
-        private async Task<IEnumerable<RequiredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType)
+        public async Task<IEnumerable<RequliredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType)
         {
             /*
              * Check if sample is needed
              */
-            List<RequiredSampleDTO> result = new();
+            List<RequliredSampleDTO> result = new();
             var required = await _repo.SampleRequired.GetSampleRequired(parentMaterialNumber);
             if (required is null)
                 throw new SampleDataNotFoundException(parentMaterialNumber);
@@ -57,7 +56,7 @@ namespace Service.Repo
             {
                 if(item.MaterialType == materialType)
                 {
-                    var requiredSample = _mapper.Map<RequiredSampleDTO>(item);
+                    var requiredSample = _mapper.Map<RequliredSampleDTO>(item);
 
                     result.Add(requiredSample);
                 }

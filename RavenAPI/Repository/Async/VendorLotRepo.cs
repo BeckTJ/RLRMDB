@@ -29,5 +29,10 @@ namespace Repository.Async
             await FindByCondition(v => v.MaterialNumber == materialNumber)
                 .Include(v => v.RawMaterials)
                 .ToListAsync();
+
+        public void UpdateVendorLot(VendorLot vendorLot)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

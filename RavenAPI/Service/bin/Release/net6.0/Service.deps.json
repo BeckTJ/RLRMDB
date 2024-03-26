@@ -756,6 +756,16 @@
           "LoggerService.dll": {}
         }
       },
+      "RavenDB/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.22",
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.12",
+          "Microsoft.Extensions.Configuration.UserSecrets": "6.0.1"
+        },
+        "runtime": {
+          "RavenDB.dll": {}
+        }
+      },
       "Service.Contracts/1.0.0": {
         "dependencies": {
           "Shared": "1.0.0"
@@ -766,6 +776,7 @@
       },
       "Service.Repo.Contracts/1.0.0": {
         "dependencies": {
+          "RavenDB": "1.0.0",
           "Shared": "1.0.0"
         },
         "runtime": {
@@ -775,14 +786,6 @@
       "Shared/1.0.0": {
         "runtime": {
           "Shared.dll": {}
-        }
-      },
-      "RavenDB.Reference/1.0.0.0": {
-        "runtime": {
-          "RavenDB.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       }
     }
@@ -1286,6 +1289,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "RavenDB/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Service.Contracts/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -1298,11 +1306,6 @@
     },
     "Shared/1.0.0": {
       "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "RavenDB.Reference/1.0.0.0": {
-      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

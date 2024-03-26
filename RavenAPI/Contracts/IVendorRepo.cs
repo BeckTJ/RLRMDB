@@ -8,7 +8,7 @@ namespace Contracts
         Task<VendorLot> GetVendorByVendorLot(string lotNumber);
         Task<IEnumerable<VendorLot>> GetVendorLotsWithRawMaterials(int materialNumber);
         void SubmitVendorLot(VendorLot vendorLot);
-
+        void UpdateVendorLot(VendorLot vendorLot);
     }
 }
  

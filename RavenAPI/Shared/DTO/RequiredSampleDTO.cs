@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.DTO
 {
-    public record RequiredSampleDTO
+    public record RequliredSampleDTO
     {
         public int MaterialNumber { get; set; }
         public string? ProductLotNumber { get; set; }

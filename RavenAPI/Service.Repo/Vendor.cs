@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Contracts;
+using RavenDB.Models;
 using Service.Repo.Contracts;
 using Shared.DTO;
 
@@ -27,7 +28,27 @@ namespace Service.Repo
         }
         public void InputVendorLot(CreateRawMaterialDTO material)
         {
-            throw new NotImplementedException();
+            VendorLotDTO vendorLot = new()
+            {
+                MaterialNumber = material.MaterialNumber,
+                VendorLotNumber = material.VendorLotNumber,
+                Quantity = material.Quantity,
+            };
+
+            var lot = _repo.VendorLot.GetVendorByVendorLot(material.VendorLotNumber);
+
+            if(lot == null)
+                AddVendorLot(vendorLot);
+            else
+                UpdateVendorLot(vendorLot);
+        }
+        public void AddVendorLot(VendorLotDTO vendorLot)
+        {
+            _repo.VendorLot.SubmitVendorLot(_mapper.Map<VendorLot>(vendorLot));
+        }
+        public void UpdateVendorLot(VendorLotDTO vendorLot)
+        {
+            _repo.VendorLot.UpdateVendorLot(_mapper.Map<VendorLot>(vendorLot));
         }
     }
 }

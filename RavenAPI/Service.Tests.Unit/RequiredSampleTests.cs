@@ -45,12 +45,12 @@ namespace Service.Tests.Unit
             var sampleRequired = _ctxSampleRequired.WithSampleRequiredJuice();
             _repo.SampleRequired.GetSampleRequired(materialNumber).Returns(sampleRequired);
             _sut = new ServiceRepoManager(_repo, null, _map);
-
+            var vendor = _map.Map<MaterialVendorDTO>(material);
             //Act
-            var actual = await _sut.QualityControl.CheckRequiredSample(material);
+            var actual = await _sut.QualityControl.CheckRequiredSample(vendor);
 
             //Assert
-            Assert.Equal(1, actual.Count());
+            Assert.Single(actual);
 
         }
 
@@ -60,7 +60,7 @@ namespace Service.Tests.Unit
             //Arrange
             
             int materialNumber = 58423;
-            var sampleRequired = _ctx.WithSampleRequiredJuice();
+            var sampleRequired = _ctxSampleRequired.WithSampleRequiredJuice();
             //Act
             //Assert
         }
@@ -70,7 +70,7 @@ namespace Service.Tests.Unit
         {
             //Arrange
             int materialNumber = 58245;
-            var sampleRequired = _ctx.WithSampleRequiredBeer();
+            var sampleRequired = _ctxSampleRequired.WithSampleRequiredBeer();
             
             //Act
             //Assert
@@ -81,7 +81,7 @@ namespace Service.Tests.Unit
         {
             //Arrange
             int materialNumber = 58245;
-            var sampleRequired = _ctx.WithSampleRequiredBeer();
+            var sampleRequired = _ctxSampleRequired.WithSampleRequiredBeer();
 
             //Act
             //Assert

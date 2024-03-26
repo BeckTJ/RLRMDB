@@ -18,7 +18,7 @@ namespace RavenAPI
             CreateMap<SampleSubmit, SampleDTO>();
             CreateMap<SampleRequired, SampleRequiredDTO>();
             CreateMap<Material, ProductLotNumberDTO>();
-            CreateMap<SampleRequired, RequiredSampleDTO>()
+            CreateMap<SampleRequired, RequliredSampleDTO>()
                 .ForMember("AmpSampleSize", opt => opt.MapFrom(s => s.AmpVolume + s.AmpUnitOfIssue))
                 .ForMember("BubblerSampleSize", opt => opt.MapFrom(s => s.BubblerVolume + s.BubblerUnitOfIssue))
                 .ForMember("VialSampleSize", opt => opt.MapFrom(s => s.VialVolume + s.VialUnitOfIssue));

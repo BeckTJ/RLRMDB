@@ -9,8 +9,8 @@ C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contr
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.AssemblyInfo.cs
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.csproj.CoreCompileInputs.cache
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.sourcelink.json
-C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.csproj.CopyComplete
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.dll
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\refint\Service.Contracts.dll
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service.Contracts.pdb
 C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\ref\Service.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Contracts\obj\Release\net6.0\Service..DEC3DE55.Up2Date

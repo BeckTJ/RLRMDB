@@ -1796,6 +1796,7 @@
       },
       "Service.Repo.Contracts/1.0.0": {
         "dependencies": {
+          "RavenDB": "1.0.0",
           "Shared": "1.0.0"
         },
         "runtime": {

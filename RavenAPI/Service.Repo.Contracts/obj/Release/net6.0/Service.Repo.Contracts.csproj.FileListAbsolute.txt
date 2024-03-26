@@ -9,8 +9,10 @@ C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.AssemblyInfo.cs
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.csproj.CoreCompileInputs.cache
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.sourcelink.json
-C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.csproj.CopyComplete
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.dll
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\refint\Service.Repo.Contracts.dll
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service.Repo.Contracts.pdb
 C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\ref\Service.Repo.Contracts.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\RavenDB.dll
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\bin\Release\net6.0\RavenDB.pdb
+C:\Users\TBeck\Raven\RavenAPI\Service.Repo.Contracts\obj\Release\net6.0\Service..B2C0BFE8.Up2Date
