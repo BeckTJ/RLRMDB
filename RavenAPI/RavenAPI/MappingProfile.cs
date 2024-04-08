@@ -18,10 +18,31 @@ namespace RavenAPI
             CreateMap<SampleSubmit, SampleDTO>();
             CreateMap<SampleRequired, SampleRequiredDTO>();
             CreateMap<Material, ProductLotNumberDTO>();
-            CreateMap<SampleRequired, RequliredSampleDTO>()
-                .ForMember("AmpSampleSize", opt => opt.MapFrom(s => s.AmpVolume + s.AmpUnitOfIssue))
-                .ForMember("BubblerSampleSize", opt => opt.MapFrom(s => s.BubblerVolume + s.BubblerUnitOfIssue))
-                .ForMember("VialSampleSize", opt => opt.MapFrom(s => s.VialVolume + s.VialUnitOfIssue));
+            CreateMap<SampleRequired, RequiredSampleDTO>()
+                .ForMember(x => x.Amp, opt => opt.MapFrom(s => 
+                new SampleContainer
+                {
+                    ContainerType = "Amp",
+                    SampleSize = (int)s.AmpVolume,
+                    Quantity = (int)s.Amps,
+                    UnitOfIssue = s.AmpUnitOfIssue,
+                }))
+                .ForMember(x => x.MetalBubbler, opt => opt.MapFrom(s => 
+                new SampleContainer
+                {
+                    ContainerType = "Metal Bubbler",
+                    SampleSize = (int)s.BubblerVolume,
+                    Quantity = (int)s.MetalBubbler,
+                    UnitOfIssue = s.BubblerUnitOfIssue,
+                }))
+                .ForMember(x => x.Vial, opt => opt.MapFrom(s => 
+                new SampleContainer
+                {
+                    ContainerType = "Vial",
+                    SampleSize = (int)s.VialVolume,
+                    Quantity = (int)s.Vials,
+                    UnitOfIssue = s.VialUnitOfIssue,
+                }));
 
             CreateMap<CreateRawMaterialDTO, RawMaterial>();
             CreateMap<CreateVendorLotDTO, VendorLot>();

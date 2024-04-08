@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "E7taRbbqQnrAOGzzwVlvGpZjDvKYsTYDFisjmLPG7Bm2y0LZ+C4fujPhHVolRsvjIfsVbqwkY06qfrHtd7Hlkw==",
+  "dgSpecHash": "HCgsZT9J1dS3Ixmy29F5ldKVyL2jizUPcQH0WeBzz3ikWgSs3xqTOASEwRxaXlzatxYkkMRMsyaieUYbqslwsw==",
   "success": true,
   "projectFilePath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Tests.Unit\\Service.Tests.Unit.csproj",
   "expectedPackageFiles": [

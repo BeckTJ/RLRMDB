@@ -23,7 +23,7 @@ namespace Service.Repo
          * else
          * check if material has been sampled. If it has check if material requires old vendor lots to be sampled.
          */
-        public async Task<IEnumerable<RequliredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material)
+        public async Task<IEnumerable<RequiredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material)
         {
             string materialType;
 
@@ -42,12 +42,12 @@ namespace Service.Repo
             //check the to see if material has been sampled
             return required;
         }
-        public async Task<IEnumerable<RequliredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType)
+        public async Task<IEnumerable<RequiredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType)
         {
             /*
              * Check if sample is needed
              */
-            List<RequliredSampleDTO> result = new();
+            List<RequiredSampleDTO> result = new();
             var required = await _repo.SampleRequired.GetSampleRequired(parentMaterialNumber);
             if (required is null)
                 throw new SampleDataNotFoundException(parentMaterialNumber);
@@ -56,7 +56,7 @@ namespace Service.Repo
             {
                 if(item.MaterialType == materialType)
                 {
-                    var requiredSample = _mapper.Map<RequliredSampleDTO>(item);
+                    var requiredSample = _mapper.Map<RequiredSampleDTO>(item);
 
                     result.Add(requiredSample);
                 }

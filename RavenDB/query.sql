@@ -11,11 +11,11 @@ join QualityControl.SampleSubmit on SampleSubmit.SampleId = RawMaterial.SampleId
 where MaterialNumber = 3081971 --3322187
 
 select * from QualityControl.SampleRequired
-where MaterialNumber = 58423
+where MaterialNumber = 58245
 -- where MaterialNumber = (select ParentMaterialNumber from Materials.MaterialVendor
 --                         where MaterialNumber = 3322187)
-
-select * from Materials.MaterialVendor where ParentMaterialNumber = 58971
+select * from Materials.Material 
+select * from Materials.MaterialVendor where ParentMaterialNumber = 58245
 
 select * from Materials.VendorLot
 

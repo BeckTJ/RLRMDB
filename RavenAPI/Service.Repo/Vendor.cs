@@ -24,7 +24,10 @@ namespace Service.Repo
         }
         public async Task<MaterialVendorDTO> GetMaterialVendor(int materialNumber)
         {
-            throw new NotImplementedException();
+            var vendor = await _repo.MaterialVendor.GetMaterialVendorWithVendorLots(materialNumber);
+            var materialVendor = _mapper.Map<MaterialVendorDTO>(vendor);
+
+            return materialVendor;    
         }
         public void InputVendorLot(CreateRawMaterialDTO material)
         {

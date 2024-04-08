@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\TBeck\\Raven\\RavenAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D1FAD873-C877-46FE-94B2-C89B04AAAA9F}|Service.Repo\\Service.Repo.csproj|c:\\users\\tbeck\\raven\\ravenapi\\service.repo\\qualitycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D1FAD873-C877-46FE-94B2-C89B04AAAA9F}|Service.Repo\\Service.Repo.csproj|solutionrelative:service.repo\\qualitycontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D26383A9-216D-479F-9EAA-B3384C323D78}|Repository\\Repository.csproj|c:\\users\\tbeck\\raven\\ravenapi\\repository\\async\\samplerequiredrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D26383A9-216D-479F-9EAA-B3384C323D78}|Repository\\Repository.csproj|solutionrelative:repository\\async\\samplerequiredrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1EAB5469-5D51-4CCA-9CB2-5690A58CF7F3}|Service\\Service.csproj|c:\\users\\tbeck\\raven\\ravenapi\\service\\materialvendorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1EAB5469-5D51-4CCA-9CB2-5690A58CF7F3}|Service\\Service.csproj|solutionrelative:service\\materialvendorservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D1FAD873-C877-46FE-94B2-C89B04AAAA9F}|Service.Repo\\Service.Repo.csproj|c:\\users\\tbeck\\raven\\ravenapi\\service.repo\\vendor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D1FAD873-C877-46FE-94B2-C89B04AAAA9F}|Service.Repo\\Service.Repo.csproj|solutionrelative:service.repo\\vendor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|c:\\users\\tbeck\\raven\\ravenapi\\shared\\dto\\requiredsampledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|solutionrelative:shared\\dto\\requiredsampledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|c:\\users\\tbeck\\raven\\ravenapi\\shared\\dto\\vendorlotdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|solutionrelative:shared\\dto\\vendorlotdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}|Presentation\\Presentation.csproj|c:\\users\\tbeck\\raven\\ravenapi\\presentation\\controllers\\materialvendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1F2EBD5-58B2-4ADC-A601-C46309F0DA3F}|Presentation\\Presentation.csproj|solutionrelative:presentation\\controllers\\materialvendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|c:\\users\\tbeck\\raven\\ravenapi\\shared\\dto\\createrawmaterialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|solutionrelative:shared\\dto\\createrawmaterialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|c:\\users\\tbeck\\raven\\ravenapi\\shared\\dto\\samplerequireddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43D49E5D-D84B-4921-866D-640FCDD02081}|Shared\\Shared.csproj|solutionrelative:shared\\dto\\samplerequireddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,78 +29,72 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 476,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 390,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MaterialVendorController.cs",
-              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Presentation\\Controllers\\MaterialVendorController.cs",
-              "RelativeDocumentMoniker": "Presentation\\Controllers\\MaterialVendorController.cs",
-              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Presentation\\Controllers\\MaterialVendorController.cs",
-              "RelativeToolTip": "Presentation\\Controllers\\MaterialVendorController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAAOAAAA",
+              "DocumentIndex": 1,
+              "Title": "SampleRequiredRepo.cs",
+              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Async\\SampleRequiredRepo.cs",
+              "RelativeDocumentMoniker": "Repository\\Async\\SampleRequiredRepo.cs",
+              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Repository\\Async\\SampleRequiredRepo.cs",
+              "RelativeToolTip": "Repository\\Async\\SampleRequiredRepo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T06:26:05.085Z",
+              "WhenOpened": "2024-04-08T06:43:55.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SampleRequiredDTO.cs",
+              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\SampleRequiredDTO.cs",
+              "RelativeDocumentMoniker": "Shared\\DTO\\SampleRequiredDTO.cs",
+              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\SampleRequiredDTO.cs",
+              "RelativeToolTip": "Shared\\DTO\\SampleRequiredDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T06:29:46.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RequiredSampleDTO.cs",
+              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\RequiredSampleDTO.cs",
+              "RelativeDocumentMoniker": "Shared\\DTO\\RequiredSampleDTO.cs",
+              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\RequiredSampleDTO.cs",
+              "RelativeToolTip": "Shared\\DTO\\RequiredSampleDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-08T06:28:22.718Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MaterialVendorServices.cs",
-              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\MaterialVendorServices.cs",
-              "RelativeDocumentMoniker": "Service\\MaterialVendorServices.cs",
-              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\MaterialVendorServices.cs",
-              "RelativeToolTip": "Service\\MaterialVendorServices.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAkAAAA",
+              "Title": "QualityControl.cs",
+              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\QualityControl.cs",
+              "RelativeDocumentMoniker": "Service.Repo\\QualityControl.cs",
+              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\QualityControl.cs",
+              "RelativeToolTip": "Service.Repo\\QualityControl.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAYwCwAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-27T06:18:37.867Z",
+              "WhenOpened": "2024-04-08T06:32:15.783Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "VendorLotDTO.cs",
-              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\VendorLotDTO.cs",
-              "RelativeDocumentMoniker": "Shared\\DTO\\VendorLotDTO.cs",
-              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\VendorLotDTO.cs",
-              "RelativeToolTip": "Shared\\DTO\\VendorLotDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAFAAAA",
+              "Title": "MaterialVendorServices.cs",
+              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\MaterialVendorServices.cs",
+              "RelativeDocumentMoniker": "Service\\MaterialVendorServices.cs",
+              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service\\MaterialVendorServices.cs",
+              "RelativeToolTip": "Service\\MaterialVendorServices.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAgwDYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T08:02:32.921Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 400,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateRawMaterialDTO.cs",
-              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\CreateRawMaterialDTO.cs",
-              "RelativeDocumentMoniker": "Shared\\DTO\\CreateRawMaterialDTO.cs",
-              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Shared\\DTO\\CreateRawMaterialDTO.cs",
-              "RelativeToolTip": "Shared\\DTO\\CreateRawMaterialDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T09:32:28.663Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Vendor.cs",
-              "DocumentMoniker": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\Vendor.cs",
-              "RelativeDocumentMoniker": "Service.Repo\\Vendor.cs",
-              "ToolTip": "C:\\Users\\TBeck\\Raven\\RavenAPI\\Service.Repo\\Vendor.cs",
-              "RelativeToolTip": "Service.Repo\\Vendor.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAgwCIAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-26T08:01:01.758Z",
+              "WhenOpened": "2024-02-27T06:18:37.867Z",
               "EditorCaption": ""
             }
           ]

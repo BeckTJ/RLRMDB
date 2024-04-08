@@ -4,9 +4,9 @@ namespace Service.Repo.Contracts
 {
     public interface IQualityControl
     {
-        Task<IEnumerable<RequliredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material);
+        Task<IEnumerable<RequiredSampleDTO>> CheckRequiredSample(MaterialVendorDTO material);
         void SubmitSample(string sampleType, long inspectionLotNumber);
-        Task<IEnumerable<RequliredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType);
+        Task<IEnumerable<RequiredSampleDTO>> GetRequiredSample(int parentMaterialNumber,string materialType);
 
     }
 }
